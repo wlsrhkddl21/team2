@@ -15,13 +15,13 @@ public class MemberController {
 	public String join() {
 		
 		
-		return "join";
+		return "member/join";
 	}
 	@RequestMapping(value = "/login")
 	public String login() {
 		
 		
-		return "login";
+		return "member/login";
 	}
 	
 }
