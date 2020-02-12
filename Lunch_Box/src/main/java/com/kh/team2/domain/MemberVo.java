@@ -7,16 +7,8 @@ public class MemberVo {
 	private String mem_address;
 	private String mem_tel;
 	private int mem_point;
-	public MemberVo(String mem_name, String mem_id, String mem_pass, String mem_address, String mem_tel,
-			int mem_point) {
-		super();
-		this.mem_name = mem_name;
-		this.mem_id = mem_id;
-		this.mem_pass = mem_pass;
-		this.mem_address = mem_address;
-		this.mem_tel = mem_tel;
-		this.mem_point = mem_point;
-	}
+	
+	
 	public String getMem_name() {
 		return mem_name;
 	}

@@ -8,9 +8,9 @@
 
 	<insert id="insertMember">
 		insert into tbl_member 
-		(mem_name, mem_id, mem_pass, mem_address, mem_tel, mem_point)
+		(mem_name, mem_id, mem_pass, mem_address, mem_tel)
 		values 
-		(#{mem_name}, #{mem_id}, #{mem_pass}, #{mem_address}, #{mem_tel}, #{mem_point})
+		(#{mem_name}, #{mem_id}, #{mem_pass}, #{mem_address}, #{mem_tel})
 	</insert>
 
 </mapper>  
