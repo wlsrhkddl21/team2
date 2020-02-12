@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/lb")
-public class LunchBoxController {
+public class MemberController {
 	
 	@RequestMapping(value = "/join")
 	public String join() {
