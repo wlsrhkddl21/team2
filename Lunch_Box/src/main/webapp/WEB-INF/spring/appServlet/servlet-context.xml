@@ -20,7 +20,20 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	 
+	 <!-- 업로드 경로 
+		String uploadPath = new String("") -->
+	<beans:bean
+		id="uploadPath"
+		class="java.lang.String">
+		<beans:constructor-arg value="//192.168.8.34/upload/team2"/>
+	</beans:bean>
 	
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"/>
+	</beans:bean>
+	 
 	<context:component-scan base-package="com.kh.team2" />
 	
 	
