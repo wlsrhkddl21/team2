@@ -9,7 +9,7 @@
 <!-- 		<typeAlias type="com.kh.sample02.domain.MemberVo" -->
 <!-- 			alias="MemberVo"/> -->
 		<!-- 패키지 단위 -->
-		<package name="com.kh.sample01.domain"/>
+		<package name="com.kh.team2.domain"/>
 	</typeAliases>
 
 </configuration>

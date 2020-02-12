@@ -4,62 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.kh.mappers.boardMapper">
+<mapper namespace="com.kh.team2.mappers.boardMapper">
 
-	<insert id="create">
-		insert into tbl_board (bno, title, content, writer)
-		values (seq_board_bno.nextval, #{title}, #{content}, #{writer})
-	</insert>
 	
-	<select id="read" resultType="BoardVo">
-		select * from tbl_board
-		where bno = #{bno}
-	</select>
-	
-	<update id="update">
-		update tbl_board set
-			title = #{title},
-			content = #{content}
-		where bno = #{bno}
-	</update>
-	
-	<delete id="delete">
-		delete from tbl_board
-		where bno = #{bno}
-	</delete>
-	
-	<select id="listAll" resultType="BoardVo">
-		select * 
-        from (select rownum rnum, a.* 
-        	  from (select * 
-        	  		from tbl_board
-        	  		
-        	  		<if test="searchType != null">
-        	  			<choose>
-        	  				<when test="searchType == 'title'">
-        	  					where title like '%' || #{keyword} || '%'
-        	  				</when>
-        	  				<when test="searchType == 'content'">
-        	  					where content like '%' || #{keyword} || '%'
-        	  				</when>
-        	  				<when test="searchType == 'title_content'">
-        	  					where title like '%' || #{keyword} || '%'
-        	  					or content like '%' || #{keyword} || '%'
-        	  				</when>
-        	  				<when test="searchType == 'writer'">
-        	  					where writer like '%' || #{keyword} || '%'
-        	  				</when>
-        	  			</choose>
-        	  		</if>
-        	  		
-        	  		order by bno desc
-                   ) a
-             )
-		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
-	</select>
-	
-	<select id="listCount" resultType="int">
-		select count(*) from tbl_board
-	</select>
 
 </mapper>  
