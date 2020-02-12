@@ -9,6 +9,8 @@
 <!-- 		insert into tbl_product(pdt_num,pdt_category,pdt_name,pdt,date,pdt_price,pdt_image) -->
 <!-- 		values(seq_product.nextval,) -->
 <!-- 	</insert> -->
-	
+		<select id="readAllPDT" resultType="ProductVo">
+			select * from tbl_product 
+		</select>
 
 </mapper>  

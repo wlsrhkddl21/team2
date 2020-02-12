@@ -1,9 +1,19 @@
 package com.kh.team2.persistence;
 
-import org.apache.ibatis.session.SqlSession;
+import java.util.List;
 
+import javax.inject.Inject;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+import com.kh.team2.domain.ProductVo;
+
+@Repository
 public class ProductDaoimpl implements ProductDao {
 	private static final String NAMESPACE ="com.kh.team2.mappers.productMapper";
+	
+	@Inject
 	SqlSession sqlSession;
 	@Override
 	public void insertPDT() throws Exception {
@@ -30,8 +40,8 @@ public class ProductDaoimpl implements ProductDao {
 	}
 
 	@Override
-	public void readAllPDT() throws Exception {
-		// TODO Auto-generated method stub
+	public List<ProductVo> readAllPDT() throws Exception {
+		return sqlSession.selectList(NAMESPACE+"readAllPDT");
 
 	}
 
