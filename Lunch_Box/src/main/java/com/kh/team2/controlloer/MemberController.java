@@ -1,4 +1,4 @@
-package com.kh.team2;
+package com.kh.team2.controlloer;
 
 import org.springframework.stereotype.Controller;
 
