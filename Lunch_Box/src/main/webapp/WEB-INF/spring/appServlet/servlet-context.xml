@@ -26,7 +26,7 @@
 	<beans:bean
 		id="uploadPath"
 		class="java.lang.String">
-		<beans:constructor-arg value="//192.168.8.34/upload/team2"/>
+		<beans:constructor-arg value="//192.168.0.34/upload/team2"/>
 	</beans:bean>
 	
 	<beans:bean id="multipartResolver"
