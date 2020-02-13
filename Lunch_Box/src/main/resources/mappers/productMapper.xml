@@ -5,14 +5,26 @@
 
 
 <mapper namespace="com.kh.mappers.productMapper">
-<!-- 	<insert id="insertPDT"> -->
-<!-- 		insert into tbl_product(pdt_num,pdt_category,pdt_name,pdt,date,pdt_price,pdt_image) -->
-<!-- 		values(seq_product.nextval,) -->
-<!-- 	</insert> -->
-		<select id="readAllPDT" resultType="ProductVo">
-			select * from tbl_product 
-		</select>
-<!-- 		<insert id="insertPDT"> -->
-<!-- 			insert into tbl_product(pdt_num,pdt_category,pdt_name,pdt_) -->
-<!-- 		</insert> -->
+	<insert id="insertPDT">
+		insert into tbl_product(pdt_num,pdt_category,pdt_name,pdt_date,pdt_price,pdt_image)
+		values(seq_product.nextval,#{pdt_category},#{pdt_name},#{pdt_date},#{pdt_price},#{pdt_image})
+	</insert>
+	
+	<select id="readAllPDT" resultType="ProductVo">
+		select * from tbl_product 
+	</select>
+	
+	<select id="readPDT" resultType="ProductVo">
+		select * from tbl_product 
+		where pdt_num = #{pdt_num}
+	</select>
+	
+	<update id="updatePDT">
+	
+	</update>
+	
+	<delete id="deletePDT">
+	
+	</delete>
+
 </mapper>  
