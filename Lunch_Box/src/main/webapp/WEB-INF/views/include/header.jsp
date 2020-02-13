@@ -65,13 +65,24 @@
 							<a href="#">도시락 판매 <span class="fa fa-angle-down" aria-hidden="true"></span></a>
 							<input type="checkbox" id="drop-2" />
 							<ul>
-								<li><a href="#chefs" class="drop-text">일반 도시락</a></li>
-								<li><a href="#blog" class="drop-text">나만의 도시락</a></li>
+								<li><a href="/shop/single" class="drop-text">일반 도시락</a></li>
+								<li><a href="/shop/my" class="drop-text">나만의 도시락</a></li>
 							</ul>
 						</li>
-						<li><a href="#about">정기배송</a></li>
+						<li><a href="/shop/sub">정기배송</a></li>
 						<li><a href="#gallery">리뷰 게시판</a></li>
-						<li><a href="#contact">고객센터</a></li>
+						<li>
+							<!-- First Tier Drop Down -->
+							<label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"
+									aria-hidden="true"></span>							</label>
+							<a href="#">고객센터 <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+							<input type="checkbox" id="drop-2" />
+							<ul>
+								<li><a href="/board/notice" class="drop-text">공지사항</a></li>
+								<li><a href="/board/qna" class="drop-text">문의게시판</a></li>
+								<li><a href="/board/faq" class="drop-text">자주하는질문</a></li>
+							</ul>
+						</li>
 					</ul>
 			  </nav>
 			</div>
