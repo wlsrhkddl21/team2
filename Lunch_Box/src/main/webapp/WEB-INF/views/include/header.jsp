@@ -80,7 +80,7 @@
 			<div class="text-center">
 				<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">관리자창 </a>
 				<a href="/lb/login" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">로그인 </a>
-				<a href="/lb/join" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">회원가입 </a>
+				<a href="/lb/joinGet" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">회원가입 </a>
 			</div>
 			<!-- //dwn -->
 		</div>

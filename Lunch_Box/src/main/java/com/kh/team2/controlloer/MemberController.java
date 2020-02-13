@@ -1,6 +1,7 @@
 package com.kh.team2.controlloer;
 
 
+import org.omg.CORBA.Request;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,15 +16,22 @@ import com.kh.team2.domain.MemberVo;
 @RequestMapping("/lb")
 public class MemberController {
 	
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String join(MemberVo memberVo) {
-		
+	@RequestMapping(value = "/joinGet", method = RequestMethod.GET)
+	public String join(MemberVo memberVo) throws Exception{
+		System.out.println("joinGet");
 		
 		return "member/join";
 	}
+	@RequestMapping(value = "/joinPost", method = RequestMethod.POST)
+	public String register(MemberVo memberVo) {
+		System.out.println("joinPost");
+		
+		return "member/login";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
-		
+		System.out.println("loginGet");
 		
 		return "member/login";
 	}
