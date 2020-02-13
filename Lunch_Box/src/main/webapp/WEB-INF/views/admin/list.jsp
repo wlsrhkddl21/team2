@@ -44,7 +44,7 @@ $(document).ready(function(){
 						<td>${productVo.pdt_num}</td>
 						<c:if test="${not empty productVo.pdt_image}">
 						<td>
-						<img alt="상품이미지" src="${productVo.pdt_image}">
+						<img alt="상품이미지" src="/admin/displayFile?fileName=${productVo.pdt_image}">
 						${productVo }
 						</td>
 						</c:if>

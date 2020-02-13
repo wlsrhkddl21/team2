@@ -1,15 +1,20 @@
 package com.kh.team2.controlloer;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -56,5 +61,17 @@ public class AdminController {
 		service.insertPDT(productVo);
 		System.out.println("productVo:"+productVo);
 		return "redirect:/admin/list";
+	}
+	
+	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
+//		String realPath = uploadPath + File.separator + fileName.replace("/", "\\");
+//		String realPath = "//192.168.0.34/upload/team2\\product\\d839fcf6-64a4-4ee5-ab1d-65061460b425_ddong.jpg".replace("/", "\\");
+//		System.out.println("realPath:"+ realPath);
+		FileInputStream is = new FileInputStream(fileName);
+		byte[] bytes = IOUtils.toByteArray(is);
+		is.close();
+		return bytes;
 	}
 }
