@@ -45,9 +45,19 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, LogingDto logingDto, Model model) {
 //		System.out.println("loginGet");
-		System.out.println("logingDto:" + logingDto);
 		
 		return "member/login";
 	}
+	
+	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+	public String loginPost(HttpServletRequest request, LogingDto logingDto, Model model) {
+//		System.out.println("loginGet");
+		System.out.println("로그인하고 메인옴");
+		System.out.println("logingDto:" + logingDto);
+		return "index";
+	}
+	
+	
+	
 	
 }

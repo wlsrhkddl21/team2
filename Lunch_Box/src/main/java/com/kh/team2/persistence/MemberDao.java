@@ -13,7 +13,7 @@ public interface MemberDao {
 	// 아이디랑 비밀번호로 회원 조회
 	public MemberVo readWithPw(String mem_id, String mem_pass);
 
-//	public MemberVo GetKey(String mem_id, String key);
+	public MemberVo GetKey(String mem_id, String key);
 
 //	public void GetKey(String mem_id, String key);
 }

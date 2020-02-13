@@ -37,4 +37,10 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE + ".readWithPw", paramMap);
 	}
 
+	@Override
+	public MemberVo GetKey(String mem_id, String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

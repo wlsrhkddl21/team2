@@ -7,6 +7,7 @@ public class MemberVo {
 	private String mem_address;
 	private String mem_tel;
 	private int mem_point;
+	private String key;
 	
 	
 	public String getMem_name() {
@@ -45,10 +46,16 @@ public class MemberVo {
 	public void setMem_point(int mem_point) {
 		this.mem_point = mem_point;
 	}
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
 	@Override
 	public String toString() {
 		return "MemberVo [mem_name=" + mem_name + ", mem_id=" + mem_id + ", mem_pass=" + mem_pass + ", mem_address="
-				+ mem_address + ", mem_tel=" + mem_tel + ", mem_point=" + mem_point + "]";
+				+ mem_address + ", mem_tel=" + mem_tel + ", mem_point=" + mem_point + ", key=" + key + "]";
 	}
 	
 	
