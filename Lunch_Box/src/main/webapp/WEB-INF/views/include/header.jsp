@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <head>
-	<title>Home</title> 
+	<title>Lunch Box</title> 
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
@@ -77,6 +78,7 @@
 			<!-- //nav -->
 			<!-- dwn -->
 			<div class="text-center">
+				<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">관리자창 </a>
 				<a href="/lb/login" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">로그인 </a>
 				<a href="/lb/join" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">회원가입 </a>
 			</div>

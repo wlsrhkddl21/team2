@@ -22,8 +22,8 @@ public class MemberDaoTest {
 	@Test
 	public void testInsertMember() throws Exception {
 		MemberVo memberVo = new MemberVo();
-		memberVo.setMem_name("민");
-		memberVo.setMem_id("min");
+		memberVo.setMem_name("장석천");
+		memberVo.setMem_id("jang");
 		memberVo.setMem_pass("1234");
 		memberVo.setMem_address("울산");
 		memberVo.setMem_tel("010123456789");
