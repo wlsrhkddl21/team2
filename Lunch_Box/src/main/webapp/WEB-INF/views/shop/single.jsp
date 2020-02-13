@@ -16,17 +16,19 @@
 				<c:forEach items="${list }" var="productVo">
 					<c:if test="${productVo.pdt_date == 1}">
 						<div class="col-md-4">
-							<a href="#"> <img src="../images/test1.jpg" alt=" "
+							<a href="/shop/detail/${productVo.pdt_num }"> <img src="../images/test1.jpg" alt=" "
 								class="img-fluid" style="height: 380px; width: 380px;" />
 							</a>
 							<div>
-								<a class= "navbar-brand" style="font-size: 25px;" href="shop/datail?=${productVo.pdt_num }">
+								<a class= "navbar-brand" style="font-size: 25px;" href="/shop/detail/${productVo.pdt_num }">
 									${productVo.pdt_name }</a>
 							</div>
+							<div style="height: 10px;"></div>
 							<div>
 								<b style="font-size:18px; color: gray;" ><fmt:formatNumber
-										value="${productVo.pdt_price }" type="number" /></b>
+										value="${productVo.pdt_price }" type="number" />원</b>
 							</div>
+								<div style="height: 20px;"></div>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -44,8 +46,6 @@
 						<div class="col-md-8">
 							<nav>
 								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#">Previous</a>
-									</li>
 									<li class="page-item"><a class="page-link" href="#">1</a>
 									</li>
 									<li class="page-item"><a class="page-link" href="#">2</a>
@@ -55,8 +55,6 @@
 									<li class="page-item"><a class="page-link" href="#">4</a>
 									</li>
 									<li class="page-item"><a class="page-link" href="#">5</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">Next</a>
 									</li>
 								</ul>
 							</nav>

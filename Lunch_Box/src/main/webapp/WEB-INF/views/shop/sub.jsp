@@ -3,15 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp" %>
-	<style>
-.pdt-font-name {
-	font-size: 25px;
-}
 
-.ptd-font-price {
-	font-size: 20px;
-}
-</style>
 <div style="height: 20px"></div>
 <h3 class="title-w3ls text-center text-bl mb-5">정기 배송</h3>
 <div style="height: 20px"></div>
@@ -24,18 +16,19 @@
 				<c:forEach items="${list }" var="productVo">
 					<c:if test="${productVo.pdt_date != 1}">
 						<div class="col-md-4">
-							<a href="shop/datail?=${productVo.pdt_num }"> <img src="../images/test1.jpg" alt=" "
+							<a href="/shop/detail/${productVo.pdt_num }"> <img src="../images/test1.jpg" alt=" "
 								class="img-fluid" style="height: 380px; width: 380px;" />
 							</a>
 							<div>
-								<b class="pdt-font-name">
-									<a href="shop/datail?=${productVo.pdt_num }">
-									${productVo.pdt_name }</a></b>
+								<a class= "navbar-brand" style="font-size: 25px;" href="/shop/detail/${productVo.pdt_num }">
+									${productVo.pdt_name }</a>
 							</div>
+							<div style="height: 10px;"></div>
 							<div>
-								<b class="ptd-font-price"><fmt:formatNumber
-										value="${productVo.pdt_price }" type="number" /></b>
+								<b style="font-size:18px; color: gray;" ><fmt:formatNumber
+										value="${productVo.pdt_price }" type="number" />원</b>
 							</div>
+								<div style="height: 20px;"></div>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -69,6 +62,7 @@
 									</li>
 								</ul>
 							</nav>
+							<div style="height: 50px"></div>
 						</div>
 						<div class="col-md-2"></div>
 					</div>
