@@ -29,4 +29,17 @@ public class MemberDaoTest {
 		memberVo.setMem_tel("010123456789");
 		dao.insertMember(memberVo);
 	}
+	
+	@Test
+	public void testReadMember() throws Exception {
+		String mem_id = "jang@email.com";
+		dao.readMember(mem_id);
+	}
+	
+	@Test
+	public void testReadPw() throws Exception {
+		String mem_id = "jang@email.com";
+		String mem_pass = "1234";
+		dao.readWithPw(mem_id, mem_pass);
+	}
 }

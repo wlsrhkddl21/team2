@@ -28,30 +28,30 @@
 						<form action="/lb/joinPost" method="post">
 							<div class="row">
 								<div class="col-sm-6 form-group pr-sm-1">
-									<input id="mem_name"class="form-control" type="text" name="Name" placeholder="Name" required="">
+									<input id="mem_name"class="form-control" type="text" name="mem_name" placeholder="Name" required="">
 								</div>
 								<div class="col-sm-6 form-group pl-sm-1">
-									<input id="mem_email" class="form-control" type="email" name="Email" placeholder="Email"
-										required="">
+									<input id="mem_id" class="form-control" type="email" name="mem_id" placeholder="Email"
+										>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-6 form-group pr-sm-1">
-									<input id="mem_pass" class="form-control" type="password" name="Password" placeholder="Password" required="">
+									<input id="mem_pass" class="form-control" type="password" name="mem_pass" placeholder="Password" >
 								</div>
 								<div class="col-sm-6 form-group pl-sm-1">
-									<input id="mem_passCheck" class="form-control" type="password" name="PasswordCheck" placeholder="PasswordCheck"
-										required="">
+									<input id="mem_passCheck" class="form-control" type="password" name="mem_passCheck" placeholder="PasswordCheck"
+										>
 								</div>
 							</div>
 							
 							<div class="form-group">
-								<input id="mem_address" class="form-control" type="text" name="Address" placeholder="Address"
-									required="">
+								<input id="mem_address" class="form-control" type="text" name="mem_address" placeholder="Address"
+									>
 							</div>
 							<div class="form-group">
-								<input id="mem_tel" class="form-control" type="text" name="Phone Number" placeholder="Phone Number"
-									required="">
+								<input id="mem_tel" class="form-control" type="text" name="mem_tel" placeholder="Phone Number"
+									>
 							</div>
 							
 							<div class="input-group1 text-right">
