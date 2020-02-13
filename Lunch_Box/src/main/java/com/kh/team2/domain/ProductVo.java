@@ -4,10 +4,25 @@ public class ProductVo {
 	private int pdt_num;
 	private String pdt_category;
 	private String pdt_name;
-	private String pdt_date;
+	private int pdt_date;
 	private int pdt_price;
 	private String pdt_image;
-	private String pdt_sales;
+	private int pdt_sales;
+	public ProductVo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public ProductVo(int pdt_num, String pdt_category, String pdt_name, int pdt_date, int pdt_price, String pdt_image,
+			int pdt_sales) {
+		super();
+		this.pdt_num = pdt_num;
+		this.pdt_category = pdt_category;
+		this.pdt_name = pdt_name;
+		this.pdt_date = pdt_date;
+		this.pdt_price = pdt_price;
+		this.pdt_image = pdt_image;
+		this.pdt_sales = pdt_sales;
+	}
 	public int getPdt_num() {
 		return pdt_num;
 	}
@@ -26,10 +41,10 @@ public class ProductVo {
 	public void setPdt_name(String pdt_name) {
 		this.pdt_name = pdt_name;
 	}
-	public String getPdt_date() {
+	public int getPdt_date() {
 		return pdt_date;
 	}
-	public void setPdt_date(String pdt_date) {
+	public void setPdt_date(int pdt_date) {
 		this.pdt_date = pdt_date;
 	}
 	public int getPdt_price() {
@@ -44,25 +59,10 @@ public class ProductVo {
 	public void setPdt_image(String pdt_image) {
 		this.pdt_image = pdt_image;
 	}
-	public String getPdt_sales() {
+	public int getPdt_sales() {
 		return pdt_sales;
 	}
-	public void setPdt_sales(String pdt_sales) {
-		this.pdt_sales = pdt_sales;
-	}
-	public ProductVo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public ProductVo(int pdt_num, String pdt_category, String pdt_name, String pdt_date, int pdt_price,
-			String pdt_image, String pdt_sales) {
-		super();
-		this.pdt_num = pdt_num;
-		this.pdt_category = pdt_category;
-		this.pdt_name = pdt_name;
-		this.pdt_date = pdt_date;
-		this.pdt_price = pdt_price;
-		this.pdt_image = pdt_image;
+	public void setPdt_sales(int pdt_sales) {
 		this.pdt_sales = pdt_sales;
 	}
 	@Override

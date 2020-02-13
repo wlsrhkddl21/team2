@@ -1,20 +1,20 @@
-package com.kh.team2.persistence;
+package com.kh.team2.service;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.kh.team2.domain.ProductVo;
+import com.kh.team2.persistence.AdminDao;
 
-@Repository
-public class ProductDaoimpl implements ProductDao {
-	private static final String NAMESPACE ="com.kh.team2.mappers.productMapper";
+@Service
+public class AdminServiceImpl implements AdminService {
 	
 	@Inject
-	SqlSession sqlSession;
+	AdminDao adminDao;
+	
 	@Override
 	public void insertPDT() throws Exception {
 		// TODO Auto-generated method stub
@@ -41,8 +41,8 @@ public class ProductDaoimpl implements ProductDao {
 
 	@Override
 	public List<ProductVo> readAllPDT() throws Exception {
-		return sqlSession.selectList(NAMESPACE+"readAllPDT");
-
+		
+		return adminDao.readAllPDT();
 	}
 
 }

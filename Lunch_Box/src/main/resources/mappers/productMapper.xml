@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.kh.team2.mappers.productMapper">
+<mapper namespace="com.kh.mappers.productMapper">
 <!-- 	<insert id="insertPDT"> -->
 <!-- 		insert into tbl_product(pdt_num,pdt_category,pdt_name,pdt,date,pdt_price,pdt_image) -->
 <!-- 		values(seq_product.nextval,) -->
@@ -12,5 +12,8 @@
 		<select id="readAllPDT" resultType="ProductVo">
 			select * from tbl_product 
 		</select>
+<!-- 		<insert id="insertPDT"> -->
+<!-- 			insert into tbl_product(pdt_num,pdt_category,pdt_name,pdt_) -->
+<!-- 		</insert> -->
 
 </mapper>  
