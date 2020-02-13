@@ -33,7 +33,54 @@ ol {
 .process {
 	float : right;
 }
-
+.tbl_col{
+	table-layout: fixed;
+	clear: both;
+	width: 100%;
+	border-collapse: collapse;
+}
+th {
+	padding: 15px 0;
+	background: #f7f7f7;
+	color: #333;
+	font-size: 15px;
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+}
+td {
+	padding: 15px 0;
+	border-bottom: 1px solid #e6e6e6;
+	color: #333;
+	font-size: 14px;
+	text-align: center;
+	vertical-align: middle;
+}
+.tbl_price {
+	position: relative;
+	padding: 30px;
+	border-bottom: 1px solid #dbdbdb;
+	background : #f9f9f9;
+	text-align: right;
+	width:400px;
+}
+.tbl_price table{
+	float: right;
+	width: 400px;
+}
+.tbl_price table th{
+	padding: 7px 0;
+	color: #333;
+	font-size: 15px;
+	font-weight: 400;
+	text-align: left;
+}
+.tbl_price table td{
+	padding: 7px 0;
+	color: #333;
+	font-size: 15px;
+	text-align: right;
+}
 </style>
 
 <script>
@@ -81,24 +128,56 @@ $(document).ready(function() {
 						<input type="hidden" name="pdt_num">
 						<input type="hidden" name="cart_count">
 						<div>
-							<table border="1">
+							<table class="tbl_col" >
+								<colgroup>
+									<col style="width:10%;">
+									<col style="width:40%;">
+									<col style="width:30%;">
+									<col style="width:10%;">
+									<col style="width:10%;">
+								</colgroup>
 								<thead>
 									<tr>
-										<th>체크</th>
-										<th>상품명</th>
-										<th>가격</th>
-										<th>수량</th>
+										<th scope="col">체크</th>
+										<th scope="col">상품명</th>
+										<th scope="col">가격</th>
+										<th scope="col">수량</th>
+										<th scope="col">번호</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${list}" var="vo">
 										<tr>
-											<td>체크</td>
+											<td><a href="/cart/delete/${vo.cart_num}">삭제</a></td>
 											<td>${vo.pdt_name}</td>
 											<td>${vo.pdt_price}</td>
 											<td>${vo.cart_count}</td>
+											<td>${vo.cart_num}</td>
 										</tr>
 									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<div class="tbl_price">
+							<p>배송비는 20000원 이상 구매시 무료배송 입니다.</p>
+							<table>
+								<colgroup>
+									<col style="width:35%;">
+									<col style="width:65%;">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="row">주문금액</th>
+										<td>20000원</td>
+									</tr>
+									<tr>
+										<th scope="row">배송료</th>
+										<td>0원</td>
+									</tr>
+									<tr>
+										<th scope="row">결제금액</th>
+										<td>20000원</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>

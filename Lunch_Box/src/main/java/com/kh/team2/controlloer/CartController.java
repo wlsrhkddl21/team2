@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -31,6 +32,11 @@ public class CartController {
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String inset(CartVo vo) throws Exception {
 		cartService.cartInsert(vo);
+		return "redirect:/cart/list";
+	}
+	@RequestMapping(value = "/delete/{num}")
+	public String delete(@PathVariable("num") int num) throws Exception {
+		cartService.cartDelete(num);
 		return "redirect:/cart/list";
 	}
 }
