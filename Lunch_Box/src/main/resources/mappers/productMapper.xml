@@ -15,5 +15,4 @@
 <!-- 		<insert id="insertPDT"> -->
 <!-- 			insert into tbl_product(pdt_num,pdt_category,pdt_name,pdt_) -->
 <!-- 		</insert> -->
-
 </mapper>  
