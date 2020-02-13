@@ -23,11 +23,5 @@ public class AdminTest {
 		dao.readAllPDT();
 	}
 	
-	@Inject
-	private BoardDao bDao;
 	
-	@Test
-	public void testBoard() throws Exception {
-		bDao.listAll();
-	}
 }

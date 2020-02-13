@@ -6,7 +6,17 @@
 <mapper namespace="com.kh.mappers.boardMapper">
 	
 	<select id="listAll" resultType="BoardVo">
-		select * from tbl_notice
+		select * 
+			from (select rownum rnum, a.* 
+        	  from (select * 
+        	  		from tbl_notice	order by not_num desc
+                   ) a
+             )
+		where rnum &gt;= 1 and rnum &lt;= 10
+	</select>
+	
+	<select id="listCount" resultType="int">
+		select count(*) from tbl_notice
 	</select>
 	
 </mapper>  

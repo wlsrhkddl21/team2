@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team2.domain.BoardVo;
+import com.kh.team2.domain.PagingDto;
 
 
 @Repository
@@ -19,10 +20,18 @@ public class BoardDaoImpl implements BoardDao {
 	@Inject
 	private SqlSession sqlSession;
 
+	
 	@Override
-	public List<BoardVo> listAll() throws Exception {
-		return sqlSession.selectList(NAMESPACE+".listAll");
+	public int listCount(PagingDto pagingDto) throws Exception {
+		int count = sqlSession.selectOne(NAMESPACE + ".listCount", pagingDto);
+		return count;
 	}
 
+
+	@Override
+	public List<BoardVo> listAll(PagingDto pagingDto) throws Exception {
+		 
+		return sqlSession.selectList(NAMESPACE + ".listAll", pagingDto);
+	}
 
 }
