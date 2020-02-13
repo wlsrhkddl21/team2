@@ -3,6 +3,13 @@
 
 <%@ include file="../include/header.jsp" %>
 	
+<script>
+// $(document).ready(function(){
+// 	$("#btnSubmit").click(function(){
+// 		location.href = "/lb/login";
+// 	});
+// });
+</script>
 
 	<!-- contact -->
 	<section class="contact py-5" id="contact">
@@ -18,7 +25,7 @@
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
 						<h4 class="mb-4 sec-title-w3 let-spa text-bl">Send us a message</h4>
-						<form action="#" method="post">
+						<form action="/lb/login" method="get">
 							<div class="row">
 								<div class="col-sm-6 form-group pr-sm-1">
 									<input class="form-control" type="text" name="Name" placeholder="Name" required="">
@@ -40,7 +47,7 @@
 								<textarea name="message" placeholder="Message" required=""></textarea>
 							</div>
 							<div class="input-group1 text-right">
-								<button class="btn" type="submit">Submit</button>
+								<button class="btn" type="submit" id="btnSubmit">Submit</button>
 							</div>
 						</form>
 					</div>

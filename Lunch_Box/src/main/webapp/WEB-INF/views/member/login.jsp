@@ -17,8 +17,8 @@
 				<!-- contact form -->
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
-						<h4 class="mb-4 sec-title-w3 let-spa text-bl">Send us a message</h4>
-						<form action="#" method="post">
+						<h4 class="mb-4 sec-title-w3 let-spa text-bl">로 그 인 폼</h4>
+						<form action="/" method="get">
 							<div class="row">
 								<div class="col-sm-6 form-group pr-sm-1">
 									<input class="form-control" type="text" name="Name" placeholder="Name" required="">
