@@ -6,14 +6,10 @@ import com.kh.team2.domain.ProductVo;
 
 public interface AdminService {
 
-	public void insertPDT() throws Exception;
-
-	public void deletePDT() throws Exception;
-
-	public void updatePDT() throws Exception;
-
-	public void readPDT() throws Exception;
-
+	public void insertPDT(ProductVo productVo) throws Exception;
+	public void deletePDT(int pdt_num) throws Exception;
+	public void updatePDT(ProductVo productVo) throws Exception;
+	public ProductVo readPDT(int pdt_num) throws Exception;
 	public List<ProductVo> readAllPDT() throws Exception;
 
 }

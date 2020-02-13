@@ -14,35 +14,32 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Inject
 	AdminDao adminDao;
-	
-	@Override
-	public void insertPDT() throws Exception {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
-	public void deletePDT() throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updatePDT() throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void readPDT() throws Exception {
-		// TODO Auto-generated method stub
+	public ProductVo readPDT(int pdt_num) throws Exception {
+		return adminDao.readPDT(pdt_num);
 
 	}
 
 	@Override
 	public List<ProductVo> readAllPDT() throws Exception {
-		
 		return adminDao.readAllPDT();
+	}
+
+	@Override
+	public void deletePDT(int pdt_num) throws Exception {
+		adminDao.deletePDT(pdt_num);
+	}
+
+	@Override
+	public void updatePDT(ProductVo productVo) throws Exception {
+		adminDao.updatePDT(productVo);
+	}
+
+
+	@Override
+	public void insertPDT(ProductVo productVo) throws Exception {
+		adminDao.insertPDT(productVo);
 	}
 
 }

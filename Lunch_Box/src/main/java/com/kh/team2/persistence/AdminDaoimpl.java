@@ -11,32 +11,17 @@ import com.kh.team2.domain.ProductVo;
 
 @Repository
 public class AdminDaoimpl implements AdminDao {
+	
 	private static final String NAMESPACE ="com.kh.mappers.productMapper";
 	
 	@Inject
 	SqlSession sqlSession;
+
+	
 	@Override
-	public void insertPDT() throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deletePDT() throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updatePDT() throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void readPDT() throws Exception {
-		// TODO Auto-generated method stub
-
+	public ProductVo readPDT(int pdt_num) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+".readPDT",pdt_num);
 	}
 
 	@Override
@@ -44,5 +29,25 @@ public class AdminDaoimpl implements AdminDao {
 		return sqlSession.selectList(NAMESPACE+".readAllPDT");
 
 	}
+
+	@Override
+	public void insertPDT(ProductVo productVo) throws Exception {
+		sqlSession.insert(NAMESPACE+".insertPDT",productVo);
+		
+	}
+
+	@Override
+	public void deletePDT(int pdt_num) throws Exception {
+		sqlSession.delete(NAMESPACE+".deletePDT",pdt_num);
+		
+	}
+
+	@Override
+	public void updatePDT(ProductVo productVo) throws Exception {
+		sqlSession.update(NAMESPACE+".updatePDT",productVo);
+		
+	}
+
+	
 
 }

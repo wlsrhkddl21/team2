@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kh.team2.mappers.cartMapper">
+
+	<select id="cartList" resultType="CartVo">
+		select a.cart_num,a.cart_count,a.mem_id,b.pdt_num,b.pdt_name,b.pdt_price
+ 		from tbl_cart a,tbl_product b
+ 		where a.mem_id = #{mem_id} and b.pdt_num = a.pdt_num
+	</select>
+
+	<insert id="addCart">
+		insert into tbl_cart
+ 		values ( #{pdt_num} , SEQ_CARTNUM.nextval , #{cart_count} , #{mem_id})
+	</insert>
+	
+	<delete id="deleteCart">
+		delete from tbl_cart
+		where cart_num = #{num}
+	</delete>
+	
+</mapper>  
