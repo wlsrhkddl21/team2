@@ -11,6 +11,7 @@
 $(document).ready(function(){
 	$(".form-control").each(function(){
 		$(".form-control").attr("disabled",true);
+		
 	});
 	
 	$("#btnList").click(function(){
