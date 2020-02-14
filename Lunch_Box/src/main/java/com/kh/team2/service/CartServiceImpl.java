@@ -31,4 +31,9 @@ public class CartServiceImpl implements CartService {
 		cartDao.cartDelete(num);
 	}
 
+	@Override
+	public void allDelete() throws Exception {
+		cartDao.allDelete();
+	}
+
 }

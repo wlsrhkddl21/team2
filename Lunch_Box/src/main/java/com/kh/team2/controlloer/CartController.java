@@ -49,8 +49,16 @@ public class CartController {
 	
 	@RequestMapping(value = "/delete",method = RequestMethod.POST)
 	@ResponseBody
-	public String delete(@RequestParam("checkArr") List<String> checkArr) {
-		System.out.println(checkArr.get(0));
+	public String delete(@RequestParam("checkArr") List<String> checkArr) throws Exception {
+		for (int i = 0; i < checkArr.size() ; i++) {
+			System.out.println(checkArr.get(i));
+			cartService.cartDelete(Integer.parseInt(checkArr.get(i)));
+		}
 		return "success";
+	}
+	@RequestMapping(value = "/deleteAll",method = RequestMethod.GET)
+	public String deleteAll() throws Exception {
+		cartService.allDelete();
+		return "redirect:/cart/list";
 	}
 }

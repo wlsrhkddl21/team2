@@ -22,4 +22,8 @@
 		where cart_num = #{num}
 	</delete>
 	
+	<delete id="deleteAll">
+		delete from tbl_cart
+	</delete>
+	
 </mapper>  
