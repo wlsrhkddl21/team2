@@ -21,11 +21,18 @@
 	</select>
 
 	<update id="updatePDT">
-
+		update tbl_product set
+		pdt_category=#{pdt_category},
+		pdt_name=#{pdt_name},
+		pdt_date=#{pdt_date},
+		pdt_price=#{pdt_price},
+		pdt_image=#{pdt_image}
+		where pdt_num = #{pdt_num}
 	</update>
 
 	<delete id="deletePDT">
-
+		delete from tbl_product
+		where pdt_num = #{pdt_num}
 	</delete>
 
 </mapper>  

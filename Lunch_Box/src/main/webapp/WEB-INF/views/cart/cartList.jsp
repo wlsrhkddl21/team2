@@ -14,6 +14,39 @@ $(document).ready(function() {
 		$("#cartForm").submit();
 	});
 	
+	$("#allCheck").click(function() {
+		if ($("#allCheck").prop("checked")) {
+			console.log($("#allCheck"));
+			$("input[type=checkbox]").prop("checked",true);
+		} else {
+			$("input[type=checkbox]").prop("checked",false);
+		}
+			
+	});
+	
+	$("#btnDelete").click(function() {
+		var checkArr = [];
+		$(".chk:checked").each(function(i) {
+			checkArr.push($(this).val());
+		});
+		console.log("checkArr:" , checkArr);
+		var sArr = checkArr.join(",");
+		var d = {"checkArr" : sArr }
+		console.log(d);
+		$.post("/cart/test_check", d, function(rData) {
+			console.log(rData);
+		});
+// 		$.ajax({
+// 			"type" : "post",
+// 			"url" : "/cart/test_check",
+// 			"headers" : {
+// 				"Content-Type" : "application/json",
+// 				"X-HTTP-Method-Override" : "post"
+// 			},
+// 			"dataType" : "text",
+// 			"data" : JSON.stringify(d)
+// 		});
+	});
 });
 </script>
 	<!-- contact -->
@@ -56,7 +89,7 @@ $(document).ready(function() {
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col"><input type="checkbox"/></th>
+										<th scope="col"><input type="checkbox" id="allCheck"/></th>
 										<th scope="col"></th>
 										<th scope="col">상품명</th>
 										<th scope="col">가격</th>
@@ -66,10 +99,10 @@ $(document).ready(function() {
 								</thead>
 								<tbody>
 									<c:choose>
-										<c:when test="">
+										<c:when test="${isEmpty == false}">
 											<c:forEach items="${list}" var="vo">
 												<tr>
-													<td><input type="checkbox"/><a href="/cart/delete/${vo.cart_num}">삭제</a></td>
+													<td><input type="checkbox" class="chk" value="${vo.cart_num}"/></td>
 													<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
 													<td class="left">${vo.pdt_name}</td>
 													<td>${vo.pdt_price}</td>
@@ -86,12 +119,13 @@ $(document).ready(function() {
 									</c:choose>
 								</tbody>
 							</table>
-						<div class="tbl_price">
-							<table>
-								<colgroup>
-									<col style="width:35%;">
-									<col style="width:65%;">
-								</colgroup>
+							<c:if test="${isEmpty == false}">
+							<div class="tbl_price">
+								<table>
+									<colgroup>
+										<col style="width:35%;">
+										<col style="width:65%;">
+									</colgroup>
 								<tbody>
 									<tr>
 										<th colspan="2" style="text-align: center;">배송비는 20000원 이상 구매 시 무료배송 적용됩니다.</th>
@@ -109,15 +143,16 @@ $(document).ready(function() {
 										<td>20000원</td>
 									</tr>
 								</tbody>
-							</table>
-						</div>
+								</table>
+							</div>
+							</c:if>
 						<div class="btn_cart">
 							<div class="check">
-								<span class="box_btn" ><a class="white large" href="#">선택삭제</a></span>
+								<span class="box_btn" ><a class="white large" href="#" id="btnDelete">선택삭제</a></span>
 								<span class="box_btn" ><a class="white large" href="#">장바구니 비우기</a></span>
 							</div>
 							<div class="order">
-								<span class="box_btn"><a class="large black" href="#">계속 쇼핑하기</a></span>
+								<span class="box_btn"><a class="large black" href="/shop/single">계속 쇼핑하기</a></span>
 								<span class="box_btn"><a class="large black" href="#">선택상품 주문하기</a></span>
 								<span class="box_btn"><a class="large green" href="#">전체상품 주문하기</a></span>
 							</div>

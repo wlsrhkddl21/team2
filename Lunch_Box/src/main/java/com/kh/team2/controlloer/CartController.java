@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team2.domain.CartVo;
 import com.kh.team2.service.CartService;
@@ -23,13 +25,13 @@ public class CartController {
 	@RequestMapping(value = "/list" , method = RequestMethod.GET)
 	public String view(Model model,CartVo vo) throws Exception {
 		List<CartVo> list = cartService.cartList("jang");
-		String msg = "";
-		model.addAttribute("list",list);
+		boolean isEmpty = false;
 		if (list.isEmpty()) {
-			msg = "none";
-			model.addAttribute("msg",msg);
+			isEmpty = true;
+			System.out.println("비어있음");
 		}
-		System.out.println(list);
+		model.addAttribute("list",list);
+		model.addAttribute("isEmpty",isEmpty);
 		return "cart/cartList"; 
 		
 	}
@@ -44,9 +46,11 @@ public class CartController {
 		cartService.cartInsert(vo);
 		return "redirect:/cart/list";
 	}
-	@RequestMapping(value = "/delete/{num}")
-	public String delete(@PathVariable("num") int num) throws Exception {
-		cartService.cartDelete(num);
-		return "redirect:/cart/list";
+	
+	@RequestMapping(value = "/delete",method = RequestMethod.POST)
+	@ResponseBody
+	public String delete(@RequestParam("checkArr") List<String> checkArr) {
+		System.out.println(checkArr.get(0));
+		return "success";
 	}
 }
