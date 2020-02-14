@@ -72,14 +72,15 @@ $(function(){
 	
 	// submit버튼
 	$("#btnSubmit").click(function(){
-		var upDiv = $("#uploadedList > div");
-		upDiv.each(function(index){
-			var fileName = $(this).attr("data-filename");
-			console.log("fileName:" + fileName);
-			var hiddenInput = "<input type='hidden' name='files["+index+"]'"+
-							  "value='" + fileName + "'/>";
-			$("#registerForm").prepend(hiddenInput);
-		});
+// 		var upDiv = $("#uploadedList > div");
+// 		upDiv.each(function(index){
+// 			var fileName = $(this).attr("data-filename");
+// 			console.log("fileName:" + fileName);
+// 			var hiddenInput = "<input type='hidden' name='files["+index+"]'"+
+// 							  "value='" + fileName + "'/>";
+// 			$("#registerForm").prepend(hiddenInput);
+// 		});
+		console.log()
 		$("#registerForm").submit();  //폼전송
 	});
 	
@@ -120,29 +121,19 @@ ${pagingDto }
 				<input type="hidden" name="page" value="${pagingDto.page }"/>
 				<input type="hidden" name="perPage" value="${pagingDto.perPage }"/>
 				<div class="form-group">
-					<label for="title">Title</label>
-					<input type="text" class="form-control" id="title" 
-						name="title"/>
+					<label for="not_title">Title</label>
+					<input type="text" class="form-control" id="not_title" 
+						name="not_title"/>
 				</div>
 				<div class="form-group">
-					<label for="content">Content</label>
-					<textarea class="form-control" rows="5" id="content" 
-						name="content"></textarea>
+					<label for="not_conetent">Content</label>
+					<textarea class="form-control" rows="5" id="not_content" 
+						name="not_content"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="writer">writer</label>
-					<input type="text" class="form-control" id="writer" 
-						name="writer" />
-				</div>
-				<!--  파일 첨부 -->
-				<div class="form-group">
-					<label for="fileDrop">첨부할 파일을 드래그 &amp; 드롭하세요</label>
-					<div id="fileDrop">
-					</div>
-				</div>
-				<!-- 썸네일 이미지 -->
-				<div class="form-group" id="uploadedList">
-				
+					<label for="not_writer">writer</label>
+					<input type="text" class="form-control" id="not_writer" 
+						name="not_writer" />
 				</div>
 				<div class="form-group" id="buttonDiv">
 				<button type="button" class="btn btn-primary" id="btnSubmit">

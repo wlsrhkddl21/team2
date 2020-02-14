@@ -11,4 +11,12 @@ public interface BoardService {
 	public List<BoardVo> listAll(PagingDto pagingDto) throws Exception;
 	// 글갯수
 	public int listCount(PagingDto pagingDto) throws Exception;
+	// 글쓰기
+	public void create(BoardVo vo) throws Exception;
+	// 글 읽기
+	public BoardVo read(int not_num) throws Exception;
+	// 글삭제
+	public void delete(int not_num) throws Exception;
+	// 글수정
+	public void update(BoardVo vo) throws Exception;
 }
