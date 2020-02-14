@@ -32,4 +32,9 @@ public class CartDaoImpl implements CartDao {
 		sqlSession.update(NAMESPACE+".deleteCart",num);
 	}
 
+	@Override
+	public void allDelete() throws Exception {
+		sqlSession.delete(NAMESPACE+".deleteAll");
+	}
+
 }

@@ -32,20 +32,13 @@ $(document).ready(function() {
 		console.log("checkArr:" , checkArr);
 		var sArr = checkArr.join(",");
 		var d = {"checkArr" : sArr }
-		console.log(d);
-		$.post("/cart/test_check", d, function(rData) {
-			console.log(rData);
+		$.post("/cart/delete", d , function(rData) {
+			location.href="/cart/list";
 		});
-// 		$.ajax({
-// 			"type" : "post",
-// 			"url" : "/cart/test_check",
-// 			"headers" : {
-// 				"Content-Type" : "application/json",
-// 				"X-HTTP-Method-Override" : "post"
-// 			},
-// 			"dataType" : "text",
-// 			"data" : JSON.stringify(d)
-// 		});
+	});
+	
+	$("#btnAllDelete").click(function() {
+		location.href="/cart/deleteAll";
 	});
 });
 </script>
@@ -120,19 +113,20 @@ $(document).ready(function() {
 								</tbody>
 							</table>
 							<c:if test="${isEmpty == false}">
+							<div>
 							<div class="tbl_price">
-								<table>
+								<table class="tbl_col">
 									<colgroup>
 										<col style="width:35%;">
 										<col style="width:65%;">
 									</colgroup>
 								<tbody>
 									<tr>
-										<th colspan="2" style="text-align: center;">배송비는 20000원 이상 구매 시 무료배송 적용됩니다.</th>
+										<th colspan="2" style="text-align: right;">배송비는 20000원 이상 구매 시 무료배송 적용됩니다.</th>
 									</tr>
 									<tr>
 										<th scope="row">주문금액</th>
-										<td>20000원</td>
+										<td class="result">20000원</td>
 									</tr>
 									<tr>
 										<th scope="row">배송료</th>
@@ -145,11 +139,12 @@ $(document).ready(function() {
 								</tbody>
 								</table>
 							</div>
+							</div>
 							</c:if>
 						<div class="btn_cart">
 							<div class="check">
 								<span class="box_btn" ><a class="white large" href="#" id="btnDelete">선택삭제</a></span>
-								<span class="box_btn" ><a class="white large" href="#">장바구니 비우기</a></span>
+								<span class="box_btn" ><a class="white large" href="#" id="btnAllDelete">장바구니 비우기</a></span>
 							</div>
 							<div class="order">
 								<span class="box_btn"><a class="large black" href="/shop/single">계속 쇼핑하기</a></span>
