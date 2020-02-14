@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team2.domain.BoardVo;
 import com.kh.team2.domain.PagingDto;
@@ -27,6 +28,7 @@ public class BoardServiceImpl implements BoardService {
 	public int listCount(PagingDto pagingDto) throws Exception {
 		return boardDao.listCount(pagingDto);
 	}
+
 
 
 }
