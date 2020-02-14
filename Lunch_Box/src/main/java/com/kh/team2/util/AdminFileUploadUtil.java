@@ -81,7 +81,7 @@ public class AdminFileUploadUtil {
 		// 업로드 된 원본 이미지를 메모리에 로딩
 		BufferedImage sourceImg = ImageIO.read(new File(uploadedPath));
 		// pom.xml =>> imgscalr-lib
-		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
+		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 50);
 		String thumbnailName = uploadPath + File.separator +  "s_" + uuidName;
 		File target = new File(thumbnailName);
 		ImageIO.write(destImg, getFormatName(uuidName), target);
@@ -100,6 +100,7 @@ public class AdminFileUploadUtil {
 			if (f.exists()) {
 				f.delete();
 			}
+			
 			String formatName = AdminFileUploadUtil.getFormatName(fileName);
 			boolean isImage = AdminFileUploadUtil.isImage(formatName);
 			if (isImage == true) {
