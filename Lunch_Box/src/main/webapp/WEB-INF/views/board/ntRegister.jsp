@@ -115,9 +115,9 @@ ${pagingDto }
 		<input type="hidden" name="perPage" value="${pagingDto.perPage }"/>
 	</form>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12 main_grid_contact">
 			<!--  action 을 생략하면 현재경로 : /board/register -->
-			<form role="form" method="post" id="registerForm">
+			<form role="form" method="post" id="registerForm" style="padding:30px">
 				<input type="hidden" name="page" value="${pagingDto.page }"/>
 				<input type="hidden" name="perPage" value="${pagingDto.perPage }"/>
 				<div class="form-group">
