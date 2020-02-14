@@ -12,9 +12,15 @@ $(document).ready(function(){
 	$(".form-control").each(function(){
 		$(".form-control").attr("disabled",true);
 	});
+	
 	$("#btnList").click(function(){
 		location.href="/admin/list";
-	})
+	});
+	
+	$("#btnSubmit").click(function(){
+		
+	});
+	
 	$("#btnUpdate").click(function(){
 		$(".form-control").attr("disabled",false);
 		$(".updateShow").each(function(){
@@ -50,7 +56,7 @@ $(document).ready(function(){
 		<div class="col-md-6">
 			<div class="col-lg-12 main_grid_contact">
 				<div class="form-w3ls p-md-5 p-4">
-					<form role="form">
+					<form role="form" id="updateForm">
 						<div class="form-group">
 							<label for="pdt_num">상품번호</label> 
 							<input type="text" value="${productVo.pdt_num }" 
@@ -89,38 +95,11 @@ $(document).ready(function(){
 						<button type="button" class="btn btn-primary" id="btnList">목록</button>
 						<button type="button" class="btn btn-primary updateHide" id="btnUpdate">수정</button>
 						<button type="button" class="btn btn-primary updateHide" id="btnDelete">삭제</button>
-						<button type="button" class="btn btn-primary updateShow" id="btnSubmit" style="display:none;">완료</button>
+						<button type="submit" class="btn btn-primary updateShow" id="btnSubmit" style="display:none;">완료</button>
 						<button type="button" class="btn btn-primary updateShow" id="btnCancel" style="display:none;">취소</button>
 					</form>
 				</div>
 			</div>
-			<div class="row"  style="text-align:center;">
-			<nav>
-				<ul class="pagination">
-					<li class="page-item">
-						<a class="page-link" href="#">Previous</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">1</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">2</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">3</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">4</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">5</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">Next</a>
-					</li>
-				</ul>
-			</nav>
-	</div>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
