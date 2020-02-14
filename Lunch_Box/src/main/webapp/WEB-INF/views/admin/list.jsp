@@ -8,15 +8,28 @@ cursor : pointer;
 }
 </style>
 <script>
-	console.log("${list }");
+// 	console.log("${list }");
 $(document).ready(function(){
 	$(".pdt_name").click(function(e){
 		e.preventDefault();
-		console.log("클릭됨");
+// 		console.log("클릭됨");
 		var pdt_num = $(this).attr("data-num");
 // 		location.href = "/admin/content";
 		location.href = "/admin/content?pdt_num="+pdt_num;
 	});
+	function thumbnail(){
+		$(".pdtImg").each(function(){
+			var fileName = $(this).attr("data-img");
+			console.log("fileName:"+fileName);
+			var slice = fileName.lastIndexOf("/")
+			var path = fileName.substring(0,slice+1);
+			var real = fileName.substring(slice+1);
+			var thumbnail = path+"s_"+real;
+			console.log(thumbnail);
+			$(this).attr("src","/admin/displayFile?fileName="+thumbnail);
+		});
+	}
+	thumbnail();
 });
 </script>
 	
@@ -43,12 +56,11 @@ $(document).ready(function(){
 					<tr>
 						<td>${productVo.pdt_num}</td>
 						<c:if test="${not empty productVo.pdt_image}">
-						<td>
-						<img alt="상품이미지" src="/admin/displayFile?fileName=${productVo.pdt_image}">
-						${productVo }
+						<td style = "text-align:center">
+						<img alt="상품이미지" class ="pdtImg" data-img="${productVo.pdt_image}">
 						</td>
 						</c:if>
-						<td>${productVo.pdt_category}</td>
+						<td style = "text-align:center">${productVo.pdt_category}</td>
 						<td><a class="pdt_name" href="#" data-num="${productVo.pdt_num}">${productVo.pdt_name}</a></td>
 						<td style = "text-align:center">${productVo.pdt_sales}</td>
 					</tr>
