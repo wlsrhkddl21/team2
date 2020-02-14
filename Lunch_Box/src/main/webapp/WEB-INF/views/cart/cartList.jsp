@@ -3,6 +3,9 @@
 <%@ include file="../include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
+div {
+	display: block;
+}
 .num {
 	float: left;
     width: 30px;
@@ -57,29 +60,85 @@ td {
 	vertical-align: middle;
 }
 .tbl_price {
-	position: relative;
+	position : relative;
 	padding: 30px;
 	border-bottom: 1px solid #dbdbdb;
 	background : #f9f9f9;
 	text-align: right;
-	width:400px;
 }
-.tbl_price table{
-	float: right;
+.tbl_price table {
+	margin-left: 500px;
 	width: 400px;
 }
-.tbl_price table th{
-	padding: 7px 0;
-	color: #333;
-	font-size: 15px;
-	font-weight: 400;
+.tbl_price th {
+	background: inherit;
+	text-align: left;
+	font
+}
+.tbl_price td {
+	border-bottom: inherit;
+	text-align: right;
+}
+
+.left {
+	padding-left: 15px;
 	text-align: left;
 }
-.tbl_price table td{
-	padding: 7px 0;
-	color: #333;
+p {
+ 	margin: 0;
+ 	padding: 0;
+ 	font-size: inherit;
+ 	letter-spacing: inherit;
+ 	line-height: normal;
+ 	color: inherit;
+}
+
+.btn_cart {
+	margin: 20px 0 50px;
+}
+
+.check {
+	float: left;
+}
+
+.btn_box {
+	display: inline-block;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: top;
+	margin: 0;
+	padding: 0 10px;
+	outline: 0;
+	font-weight: 400;
+	cursor:pointer;
+}
+.white {
+	border:1px solid #e6e6e6;
+	background: #fff;
+	color:#333 !important;
+}
+.large {
+	min-width: 180px;
+	height: 50px;
 	font-size: 15px;
-	text-align: right;
+	line-height: 50px;
+	padding: 20px;
+}
+.order {
+	float: right;
+}
+.black {
+	border: 1px solid #333;
+	color: #fff;
+	background: #333;
+}
+.green {
+	border: 1px solid #fd5c63;
+	background: #fd5c63;
+	color: #fff;
+}
+a {
+	text-decoration: none;
 }
 </style>
 
@@ -108,10 +167,6 @@ $(document).ready(function() {
 					<div class="form-w3ls p-md-5 p-4">
 						<div>
 						<h3 class="mb-4 sec-title-w3 let-spa text-bl">장 바 구 니</h3>
-						<input type="text" id="mem_id" placeholder="id"/>
-						<input type="text" id="pdt_num" placeholder="상품번호"/>
-						<input type="text" id="cart_count" placeholder="갯수"/>
-						<input id="addBtn" type="button" value="추가"/>
 							<div class="process">
 								<ol>
 									<li><span class="num selected">1</span>장바구니</li>
@@ -123,22 +178,23 @@ $(document).ready(function() {
 					</div>
 					<div class="form-w3ls p-md-5 p-4">
 						<div>
-						<form id="cartForm" action="#" method="POST">
+						<form id="cartForm" action="#" method="POST" style="margin: 0px;">
 						<input type="hidden" name="mem_id">
 						<input type="hidden" name="pdt_num">
 						<input type="hidden" name="cart_count">
-						<div>
 							<table class="tbl_col" >
 								<colgroup>
 									<col style="width:10%;">
-									<col style="width:40%;">
+									<col style="width:20%;">
 									<col style="width:30%;">
+									<col style="width:20%;">
 									<col style="width:10%;">
 									<col style="width:10%;">
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col">체크</th>
+										<th scope="col"><input type="checkbox"/></th>
+										<th scope="col"></th>
 										<th scope="col">상품명</th>
 										<th scope="col">가격</th>
 										<th scope="col">수량</th>
@@ -148,8 +204,9 @@ $(document).ready(function() {
 								<tbody>
 									<c:forEach items="${list}" var="vo">
 										<tr>
-											<td><a href="/cart/delete/${vo.cart_num}">삭제</a></td>
-											<td>${vo.pdt_name}</td>
+											<td><input type="checkbox"/><a href="/cart/delete/${vo.cart_num}">삭제</a></td>
+											<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
+											<td class="left">${vo.pdt_name}</td>
 											<td>${vo.pdt_price}</td>
 											<td>${vo.cart_count}</td>
 											<td>${vo.cart_num}</td>
@@ -157,15 +214,16 @@ $(document).ready(function() {
 									</c:forEach>
 								</tbody>
 							</table>
-						</div>
 						<div class="tbl_price">
-							<p>배송비는 20000원 이상 구매시 무료배송 입니다.</p>
 							<table>
 								<colgroup>
 									<col style="width:35%;">
 									<col style="width:65%;">
 								</colgroup>
 								<tbody>
+									<tr>
+										<th colspan="2" style="text-align: center;">배송비는 20000원 이상 구매 시 무료배송 적용됩니다.</th>
+									</tr>
 									<tr>
 										<th scope="row">주문금액</th>
 										<td>20000원</td>
@@ -180,6 +238,17 @@ $(document).ready(function() {
 									</tr>
 								</tbody>
 							</table>
+						</div>
+						<div class="btn_cart">
+							<div class="check">
+								<span class="box_btn" ><a class="white large" href="#">선택삭제</a></span>
+								<span class="box_btn" ><a class="white large" href="#">장바구니 비우기</a></span>
+							</div>
+							<div class="order">
+								<span class="box_btn"><a class="large black" href="#">계속 쇼핑하기</a></span>
+								<span class="box_btn"><a class="large black" href="#">선택상품 주문하기</a></span>
+								<span class="box_btn"><a class="large green" href="#">전체상품 주문하기</a></span>
+							</div>
 						</div>
 						</form>
 						</div>

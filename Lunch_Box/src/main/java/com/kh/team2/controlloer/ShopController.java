@@ -17,21 +17,21 @@ import com.kh.team2.service.ProductService;
 @Controller
 @RequestMapping("/shop/*")
 public class ShopController {
-	// 상품 정보 불러오기
+	// �긽�뭹 �젙蹂� 遺덈윭�삤湲�
 	@Inject
 	private AdminService adminService;
 	
 	@Inject
 	private ProductService productService;
 
-	// 나만의 도시락
+	// �굹留뚯쓽 �룄�떆�씫
 	@RequestMapping(value = "/my")
 	public String my() {
 
 		return "shop/my";
 	}
 
-	// 정기 배송
+	// �젙湲� 諛곗넚
 	@RequestMapping(value = "/sub")
 	public String subscription(Model model) throws Exception {
 		System.out.println("subscription Shop Controller");
@@ -42,7 +42,7 @@ public class ShopController {
 		return "shop/sub";
 	}
 
-	// 일반 상품
+	// �씪諛� �긽�뭹
 	@RequestMapping(value = "/single")
 	public String single(Model model) throws Exception {
 
@@ -54,7 +54,7 @@ public class ShopController {
 		return "shop/single";
 	}
 
-	// 상품 상세보기
+	// �긽�뭹 �긽�꽭蹂닿린
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
 	public String detail(@PathVariable("pdt_num") int pdt_num,Model model) throws Exception {
 		// @PathVariable("pdt_num") int pdt_num

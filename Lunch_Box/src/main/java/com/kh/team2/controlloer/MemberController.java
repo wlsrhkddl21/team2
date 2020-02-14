@@ -49,7 +49,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public String loginPost(HttpSession session, LogingDto logingDto, Model model) throws Exception {
+	public String loginPost(HttpServletRequest request, LogingDto logingDto, Model model) throws Exception {
 //		System.out.println("loginGet");
 //		System.out.println("로그인하고 메인옴");
 		System.out.println("logingDto:" + logingDto);
