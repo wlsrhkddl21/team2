@@ -66,23 +66,20 @@ td {
 	background : #f9f9f9;
 	text-align: right;
 }
-.tbl_price table{
-	float: right;
+.tbl_price table {
+	margin-left: 500px;
 	width: 400px;
 }
-.tbl_price table th{
-	padding: 7px 0;
-	color: #333;
-	font-size: 15px;
-	font-weight: 400;
+.tbl_price th {
+	background: inherit;
 	text-align: left;
+	font
 }
-.tbl_price table td{
-	padding: 7px 0;
-	color: #333;
-	font-size: 15px;
+.tbl_price td {
+	border-bottom: inherit;
 	text-align: right;
 }
+
 .left {
 	padding-left: 15px;
 	text-align: left;
@@ -94,6 +91,54 @@ p {
  	letter-spacing: inherit;
  	line-height: normal;
  	color: inherit;
+}
+
+.btn_cart {
+	margin: 20px 0 50px;
+}
+
+.check {
+	float: left;
+}
+
+.btn_box {
+	display: inline-block;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: top;
+	margin: 0;
+	padding: 0 10px;
+	outline: 0;
+	font-weight: 400;
+	cursor:pointer;
+}
+.white {
+	border:1px solid #e6e6e6;
+	background: #fff;
+	color:#333 !important;
+}
+.large {
+	min-width: 180px;
+	height: 50px;
+	font-size: 15px;
+	line-height: 50px;
+	padding: 20px;
+}
+.order {
+	float: right;
+}
+.black {
+	border: 1px solid #333;
+	color: #fff;
+	background: #333;
+}
+.green {
+	border: 1px solid #fd5c63;
+	background: #fd5c63;
+	color: #fff;
+}
+a {
+	text-decoration: none;
 }
 </style>
 
@@ -170,13 +215,15 @@ $(document).ready(function() {
 								</tbody>
 							</table>
 						<div class="tbl_price">
-							<p style="">배송비는 20000원 이상 구매시 무료배송 입니다.</p>
 							<table>
 								<colgroup>
 									<col style="width:35%;">
 									<col style="width:65%;">
 								</colgroup>
 								<tbody>
+									<tr>
+										<th colspan="2" style="text-align: center;">배송비는 20000원 이상 구매 시 무료배송 적용됩니다.</th>
+									</tr>
 									<tr>
 										<th scope="row">주문금액</th>
 										<td>20000원</td>
@@ -191,6 +238,17 @@ $(document).ready(function() {
 									</tr>
 								</tbody>
 							</table>
+						</div>
+						<div class="btn_cart">
+							<div class="check">
+								<span class="box_btn" ><a class="white large" href="#">선택삭제</a></span>
+								<span class="box_btn" ><a class="white large" href="#">장바구니 비우기</a></span>
+							</div>
+							<div class="order">
+								<span class="box_btn"><a class="large black" href="#">계속 쇼핑하기</a></span>
+								<span class="box_btn"><a class="large black" href="#">선택상품 주문하기</a></span>
+								<span class="box_btn"><a class="large green" href="#">전체상품 주문하기</a></span>
+							</div>
 						</div>
 						</form>
 						</div>
