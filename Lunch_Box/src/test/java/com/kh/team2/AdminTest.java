@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team2.persistence.AdminDao;
+import com.kh.team2.persistence.BoardDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
@@ -21,4 +22,6 @@ public class AdminTest {
 	public void testReadAll() throws Exception{
 		dao.readAllPDT();
 	}
+	
+	
 }

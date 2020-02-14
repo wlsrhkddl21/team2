@@ -13,15 +13,18 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.springframework.util.FileCopyUtils;
 
-public class FileUploadUtil {
+public class AdminFileUploadUtil {
 
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
 		UUID uuid = UUID.randomUUID(); // 겹치지 않는 고유한 값 생성
 		System.out.println("uuid:" + uuid);
 		String uuidName = uuid + "_" + originalName;
 		System.out.println("uuidName:" + uuidName);
-		String datePath = calcPath(uploadPath);
-		String filePath = uploadPath + File.separator + datePath + File.separator + uuidName;
+		File f = new File(uploadPath);
+		if(!f.exists()) {
+			f.mkdir();
+		}
+		String filePath = uploadPath + File.separator + uuidName;
 		File target = new File(filePath);
 		FileCopyUtils.copy(fileData, target);
 		String formatName = getFormatName(originalName);
@@ -29,9 +32,9 @@ public class FileUploadUtil {
 		boolean isImage = isImage(formatName);
 		System.out.println(isImage);
 		if (isImage == true) {
-			makeThumbnail(uploadPath, datePath, uuidName);
+			makeThumbnail(uploadPath,uuidName);
 		}
-		return datePath + File.separator + uuidName;
+		return uploadPath + File.separator + uuidName;
 	}
 
 	// 날짜에 해당하는 폴더 계산 -> 2020/01/20
@@ -68,14 +71,14 @@ public class FileUploadUtil {
 	}
 
 	// 썸네일 이미지 생성
-	public static void makeThumbnail(String uploadPath, String dirPath, String uuidName) throws IOException {
+	public static void makeThumbnail(String uploadPath, String uuidName) throws IOException {
 		// 원본 파일
-		String uploadedPath = uploadPath + File.separator + dirPath + File.separator + uuidName;
+		String uploadedPath = uploadPath + File.separator + uuidName;
 		// 업로드 된 원본 이미지를 메모리에 로딩
 		BufferedImage sourceImg = ImageIO.read(new File(uploadedPath));
 		// pom.xml =>> imgscalr-lib
 		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
-		String thumbnailName = uploadPath + File.separator + dirPath + File.separator + "s_" + uuidName;
+		String thumbnailName = uploadPath + File.separator +  "s_" + uuidName;
 		File target = new File(thumbnailName);
 		ImageIO.write(destImg, getFormatName(uuidName), target);
 	}
@@ -93,8 +96,8 @@ public class FileUploadUtil {
 			if (f.exists()) {
 				f.delete();
 			}
-			String formatName = FileUploadUtil.getFormatName(fileName);
-			boolean isImage = FileUploadUtil.isImage(formatName);
+			String formatName = AdminFileUploadUtil.getFormatName(fileName);
+			boolean isImage = AdminFileUploadUtil.isImage(formatName);
 			if (isImage == true) {
 				int slashIndex = fileName.lastIndexOf("/");
 				String front = fileName.substring(0, slashIndex + 1);

@@ -3,9 +3,8 @@ package com.kh.team2.controlloer;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.Request;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,12 +49,30 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public String loginPost(HttpServletRequest request, LogingDto logingDto, Model model) {
+	public String loginPost(HttpSession session, LogingDto logingDto, Model model) throws Exception {
 //		System.out.println("loginGet");
-		System.out.println("로그인하고 메인옴");
+//		System.out.println("로그인하고 메인옴");
 		System.out.println("logingDto:" + logingDto);
+		MemberVo memberVo = service.login(logingDto);
+		String go = "";
+		if (memberVo != null) {
+			model.addAttribute("msg", "성공");
+			model.addAttribute("memberVo", memberVo);
+			go = "index";
+		} else {
+			model.addAttribute("msg","실패");
+			go = "member/login";
+		}
+		return go;
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
 		return "index";
 	}
+	
+	
 	
 	
 	

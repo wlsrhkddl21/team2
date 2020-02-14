@@ -4,7 +4,17 @@
 <%@ include file="../include/header.jsp" %>
 <script>
 $(document).ready(function(){
+	var msg = "${msg}";
+	if (msg == "실패") {
+		alert("로그인 실패");
+	}
+	if (msg == "성공") {
+		alert("로그인 성공");
+	}
 	
+	$("#btnLogin").click(function(e){
+		
+	});
 });
 </script>	
 

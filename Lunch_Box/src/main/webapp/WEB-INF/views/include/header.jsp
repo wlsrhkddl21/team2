@@ -1,9 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
+<style>
+.dis {
+	display: none;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+<script>
+var msg = "${msg}";
+var memberVo = "${memberVo}";
+$(document).ready(function(){
+	if (msg == "성공") {
+		$("#divLogin").addClass("dis");
+		$("#dis").removeClass("dis");
+	}
+	
+});
+</script>
 <head>
 	<title>Lunch Box</title> 
 	<!-- Meta tag Keywords -->
@@ -71,16 +87,32 @@
 						</li>
 						<li><a href="/shop/sub">정기배송</a></li>
 						<li><a href="#gallery">리뷰 게시판</a></li>
-						<li><a href="#contact">고객센터</a></li>
+						<li>
+							<!-- First Tier Drop Down -->
+							<label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"
+									aria-hidden="true"></span>							</label>
+							<a href="#">고객센터 <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+							<input type="checkbox" id="drop-2" />
+							<ul>
+								<li><a href="/board/notice" class="drop-text">공지사항</a></li>
+								<li><a href="/board/qna" class="drop-text">문의게시판</a></li>
+								<li><a href="/board/faq" class="drop-text">자주하는질문</a></li>
+							</ul>
+						</li>
 					</ul>
 			  </nav>
 			</div>
 			<!-- //nav -->
 			<!-- dwn -->
-			<div class="text-center">
+			<div class="text-center" id="divLogin">
+			
 				<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">관리자창 </a>
 				<a href="/lb/login" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">로그인 </a>
 				<a href="/lb/joinGet" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">회원가입 </a>
+			</div>
+			<div id="dis" class="dis">
+				<a>${memberVo.mem_name} 님 환영합니다</a>
+				<a href="/lb/logout"><button>로그아웃</button></a>
 			</div>
 			<!-- //dwn -->
 		</div>
