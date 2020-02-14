@@ -17,7 +17,9 @@ $(document).ready(function() {
 	});
 	// Delete 버튼
 	$("#btnDelete").click(function(){
-		$("#frmList").attr("action", "/board/ntDelete").submit();
+		if(confirm("삭제하시겠습니까?")) {
+			$("#frmList").attr("action", "/board/ntDelete").submit();	
+		}
 	});
 	
 	$("#btnCancel").click(function(){
@@ -93,9 +95,9 @@ $(document).ready(function() {
 
 	<div class="row">
 		<div class="col-md-1"></div>
-			<div class="col-md-10">
+			<div class="col-md-10 main_grid_contact" >
 			<form id="myform" role="form" method="post" 
-				action="/board/ntUpdate">
+				action="/board/ntUpdate" style="padding:30px;">
 			<input type="hidden" name="not_num" value="${boardVo.not_num}"/>
 			<input type="hidden" name="page" value="${pagingDto.page}"/>
 			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>

@@ -18,21 +18,21 @@ import com.kh.team2.service.ProductService;
 @Controller
 @RequestMapping("/shop/*")
 public class ShopController {
-	// 파일
+	// 상품 정보 불러오기 (readPDT)
 	@Inject
 	private AdminService adminService;
 	
 	@Inject
 	private ProductService productService;
 
-	// 占쎄돌筌???占쎈?占쎈占쎌?
+	// 나만의 도시락
 	@RequestMapping(value = "/my")
 	public String my() {
 
 		return "shop/my";
 	}
 
-	// 占쎌疫뀐옙 獄怨?
+	// 정기 배송
 	@RequestMapping(value = "/sub")
 	public String subscription(Model model) throws Exception {
 		System.out.println("subscription Shop Controller");
@@ -43,7 +43,7 @@ public class ShopController {
 		return "shop/sub";
 	}
 
-	// 占쎌よ?占?占쎄맒占쎈?
+	// 일반 상품
 	@RequestMapping(value = "/single")
 	public String single(Model model) throws Exception {
 
@@ -55,10 +55,9 @@ public class ShopController {
 		return "shop/single";
 	}
 
-	// 占쎄맒占쎈?占쎄맒占쎄쉭癰?용┛
+	// 상품 상세보기
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
 	public String detail(@PathVariable("pdt_num") int pdt_num,Model model) throws Exception {
-		// @PathVariable("pdt_num") int pdt_num
 		System.out.println("detail Shop Controller");
 		ProductVo productVo = productService.readByPdtNum(pdt_num);
 		
@@ -67,9 +66,10 @@ public class ShopController {
 		return "shop/detail";
 	}
 	
+	
+	//구매 페이지
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	public String buy(BuyVo vo,Model model) throws Exception {
-		// @PathVariable("pdt_num") int pdt_num
 		System.out.println("buy Shop Controller");
 		System.out.println("BuyVo:"+vo);
 		model.addAttribute("buyVo",vo);
