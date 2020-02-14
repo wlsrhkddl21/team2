@@ -1,6 +1,6 @@
 package com.kh.team2.controlloer;
 
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.util.List;
 
@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,8 +56,8 @@ public class AdminController {
 		String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes());
 		String path = dirPath.replace("\\", "/");
 		System.out.println("path:" + path);
-		productVo.setPdt_image("\\"+path);
-		service.insertPDT(productVo);
+		productVo.setPdt_image(path);
+//		service.insertPDT(productVo);
 		System.out.println("productVo:"+productVo);
 		return "redirect:/admin/list";
 	}

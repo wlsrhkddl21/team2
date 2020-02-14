@@ -24,6 +24,10 @@ public class AdminFileUploadUtil {
 		if(!f.exists()) {
 			f.mkdir();
 		}
+//		// 업로드 된 원본 이미지를 메모리에 로딩
+//		BufferedImage sourceImg = ImageIO.read(new File(uploadPath));
+//		// pom.xml =>> imgscalr-lib
+//		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 600);
 		String filePath = uploadPath + File.separator + uuidName;
 		File target = new File(filePath);
 		FileCopyUtils.copy(fileData, target);
