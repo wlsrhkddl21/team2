@@ -32,8 +32,10 @@
 			$("#span_pdt_count").text(count);
 			$("#span_pdt_price").text(count*pdt_price);	
 		});
-		
-		
+		$("#bntCart").click(function() {
+			var count = $("#pdt_count").val();
+			location.href="/cart/insert/"+"${productVo.pdt_num}"+"/"+count;
+		});
 	});
 </script>
 <div class="container-fluid">
@@ -60,7 +62,7 @@
 						<div class="div_text">배송비 : 2,500원 (5만원 이상 무료)</div>
 						<div class="div_text">적립금 : 5%</div>
 						<div class="div_text">수량: <input type="button" class="btn btn-light" value="-" id="btnSub"/>
-									<input name="buy_count" type="text" value="1" style="width: 50px;" />
+									<input name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" />
 									<input type="button" class="btn btn-light" value="+" id="btnAdd"/>
 						</div>
 						<hr>
