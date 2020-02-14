@@ -20,12 +20,16 @@ public class CartController {
 	@Inject
 	CartService cartService;
 	
-	// ��ٱ��� ����Ʈ ����
 	@RequestMapping(value = "/list" , method = RequestMethod.GET)
 	public String view(Model model,CartVo vo) throws Exception {
-		System.out.println("��ٱ��� ����Ʈ");
 		List<CartVo> list = cartService.cartList("jang");
+		String msg = "";
 		model.addAttribute("list",list);
+		if (list.isEmpty()) {
+			msg = "none";
+			model.addAttribute("msg",msg);
+		}
+		System.out.println(list);
 		return "cart/cartList"; 
 		
 	}

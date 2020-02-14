@@ -14,8 +14,8 @@ public class ProductDaoImpl implements ProductDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public ProductVo readByPdtNum(int pdt_num) throws Exception {
-		ProductVo vo = sqlSession.selectOne(NAMESPACE +".readByPdtNum",pdt_num);
+	public ProductVo readPDT(int pdt_num) throws Exception {
+		ProductVo vo = sqlSession.selectOne(NAMESPACE +".readPDT",pdt_num);
 		return vo;
 	}
 

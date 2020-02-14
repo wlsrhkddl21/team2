@@ -36,6 +36,7 @@
 			var count = $("#pdt_count").val();
 			location.href="/cart/insert/"+"${productVo.pdt_num}"+"/"+count;
 		});
+		
 	});
 </script>
 <div class="container-fluid">
@@ -49,10 +50,10 @@
 						style="height: 380px; width: 380px;" />
 				</div>
 				<div class="col-md-8">
-				<form>
+				<form action="/shop/buy" method="post">
 				<input type="hidden" name="pdt_num" value="${productVo.pdt_num }"/> 
-				<input type="hidden" name="buy_price"/>
-				<input type="hidden" name="mem_id"/>
+				<input type="hidden" name="buy_price" value="${productVo.pdt_price }"/>
+				<input type="hidden" name="mem_id" value="admin"/>
 					<div style="height: 30px;"></div>
 						<h1 style="color: #fd5c63;">${productVo.pdt_name}</h1>
 						<hr>
@@ -70,7 +71,7 @@
 						<hr>
 						<div style="font-size: 45px;"> 
 							<input type="button" class="btn btn-light" value="장바구니 담기" id="bntCart"/>
-							<input type="button" class="btn btn-light" value="구매하기" id="bntBuy"/>
+							<input type="submit" class="btn btn-light" value="구매하기" id="bntBuy"/>
 						</div>
 				</form>				
 				</div>

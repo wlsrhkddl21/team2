@@ -1,9 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+
+$(document).ready(function(){
+	var msg = "${msg}";
+	var memberVo = "${memberVo}";
+	if (msg == "성공") {
+		
+		var mem_name = ${sessionScope.mem_name};
+	}
+	
+});
+</script>
 <head>
 	<title>Lunch Box</title> 
 	<!-- Meta tag Keywords -->
@@ -88,11 +102,20 @@
 			</div>
 			<!-- //nav -->
 			<!-- dwn -->
-			<div class="text-center">
+			<c:choose>
+			<c:when test="${empty mem_name }">
+			<div class="text-center" id="divLogin">
+			
 				<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">관리자창 </a>
 				<a href="/lb/login" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">로그인 </a>
-				<a href="/lb/join" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">회원가입 </a>
+				<a href="/lb/joinGet" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">회원가입 </a>
 			</div>
+			</c:when>
+			<c:otherwise>
+				<a>${mem_name} 님 환영합니다</a>
+				<a href="/lb/logout"><button>로그아웃</button></a>
+			</c:otherwise>
+			</c:choose>
 			<!-- //dwn -->
 		</div>
 	</div>

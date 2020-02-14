@@ -15,7 +15,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public ProductVo readByPdtNum(int pdt_num) throws Exception {
-		return productDao.readByPdtNum(pdt_num);
+		return productDao.readPDT(pdt_num);
 	}
 
 }
