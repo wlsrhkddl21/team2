@@ -61,7 +61,6 @@ td {
 	border-bottom: 1px solid #dbdbdb;
 	background : #f9f9f9;
 	text-align: right;
-	display: none;
 }
 .tbl_price table {
 	margin-left: 500px;
@@ -140,4 +139,9 @@ a {
 .empty {
 	padding: 100px 0 !important;
 }
+input[type=checkbox] {
+	width: 20px;
+	height: 20px;
+}
+
 </style>
