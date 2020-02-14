@@ -26,10 +26,12 @@ public class BoardController {
 	
 	@RequestMapping(value ="notice",method = RequestMethod.GET)
 	public String list(Model model, PagingDto pagingDto) throws Exception {
-		List<BoardVo> list = boardService.listAll(pagingDto); 
+		List<BoardVo> list = boardService.listAll(pagingDto);
+		List<BoardVo> hotList = boardService.hotList(pagingDto);
 		int totalCount = boardService.listCount(pagingDto);
 		pagingDto.setTotalCount(totalCount);
 		model.addAttribute("list", list);
+		model.addAttribute("hotList", hotList);
 		model.addAttribute("pagingDto", pagingDto);
 		return "board/notice";
 	}
@@ -71,6 +73,23 @@ public class BoardController {
 	public String delete(@RequestParam("not_num") int not_num) throws Exception {
 		boardService.delete(not_num);
 		return "redirect:/board/notice";
+	}
+	// 중요공지등록
+	@RequestMapping(value="/hotUpdate", method = RequestMethod.POST)
+	public String hotUpdate(BoardVo boardVo, 
+			@ModelAttribute PagingDto pagingDto) throws Exception {
+		boardService.hotUpdate(boardVo);
+		return "redirect:/board/ntRead?not_num=" + boardVo.getNot_num() + "&page=" 
+				+ pagingDto.getPage() + "&perPage=" + pagingDto.getPerPage();
+	}
+	
+	// 중요공지중지
+	@RequestMapping(value="/hotDelete", method = RequestMethod.POST)
+	public String hotDelete(BoardVo boardVo, 
+			@ModelAttribute PagingDto pagingDto) throws Exception {
+		boardService.hotDelete(boardVo);
+		return "redirect:/board/ntRead?not_num=" + boardVo.getNot_num() + "&page=" 
+		+ pagingDto.getPage() + "&perPage=" + pagingDto.getPerPage();
 	}
 	
 }

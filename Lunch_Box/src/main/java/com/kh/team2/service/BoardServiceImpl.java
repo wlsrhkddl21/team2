@@ -50,6 +50,23 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.update(vo);
 	}
 
+	@Override
+	public List<BoardVo> hotList(PagingDto pagingDto) throws Exception {
+		return boardDao.hotList(pagingDto);
+	}
+
+	@Override
+	public void hotUpdate(BoardVo vo) throws Exception {
+		boardDao.hotUpdate(vo);
+		
+	}
+
+	@Override
+	public void hotDelete(BoardVo vo) throws Exception {
+		boardDao.hotDelete(vo);
+		
+	}
+
 
 
 }

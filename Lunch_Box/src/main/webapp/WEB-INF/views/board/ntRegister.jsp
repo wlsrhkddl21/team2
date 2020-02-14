@@ -80,7 +80,6 @@ $(function(){
 // 							  "value='" + fileName + "'/>";
 // 			$("#registerForm").prepend(hiddenInput);
 // 		});
-		console.log()
 		$("#registerForm").submit();  //폼전송
 	});
 	

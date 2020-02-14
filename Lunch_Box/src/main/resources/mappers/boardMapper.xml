@@ -15,6 +15,16 @@
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select>
 	
+	<select id="hotList" resultType="BoardVo">
+		select * 
+			from (select rownum rnum, a.* 
+        	  from (select * 
+        	  		from tbl_notice	order by not_num desc
+                   ) a
+             )
+		where not_hot = 1
+	</select>
+	
 	<select id="listCount" resultType="int">
 		select count(*) from tbl_notice
 	</select>
@@ -43,6 +53,21 @@
 		update tbl_notice set
 			not_title = #{not_title},
 			not_content = #{not_content}
+		where not_num = #{not_num}
+	</update>
+	<update id="hotUpdate">
+		update tbl_notice set
+			not_title = #{not_title},
+			not_content = #{not_content},
+			not_hot = 1
+		where not_num = #{not_num}
+	</update>
+	
+	<update id="hotDelete">
+		update tbl_notice set
+			not_title = #{not_title},
+			not_content = #{not_content},
+			not_hot = 0
 		where not_num = #{not_num}
 	</update>
 	

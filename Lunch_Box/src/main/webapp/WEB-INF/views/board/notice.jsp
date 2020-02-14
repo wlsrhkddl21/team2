@@ -62,7 +62,7 @@ $(document).ready(function(){
 		<h3 class="title-w3ls text-center text-bl mb-5">공지사항</h3>
 		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
 		<div style="height: 20px"></div>
-		<table class="table table-striped text-center">
+		<table class="table text-center table-striped">
 				<thead>
 					<tr>
 						<th>글번호</th> 
@@ -73,6 +73,17 @@ $(document).ready(function(){
 					</tr>
 				</thead>
 				<tbody>
+				<c:forEach items="${hotList }" var="boardVo">
+					<tr style="font-weight:bold;">
+						<td>${boardVo.not_num }</td>
+						<td><a data-bno="${boardVo.not_num}" class="not_title"> ${boardVo.not_title } </a></td>
+						<td>${boardVo.not_writer }</td>
+						<td><fmt:formatDate value="${boardVo.not_regdate }" 
+								pattern="yyyy-MM-dd HH:mm:ss"/></td>
+						<td>${boardVo.not_viewcount }</td>
+					</tr>
+				</c:forEach>
+					
 				<c:forEach items="${list }" var="boardVo">
 					<tr>
 						<td>${boardVo.not_num }</td>
@@ -85,7 +96,7 @@ $(document).ready(function(){
 				</c:forEach>
 				</tbody>
 			</table>
-			<div style="height: 50px"></div>
+			<div style="height: 50px">
 				<nav>
 					<ul style="margin-right:250px; margin-bottom:20px;">
 						<c:if test="${pagingDto.hasPrev == true }">
@@ -112,6 +123,7 @@ $(document).ready(function(){
 						</c:if>
 					</ul>
 				</nav>
+			</div>
 			<!-- <div class="container-fluid ">
 			<div class="row" >
 							<div class="col-md-2"></div>
