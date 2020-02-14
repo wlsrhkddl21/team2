@@ -2,145 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<style>
-div {
-	display: block;
-}
-.num {
-	float: left;
-    width: 30px;
-    height: 30px;
-    margin-right: 8px;
-    border-radius: 100%;
-    background: #cacaca;
-    color: #fff;
-    font-size: 16px;
-    text-align: center;
-    line-height: 30px;
-}
-.selected {
-	background-color: #fd5c63;
-}
-li {
-    float: left;
-    padding: 0 0 0 30px;
-/*     background: url(http://www.homeal.net/_skin/homeal/img/common/arr_step.png) no-repeat 15px 50%; */
-    color: #a4a4a4;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 30px;
-}
-ol {
-	list-style: none;
-}
-.process {
-	float : right;
-}
-.tbl_col{
-	table-layout: fixed;
-	clear: both;
-	width: 100%;
-	border-collapse: collapse;
-}
-th {
-	padding: 15px 0;
-	background: #f7f7f7;
-	color: #333;
-	font-size: 15px;
-	font-weight: 400;
-	text-align: center;
-	vertical-align: middle;
-}
-td {
-	padding: 15px 0;
-	border-bottom: 1px solid #e6e6e6;
-	color: #333;
-	font-size: 14px;
-	text-align: center;
-	vertical-align: middle;
-}
-.tbl_price {
-	position : relative;
-	padding: 30px;
-	border-bottom: 1px solid #dbdbdb;
-	background : #f9f9f9;
-	text-align: right;
-}
-.tbl_price table {
-	margin-left: 500px;
-	width: 400px;
-}
-.tbl_price th {
-	background: inherit;
-	text-align: left;
-	font
-}
-.tbl_price td {
-	border-bottom: inherit;
-	text-align: right;
-}
-
-.left {
-	padding-left: 15px;
-	text-align: left;
-}
-p {
- 	margin: 0;
- 	padding: 0;
- 	font-size: inherit;
- 	letter-spacing: inherit;
- 	line-height: normal;
- 	color: inherit;
-}
-
-.btn_cart {
-	margin: 20px 0 50px;
-}
-
-.check {
-	float: left;
-}
-
-.btn_box {
-	display: inline-block;
-	overflow: hidden;
-	text-align: center;
-	vertical-align: top;
-	margin: 0;
-	padding: 0 10px;
-	outline: 0;
-	font-weight: 400;
-	cursor:pointer;
-}
-.white {
-	border:1px solid #e6e6e6;
-	background: #fff;
-	color:#333 !important;
-}
-.large {
-	min-width: 180px;
-	height: 50px;
-	font-size: 15px;
-	line-height: 50px;
-	padding: 20px;
-}
-.order {
-	float: right;
-}
-.black {
-	border: 1px solid #333;
-	color: #fff;
-	background: #333;
-}
-.green {
-	border: 1px solid #fd5c63;
-	background: #fd5c63;
-	color: #fff;
-}
-a {
-	text-decoration: none;
-}
-</style>
+<%@ include file="../include/cartStyle.jsp" %>
 
 <script>
 $(document).ready(function() {
@@ -151,6 +13,7 @@ $(document).ready(function() {
 		$("#cartForm").attr("action","/cart/insert");
 		$("#cartForm").submit();
 	});
+	
 });
 </script>
 	<!-- contact -->
@@ -202,16 +65,25 @@ $(document).ready(function() {
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${list}" var="vo">
-										<tr>
-											<td><input type="checkbox"/><a href="/cart/delete/${vo.cart_num}">삭제</a></td>
-											<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
-											<td class="left">${vo.pdt_name}</td>
-											<td>${vo.pdt_price}</td>
-											<td>${vo.cart_count}</td>
-											<td>${vo.cart_num}</td>
-										</tr>
-									</c:forEach>
+									<c:choose>
+										<c:when test="">
+											<c:forEach items="${list}" var="vo">
+												<tr>
+													<td><input type="checkbox"/><a href="/cart/delete/${vo.cart_num}">삭제</a></td>
+													<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
+													<td class="left">${vo.pdt_name}</td>
+													<td>${vo.pdt_price}</td>
+													<td>${vo.cart_count}</td>
+													<td>${vo.cart_num}</td>
+												</tr>
+										</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<tr>
+												<td colspan="6" class="empty">장바구니가 비었습니다.</td>
+											</tr>
+										</c:otherwise>
+									</c:choose>
 								</tbody>
 							</table>
 						<div class="tbl_price">

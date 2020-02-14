@@ -2,6 +2,7 @@ package com.kh.team2.controlloer;
 
 
 import javax.inject.Inject;
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -54,10 +55,12 @@ public class MemberController {
 //		System.out.println("로그인하고 메인옴");
 		System.out.println("logingDto:" + logingDto);
 		MemberVo memberVo = service.login(logingDto);
+		HttpSession session = request.getSession();
 		String go = "";
 		if (memberVo != null) {
 			model.addAttribute("msg", "성공");
 			model.addAttribute("memberVo", memberVo);
+			session.setAttribute("mem_name", memberVo.getMem_name());
 			go = "index";
 		} else {
 			model.addAttribute("msg","실패");
