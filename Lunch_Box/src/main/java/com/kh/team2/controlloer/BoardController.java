@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,6 @@ public class BoardController {
 	@Inject
 	BoardService boardService;
 	
-	
 	@RequestMapping(value ="notice",method = RequestMethod.GET)
 	public String list(Model model, PagingDto pagingDto) throws Exception {
 		List<BoardVo> list = boardService.listAll(pagingDto); 
@@ -31,5 +31,16 @@ public class BoardController {
 		model.addAttribute("pagingDto", pagingDto);
 		return "board/notice";
 	}
+
+	// 글등록폼 -> /board/register -> GET 방식 요청 처리
+	@RequestMapping(value="/ntRegister", method = RequestMethod.GET)
+	public String nrRegist(Model model, PagingDto pagingDto) throws Exception {
+		model.addAttribute("pagingDto", pagingDto);
+		return "board/ntRegister";
+	}
+	
+	
+	
+	
 	
 }

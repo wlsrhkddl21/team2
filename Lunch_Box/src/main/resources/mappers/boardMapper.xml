@@ -12,7 +12,7 @@
         	  		from tbl_notice	order by not_num desc
                    ) a
              )
-		where rnum &gt;= 1 and rnum &lt;= 10
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select>
 	
 	<select id="listCount" resultType="int">
