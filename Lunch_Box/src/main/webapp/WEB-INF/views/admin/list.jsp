@@ -57,8 +57,7 @@ $(document).ready(function(){
 						<td>${productVo.pdt_num}</td>
 						<c:if test="${not empty productVo.pdt_image}">
 						<td style = "text-align:center">
-						<img alt="상품이미지" class ="pdtImg" data-img="${productVo.pdt_image}" 
-						>
+						<img alt="상품이미지" class ="pdtImg" data-img="${productVo.pdt_image}">
 						</td>
 						</c:if>
 						<td style = "text-align:center">${productVo.pdt_category}</td>
