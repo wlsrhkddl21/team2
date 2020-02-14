@@ -2,86 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<style>
-.num {
-	float: left;
-    width: 30px;
-    height: 30px;
-    margin-right: 8px;
-    border-radius: 100%;
-    background: #cacaca;
-    color: #fff;
-    font-size: 16px;
-    text-align: center;
-    line-height: 30px;
-}
-.selected {
-	background-color: #fd5c63;
-}
-li {
-    float: left;
-    padding: 0 0 0 30px;
-/*     background: url(http://www.homeal.net/_skin/homeal/img/common/arr_step.png) no-repeat 15px 50%; */
-    color: #a4a4a4;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 30px;
-}
-ol {
-	list-style: none;
-}
-.process {
-	float : right;
-}
-.tbl_col{
-	table-layout: fixed;
-	clear: both;
-	width: 100%;
-	border-collapse: collapse;
-}
-th {
-	padding: 15px 0;
-	background: #f7f7f7;
-	color: #333;
-	font-size: 15px;
-	font-weight: 400;
-	text-align: center;
-	vertical-align: middle;
-}
-td {
-	padding: 15px 0;
-	border-bottom: 1px solid #e6e6e6;
-	color: #333;
-	font-size: 14px;
-	text-align: center;
-	vertical-align: middle;
-}
-.tbl_price {
-	position: relative;
-	padding: 30px;
-	border-bottom: 1px solid #dbdbdb;
-	background : #f9f9f9;
-	text-align: right;
-	width:400px;
-}
-.tbl_price table{
-	float: right;
-	width: 400px;
-}
-.tbl_price table th{
-	padding: 7px 0;
-	color: #333;
-	font-size: 15px;
-	font-weight: 400;
-	text-align: left;
-}
-.tbl_price table td{
-	padding: 7px 0;
-	color: #333;
-	font-size: 15px;
-	text-align: right;
-}
-</style>
+<%@ include file="../include/cartStyle.jsp" %>
 
 <script>
 $(document).ready(function() {
@@ -92,6 +13,7 @@ $(document).ready(function() {
 		$("#cartForm").attr("action","/cart/insert");
 		$("#cartForm").submit();
 	});
+	
 });
 </script>
 	<!-- contact -->
@@ -108,10 +30,6 @@ $(document).ready(function() {
 					<div class="form-w3ls p-md-5 p-4">
 						<div>
 						<h3 class="mb-4 sec-title-w3 let-spa text-bl">장 바 구 니</h3>
-						<input type="text" id="mem_id" placeholder="id"/>
-						<input type="text" id="pdt_num" placeholder="상품번호"/>
-						<input type="text" id="cart_count" placeholder="갯수"/>
-						<input id="addBtn" type="button" value="추가"/>
 							<div class="process">
 								<ol>
 									<li><span class="num selected">1</span>장바구니</li>
@@ -123,22 +41,23 @@ $(document).ready(function() {
 					</div>
 					<div class="form-w3ls p-md-5 p-4">
 						<div>
-						<form id="cartForm" action="#" method="POST">
+						<form id="cartForm" action="#" method="POST" style="margin: 0px;">
 						<input type="hidden" name="mem_id">
 						<input type="hidden" name="pdt_num">
 						<input type="hidden" name="cart_count">
-						<div>
 							<table class="tbl_col" >
 								<colgroup>
 									<col style="width:10%;">
-									<col style="width:40%;">
+									<col style="width:20%;">
 									<col style="width:30%;">
+									<col style="width:20%;">
 									<col style="width:10%;">
 									<col style="width:10%;">
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col">체크</th>
+										<th scope="col"><input type="checkbox"/></th>
+										<th scope="col"></th>
 										<th scope="col">상품명</th>
 										<th scope="col">가격</th>
 										<th scope="col">수량</th>
@@ -146,26 +65,37 @@ $(document).ready(function() {
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${list}" var="vo">
-										<tr>
-											<td><a href="/cart/delete/${vo.cart_num}">삭제</a></td>
-											<td>${vo.pdt_name}</td>
-											<td>${vo.pdt_price}</td>
-											<td>${vo.cart_count}</td>
-											<td>${vo.cart_num}</td>
-										</tr>
-									</c:forEach>
+									<c:choose>
+										<c:when test="">
+											<c:forEach items="${list}" var="vo">
+												<tr>
+													<td><input type="checkbox"/><a href="/cart/delete/${vo.cart_num}">삭제</a></td>
+													<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
+													<td class="left">${vo.pdt_name}</td>
+													<td>${vo.pdt_price}</td>
+													<td>${vo.cart_count}</td>
+													<td>${vo.cart_num}</td>
+												</tr>
+										</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<tr>
+												<td colspan="6" class="empty">장바구니가 비었습니다.</td>
+											</tr>
+										</c:otherwise>
+									</c:choose>
 								</tbody>
 							</table>
-						</div>
 						<div class="tbl_price">
-							<p>배송비는 20000원 이상 구매시 무료배송 입니다.</p>
 							<table>
 								<colgroup>
 									<col style="width:35%;">
 									<col style="width:65%;">
 								</colgroup>
 								<tbody>
+									<tr>
+										<th colspan="2" style="text-align: center;">배송비는 20000원 이상 구매 시 무료배송 적용됩니다.</th>
+									</tr>
 									<tr>
 										<th scope="row">주문금액</th>
 										<td>20000원</td>
@@ -180,6 +110,17 @@ $(document).ready(function() {
 									</tr>
 								</tbody>
 							</table>
+						</div>
+						<div class="btn_cart">
+							<div class="check">
+								<span class="box_btn" ><a class="white large" href="#">선택삭제</a></span>
+								<span class="box_btn" ><a class="white large" href="#">장바구니 비우기</a></span>
+							</div>
+							<div class="order">
+								<span class="box_btn"><a class="large black" href="#">계속 쇼핑하기</a></span>
+								<span class="box_btn"><a class="large black" href="#">선택상품 주문하기</a></span>
+								<span class="box_btn"><a class="large green" href="#">전체상품 주문하기</a></span>
+							</div>
 						</div>
 						</form>
 						</div>

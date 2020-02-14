@@ -28,10 +28,4 @@
 
 	</delete>
 
-	<select id="readByPdtNum" resultType="ProductVo">
-		select * from tbl_product
-		where pdt_num = #{pdt_num}
-	</select>
-
-
 </mapper>  

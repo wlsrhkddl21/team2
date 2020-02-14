@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="include/header.jsp" %>
-
-	<!-- banner slider -->
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script>
+	var msg = "${msg}";
+	if (msg == "성공") {
+		alert("로그인 성공");
+	}
+</script>
+<!-- 	banner slider -->
 	<div id="homepage-slider" class="st-slider">
 		<input type="radio" class="cs_anchor radio" name="slider" id="play1" checked="" />
 		<input type="radio" class="cs_anchor radio" name="slider" id="slide1" />
@@ -34,9 +40,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- //banner slider -->
+<!-- 	//banner slider -->
 
-	<!-- banner bottom grids -->
+<!-- 	banner bottom grids -->
 	<section class="banner-bottom-w3layouts pb-5" id="services">
 		<div class="container">
 			<div class="row">
@@ -73,9 +79,9 @@
 			</div>
 		</div>
 	</section>
-	<!-- //banner bottom grids -->
+<!-- 	//banner bottom grids -->
 
-	<!-- about -->
+<!-- 	about -->
 	<section class="w3ls-bnrbtm py-5" id="about">
 		<div class="container py-xl-5 py-lg-3">
 			<div class="row pb-5">
@@ -106,9 +112,9 @@
 			</div>
 		</div>
 	</section>
-	<!-- //about -->
+<!-- 	//about -->
 
-	<!-- team -->
+<!-- 	team -->
 	<section class="teams py-5" id="chefs">
 		<div class="container py-xl-5 py-lg-3">
 			<h3 class="title-w3ls text-center text-wh mb-5">Our Best Chef's</h3>
@@ -167,14 +173,14 @@
 			</div>
 		</div>
 	</section>
-	<!-- //team -->
+<!-- 	//team -->
 
-	<!-- blog -->
+<!-- 	blog -->
 	<section class="blog py-5" id="blog">
 		<div class="container py-xl-5 py-lg-3">
 			<h3 class="title-w3ls text-center text-bl mb-5">Our Fresh Blog Posts</h3>
 			<div class="row">
-				<!-- blog grid -->
+<!-- 				blog grid -->
 				<div class="col-lg-4 col-md-6 px-md-2">
 					<div class="card">
 						<div class="card-header p-0 position-relative">
@@ -201,8 +207,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- //blog grid -->
-				<!-- blog grid -->
+<!-- 				//blog grid -->
+<!-- 				blog grid -->
 				<div class="col-lg-4 col-md-6 px-md-2 mt-md-0 mt-5">
 					<div class="card">
 						<div class="card-header p-0 position-relative">
@@ -229,8 +235,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- //blog grid -->
-				<!-- blog grid -->
+<!-- 				//blog grid -->
+<!-- 				blog grid -->
 				<div class="col-lg-4 col-md-6 px-md-2 mt-lg-0 mt-5">
 					<div class="card">
 						<div class="card-header p-0 position-relative">
@@ -257,13 +263,13 @@
 						</div>
 					</div>
 				</div>
-				<!-- //blog grid -->
+<!-- 				//blog grid -->
 			</div>
 		</div>
 	</section>
-	<!-- //blog -->
+<!-- 	//blog -->
 
-	<!-- who we are -->
+<!-- 	who we are -->
 	<section class="w3ls-bnrbtm py-5" id="what">
 		<div class="row no-gutters">
 			<div class="col-xl-6 text-center">
@@ -338,9 +344,9 @@
 			</div>
 		</div>
 	</section>
-	<!-- //who we are -->
+<!-- 	//who we are -->
 
-	<!-- gallery -->
+<!-- 	gallery -->
 	<div class="gallery py-5" id="gallery">
 		<div class="container py-xl-5 py-lg-3">
 			<h3 class="title-w3ls text-center text-bl mb-5">Our Gallery</h3>
@@ -379,8 +385,8 @@
 				</div>
 			</div>
 		</div>
-		<!-- gallery popups -->
-		<!-- popup-->
+<!-- 		gallery popups -->
+<!-- 		popup -->
 		<div id="gal1" class="pop-overlay animate">
 			<div class="popup">
 				<img src="images/g1.jpg" alt="Popup Image" class="img-fluid" />
@@ -389,8 +395,8 @@
 				<a class="close" href="#gallery">&times;</a>
 			</div>
 		</div>
-		<!-- //popup -->
-		<!-- popup-->
+		//popup
+		popup
 		<div id="gal2" class="pop-overlay animate">
 			<div class="popup">
 				<img src="images/g2.jpg" alt="Popup Image" class="img-fluid" />
@@ -399,8 +405,8 @@
 				<a class="close" href="#gallery">&times;</a>
 			</div>
 		</div>
-		<!-- //popup -->
-		<!-- popup-->
+<!-- 		//popup -->
+<!-- 		popup -->
 		<div id="gal3" class="pop-overlay animate">
 			<div class="popup">
 				<img src="images/g3.jpg" alt="Popup Image" class="img-fluid" />
@@ -409,8 +415,8 @@
 				<a class="close" href="#gallery">&times;</a>
 			</div>
 		</div>
-		<!-- //popup3 -->
-		<!-- popup-->
+<!-- 		//popup3 -->
+<!-- 		popup -->
 		<div id="gal4" class="pop-overlay animate">
 			<div class="popup">
 				<img src="images/g4.jpg" alt="Popup Image" class="img-fluid" />
@@ -419,8 +425,8 @@
 				<a class="close" href="#gallery">&times;</a>
 			</div>
 		</div>
-		<!-- //popup -->
-		<!-- popup-->
+<!-- 		//popup -->
+<!-- 		popup -->
 		<div id="gal5" class="pop-overlay animate">
 			<div class="popup">
 				<img src="images/g5.jpg" alt="Popup Image" class="img-fluid" />
@@ -429,8 +435,8 @@
 				<a class="close" href="#gallery">&times;</a>
 			</div>
 		</div>
-		<!-- //popup -->
-		<!-- popup-->
+<!-- 		//popup -->
+<!-- 		popup -->
 		<div id="gal6" class="pop-overlay animate">
 			<div class="popup">
 				<img src="images/g6.jpg" alt="Popup Image" class="img-fluid" />
@@ -439,22 +445,22 @@
 				<a class="close" href="#gallery">&times;</a>
 			</div>
 		</div>
-		<!-- //popup -->
-		<!-- //gallery popups -->
+<!-- 		//popup -->
+<!-- 		//gallery popups -->
 	</div>
-	<!-- //gallery -->
+<!-- 	//gallery -->
 
-	<!-- contact -->
+<!-- 	contact -->
 	<section class="contact py-5" id="contact">
 		<div class="container">
 			<h3 class="title-w3ls text-center text-bl mb-5">Contact Us</h3>
 			<div class="row mx-sm-0 mx-2">
-				<!-- map -->
+<!-- 				map -->
 				<div class="col-lg-6 map">
 					
 				</div>
-				<!-- //map -->
-				<!-- contact form -->
+<!-- 				//map -->
+<!-- 				contact form -->
 				<div class="col-lg-6 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
 						<h4 class="mb-4 sec-title-w3 let-spa text-bl">Send us a message</h4>
@@ -485,13 +491,13 @@
 						</form>
 					</div>
 				</div>
-				<!-- //contact form -->
+<!-- 				//contact form -->
 			</div>
 		</div>
 	</section>
-	<!-- //contact -->
+<!-- 	//contact -->
 
-	<!-- support -->
+<!-- 	support -->
 	<div class="support py-5" id="support">
 		<div class="container py-xl-5 py-lg-3">
 			<h3 class="title-w3ls text-center text-bl mb-5">Help & Support</h3>
@@ -523,5 +529,5 @@
 			</div>
 		</div>
 	</div>
-	<!-- support -->
+<!-- 	support -->
 <%@ include file="include/footer.jsp" %>

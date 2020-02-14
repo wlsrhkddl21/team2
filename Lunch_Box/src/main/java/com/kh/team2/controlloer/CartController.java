@@ -22,15 +22,25 @@ public class CartController {
 	
 	@RequestMapping(value = "/list" , method = RequestMethod.GET)
 	public String view(Model model,CartVo vo) throws Exception {
-		System.out.println("장바구니 리스트");
 		List<CartVo> list = cartService.cartList("jang");
+		String msg = "";
 		model.addAttribute("list",list);
+		if (list.isEmpty()) {
+			msg = "none";
+			model.addAttribute("msg",msg);
+		}
+		System.out.println(list);
 		return "cart/cartList"; 
 		
 	}
 	
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String inset(CartVo vo) throws Exception {
+	@RequestMapping(value = "/insert/{num}/{count}", method = RequestMethod.GET)
+	public String inset(@PathVariable("num") int num,
+						@PathVariable("count") int count,CartVo vo) throws Exception {
+		vo.setPdt_num(num);
+		vo.setCart_count(count);
+		vo.setMem_id("jang");
+		System.out.println(vo);
 		cartService.cartInsert(vo);
 		return "redirect:/cart/list";
 	}

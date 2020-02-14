@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.team2.domain.BuyVo;
 import com.kh.team2.domain.ProductVo;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.ProductService;
@@ -17,21 +18,21 @@ import com.kh.team2.service.ProductService;
 @Controller
 @RequestMapping("/shop/*")
 public class ShopController {
-	// 상품 정보 불러오기
+	// 파일
 	@Inject
 	private AdminService adminService;
 	
 	@Inject
 	private ProductService productService;
 
-	// 나만의 도시락
+	// 占쎄돌筌???占쎈?占쎈占쎌?
 	@RequestMapping(value = "/my")
 	public String my() {
 
 		return "shop/my";
 	}
 
-	// 정기 배송
+	// 占쎌疫뀐옙 獄怨?
 	@RequestMapping(value = "/sub")
 	public String subscription(Model model) throws Exception {
 		System.out.println("subscription Shop Controller");
@@ -42,7 +43,7 @@ public class ShopController {
 		return "shop/sub";
 	}
 
-	// 일반 상품
+	// 占쎌よ?占?占쎄맒占쎈?
 	@RequestMapping(value = "/single")
 	public String single(Model model) throws Exception {
 
@@ -54,7 +55,7 @@ public class ShopController {
 		return "shop/single";
 	}
 
-	// 상품 상세보기
+	// 占쎄맒占쎈?占쎄맒占쎄쉭癰?용┛
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
 	public String detail(@PathVariable("pdt_num") int pdt_num,Model model) throws Exception {
 		// @PathVariable("pdt_num") int pdt_num
@@ -64,5 +65,15 @@ public class ShopController {
 		model.addAttribute("productVo",productVo);
 		
 		return "shop/detail";
+	}
+	
+	@RequestMapping(value = "/buy", method = RequestMethod.POST)
+	public String buy(BuyVo vo,Model model) throws Exception {
+		// @PathVariable("pdt_num") int pdt_num
+		System.out.println("buy Shop Controller");
+		System.out.println("BuyVo:"+vo);
+		model.addAttribute("buyVo",vo);
+		
+		return "shop/buy";
 	}
 }
