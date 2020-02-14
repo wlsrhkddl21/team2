@@ -97,8 +97,8 @@ $(document).ready(function(){
 				</tbody>
 			</table>
 			<div style="height: 50px">
-				<nav>
-					<ul style="margin-right:250px; margin-bottom:20px;">
+				<nav class="navbar">
+					<ul class="pagination mx-auto">
 						<c:if test="${pagingDto.hasPrev == true }">
 							<li class="page-item"><a class="page-link"
 								data-page="${pagingDto.startPage - 1}">Previous</a></li>
