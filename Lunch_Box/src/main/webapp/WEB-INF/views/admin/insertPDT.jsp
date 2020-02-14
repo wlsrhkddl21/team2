@@ -15,8 +15,8 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-3"></div>
+		<div class="col-md-6 main_grid_contact">
 			<form role="form" method="post" action="/admin/insertPDT" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="pdt_category">종류</label>
@@ -52,8 +52,9 @@ $(document).ready(function(){
 				<button type="submit" class="btn btn-primary">등록</button>
 				<button type="button" id="btnList" class="btn btn-danger">목록</button>
 			</form>
+			
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-3"></div>
 	</div>
 </div>
 <%@include file="../include/footer.jsp"%>

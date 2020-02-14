@@ -6,6 +6,20 @@
 
 <mapper namespace="com.kh.team2.mappers.memberMapper">
 
-	
+	<insert id="insertMember">
+		insert into tbl_member 
+		(mem_name, mem_id, mem_pass, mem_address, mem_tel)
+		values 
+		(#{mem_name}, #{mem_id}, #{mem_pass}, #{mem_address}, #{mem_tel})
+	</insert>
 
+	<select id="readMember" resultType="MemberVo">
+		select * from tbl_member
+		where mem_id = #{mem_id}
+	</select>
+	
+	<select id="readWithPw" resultType="MemberVo">
+		select * from tbl_member
+		where mem_id = #{mem_id} and mem_pass = #{mem_pass}
+	</select>
 </mapper>  

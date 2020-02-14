@@ -40,10 +40,13 @@ $(document).ready(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-		<div style = "text-align:right">
+		
+			<div class="col-lg-12 main_grid_contact">
+					<div class="form-w3ls p-md-5 p-4">
+					<div style = "text-align:right">
 			<a href="/admin/insertPDT" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">상품등록</a>
 			</div>
-			<table class="table table-striped">
+			<table class="table table-striped text-center">
 					<tr>
 						<th>No</th>
 						<th style = "text-align:center">Image</th>
@@ -56,17 +59,19 @@ $(document).ready(function(){
 					<tr>
 						<td>${productVo.pdt_num}</td>
 						<c:if test="${not empty productVo.pdt_image}">
-						<td style = "text-align:center">
+						<td >
 						<img alt="상품이미지" class ="pdtImg" data-img="${productVo.pdt_image}">
 						</td>
 						</c:if>
-						<td style = "text-align:center">${productVo.pdt_category}</td>
-						<td><a class="pdt_name" href="#" data-num="${productVo.pdt_num}">${productVo.pdt_name}</a></td>
-						<td style = "text-align:center">${productVo.pdt_sales}</td>
+						<td>${productVo.pdt_category}</td>
+						<td><a class="pdt_name"  href="#" data-num="${productVo.pdt_num}">${productVo.pdt_name}</a></td>
+						<td >${productVo.pdt_sales}</td>
 					</tr>
 					</c:forEach>
 					</tbody>
 			</table>
+			</div>
+			</div>
 		</div>
 		<div class="col-md-2"></div>
 	</div>

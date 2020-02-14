@@ -19,6 +19,33 @@
 		select count(*) from tbl_notice
 	</select>
 	
+	<select id="getNextVal" resultType="int">
+		select seq_notice_num.nextval
+		from dual
+	</select>
+	
+	<insert id="create">
+		insert into tbl_notice (not_num, not_title, not_content, not_writer)
+		values (seq_notice_num.nextval, #{not_title}, #{not_content}, #{not_writer})
+	</insert>
+	
+	<select id="read" resultType="BoardVo">
+		select * from tbl_notice
+		where not_num = #{not_num}
+	</select>
+	
+	<delete id="delete">
+		delete from tbl_notice
+		where not_num = #{not_num}	
+	</delete>
+	
+	<update id="update">
+		update tbl_notice set
+			not_title = #{not_title},
+			not_content = #{not_content}
+		where not_num = #{not_num}
+	</update>
+	
 </mapper>  
 
 

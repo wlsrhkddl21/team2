@@ -29,10 +29,23 @@ $(document).ready(function() {
 		$(".chk:checked").each(function(i) {
 			checkArr.push($(this).val());
 		});
-		
-		$.post("/cart/delete", checkArr , function(rData) {
+		console.log("checkArr:" , checkArr);
+		var sArr = checkArr.join(",");
+		var d = {"checkArr" : sArr }
+		console.log(d);
+		$.post("/cart/test_check", d, function(rData) {
 			console.log(rData);
 		});
+// 		$.ajax({
+// 			"type" : "post",
+// 			"url" : "/cart/test_check",
+// 			"headers" : {
+// 				"Content-Type" : "application/json",
+// 				"X-HTTP-Method-Override" : "post"
+// 			},
+// 			"dataType" : "text",
+// 			"data" : JSON.stringify(d)
+// 		});
 	});
 });
 </script>
