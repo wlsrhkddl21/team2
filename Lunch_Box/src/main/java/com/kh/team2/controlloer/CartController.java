@@ -1,5 +1,6 @@
 package com.kh.team2.controlloer;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,10 +27,28 @@ public class CartController {
 	public String view(Model model,CartVo vo) throws Exception {
 		List<CartVo> list = cartService.cartList("jang");
 		boolean isEmpty = false;
+		int totalPrice = 0;
+		int tip = 0;
+		int result = 0;
+		DecimalFormat tp = new DecimalFormat("###,###,###,###");
 		if (list.isEmpty()) {
 			isEmpty = true;
 			System.out.println("비어있음");
 		}
+		for (int i = 0; i < list.size() ; i++ ) {
+			result += list.get(i).getPdt_total();
+		}
+		totalPrice = result;
+		if ( totalPrice < 50000) {
+			tip = 2500;
+			totalPrice = result - tip;
+		}
+		String strResult = tp.format(result);
+		String strTotalPrice = tp.format(totalPrice);
+		String strTip = tp.format(tip);
+		model.addAttribute("tip",strTip);
+		model.addAttribute("result",strResult);
+		model.addAttribute("total",strTotalPrice);
 		model.addAttribute("list",list);
 		model.addAttribute("isEmpty",isEmpty);
 		return "cart/cartList"; 
@@ -61,4 +80,7 @@ public class CartController {
 		cartService.allDelete();
 		return "redirect:/cart/list";
 	}
+	
 }
+
+

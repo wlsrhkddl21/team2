@@ -57,4 +57,14 @@ public class BoardTest {
 		int not_num = 736;
 		dao.delete(not_num);
 	}
+	
+	@Test
+	public void testHot() throws Exception {
+		BoardVo vo = new BoardVo();
+		vo.setNot_num(737);
+		vo.setNot_title("수정테스트");
+		vo.setNot_content("수정테스트");
+		vo.setNot_hot(1);
+		dao.update(vo);
+	}
 }

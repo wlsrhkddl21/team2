@@ -9,7 +9,14 @@ public class BoardVo {
 	private String not_writer;
 	private Timestamp not_regdate;
 	private int not_viewcount;
+	private int not_hot;
 	
+	public int getNot_hot() {
+		return not_hot;
+	}
+	public void setNot_hot(int not_hot) {
+		this.not_hot = not_hot;
+	}
 	public int getNot_num() {
 		return not_num;
 	}
@@ -50,7 +57,7 @@ public class BoardVo {
 	public String toString() {
 		return "BoardVo [not_num=" + not_num + ", not_title=" + not_title + ", not_content=" + not_content
 				+ ", not_writer=" + not_writer + ", not_regdate=" + not_regdate + ", not_viewcount=" + not_viewcount
-				+ "]";
+				+ ", not_hot=" + not_hot + "]";
 	}
 	
 	

@@ -35,7 +35,7 @@ $(document).ready(function(){
 						<form action="/lb/loginPost" method="post">
 							
 							<div class="form-group">
-								<input id="mem_id" class="form-control" type="email" name="mem_id" placeholder="Email"
+								<input id="mem_id" class="form-control" type="text" name="mem_id" placeholder="Email"
 									required="">
 							</div>
 							<div class="form-group">

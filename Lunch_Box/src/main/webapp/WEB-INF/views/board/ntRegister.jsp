@@ -80,7 +80,6 @@ $(function(){
 // 							  "value='" + fileName + "'/>";
 // 			$("#registerForm").prepend(hiddenInput);
 // 		});
-		console.log()
 		$("#registerForm").submit();  //폼전송
 	});
 	
@@ -120,6 +119,7 @@ ${pagingDto }
 			<form role="form" method="post" id="registerForm" style="padding:30px">
 				<input type="hidden" name="page" value="${pagingDto.page }"/>
 				<input type="hidden" name="perPage" value="${pagingDto.perPage }"/>
+				<input type="hidden" name="not_writer" value="${mem_name }"/>
 				<div class="form-group">
 					<label for="not_title">Title</label>
 					<input type="text" class="form-control" id="not_title" 
@@ -130,11 +130,11 @@ ${pagingDto }
 					<textarea class="form-control" rows="5" id="not_content" 
 						name="not_content"></textarea>
 				</div>
-				<div class="form-group">
-					<label for="not_writer">writer</label>
-					<input type="text" class="form-control" id="not_writer" 
-						name="not_writer" />
-				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="not_writer">writer</label> -->
+<!-- 					<input type="text" class="form-control" id="not_writer"  -->
+<!-- 						name="not_writer" /> -->
+<!-- 				</div> -->
 				<div class="form-group" id="buttonDiv">
 				<button type="button" class="btn btn-primary" id="btnSubmit">
 					Submit

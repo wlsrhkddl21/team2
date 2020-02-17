@@ -121,6 +121,10 @@ p {
 	line-height: 50px;
 	padding: 20px;
 }
+.middle {
+	height: 30px;
+	line-height: 30px;
+}
 .order {
 	float: right;
 }
@@ -144,5 +148,34 @@ input[type=checkbox] {
 	width: 20px;
 	height: 20px;
 }
-
+.block {
+	display: block;
+}
+#count {
+ width: 22px;
+ height: 23px;
+ padding: 0 0 0 5px;
+ line-height: 25px;
+ border: 1px solid #d4d8d9;
+ border-radius: 3px 0 0 3px;
+}
+.up {
+	position: absolute;
+	left: 27px;
+	top:0;
+	cursor: pointer;
+}
+.down {
+	position: absolute;
+	left: 27px;
+	bottom: 0;
+	cursor: pointer;
+}
+#qty {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	margin: 0 1px 0 0 ;
+	text-align: left;
+}
 </style>

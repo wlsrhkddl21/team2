@@ -13,4 +13,6 @@ public interface CartDao {
 	public void cartDelete(int num) throws Exception;
 	// 장바구니 전체 삭제
 	public void allDelete() throws Exception;
+	// 장바구니 수량 변경
+	public void updataCount(int count,int cart_num) throws Exception;
 }

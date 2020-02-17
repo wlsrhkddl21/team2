@@ -3,31 +3,50 @@
 <%@ include file="../include/header.jsp" %>
 <script>
 $(document).ready(function() {
-	// Modify 버튼
+	// 수정 버튼
 	$("#btnModify").click(function() {
 		$("#not_title").prop("readonly", false);
 		$("#not_content").prop("readonly", false);
 		$(this).hide(100);
 		$("button[type=submit]").show(100);
 		$("#btnCancel").show(100);
+		$("#btnHot").show(100);
+		if(${boardVo.not_hot} == 1) {
+			console.log("중요공지임");
+			$("#btnHot").hide(100);
+			$("#btnHotCancel").show(100);
+		}
 	});
-	// ListAll 버튼
+	// 중요공지삭제버튼
+	$("#btnHotCancel").click(function(){
+		if(confirm("중요공지를 중단하시겠습니까?")) {
+			$("#myform").attr("action", "/board/hotDelete").submit();
+		}
+	});
+	// 목록 버튼
 	$("#btnListAll").click(function(){
 		location.href = "/board/notice";
 	});
-	// Delete 버튼
+	// 삭제 버튼
 	$("#btnDelete").click(function(){
 		if(confirm("삭제하시겠습니까?")) {
 			$("#frmList").attr("action", "/board/ntDelete").submit();	
 		}
 	});
-	
+	// 작성취소 버튼
 	$("#btnCancel").click(function(){
 		$("#not_title").prop("readonly", true);
 		$("#not_content").prop("readonly", true);
 		$("button[type=submit]").hide(100);
 		$(this).hide(100);
 		$("#btnModify").show(100);
+		$("#btnHot").hide(100);
+	});
+	// 중요공지등록 버튼
+	$("#btnHot").click(function() {
+		if(confirm("중요공지로 등록하시겠습니까?")) {
+			$("#myform").attr("action", "/board/hotUpdate").submit();
+		}
 	});
 });
 	
@@ -75,11 +94,8 @@ $(document).ready(function() {
 							</button>
 						</div>
 					</div>
-					
 				</div>
-				
 			</div>
-			
 		</div>
 	</div>
 
@@ -120,10 +136,16 @@ $(document).ready(function() {
 				</div>
 				<hr>
 				<div style="clear:both;">
-					<button type="submit" class="btn btn-success"
+					<button type="submit" class="btn btn-success" id="btnSuccess"
 						style="display:none;">완료</button>
 					<button type="button" class="btn btn-warning" id="btnCancel"
 						style="display:none;">수정취소</button>
+					<button type="button" class="btn btn-warning" id="btnHot"
+						style="display:none;">중요공지등록</button>
+					<button type="button" class="btn btn-warning" id="btnHotSuccess"
+						style="display:none;">중요공지등록완료</button>
+					<button type="button" class="btn btn-warning" id="btnHotCancel"
+						style="display:none;">중요공지등록삭제</button>
 					<button type="button" class="btn btn-warning"
 						id="btnModify">수정</button>
 					<button type="button" class="btn btn-danger"

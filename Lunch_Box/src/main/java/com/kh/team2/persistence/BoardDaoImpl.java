@@ -65,4 +65,24 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
+
+	@Override
+	public List<BoardVo> hotList(PagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".hotList", pagingDto);
+	}
+
+
+	@Override
+	public void hotUpdate(BoardVo vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".hotUpdate", vo);
+		
+	}
+
+
+	@Override
+	public void hotDelete(BoardVo vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".hotDelete", vo);
+		
+	}
+
 }
