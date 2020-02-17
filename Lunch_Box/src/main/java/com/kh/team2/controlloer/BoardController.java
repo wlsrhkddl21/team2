@@ -36,14 +36,14 @@ public class BoardController {
 		return "board/notice";
 	}
 
-	// 글등록폼 -> /board/register -> GET 방식 요청 처리
+	// 湲��벑濡앺뤌 -> /board/register -> GET 諛⑹떇 �슂泥� 泥섎━
 	@RequestMapping(value="/ntRegister", method = RequestMethod.GET)
 	public String ntRegist(Model model, PagingDto pagingDto) throws Exception {
 		model.addAttribute("pagingDto", pagingDto);
 		return "board/ntRegister";
 	}
 	
-	// 글등록 -> POST
+	// 湲��벑濡� -> POST
 	@RequestMapping(value= "/ntRegister", method = RequestMethod.POST)
 	public String ntRegisterPOST(BoardVo boardVo, PagingDto pagingDto) throws Exception {
 //		System.out.println(boardVo);
@@ -51,7 +51,7 @@ public class BoardController {
 		return "redirect:/board/notice?page=1&perPage=" + pagingDto.getPerPage();
 	}
 	
-	// 글읽기
+	// 湲��씫湲�
 	@RequestMapping(value="/ntRead", method = RequestMethod.GET)
 	public String read(@RequestParam("not_num") int not_num,
 			@ModelAttribute PagingDto pagingDto, Model model) throws Exception {
@@ -60,7 +60,7 @@ public class BoardController {
 		return "board/ntRead";
 	}
 	
-	// 글수정
+	// 湲��닔�젙
 	@RequestMapping(value="/ntUpdate", method = RequestMethod.POST)
 	public String update(BoardVo boardVo, 
 			@ModelAttribute PagingDto pagingDto) throws Exception {
@@ -74,7 +74,7 @@ public class BoardController {
 		boardService.delete(not_num);
 		return "redirect:/board/notice";
 	}
-	// 중요공지등록
+	// 以묒슂怨듭��벑濡�
 	@RequestMapping(value="/hotUpdate", method = RequestMethod.POST)
 	public String hotUpdate(BoardVo boardVo, 
 			@ModelAttribute PagingDto pagingDto) throws Exception {
@@ -83,13 +83,20 @@ public class BoardController {
 				+ pagingDto.getPage() + "&perPage=" + pagingDto.getPerPage();
 	}
 	
-	// 중요공지중지
+	// 以묒슂怨듭�以묒�
 	@RequestMapping(value="/hotDelete", method = RequestMethod.POST)
 	public String hotDelete(BoardVo boardVo, 
 			@ModelAttribute PagingDto pagingDto) throws Exception {
 		boardService.hotDelete(boardVo);
 		return "redirect:/board/ntRead?not_num=" + boardVo.getNot_num() + "&page=" 
 		+ pagingDto.getPage() + "&perPage=" + pagingDto.getPerPage();
+	}
+	
+	// 리뷰 게시판
+	@RequestMapping(value="/reviewBoard", method = RequestMethod.GET)
+	public String reviewBoard() throws Exception {
+		
+		return "board/reviewBoard";
 	}
 	
 }
