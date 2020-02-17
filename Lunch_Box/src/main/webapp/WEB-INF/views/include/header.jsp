@@ -13,7 +13,7 @@ $(document).ready(function(){
 	var memberVo = "${memberVo}";
 	if (msg == "성공") {
 		
-		var mem_name = ${sessionScope.mem_name};
+		var mem_name = "${sessionScope.mem_name}";
 	}
 	
 });
@@ -84,7 +84,7 @@ $(document).ready(function(){
 							</ul>
 						</li>
 						<li><a href="/shop/sub">정기배송</a></li>
-						<li><a href="#gallery">리뷰 게시판</a></li>
+						<li><a href="/board/reviewBoard">리뷰 게시판</a></li>
 						<li>
 							<!-- First Tier Drop Down -->
 							<label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"

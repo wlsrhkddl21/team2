@@ -49,27 +49,26 @@
 					<h4 class="mb-4 sec-title-w3 let-spa text-bl">Send us a
 						message</h4>
 					<form id="joinForm" action="/lb/joinPost" method="post">
-						<div class="row">
-							<div class="col-sm-6 form-group pr-sm-1">
-
-								<input id="mem_name" class="form-control" type="text"
-									name="mem_name" placeholder="Name" required="">
-							</div>
-							<div class="col-sm-6 form-group pl-sm-1">
-								<input id="mem_id" class="form-control" type="email"
-									name="mem_id" placeholder="Email">
-							</div>
+						
+							<div class="form-group">
+							<input id="mem_name" class="form-control" type="text"
+								name="mem_name" placeholder="Name">
 						</div>
-						<div class="row">
-							<div class="col-sm-6 form-group pr-sm-1">
-								<input id="mem_pass" class="form-control" type="text"
-									name="mem_pass" placeholder="Password">
-							</div>
-							<div class="col-sm-6 form-group pl-sm-1">
-								<input id="mem_passCheck" class="form-control" type="text"
-									name="mem_passCheck" placeholder="PasswordCheck">
-							</div>
+							<div class="form-group">
+							<p><input id="mem_id" class="form-control" type="text"
+								name="mem_id" placeholder="Email"><button>중복확인</button></p>
 						</div>
+						
+						
+							<div class="form-group">
+							<input id="mem_pass" class="form-control" type="text"
+								name="mem_pass" placeholder="Password">
+						</div>
+							<div class="form-group">
+							<input id="mem_pass2" class="form-control" type="text"
+								name="mem_pass2" placeholder="Password Check">
+						</div>
+						
 
 						<div class="form-group">
 							<input id="mem_address" class="form-control" type="text"
