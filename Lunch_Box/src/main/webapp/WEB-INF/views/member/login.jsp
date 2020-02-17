@@ -9,10 +9,7 @@ $(document).ready(function(){
 	if (msg == "실패") {
 		alert("비밀번호가 일치하지 않습니다");
 	}
-	if (msg == "성공") {
-		alert("로그인 성공");
-		mem_name = ${sessionScope.mem_name};
-	}
+	
 	
 	
 	

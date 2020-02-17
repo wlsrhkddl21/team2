@@ -19,7 +19,6 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Inject
 	private SqlSession sqlSession;
-
 	
 	@Override
 	public int listCount(PagingDto pagingDto) throws Exception {
@@ -27,25 +26,21 @@ public class BoardDaoImpl implements BoardDao {
 		return count;
 	}
 
-
 	@Override
 	public List<BoardVo> listAll(PagingDto pagingDto) throws Exception {
 		 
 		return sqlSession.selectList(NAMESPACE + ".listAll", pagingDto);
 	}
 
-
 	@Override
 	public void create(BoardVo vo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".create", vo);
 	}
 
-
 	@Override
 	public int getNextVal() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getNextVal");
 	}
-
 
 	@Override
 	public BoardVo read(int not_num) throws Exception {
@@ -53,24 +48,20 @@ public class BoardDaoImpl implements BoardDao {
 		return vo;
 	}
 
-
 	@Override
 	public void delete(int not_num) throws Exception {
 		sqlSession.delete(NAMESPACE + ".delete", not_num);
 	}
-
 
 	@Override
 	public void update(BoardVo vo) throws Exception {
 		sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
-
 	@Override
 	public List<BoardVo> hotList(PagingDto pagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".hotList", pagingDto);
 	}
-
 
 	@Override
 	public void hotUpdate(BoardVo vo) throws Exception {
@@ -78,11 +69,15 @@ public class BoardDaoImpl implements BoardDao {
 		
 	}
 
-
 	@Override
 	public void hotDelete(BoardVo vo) throws Exception {
 		sqlSession.update(NAMESPACE + ".hotDelete", vo);
 		
+	}
+
+	@Override
+	public void updateViewCount(int not_num) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateViewCount", not_num); 
 	}
 
 }

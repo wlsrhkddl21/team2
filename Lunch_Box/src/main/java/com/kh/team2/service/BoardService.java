@@ -25,5 +25,4 @@ public interface BoardService {
 	public void delete(int not_num) throws Exception;
 	// 글수정
 	public void update(BoardVo vo) throws Exception;
-	
 }

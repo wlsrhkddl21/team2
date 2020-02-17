@@ -27,4 +27,6 @@ public interface BoardDao {
 	public void hotUpdate(BoardVo vo) throws Exception;
 	// 중요공지사항 삭제
 	public void hotDelete(BoardVo vo) throws Exception;
+	// 조회수 추가
+	public void updateViewCount(int not_num) throws Exception;
 }
