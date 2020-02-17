@@ -75,7 +75,7 @@ $(document).ready(function(){
 				<tbody>
 				<c:forEach items="${hotList }" var="boardVo">
 					<tr style="font-weight:bold;">
-						<td>${boardVo.not_num }</td>
+						<td style="color:red">공지</td>
 						<td><a data-bno="${boardVo.not_num}" class="not_title"> ${boardVo.not_title } </a></td>
 						<td>${boardVo.not_writer }</td>
 						<td><fmt:formatDate value="${boardVo.not_regdate }" 
@@ -122,6 +122,7 @@ $(document).ready(function(){
 								data-page="${pagingDto.endPage + 1}">Next</a></li>
 						</c:if>
 					</ul>
+					<br>
 				</nav>
 			</div>
 			<!-- <div class="container-fluid ">
