@@ -8,4 +8,13 @@ public interface MemberService {
 	
 	// 로그인
 	public MemberVo login(LogingDto logingDto) throws Exception;
+	
+	// 아이디 체크
+	public MemberVo readMember(String mem_id) throws Exception;
+	
+	// 아이디 비밀번호 체크
+	public MemberVo readWithPw(String mem_id, String mem_pass) throws Exception;
+	
+	// 아이디 중복체크
+	public int idCheck(String mem_id) throws Exception;
 }

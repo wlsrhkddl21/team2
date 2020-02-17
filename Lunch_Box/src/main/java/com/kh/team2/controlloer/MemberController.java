@@ -1,8 +1,9 @@
 package com.kh.team2.controlloer;
 
 
+
+
 import javax.inject.Inject;
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team2.domain.LogingDto;
 import com.kh.team2.domain.MemberVo;
@@ -33,12 +35,30 @@ public class MemberController {
 		
 		return "member/join";
 	}
+	@ResponseBody
 	@RequestMapping(value = "/joinPost", method = RequestMethod.POST)
 	public String insertMember(HttpServletRequest request, MemberVo memberVo, Model model) throws Exception{
-//		System.out.println("joinPost");
-//		System.out.println("memberVo:" + memberVo);
-		service.insertMember(memberVo);
-		return "member/login";
+		// text ¿¡¼­ ¾ÆÀÌµð ¿Í ÆÐ½º¿öµå¿Í Áßº¹Ã¼Å© ¿©ºÎ °ª ¹Þ¾Æ¿È
+		System.out.println(request.getParameter("mem_id"));
+		System.out.println(request.getParameter("mem_pass"));
+		System.out.println(request.getParameter("mem_pass2"));
+		System.out.println(request.getParameter("isCheck"));
+		String mem_id = request.getParameter("mem_id");
+		String mem_pass = request.getParameter("mem_pass");
+		String mem_pass2 = request.getParameter("mem_pass2");
+		String isCheck = request.getParameter("isCheck");
+		// isChk true  == °ø¹éÀ» È®ÀÎ
+		// pass ¿öµå °ø¹é ÀÌ ¾Æ´Ï°Å³ª ¼­·Î °°À» °æ¿ì 
+		// msg Áà
+		String msg = "fail";
+		if (isCheck.equals("true") && !mem_id.equals("")) {
+			msg = "success";
+		} else if (mem_pass == mem_pass2 && !mem_pass.equals("") && !mem_pass2.equals("")) {
+			msg = "fail";
+		}
+		
+		
+		return msg;
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -47,37 +67,48 @@ public class MemberController {
 		
 		return "member/login";
 	}
-	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public String loginPost(HttpServletRequest request, LogingDto logingDto, Model model) throws Exception {
+	public String loginPost(HttpServletRequest request, LogingDto logingDto, Model model, MemberVo memberVo) throws Exception {
 //		System.out.println("loginGet");
-//		System.out.println("ï¿½Î±ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½");
 		System.out.println("logingDto:" + logingDto);
-		MemberVo memberVo = service.login(logingDto);
+		memberVo = service.login(logingDto);
+//		MemberVo memberVo2 = service.readWithPw(logingDto.getMem_id(), logingDto.getMem_pass());
 		HttpSession session = request.getSession();
 		String go = "";
 		if (memberVo != null) {
-			model.addAttribute("msg", "ï¿½ï¿½ï¿½ï¿½");
+			model.addAttribute("msg", "¼º°ø");
 			model.addAttribute("memberVo", memberVo);
 			session.setAttribute("mem_name", memberVo.getMem_name());
 			session.setAttribute("mem_id", memberVo.getMem_id());
+			session.setAttribute("mem_pass", memberVo.getMem_pass());
 			go = "index";
-		} else {
-			model.addAttribute("msg","ï¿½ï¿½ï¿½ï¿½");
+		} else {	
+			model.addAttribute("msg","½ÇÆÐ");
+			model.addAttribute("memberVo", memberVo);
 			go = "member/login";
 		}
 		return go;
 	}
 	
+	// ·Î±×¾Æ¿ô
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
 		return "index";
 	}
 	
-	
-	
-	
-	
+	// ¾ÆÀÌµð Áßº¹Ã¼Å©
+	@ResponseBody
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	public String idCheck(HttpServletRequest request, Model model) throws Exception {
+		String mem_id = request.getParameter("mem_id");
+		int idChk = 2;
+		if (!mem_id.equals("")) {
+		idChk = service.idCheck(mem_id);
+		}
+		return String.valueOf(idChk);
+	}
+
+					
 	
 }

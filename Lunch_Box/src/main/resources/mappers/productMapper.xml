@@ -7,8 +7,8 @@
 <mapper namespace="com.kh.mappers.productMapper">
 	<insert id="insertPDT">
 		insert into
-		tbl_product(pdt_num,pdt_category,pdt_name,pdt_date,pdt_price,pdt_image)
-		values(seq_product.nextval,#{pdt_category},#{pdt_name},#{pdt_date},#{pdt_price},#{pdt_image})
+		tbl_product(pdt_num,pdt_category,pdt_name,pdt_date,pdt_price,pdt_image,pdt_subimage)
+		values(seq_product.nextval,#{pdt_category},#{pdt_name},#{pdt_date},#{pdt_price},#{pdt_image},#{pdt_subimage})
 	</insert>
 
 	<select id="readAllPDT" resultType="ProductVo">

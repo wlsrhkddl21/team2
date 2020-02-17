@@ -71,6 +71,12 @@
 		where not_num = #{not_num}
 	</update>
 	
+	<update id="updateViewCount">
+		update tbl_notice set
+			not_viewcount = not_viewcount + 1
+		where not_num = #{not_num}
+	</update>
+	
 </mapper>  
 
 
