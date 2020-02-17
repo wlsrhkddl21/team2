@@ -38,7 +38,7 @@ public class AdminFileUploadUtil {
 		if (isImage == true) {
 			makeThumbnail(uploadPath,uuidName);
 		}
-		return uploadPath + File.separator + uuidName;
+		return uuidName;
 	}
 
 	// 날짜에 해당하는 폴더 계산 -> 2020/01/20
@@ -96,9 +96,11 @@ public class AdminFileUploadUtil {
 		
 		for (String fileName : fileNames) {
 			String filePath = uploadPath + File.separator + fileName.replace("/", "\\");
+			System.out.println("delete:"+filePath);
 			File f = new File(filePath);
 			if (f.exists()) {
 				f.delete();
+				System.out.println(fileName+"삭제됨");
 			}
 			
 			String formatName = AdminFileUploadUtil.getFormatName(fileName);

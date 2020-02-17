@@ -3,9 +3,8 @@
 <%@include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-.page-link{
-	text-align: center;
-}
+
+
 </style>
 <script>
 $(document).ready(function(){
@@ -19,6 +18,13 @@ $(document).ready(function(){
 	});
 	
 	$("#btnSubmit").click(function(){
+		
+	});
+	
+	$("#btnDelete").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			location.href="/admin/delete?pdt_num=${productVo.pdt_num}";
+		}
 		
 	});
 	
@@ -57,32 +63,38 @@ $(document).ready(function(){
 		<div class="col-md-6">
 			<div class="col-lg-12 main_grid_contact">
 				<div class="form-w3ls p-md-5 p-4">
-					<form role="form" id="updateForm">
+					<form role="form" id="updateForm" action="/admin/updatePDT" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="pdt_image" value="${productVo.pdt_image }">
 						<div class="form-group">
 							<label for="pdt_num">상품번호</label> 
 							<input type="text" value="${productVo.pdt_num }" 
-							class="form-control" id="pdt_num" 
-							disabled/>
+							 id="pdt_num" name="pdt_num" readonly/>
 						</div>
 						<div class="form-group">
 							<label for="pdt_category">종류</label>
 							 <input type="text"	value="${productVo.pdt_category}" 
-							 class="form-control" id="pdt_category" />
+							 class="form-control updateHide" />
+							 <select class="form-control updateShow" id="pdt_category" name="pdt_category"
+							 style="display:none;">
+								<option value="한식">한식</option>
+								<option value="중식">중식</option>
+								<option value="일식">일식</option>
+							</select>	
 						</div>
 						<div class="form-group">
 							<label for="pdt_name">상품명</label> 
 							<input type="text" value="${productVo.pdt_name}" 
-							class="form-control" id="pdt_name" />
+							class="form-control" id="pdt_name" name="pdt_name"/>
 						</div>
 						<div class="form-group">
 							<label for="pdt_date">총일수</label> 
 							<input type="text" value="${productVo.pdt_date}" 
-							class="form-control" id="pdt_date"/>
+							class="form-control" id="pdt_date" name="pdt_date"/>
 						</div>
 						<div class="form-group">
 							<label for="pdt_price">가격</label> 
 							<input type="text" value="${productVo.pdt_price}" 
-							class="form-control" id="pdt_price" />
+							class="form-control" id="pdt_price" name="pdt_price" />
 						</div>
 						<div class="form-group">
 							<label for="pdt_image">이미지</label> 
