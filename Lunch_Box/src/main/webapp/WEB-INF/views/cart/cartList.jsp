@@ -40,6 +40,7 @@ $(document).ready(function() {
 	$("#btnAllDelete").click(function() {
 		location.href="/cart/deleteAll";
 	});
+	
 });
 </script>
 	<!-- contact -->
@@ -98,7 +99,7 @@ $(document).ready(function() {
 													<td><input type="checkbox" class="chk" value="${vo.cart_num}"/></td>
 													<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
 													<td class="left">${vo.pdt_name}</td>
-													<td>${vo.pdt_price}</td>
+													<td id="price">${vo.pdt_price}</td>
 													<td>${vo.cart_count}</td>
 													<td>${vo.cart_num}</td>
 												</tr>
@@ -122,7 +123,7 @@ $(document).ready(function() {
 									</colgroup>
 								<tbody>
 									<tr>
-										<th colspan="2" style="text-align: right;">배송비는 20000원 이상 구매 시 무료배송 적용됩니다.</th>
+										<th colspan="2" style="text-align: right;">배송비는 <span style="color :#fd5c63">20,000원</span> 이상 구매 시 무료배송 적용됩니다.</th>
 									</tr>
 									<tr>
 										<th scope="row">주문금액</th>
@@ -134,7 +135,7 @@ $(document).ready(function() {
 									</tr>
 									<tr>
 										<th scope="row">결제금액</th>
-										<td>20000원</td>
+										<td><span style="color :#fd5c63; font-size: 20px" >20,000</span>원</td>
 									</tr>
 								</tbody>
 								</table>

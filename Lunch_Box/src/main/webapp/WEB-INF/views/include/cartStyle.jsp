@@ -43,7 +43,7 @@ th {
 	background: #f7f7f7;
 	color: #333;
 	font-size: 15px;
-	font-weight: 400;
+	font-weight: 900;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -52,6 +52,7 @@ td {
 	border-bottom: 1px solid #e6e6e6;
 	color: #333;
 	font-size: 14px;
+	font-weight: 900;
 	text-align: center;
 	vertical-align: middle;
 }
