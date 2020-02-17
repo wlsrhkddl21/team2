@@ -8,7 +8,27 @@
 	color: #343a40;
 }
 </style>
-${buyVo }
+<script type="text/javascript">
+	$(function(){
+		$("#btn_point").click(function(){
+			var mem_point = ${memberVo.mem_point};
+			var point = $("input[name=use_point]").val();
+			
+			if(mem_point<point){
+				alert("보유한 포인트가 모자랍니다.");
+				return;
+			}
+			
+			if(point%100 != 0){
+				alert("포인트는 100 단위로 사용 가능합니다.");
+				return;
+			}
+			
+			
+		});
+	});
+
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -35,7 +55,7 @@ ${buyVo }
 							</div>
 							<div class="form-w3ls p-md-5 p-4">
 								<div>
-									<table class="tbl_col text-center">
+									<table class="tbl_col text-center tbl_buy">
 										<thead>
 											<tr>
 												<th scope="col"></th>
@@ -45,16 +65,32 @@ ${buyVo }
 												<th scope="col">수량</th>
 												<th scope="col">주문금액</th>
 											</tr>
+											<c:set var="total_point" value="0"/>
+											<c:set var="total_pdt_price" value="0"/>
 											<!-- foreach -->
+											<c:forEach items="${list }" var="buyVo">
 											<tr>
+											<c:set var="point" value="${buyVo.buy_price*0.05 *buyVo.buy_count }"></c:set>
+											<c:set var="price" value="${buyVo.buy_price*buyVo.buy_count }"></c:set>
+											<c:set var="total_pdt_price" value="${total_pdt_price+price}"/>
+											<c:set var="total_point" value="${total_point+point}"/>
 												<td scope="col"><img src="../images/test1.jpg"
 													style="height: 100px; width: 100px;" /></td>
 												<td scope="col">${buyVo.buy_pdt_name }</td>
-												<td scope="col"><fmt:formatNumber
-														value="${buyVo.buy_price }" type="number" />원</td>
-												<td scope="col">125P</td>
-												<td scope="col">1</td>
-												<td scope="col">2500</td>
+												<td scope="col">2,500원</td>
+												<td scope="col">
+													<span class="point" data-point="${point }">
+													<fmt:formatNumber value="${point }"
+														type="number"/></span>P
+												</td>
+												<td scope="col">${buyVo.buy_count }</td>
+												<td scope="col"><span class="price" data-price="${price }">
+														<fmt:formatNumber
+														value="${price }" type="number"/></span>원</td>
+											</tr>
+											</c:forEach>
+											<tr>
+												<td colspan="6">적립 예정 포인트 : ${total_point} P</td>
 											</tr>
 										</thead>
 									</table>
@@ -66,36 +102,53 @@ ${buyVo }
 												style="vertical-align: baseline;">
 												<tr>
 													<th>보유 포인트</th>
-													<td>100P</td>
+													<td><fmt:formatNumber value="${memberVo.mem_point }"
+															type="number" />P</td>
 												</tr>
 												<tr>
 													<th>사용 포인트</th>
-													<td><input type="text" style="width: 110px; height: 12px; text-align: right;">P</td>
+													<td><input type="text" name="use_point"
+														style="width: 110px; height: 12px; text-align: right;">P</td>
 												</tr>
 												<tr>
-													<td colspan="2"><input type="button" value="포인트 사용" class="btn btn-secondary"></td>
+													<td colspan="2"><input type="button" value="포인트 사용"
+														class="btn btn-secondary" id="btn_point"></td>
 												</tr>
 												<tr>
 													<td colspan="2">포인트는 100단위 부터 사용 가능합니다.</td>
 												</tr>
 											</table>
 										</div>
+										<c:set var="total_price" value="${total_pdt_price}"></c:set>
+										<c:if test="${total_pdt_price <= 50000}">
+											<c:set var="total_price" value="${total_price+2500}"></c:set>
+										</c:if>
 										<div class="col-md-6">
 											<h4 style="margin-top: 30px; margin-bottom: 15px;"
-												class="buy_text text-center">총 결제 금액 : <span> 5000원</span></h4>
+												class="buy_text text-center">
+												총 결제 금액 : <span id="result_price"> <fmt:formatNumber
+														value="${total_price }" type="number" /></span>
+											</h4>
 											<div>
-												<table class="table">
+												<table class="table tbl_result">
 													<tr>
-														<th>상품 가격 : (+)5000 원</th>
+														<th>상품 가격 : (+) <fmt:formatNumber
+																value="${total_pdt_price }" type="number" /></th>
 													</tr>
 													<tr>
-														<th>배송비 : (+)2500원 </th>
+														<th
+															<c:choose>
+																<c:when test="${total_pdt_price <= 50000}">
+																</c:when>
+																<c:otherwise>style="display: none;"</c:otherwise>
+															</c:choose>>배송비:(+) 2,500원</th>
 													</tr>
 													<tr>
-														<th>포인트 사용금액 : (-) 100원</th>
+														<th style="display: none;">테스트</th>
 													</tr>
 												</table>
 											</div>
+											${total_price}
 											<!-- 	상품 가격 <br>
 												+ 배송비 <br>
 												- 포인트 사용금액 <br>
@@ -136,9 +189,7 @@ ${buyVo }
 	<!-- 구매 폼 만들기 1개상품 구매 완료 
 				mapper, test 만들기 -->
 </table>
-</div>
 <div class="col-md-2"></div>
-</div>
-</div>
+
 
 <%@ include file="../include/footer.jsp"%>

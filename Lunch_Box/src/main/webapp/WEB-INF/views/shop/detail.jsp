@@ -9,6 +9,10 @@
 </style>
 <script type="text/javascript">
 	$(function(){
+		
+		var mem_id = "${sessionScope.mem_id}";
+		console.log(mem_id);
+		
 		$("#btnSub").click(function(){
 			var elCount = $("input[name=buy_count]");
 			var count = elCount.val();
@@ -37,6 +41,16 @@
 			location.href="/cart/insert/"+"${productVo.pdt_num}"+"/"+count;
 		});
 		
+		$("#bntBuy").click(function(){
+			$("input[name=total_price]").val($("#span_pdt_price").text());
+			if(mem_id == ""){
+				console.log("아이디없음");
+// 				 alert("결제는 로그인 후에 이용할 수 있습니다.");
+			}else{
+				$("#buy_form").submit();
+			}
+		});
+		
 	});
 </script>
 <div class="container-fluid">
@@ -50,10 +64,11 @@
 						style="height: 380px; width: 380px;" />
 				</div>
 				<div class="col-md-8">
-				<form action="/shop/buy" method="post">
+				<form action="/shop/buy" method="post" id="buy_form">
 				<input type="hidden" name="pdt_num" value="${productVo.pdt_num }"/> 
+				<input type="hidden" name="buy_pdt_name" value="${productVo.pdt_name}"/> 
 				<input type="hidden" name="buy_price" value="${productVo.pdt_price }"/>
-				<input type="hidden" name="mem_id" value="admin"/>
+				<input type="hidden" name="total_price" />
 					<div style="height: 30px;"></div>
 						<h1 style="color: #fd5c63;">${productVo.pdt_name}</h1>
 						<hr>
@@ -71,10 +86,14 @@
 						<hr>
 						<div style="font-size: 45px;"> 
 							<input type="button" class="btn btn-light" value="장바구니 담기" id="bntCart"/>
-							<input type="submit" class="btn btn-light" value="구매하기" id="bntBuy"/>
+							<input type="button" class="btn btn-light" value="구매하기" id="bntBuy"/>
 						</div>
 				</form>				
 				</div>
+					<img src="../../images/test/pdt_detail.jpg" alt=" " class="img-fluid"/>
+					
+					<!-- 리뷰게시판 -->
+					
 			</div>
 		</div>
 		<div class="col-md-2"></div>
