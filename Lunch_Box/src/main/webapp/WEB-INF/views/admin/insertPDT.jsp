@@ -11,6 +11,9 @@ $(document).ready(function(){
 	$("#btnFile").click(function() {
 		$("#pdt_image").trigger("click");
 	});
+	$("#btnSubfile").click(function() {
+		$("#pdt_Subimage").trigger("click");
+	});
 });
 </script>
 <div class="container-fluid">
@@ -45,9 +48,14 @@ $(document).ready(function(){
 						type="text" class="form-control" id="pdt_price" name="pdt_price"/>
 				</div>
 				<div class="form-group">
-					<button type="button" class="btn btn-primary" id="btnFile">이미지 파일 찾기</button>
+					<button type="button" class="btn btn-primary" id="btnFile">메인 사진 등록</button>
 					<input
 						type="file" class="form-control-file" id="pdt_image" name="file" style="display:none;"/>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-primary" id="btnSubfile">서브 사진 등록</button>
+					<input
+						type="file" class="form-control-file" id="pdt_Subimage" name="subFile" style="display:none;"/>
 				</div>
 				<button type="submit" class="btn btn-primary">등록</button>
 				<button type="button" id="btnList" class="btn btn-danger">목록</button>

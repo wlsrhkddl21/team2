@@ -36,6 +36,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardVo read(int not_num) throws Exception {
+		boardDao.updateViewCount(not_num);
 		return boardDao.read(not_num);
 	}
 
@@ -66,6 +67,7 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.hotDelete(vo);
 		
 	}
+
 
 
 

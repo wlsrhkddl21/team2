@@ -52,12 +52,19 @@ public class AdminController {
 	@RequestMapping(value ="insertPDT",method = RequestMethod.POST)
 	public String insertPDT(ProductVo productVo, MultipartHttpServletRequest req) throws Exception {
 		MultipartFile mFile =  req.getFile("file");
+		MultipartFile sFile =  req.getFile("subFile");
 		String originalFilename = mFile.getOriginalFilename();
+		String originalSubFilename = sFile.getOriginalFilename();
+		System.out.println("file:"+originalFilename);
+		System.out.println("subFile:"+originalSubFilename);
 //		productVo.setPdt_image(originalFilename);
-		String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes());
-		String path = dirPath.replace("\\", "/");
-		System.out.println("path:" + path);
-		productVo.setPdt_image(path);
+		String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes(),true);
+		String dirSubPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalSubFilename, sFile.getBytes(),false);
+		String mainPath = dirPath.replace("\\", "/");
+		String subPath = dirSubPath.replace("\\", "/");
+//		System.out.println("path:" + path);
+		productVo.setPdt_image(mainPath);
+		productVo.setPdt_subimage(subPath);
 		service.insertPDT(productVo);
 		return "redirect:/admin/list";
 	}
@@ -65,15 +72,24 @@ public class AdminController {
 	@RequestMapping(value="updatePDT",method=RequestMethod.POST)
 	public String UpdatePDT(ProductVo productVo,MultipartHttpServletRequest req) throws Exception{
 		MultipartFile mFile = req.getFile("file");
+		MultipartFile sFile = req.getFile("subFile");
 		String originalFilename = mFile.getOriginalFilename();
+		String originalSubFilename = sFile.getOriginalFilename();
+		System.out.println("file:"+originalFilename);
+		System.out.println("subFile:"+originalSubFilename);
 //		System.out.println("mFile:"+originalFilename);
 		System.out.println("productVo:"+productVo);
 		if(originalFilename!=null) {
-			System.out.println("orfile"+originalFilename);
-			AdminFileUploadUtil.delete(productVo.getPdt_image(), uploadPath+"/product");
-			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes());
+			AdminFileUploadUtil.delete(productVo.getPdt_image(), uploadPath+"/product",true);
+			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes(),true);
 			String path = dirPath.replace("\\", "/");
 			productVo.setPdt_image(path);
+		}
+		if(originalSubFilename!=null) {
+			AdminFileUploadUtil.delete(productVo.getPdt_subimage(), uploadPath+"/product",false);
+			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalSubFilename, sFile.getBytes(),false);
+			String path = dirPath.replace("\\", "/");
+			productVo.setPdt_subimage(path);
 		}
 		service.updatePDT(productVo);
 		return "redirect:/admin/content?pdt_num="+productVo.getPdt_num();
@@ -83,7 +99,9 @@ public class AdminController {
 	public String deletePDT(int pdt_num) throws Exception{
 		ProductVo productVo = service.readPDT(pdt_num);
 		String pdt_image = productVo.getPdt_image();
-		AdminFileUploadUtil.delete(uploadPath+"product", pdt_image);
+		String pdt_subimage = productVo.getPdt_subimage();
+		AdminFileUploadUtil.delete(pdt_image,uploadPath+"/product",true);
+		AdminFileUploadUtil.delete(pdt_subimage,uploadPath+"/product",false);
 		service.deletePDT(pdt_num);
 		
 		return "redirect:/admin/list";
@@ -92,7 +110,7 @@ public class AdminController {
 	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
-		String realPath = uploadPath+"product" + File.separator + fileName.replace("/", "\\");
+		String realPath = uploadPath+"\\product" + File.separator + fileName.replace("/", "\\");
 //		String realPath = "//192.168.0.34/upload/team2\\product\\d839fcf6-64a4-4ee5-ab1d-65061460b425_ddong.jpg".replace("/", "\\");
 //		System.out.println("realPath:"+ realPath);
 		FileInputStream is = new FileInputStream(realPath);
