@@ -2,11 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/cartStyle.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 .buy_text {
 	color: #343a40;
 }
 </style>
+${buyVo }
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -36,7 +38,6 @@
 									<table class="tbl_col text-center">
 										<thead>
 											<tr>
-												<th scope="col"><input id="chkAll" type="checkbox" /></th>
 												<th scope="col"></th>
 												<th scope="col">상품명</th>
 												<th scope="col">배송비</th>
@@ -44,22 +45,13 @@
 												<th scope="col">수량</th>
 												<th scope="col">주문금액</th>
 											</tr>
+											<!-- foreach -->
 											<tr>
-												<td scope="col"><input type="checkbox" /></td>
 												<td scope="col"><img src="../images/test1.jpg"
 													style="height: 100px; width: 100px;" /></td>
-												<td scope="col">도시락</td>
-												<td scope="col">2500</td>
-												<td scope="col">125P</td>
-												<td scope="col">1</td>
-												<td scope="col">2500</td>
-											</tr>
-											<tr>
-												<td scope="col"><input type="checkbox" /></td>
-												<td scope="col"><img src="../images/test1.jpg"
-													style="height: 100px; width: 100px;" /></td>
-												<td scope="col">도시락</td>
-												<td scope="col">2500</td>
+												<td scope="col">${buyVo.buy_pdt_name }</td>
+												<td scope="col"><fmt:formatNumber
+														value="${buyVo.buy_price }" type="number" />원</td>
 												<td scope="col">125P</td>
 												<td scope="col">1</td>
 												<td scope="col">2500</td>
