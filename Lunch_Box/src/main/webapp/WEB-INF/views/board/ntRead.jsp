@@ -5,6 +5,8 @@
 $(document).ready(function() {
 	// 수정 버튼
 	$("#btnModify").click(function() {
+		$("#contentView").hide(100);
+		$("#myform").show(100);
 		$("#not_title").prop("readonly", false);
 		$("#not_content").prop("readonly", false);
 		$(this).hide(100);
@@ -112,8 +114,35 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-md-1"></div>
 			<div class="col-md-10 main_grid_contact" >
+			<br>
+			<table class="table" id="contentView">
+		<colgroup>
+			<col style="width:10%;">
+			<col style="width:50%;">
+			<col style="width:10%;">
+			<col style="width:40%;">
+		</colgroup>
+		<tbody>
+			<tr>
+				<th scope="row">제목</th>
+				<td class="subject"> ${boardVo.not_title}</td>
+				<th scope="row">조회수</th>
+				<td>${boardVo.not_viewcount}</td>
+			</tr>
+			<tr>
+				<th scope="row">작성자</th>
+				<td>${boardVo.not_writer}</td>
+				<th scope="row">작성일</th>
+				<td>${boardVo.not_regdate}</td>
+			</tr>
+			<tr>
+				<th scope="row" colspan="5"><textarea rows="10" readonly>${boardVo.not_content}</textarea></th>
+			</tr>
+			
+		</tbody>
+	</table>
 			<form id="myform" role="form" method="post" 
-				action="/board/ntUpdate" style="padding:30px;">
+				action="/board/ntUpdate" style="padding:30px; display:none;">
 			<input type="hidden" name="not_num" value="${boardVo.not_num}"/>
 			<input type="hidden" name="page" value="${pagingDto.page}"/>
 			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
@@ -135,7 +164,8 @@ $(document).ready(function() {
 						readonly/>
 				</div>
 				<hr>
-				<div style="clear:both;">
+			
+			<div style="clear:both;">
 					<button type="submit" class="btn btn-success" id="btnSuccess"
 						style="display:none;">완료</button>
 					<button type="button" class="btn btn-warning" id="btnCancel"
@@ -146,6 +176,9 @@ $(document).ready(function() {
 						style="display:none;">중요공지등록완료</button>
 					<button type="button" class="btn btn-warning" id="btnHotCancel"
 						style="display:none;">중요공지등록삭제</button>
+			</div>
+			</form>
+				<div style="clear:both;">
 					<button type="button" class="btn btn-warning"
 						id="btnModify">수정</button>
 					<button type="button" class="btn btn-danger"
@@ -153,7 +186,6 @@ $(document).ready(function() {
 					<button type="button" class="btn btn-primary"
 						id="btnListAll">목록</button>
 				</div>
-			</form>
 			<!-- 댓글 작성 -->
 	<div class="row">
 		<div class="col-md-12">

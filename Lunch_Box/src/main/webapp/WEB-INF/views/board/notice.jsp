@@ -60,7 +60,9 @@ $(document).ready(function(){
 		<br>
 		<div style="height: 20px"></div>
 		<h3 class="title-w3ls text-center text-bl mb-5">공지사항</h3>
+		<c:if test="${mem_id == 'admin'}">
 		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
+		</c:if>
 		<div style="height: 20px"></div>
 		<table class="table text-center table-striped">
 				<thead>
@@ -139,6 +141,7 @@ $(document).ready(function(){
 		<div style="height: 30px">
 		<div class="col-md-2">
 		</div>
+	</div>
 	</div>
 	<!-- pagination -->
 	<!-- 페이지 -->
