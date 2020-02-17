@@ -122,7 +122,6 @@ $(document).ready(function(){
 								data-page="${pagingDto.endPage + 1}">Next</a></li>
 						</c:if>
 					</ul>
-					<br>
 				</nav>
 			</div>
 			<!-- <div class="container-fluid ">
@@ -137,6 +136,7 @@ $(document).ready(function(){
 					</div> -->
 				</div>
 		</div>
+		<div style="height: 30px">
 		<div class="col-md-2">
 		</div>
 	</div>
