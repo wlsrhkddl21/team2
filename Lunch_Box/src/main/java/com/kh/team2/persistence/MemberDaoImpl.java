@@ -43,4 +43,9 @@ public class MemberDaoImpl implements MemberDao {
 		return null;
 	}
 
+	@Override
+	public int idCheck(String mem_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".idCheck", mem_id);
+	}
+
 }

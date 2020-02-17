@@ -35,4 +35,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.readWithPw(mem_id, mem_pass);
 	}
 
+	@Override
+	public int idCheck(String mem_id) throws Exception {
+		return memberDao.idCheck(mem_id);
+	}
+
 }
