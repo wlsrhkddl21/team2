@@ -12,6 +12,20 @@ public class BuyVo {
 	String buy_pdt_name;
 	
 	
+	public BuyVo(int buy_num, int pdt_num, String buy_date, String buy_address, int buy_price, String mem_id,
+			int buy_count, String buy_tel, String buy_pdt_name) {
+		super();
+		this.buy_num = buy_num;
+		this.pdt_num = pdt_num;
+		this.buy_date = buy_date;
+		this.buy_address = buy_address;
+		this.buy_price = buy_price;
+		this.mem_id = mem_id;
+		this.buy_count = buy_count;
+		this.buy_tel = buy_tel;
+		this.buy_pdt_name = buy_pdt_name;
+	}
+
 	public BuyVo() {
 		super();
 		// TODO Auto-generated constructor stub
