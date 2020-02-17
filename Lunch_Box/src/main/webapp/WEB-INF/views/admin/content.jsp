@@ -102,7 +102,7 @@ $(document).ready(function(){
 					<input
 						type="file" class="form-control-file" id="pdt_file" name="file" style="display:none;"/>
 							<img src="/admin/displayFile?fileName=${productVo.pdt_image}" 
-							 id="pdt_image" width="600px" height="600px"/><br>
+							 id="pdt_image" width="600px" height="600px" class="updateHide"/><br>
 							 <button type="button" class="btn btn-primary updateShow" id="btnFile" style="display:none;">사진 변경</button>
 						</div>
 						<button type="button" class="btn btn-primary" id="btnList">목록</button>

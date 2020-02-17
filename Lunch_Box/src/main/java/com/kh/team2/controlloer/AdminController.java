@@ -83,7 +83,7 @@ public class AdminController {
 	public String deletePDT(int pdt_num) throws Exception{
 		ProductVo productVo = service.readPDT(pdt_num);
 		String pdt_image = productVo.getPdt_image();
-		AdminFileUploadUtil.delete(uploadPath+"product", pdt_image);
+		AdminFileUploadUtil.delete(pdt_image,uploadPath+"/product");
 		service.deletePDT(pdt_num);
 		
 		return "redirect:/admin/list";
@@ -92,7 +92,7 @@ public class AdminController {
 	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
-		String realPath = uploadPath+"product" + File.separator + fileName.replace("/", "\\");
+		String realPath = uploadPath+"\\product" + File.separator + fileName.replace("/", "\\");
 //		String realPath = "//192.168.0.34/upload/team2\\product\\d839fcf6-64a4-4ee5-ab1d-65061460b425_ddong.jpg".replace("/", "\\");
 //		System.out.println("realPath:"+ realPath);
 		FileInputStream is = new FileInputStream(realPath);
