@@ -9,6 +9,7 @@ public class BuyVo {
 	String mem_id;
 	int buy_count;
 	String buy_tel;
+	String buy_pdt_name;
 	
 	
 	public BuyVo() {
@@ -16,18 +17,14 @@ public class BuyVo {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public BuyVo(int buy_num, int pdt_num, String buy_date, String buy_address, int buy_price, String mem_id,
-			int buy_count, String buy_tel) {
-		super();
-		this.buy_num = buy_num;
-		this.pdt_num = pdt_num;
-		this.buy_date = buy_date;
-		this.buy_address = buy_address;
-		this.buy_price = buy_price;
-		this.mem_id = mem_id;
-		this.buy_count = buy_count;
-		this.buy_tel = buy_tel;
+	public String getBuy_pdt_name() {
+		return buy_pdt_name;
 	}
+
+	public void setBuy_pdt_name(String buy_pdt_name) {
+		this.buy_pdt_name = buy_pdt_name;
+	}
+
 	public int getBuy_num() {
 		return buy_num;
 	}
@@ -76,11 +73,12 @@ public class BuyVo {
 	public void setBuy_tel(String buy_tel) {
 		this.buy_tel = buy_tel;
 	}
+
 	@Override
 	public String toString() {
 		return "BuyVo [buy_num=" + buy_num + ", pdt_num=" + pdt_num + ", buy_date=" + buy_date + ", buy_address="
 				+ buy_address + ", buy_price=" + buy_price + ", mem_id=" + mem_id + ", buy_count=" + buy_count
-				+ ", buy_tel=" + buy_tel + "]";
+				+ ", buy_tel=" + buy_tel + ", buy_pdt_name=" + buy_pdt_name + "]";
 	}
 	
 	

@@ -52,18 +52,19 @@ public class MemberController {
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public String loginPost(HttpServletRequest request, LogingDto logingDto, Model model) throws Exception {
 //		System.out.println("loginGet");
-//		System.out.println("·Î±×ÀÎÇÏ°í ¸ÞÀÎ¿È");
+//		System.out.println("ï¿½Î±ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½");
 		System.out.println("logingDto:" + logingDto);
 		MemberVo memberVo = service.login(logingDto);
 		HttpSession session = request.getSession();
 		String go = "";
 		if (memberVo != null) {
-			model.addAttribute("msg", "¼º°ø");
+			model.addAttribute("msg", "ï¿½ï¿½ï¿½ï¿½");
 			model.addAttribute("memberVo", memberVo);
 			session.setAttribute("mem_name", memberVo.getMem_name());
+			session.setAttribute("mem_id", memberVo.getMem_id());
 			go = "index";
 		} else {
-			model.addAttribute("msg","½ÇÆÐ");
+			model.addAttribute("msg","ï¿½ï¿½ï¿½ï¿½");
 			go = "member/login";
 		}
 		return go;
