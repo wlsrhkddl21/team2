@@ -13,7 +13,7 @@ $(document).ready(function(){
 	var memberVo = "${memberVo}";
 	if (msg == "성공") {
 		
-		var mem_name = ${sessionScope.mem_name};
+		var 	mem_name = "${sessionScope.mem_name}";
 	}
 	
 });
