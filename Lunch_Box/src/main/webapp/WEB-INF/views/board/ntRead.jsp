@@ -5,10 +5,10 @@
 $(document).ready(function() {
 	// 수정 버튼
 	$("#btnModify").click(function() {
-		$("#contentView").hide(100);
-		$("#myform").show(100);
 		$("#not_title").prop("readonly", false);
 		$("#not_content").prop("readonly", false);
+		$("#not_title").css("border","1px solid");
+		$("#not_content").css("border","1px solid");
 		$(this).hide(100);
 		$("button[type=submit]").show(100);
 		$("#btnCancel").show(100);
@@ -35,11 +35,14 @@ $(document).ready(function() {
 			$("#frmList").attr("action", "/board/ntDelete").submit();	
 		}
 	});
-	// 작성취소 버튼
+	// 수정취소 버튼
 	$("#btnCancel").click(function(){
 		$("#not_title").prop("readonly", true);
 		$("#not_content").prop("readonly", true);
+		$("#not_title").css("border","none");
+		$("#not_content").css("border","none");
 		$("button[type=submit]").hide(100);
+		$("#btnHotCancel").hide(100);
 		$(this).hide(100);
 		$("#btnModify").show(100);
 		$("#btnHot").hide(100);
@@ -115,7 +118,12 @@ $(document).ready(function() {
 		<div class="col-md-1"></div>
 			<div class="col-md-10 main_grid_contact" >
 			<br>
-			<table class="table" id="contentView">
+			<form id="myform" role="form" method="post" 
+				action="/board/ntUpdate">
+			<input type="hidden" name="not_num" value="${boardVo.not_num}"/>
+			<input type="hidden" name="page" value="${pagingDto.page}"/>
+			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
+			<table class="table">
 		<colgroup>
 			<col style="width:10%;">
 			<col style="width:50%;">
@@ -125,45 +133,32 @@ $(document).ready(function() {
 		<tbody>
 			<tr>
 				<th scope="row">제목</th>
-				<td class="subject"> ${boardVo.not_title}</td>
+				<td class="form-group">
+				<input type="text" id="not_title" 
+						name="not_title" value="${boardVo.not_title}" style="border:none"
+						readonly/></td>
 				<th scope="row">조회수</th>
 				<td>${boardVo.not_viewcount}</td>
 			</tr>
 			<tr>
 				<th scope="row">작성자</th>
-				<td>${boardVo.not_writer}</td>
+				<td class="form-group">
+				<input type="text" id="not_writer" 
+						name="not_writer" value="${boardVo.not_writer}" style="border:none"
+						readonly/></td>
 				<th scope="row">작성일</th>
 				<td>${boardVo.not_regdate}</td>
 			</tr>
 			<tr>
-				<th scope="row" colspan="5"><textarea rows="10" readonly>${boardVo.not_content}</textarea></th>
+				<th scope="row" colspan="5" class="form-group" >
+				<textarea rows="10" id="not_content" 
+						name="not_content" style="border:none" readonly>${boardVo.not_content}</textarea>
+				</th>
 			</tr>
-			
 		</tbody>
 	</table>
-			<form id="myform" role="form" method="post" 
-				action="/board/ntUpdate" style="padding:30px; display:none;">
-			<input type="hidden" name="not_num" value="${boardVo.not_num}"/>
-			<input type="hidden" name="page" value="${pagingDto.page}"/>
-			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
-				<div class="form-group">
-					<label for="title">제목</label>
-					<input type="text" class="form-control" id="not_title" 
-						name="not_title" value="${boardVo.not_title}"
-						readonly/>
-				</div>
-				<div class="form-group">
-					<label for="content">내용</label><br>
-					<textarea rows="5" id="not_content" class="form-control"
-						name="not_content" readonly>${boardVo.not_content}</textarea>
-				</div>
-				<div class="form-group">
-					<label for="writer">작성자</label>
-					<input type="text" class="form-control" id="not_writer" 
-						name="not_writer" value="${boardVo.not_writer}"
-						readonly/>
-				</div>
-				<hr>
+			
+			<hr>
 			
 			<div style="clear:both;">
 					<button type="submit" class="btn btn-success" id="btnSuccess"
