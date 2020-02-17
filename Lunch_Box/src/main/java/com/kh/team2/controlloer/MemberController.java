@@ -2,7 +2,6 @@ package com.kh.team2.controlloer;
 
 
 import javax.inject.Inject;
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -52,19 +51,21 @@ public class MemberController {
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public String loginPost(HttpServletRequest request, LogingDto logingDto, Model model) throws Exception {
 //		System.out.println("loginGet");
-//		System.out.println("ï¿½Î±ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½");
 		System.out.println("logingDto:" + logingDto);
 		MemberVo memberVo = service.login(logingDto);
+//		MemberVo memberVo2 = service.readWithPw(logingDto.getMem_id(), logingDto.getMem_pass());
 		HttpSession session = request.getSession();
 		String go = "";
 		if (memberVo != null) {
-			model.addAttribute("msg", "ï¿½ï¿½ï¿½ï¿½");
+			model.addAttribute("msg", "¼º°ø");
 			model.addAttribute("memberVo", memberVo);
 			session.setAttribute("mem_name", memberVo.getMem_name());
 			session.setAttribute("mem_id", memberVo.getMem_id());
+			session.setAttribute("mem_pass", memberVo.getMem_pass());
 			go = "index";
-		} else {
-			model.addAttribute("msg","ï¿½ï¿½ï¿½ï¿½");
+		} else {	
+			model.addAttribute("msg","½ÇÆÐ");
+			model.addAttribute("memberVo", memberVo);
 			go = "member/login";
 		}
 		return go;

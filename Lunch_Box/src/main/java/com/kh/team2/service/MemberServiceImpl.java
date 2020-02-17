@@ -25,4 +25,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.readWithPw(logingDto.getMem_id(), logingDto.getMem_pass());
 	}
 
+	@Override
+	public MemberVo readMember(String mem_id) throws Exception {
+		return memberDao.readMember(mem_id);
+	}
+
+	@Override
+	public MemberVo readWithPw(String mem_id, String mem_pass) throws Exception {
+		return memberDao.readWithPw(mem_id, mem_pass);
+	}
+
 }
