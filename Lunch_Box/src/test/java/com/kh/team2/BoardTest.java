@@ -8,7 +8,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team2.domain.BoardVo;
+import com.kh.team2.domain.ntReplyVo;
 import com.kh.team2.persistence.BoardDao;
+import com.kh.team2.persistence.ntReplyDao;
 import com.kh.team2.service.BoardService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,6 +20,8 @@ public class BoardTest {
 	
 	@Inject
 	private BoardDao dao;
+	@Inject
+	private ntReplyDao ntDao;
 	
 	@Inject
 	private BoardService service;
@@ -66,5 +70,14 @@ public class BoardTest {
 		vo.setNot_content("수정테스트");
 		vo.setNot_hot(1);
 		dao.update(vo);
+	}
+	
+	@Test
+	public void ntDao() throws Exception {
+		ntReplyVo ntreplyVo = new ntReplyVo();
+		ntreplyVo.setNtrno(2);
+		ntreplyVo.setNtbno(744);
+		ntreplyVo.setNtrcontent("댓글테스트1");
+		ntreplyVo.setNtrwriter("admin");
 	}
 }

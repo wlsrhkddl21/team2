@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+
 <script>
 $(document).ready(function() {
 	// 수정 버튼
@@ -53,6 +54,61 @@ $(document).ready(function() {
 			$("#myform").attr("action", "/board/hotUpdate").submit();
 		}
 	});
+	// 댓글 작성완료 버튼
+	$("#btn_ntReply").click(function(){
+		var ntbno = "${boardVo.not_num}";
+		var ntrcontent = $("#ntRcontent").val();
+		var ntrwriter = $("#ntRwriter").val();
+		var sendData = {
+				"ntbno" : ntbno,
+				"ntrcontent" : ntrcontent,
+				"ntrwriter" : ntrwriter
+		};
+		console.log(sendData);
+		var url = "/replies/register";
+		
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			"dataType" :"text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+			}
+		});
+	});
+	
+	// 댓글 목록 불러오기
+	function replyList() {
+		$("#replyList").empty();
+		var url = "/replies/all/${boardVo.not_num}";
+		$.getJSON(url, function(rData) {
+			console.log(rData);
+			var strHtml = "";
+			$(rData).each(function(){
+				strHtml += "<tr>";
+				strHtml += "<td>" + this.ntrno +"</td>";
+				strHtml += "<td>" + this.ntrcontent + "</td>";
+				strHtml += "<td>" + this.ntrwriter + "</td>";
+				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
+				strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
+				strHtml += " data-rno='" + this.ntrno + "'";
+				strHtml += " data-reply_text='" + this.ntrcontent + "'";
+				strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
+				strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
+				strHtml += " data-rno='" + this.ntrno + "'";
+				strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";
+				strHtml += "</tr>";
+			});
+			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
+		});
+	}
+	replyList(); // 기능 실행
 });
 	
 </script>
@@ -135,7 +191,7 @@ $(document).ready(function() {
 				<th scope="row">제목</th>
 				<td class="form-group">
 				<input type="text" id="not_title" 
-						name="not_title" value="${boardVo.not_title}" style="border:none"
+						name="not_title" value="${boardVo.not_title}" style="border:none" 
 						readonly/></td>
 				<th scope="row">조회수</th>
 				<td>${boardVo.not_viewcount}</td>
@@ -174,10 +230,12 @@ $(document).ready(function() {
 			</div>
 			</form>
 				<div style="clear:both;">
+				<c:if test="${mem_id == 'admin'}">
 					<button type="button" class="btn btn-warning"
 						id="btnModify">수정</button>
 					<button type="button" class="btn btn-danger"
-						id="btnDelete">삭제</button>
+						id="btnDelete">삭제</button>				
+				</c:if>
 					<button type="button" class="btn btn-primary"
 						id="btnListAll">목록</button>
 				</div>
@@ -185,24 +243,22 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="reply_text">댓글내용</label>
-				<input type="text" id="reply_text"
+				<label for="ntRcontent">댓글내용</label>
+				<input type="text" id="ntRcontent"
 					class="form-control"/>
 			</div>
 			<div class="form-group">
-				<label for="replyer">작성자</label>
-				<input type="text" id="replyer"
+				<label for="ntRwriter">작성자</label>
+				<input type="text" id="ntRwriter"
 					class="form-control"/>
 			</div>
 			<div class="form-group">
 				<button type="button" class="btn-xs btn-success"
-					id="btnReply">작성완료</button>
+					id="btn_ntReply">작성완료</button>
 			</div>
 		</div>
 	</div>
 	<!-- // 댓글 작성 -->
-	
-	<hr/>
 	
 	<!-- 댓글 목록 -->
 	<div class="row">
