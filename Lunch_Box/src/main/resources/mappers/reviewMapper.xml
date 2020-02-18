@@ -11,8 +11,10 @@
 	</select>
 	
 	<select id="listAll" resultType="ReviewVo">
-		select * from tbl_review
-		order by rev_num desc
+		select * from 
+		(select rownum rnum, a.* from 
+		(select * from tbl_review	order by rev_num desc) a)
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select>
 	
 	<select id="listCount" resultType="int">
