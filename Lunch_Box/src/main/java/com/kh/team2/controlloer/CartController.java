@@ -66,6 +66,12 @@ public class CartController {
 		return "redirect:/cart/list";
 	}
 	
+	@RequestMapping(value = "/oneDelete/{cart_num}", method = RequestMethod.GET)
+	public String oneDelete(@PathVariable("cart_num") int cart_num) throws Exception {
+		cartService.cartDelete(cart_num);
+		return "redirect:/cart/list";
+	}
+	
 	@RequestMapping(value = "/delete",method = RequestMethod.POST)
 	@ResponseBody
 	public String delete(@RequestParam("checkArr") List<String> checkArr) throws Exception {

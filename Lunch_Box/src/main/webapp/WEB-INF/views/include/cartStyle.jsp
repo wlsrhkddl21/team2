@@ -152,7 +152,7 @@ input[type=checkbox] {
 	display: block;
 }
 #count {
- width: 22px;
+ width: 27px;
  height: 23px;
  padding: 0 0 0 5px;
  line-height: 25px;
