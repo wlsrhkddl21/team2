@@ -8,7 +8,6 @@
 <script src="/js/myscript.js"></script>
 <script>
 
-
 $(document).ready(function(){
 	var msg = "${msg}";
 	var memberVo = "${memberVo}";
