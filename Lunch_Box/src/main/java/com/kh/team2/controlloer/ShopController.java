@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.team2.domain.BuyDto;
 import com.kh.team2.domain.BuyVo;
 import com.kh.team2.domain.MemberVo;
 import com.kh.team2.domain.ProductVo;
@@ -77,29 +78,25 @@ public class ShopController {
 	}
 	
 	
-	//구매 페이지
+	//구매 페이지 (바로구매)
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
-	public String buy(HttpServletRequest request,BuyVo vo,Model model,@RequestParam("total_price") int total_price) throws Exception {
-		System.out.println("buy Shop Controller");
-		System.out.println("BuyVo:"+vo);
-//		model.addAttribute("buyVo",vo);
-		List<BuyVo> list = new ArrayList<BuyVo>();
-			
-		BuyVo vo2 = new BuyVo(0, 0, null, null, 6000, null, 1, null, "test1");
-		BuyVo vo3 = new BuyVo(0, 0, null, null, 8000, null, 3, null, "test1");
+	public String buy(HttpServletRequest request,Model model,
+						@RequestParam("pdt_num") int pdt_num,
+						@RequestParam("buy_count") int buy_count) throws Exception {
 		
-		list.add(vo);
-		list.add(vo2);
-		list.add(vo3);
+		System.out.println("상품번호:"+pdt_num+"갯수:"+buy_count);
+		ProductVo pdtVo = productService.readByPdtNum(pdt_num);
 		
-		List<Integer> pointList = new ArrayList<>();
+		List<BuyDto> list = new ArrayList<>();
 		
-		for(BuyVo vo1: list) {
-			int point = (int) ((vo1.getBuy_price())*0.05);
-			pointList.add(point);
-		}
+		BuyDto dto = new BuyDto();
+		dto.setBuy_count(buy_count);
+		dto.setPdt_name(pdtVo.getPdt_name());
+		dto.setPdt_price(pdtVo.getPdt_price());
 		
-
+		list.add(dto);
+		
+		
 		// 구매자 정보 
 		HttpSession session = request.getSession();
 		String mem_id = (String) session.getAttribute("mem_id");
@@ -107,8 +104,8 @@ public class ShopController {
 		
 //		System.out.println(mem_id);
 		
-		model.addAttribute("list",list);
 		model.addAttribute("memberVo",memberVo);
+		model.addAttribute("list",list);
 		
 		return "shop/buy";
 	}

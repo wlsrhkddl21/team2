@@ -42,10 +42,10 @@
 		});
 		
 		$("#bntBuy").click(function(){
-			$("input[name=total_price]").val($("#span_pdt_price").text());
+
 			if(mem_id == ""){
 				console.log("아이디없음");
-// 				 alert("결제는 로그인 후에 이용할 수 있습니다.");
+				 alert("결제는 로그인 후에 이용할 수 있습니다.");
 			}else{
 				$("#buy_form").submit();
 			}
@@ -60,15 +60,12 @@
 			<div class="row">
 				<div class="col-md-4">
 				<div style="height: 30px;"></div>
-					<img src="../../images/test1.jpg" alt=" " class="img-fluid"
+					<img src="/admin/displayFile?fileName=${productVo.pdt_image}" alt="상품이미지" class="img-fluid"
 						style="height: 380px; width: 380px;" />
 				</div>
 				<div class="col-md-8">
 				<form action="/shop/buy" method="post" id="buy_form">
 				<input type="hidden" name="pdt_num" value="${productVo.pdt_num }"/> 
-				<input type="hidden" name="buy_pdt_name" value="${productVo.pdt_name}"/> 
-				<input type="hidden" name="buy_price" value="${productVo.pdt_price }"/>
-				<input type="hidden" name="total_price" />
 					<div style="height: 30px;"></div>
 						<h1 style="color: #fd5c63;">${productVo.pdt_name}</h1>
 						<hr>
@@ -76,7 +73,7 @@
 						<b style="font-size: 25px;">판매가: <fmt:formatNumber
 								value="${productVo.pdt_price }" type="number" />원</b>
 						<div class="div_text">배송비 : 2,500원 (5만원 이상 무료)</div>
-						<div class="div_text">적립금 : 5%</div>
+						<div class="div_text">적립금 : 구매 금액의 5%</div>
 						<div class="div_text">수량: <input type="button" class="btn btn-light" value="-" id="btnSub"/>
 									<input name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" />
 									<input type="button" class="btn btn-light" value="+" id="btnAdd"/>

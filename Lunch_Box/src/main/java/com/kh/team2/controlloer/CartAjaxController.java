@@ -4,6 +4,7 @@ package com.kh.team2.controlloer;
 
 import javax.inject.Inject;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,5 +38,6 @@ public class CartAjaxController {
 		for (CartVo vo : arrCart) {
 			System.out.println(vo);
 		}
+		
 	}
 } 
