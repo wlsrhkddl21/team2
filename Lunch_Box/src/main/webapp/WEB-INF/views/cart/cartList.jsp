@@ -6,14 +6,7 @@
 
 <script>
 $(document).ready(function() {
-	$("#addBtn").click(function() {
-		$("input[name=mem_id]").val($("#mem_id").val().trim());
-		$("input[name=pdt_num]").val($("#pdt_num").val());
-		$("input[name=cart_count]").val($("#cart_count").val());
-		$("#cartForm").attr("action","/cart/insert");
-		$("#cartForm").submit();
-	});
-	
+	// all Check
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
 			console.log($("#allCheck"));
@@ -24,22 +17,146 @@ $(document).ready(function() {
 			
 	});
 	
+	// check delete
 	$("#btnDelete").click(function() {
 		var checkArr = [];
-		$(".chk:checked").each(function(i) {
+		$(".chk:checked").each(function() {
 			checkArr.push($(this).val());
 		});
 		console.log("checkArr:" , checkArr);
 		var sArr = checkArr.join(",");
 		var d = {"checkArr" : sArr }
 		$.post("/cart/delete", d , function(rData) {
+			var msg = rData.trim();
+			if (msg == "success") {
 			location.href="/cart/list";
+			}
 		});
 	});
 	
-	$("#btnAllDelete").click(function() {
-		location.href="/cart/deleteAll";
+	// select Delete
+	$(".oneDelete").click(function() {
+		var cart_num = $(this).parents("tr").find(".chk").val();
+		var myDecision = confirm("정말 삭제하시겠습니까?");
+		if (myDecision == true) {
+			location.href="/cart/oneDelete/"+cart_num;
+		}
 	});
+	
+	// Cart clean
+	$("#btnAllDelete").click(function() {
+		var myDecision = confirm("장바구니를 비우시겠습니까?");
+		if (myDecision == true) {
+		location.href="/cart/deleteAll";
+		}
+	});
+	
+	// count up
+	$(".up").click(function() {
+		var cart_num = $(this).parents("tr").find(".chk").val();
+		var count = $(this).parent().parent().find("#count").val();
+		var sData = {
+				"cart_count" : ++count,
+				"cart_num" : cart_num
+		};
+		var url = "/cart/updateCount";
+		countAjax(url,sData);
+	});
+	
+	//count down
+	$(".down").click(function() {
+		var cart_num = $(this).parents("tr").find(".chk").val();
+		var count = $(this).parent().parent().find("#count").val();
+		var sData = {
+				"cart_count" : --count,
+				"cart_num" : cart_num
+		};
+		var url = "/cart/updateCount";
+		
+		countAjax(url,sData);
+	});
+	
+	// count update
+	$(".update").click(function() {
+		var cart_num = $(this).parents("tr").find(".chk").val();
+		var count = $(this).parent().parent().find("#count").val();
+		var sData = {
+				"cart_count" : count,
+				"cart_num" : cart_num
+		};
+		var url = "/cart/updateCount";
+		
+		countAjax(url,sData);
+	});
+	
+	// all buy
+	$(".allBuy").click(function() {
+		var arr = new Array();
+		$(".chk").each(function() {
+			var obj = new Object();
+			obj.pdt_num = $(this).parents("tr").find("#pdt_num").val();
+			obj.cart_count = $(this).parents("tr").find("#count").val();
+			arr.push(obj);
+		});
+		var sData = JSON.stringify(arr);
+		buyAjax(sData)
+	});
+	
+	// check buy
+	$(".checkBuy").click(function() {
+		var arr = new Array();
+		$(".chk:checked").each(function() {
+			var obj = new Object();
+			obj.pdt_num = $(this).parents("tr").find("#pdt_num").val();
+			obj.cart_count = $(this).parents("tr").find("#count").val();
+			arr.push(obj);
+		});
+		var sData = JSON.stringify(arr);
+		buyAjax(sData)
+	});
+	// select buy
+	$(".oneBuy").click(function() {
+		var arr = new Array();
+		var obj = new Object();
+		obj.pdt_num = $(this).parent().find("#pdt_num").val();
+		obj.cart_count = $(this).parents("tr").find("#count").val();
+		arr.push(obj);
+		var sData = JSON.stringify(arr);
+		buyAjax(sData);
+	});
+	
+	// buy ajax
+	function buyAjax(sData) {
+		$.ajax({
+			url : "/cart/buy",
+			type : "post",
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			data : sData,
+			dataType : "text"
+		});
+	}
+	// count ajax
+	function countAjax(url,sData) {
+		$.ajax({
+			"type" : "put",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(sData),
+			"success" : function(rData) {
+				var msg = rData.trim();
+				if (msg == "success") {
+					location.href="/cart/list";
+				}
+			}
+		});
+	}
 });
 </script>
 	<!-- contact -->
@@ -73,10 +190,12 @@ $(document).ready(function() {
 						<input type="hidden" name="cart_count">
 							<table class="tbl_col" >
 								<colgroup>
+									<col style="width:5%;">
+									<col style="width:20%;">
+									<col style="width:25%;">
 									<col style="width:10%;">
-									<col style="width:20%;">
-									<col style="width:30%;">
-									<col style="width:20%;">
+									<col style="width:10%;">
+									<col style="width:10%;">
 									<col style="width:10%;">
 									<col style="width:10%;">
 								</colgroup>
@@ -85,9 +204,11 @@ $(document).ready(function() {
 										<th scope="col"><input type="checkbox" id="allCheck"/></th>
 										<th scope="col"></th>
 										<th scope="col">상품명</th>
-										<th scope="col">가격</th>
+										<th scope="col">판매가</th>
 										<th scope="col">수량</th>
-										<th scope="col">번호</th>
+										<th scope="col">적립금</th>
+										<th scope="col">합계</th>
+										<th scope="col">선택</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -98,9 +219,25 @@ $(document).ready(function() {
 													<td><input type="checkbox" class="chk" value="${vo.cart_num}"/></td>
 													<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
 													<td class="left">${vo.pdt_name}</td>
-													<td>${vo.pdt_price}</td>
-													<td>${vo.cart_count}</td>
-													<td>${vo.cart_num}</td>
+													<td class="price">${vo.pdt_price}</td>
+													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}"  />
+													<a><img class="up" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"/></a>
+													<a><img class="down" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"/></a>
+													</span>
+													<a class="btn_box white middle update">변경</a>
+													</span>
+													</td>
+													<td></td>
+													<td>${vo.pdt_total}</td>
+													<td><div>
+													<span class="btn_box block white middle oneBuy">
+													<input id="pdt_num" type="hidden" value="${vo.pdt_num}"/>
+													<a>구매</a>
+													</span>
+													<span class="btn_box block white middle oneDelete">
+													<a>삭제</a>
+													</span>
+													</div></td>
 												</tr>
 										</c:forEach>
 										</c:when>
@@ -122,19 +259,19 @@ $(document).ready(function() {
 									</colgroup>
 								<tbody>
 									<tr>
-										<th colspan="2" style="text-align: right;">배송비는 20000원 이상 구매 시 무료배송 적용됩니다.</th>
+										<th colspan="2" style="text-align: right;">배송비는 <span style="color :#fd5c63">50,000원</span> 이상 구매 시 무료배송 적용됩니다.</th>
 									</tr>
 									<tr>
 										<th scope="row">주문금액</th>
-										<td class="result">20000원</td>
+										<td><span>${result}</span>원</td>
 									</tr>
 									<tr>
 										<th scope="row">배송료</th>
-										<td>0원</td>
+										<td>${tip}원</td>
 									</tr>
 									<tr>
 										<th scope="row">결제금액</th>
-										<td>20000원</td>
+										<td><span style="color :#fd5c63; font-size: 20px">${total}</span>원</td>
 									</tr>
 								</tbody>
 								</table>
@@ -148,8 +285,8 @@ $(document).ready(function() {
 							</div>
 							<div class="order">
 								<span class="box_btn"><a class="large black" href="/shop/single">계속 쇼핑하기</a></span>
-								<span class="box_btn"><a class="large black" href="#">선택상품 주문하기</a></span>
-								<span class="box_btn"><a class="large green" href="#">전체상품 주문하기</a></span>
+								<span class="box_btn checkBuy"><a class="large black" href="#">선택상품 주문하기</a></span>
+								<span class="box_btn allBuy"><a class="large green" href="#">전체상품 주문하기</a></span>
 							</div>
 						</div>
 						</form>

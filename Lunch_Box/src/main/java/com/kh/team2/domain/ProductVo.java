@@ -8,21 +8,20 @@ public class ProductVo {
 	private int pdt_price;
 	private String pdt_image;
 	private int pdt_sales;
+	private String pdt_subimage;
 	public ProductVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ProductVo(int pdt_num, String pdt_category, String pdt_name, int pdt_date, int pdt_price, String pdt_image,
-			int pdt_sales) {
-		super();
-		this.pdt_num = pdt_num;
-		this.pdt_category = pdt_category;
-		this.pdt_name = pdt_name;
-		this.pdt_date = pdt_date;
-		this.pdt_price = pdt_price;
-		this.pdt_image = pdt_image;
-		this.pdt_sales = pdt_sales;
+	
+	public String getPdt_subimage() {
+		return pdt_subimage;
 	}
+
+	public void setPdt_subimage(String pdt_subimage) {
+		this.pdt_subimage = pdt_subimage;
+	}
+
 	public int getPdt_num() {
 		return pdt_num;
 	}
@@ -65,11 +64,12 @@ public class ProductVo {
 	public void setPdt_sales(int pdt_sales) {
 		this.pdt_sales = pdt_sales;
 	}
+
 	@Override
 	public String toString() {
 		return "ProductVo [pdt_num=" + pdt_num + ", pdt_category=" + pdt_category + ", pdt_name=" + pdt_name
 				+ ", pdt_date=" + pdt_date + ", pdt_price=" + pdt_price + ", pdt_image=" + pdt_image + ", pdt_sales="
-				+ pdt_sales + "]";
+				+ pdt_sales + ", pdt_subimage=" + pdt_subimage + "]";
 	}
 	
 	

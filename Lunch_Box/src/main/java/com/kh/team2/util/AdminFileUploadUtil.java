@@ -15,7 +15,7 @@ import org.springframework.util.FileCopyUtils;
 
 public class AdminFileUploadUtil {
 
-	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
+	public static String uploadFile(String uploadPath, String originalName, byte[] fileData,boolean thumbnail) throws Exception {
 		UUID uuid = UUID.randomUUID(); // 겹치지 않는 고유한 값 생성
 		System.out.println("uuid:" + uuid);
 		String uuidName = uuid + "_" + originalName;
@@ -31,14 +31,14 @@ public class AdminFileUploadUtil {
 		String filePath = uploadPath + File.separator + uuidName;
 		File target = new File(filePath);
 		FileCopyUtils.copy(fileData, target);
-		String formatName = getFormatName(originalName);
-		System.out.println("formatName: " + formatName);
-		boolean isImage = isImage(formatName);
-		System.out.println(isImage);
-		if (isImage == true) {
+//		String formatName = getFormatName(originalName);
+//		System.out.println("formatName: " + formatName);
+//		boolean isImage = isImage(formatName);
+//		System.out.println(isImage);
+		if (thumbnail) {
 			makeThumbnail(uploadPath,uuidName);
 		}
-		return uploadPath + File.separator + uuidName;
+		return uuidName;
 	}
 
 	// 날짜에 해당하는 폴더 계산 -> 2020/01/20
@@ -78,7 +78,9 @@ public class AdminFileUploadUtil {
 	public static void makeThumbnail(String uploadPath, String uuidName) throws IOException {
 		// 원본 파일
 		String uploadedPath = uploadPath + File.separator + uuidName;
+	
 		// 업로드 된 원본 이미지를 메모리에 로딩
+		System.out.println("uploadPath:"+uploadedPath);
 		BufferedImage sourceImg = ImageIO.read(new File(uploadedPath));
 		// pom.xml =>> imgscalr-lib
 		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 50);
@@ -86,24 +88,26 @@ public class AdminFileUploadUtil {
 		File target = new File(thumbnailName);
 		ImageIO.write(destImg, getFormatName(uuidName), target);
 	}
-	public static void delete(String fileName,String uploadPath) throws Exception {
+	public static void delete(String fileName,String uploadPath,boolean thumbnail) throws Exception {
 		List<String> list = new ArrayList<String>();
 		list.add(fileName);
-		delete(list,uploadPath);
+		delete(list,uploadPath,thumbnail);
 	}
 	// 삭제
-	public static void delete(List<String> fileNames, String uploadPath) throws Exception {
+	public static void delete(List<String> fileNames, String uploadPath,boolean thumbnail) throws Exception {
 		
 		for (String fileName : fileNames) {
 			String filePath = uploadPath + File.separator + fileName.replace("/", "\\");
+			System.out.println("delete:"+filePath);
 			File f = new File(filePath);
 			if (f.exists()) {
 				f.delete();
+				System.out.println(fileName+"삭제됨");
 			}
 			
-			String formatName = AdminFileUploadUtil.getFormatName(fileName);
-			boolean isImage = AdminFileUploadUtil.isImage(formatName);
-			if (isImage == true) {
+//			String formatName = AdminFileUploadUtil.getFormatName(fileName);
+//			boolean isImage = AdminFileUploadUtil.isImage(formatName);
+			if (thumbnail) {
 				int slashIndex = fileName.lastIndexOf("/");
 				String front = fileName.substring(0, slashIndex + 1);
 				String rear = fileName.substring(slashIndex + 1);

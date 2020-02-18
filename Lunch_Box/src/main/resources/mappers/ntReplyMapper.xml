@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.mappers.ntReplyMapper">
+	
+	<insert id="create">
+		insert into tbl_ntReply
+			(ntrno, ntbno, ntrcontent, ntrwriter)
+		values 
+			(seq_ntreply_rno.nextval, #{ntbno}, #{ntrcontent}, #{ntrwriter})
+	</insert>
+	
+	<select id="list" resultType="ntReplyVo">
+		select * from tbl_ntReply
+		where ntbno = #{ntbno}
+		order by ntrno desc
+	</select>
+	
+	<delete id="delete">
+		delete from tbl_ntReply
+		where ntrno = #{ntrno}
+	</delete>
+	
+	<update id="update">
+		update tbl_ntReply set
+			ntrcontent = #{ntrcontent},
+			ntrudate = sysdate
+		where ntrno = #{ntrno}
+	</update>
+	
+	
+</mapper>
+

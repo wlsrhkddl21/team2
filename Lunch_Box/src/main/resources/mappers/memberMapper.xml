@@ -22,4 +22,10 @@
 		select * from tbl_member
 		where mem_id = #{mem_id} and mem_pass = #{mem_pass}
 	</select>
+	
+	<select id="idCheck" resultType="int">
+		select count(*) from tbl_member
+		where mem_id = #{mem_id}
+	</select>
+	
 </mapper>  

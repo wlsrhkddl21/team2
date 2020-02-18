@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.team2.mappers.reviewMapper">
+	
+	<select id="selectList" resultType="ReviewVo">
+		select * from tbl_review
+		where rev_num = #{rev_num}
+	</select>
+	
+	<select id="listAll" resultType="ReviewVo">
+		select * from 
+		(select rownum rnum, a.* from 
+		(select * from tbl_review	order by rev_num desc) a)
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+	</select>
+	
+	<select id="listCount" resultType="int">
+		select count(*) from tbl_review
+	</select>
+	
+</mapper>  
+
+

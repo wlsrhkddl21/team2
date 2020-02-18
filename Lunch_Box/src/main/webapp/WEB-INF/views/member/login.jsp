@@ -5,16 +5,14 @@
 <script>
 $(document).ready(function(){
 	var msg = "${msg}";
+	var mem_name = "";
 	if (msg == "실패") {
-		alert("로그인 실패");
-	}
-	if (msg == "성공") {
-		alert("로그인 성공");
+		alert("비밀번호가 일치하지 않습니다");
 	}
 	
-	$("#btnLogin").click(function(e){
-		
-	});
+	
+	
+	
 });
 </script>	
 
@@ -35,7 +33,7 @@ $(document).ready(function(){
 						<form action="/lb/loginPost" method="post">
 							
 							<div class="form-group">
-								<input id="mem_id" class="form-control" type="email" name="mem_id" placeholder="Email"
+								<input id="mem_id" class="form-control" type="text" name="mem_id" placeholder="Email"
 									required="">
 							</div>
 							<div class="form-group">

@@ -41,4 +41,9 @@ public class CartTest {
 		cartDao.cartDelete(11);
 	}
 	
+	@Test
+	public void TestUpdate() throws Exception {
+		cartDao.updataCount(3, 125);
+	}
+	
 }

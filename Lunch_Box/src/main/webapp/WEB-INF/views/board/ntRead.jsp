@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+
 <script>
 $(document).ready(function() {
-	// 수정 버튼
+	// 	수정 버튼
 	$("#btnModify").click(function() {
 		$("#not_title").prop("readonly", false);
 		$("#not_content").prop("readonly", false);
+		$("#not_title").css("border","1px solid");
+		$("#not_content").css("border","1px solid");
 		$(this).hide(100);
 		$("button[type=submit]").show(100);
 		$("#btnCancel").show(100);
 		$("#btnHot").show(100);
-		if(${boardVo.not_hot} == 1) {
+		if("${boardVo.not_hot}" == 1) {
 			console.log("중요공지임");
 			$("#btnHot").hide(100);
 			$("#btnHotCancel").show(100);
@@ -33,11 +36,14 @@ $(document).ready(function() {
 			$("#frmList").attr("action", "/board/ntDelete").submit();	
 		}
 	});
-	// 작성취소 버튼
+	// 수정취소 버튼
 	$("#btnCancel").click(function(){
 		$("#not_title").prop("readonly", true);
 		$("#not_content").prop("readonly", true);
+		$("#not_title").css("border","none");
+		$("#not_content").css("border","none");
 		$("button[type=submit]").hide(100);
+		$("#btnHotCancel").hide(100);
 		$(this).hide(100);
 		$("#btnModify").show(100);
 		$("#btnHot").hide(100);
@@ -48,6 +54,77 @@ $(document).ready(function() {
 			$("#myform").attr("action", "/board/hotUpdate").submit();
 		}
 	});
+	// 댓글 작성완료 버튼
+	$("#btn_ntReply").click(function(){
+		var ntbno = "${boardVo.not_num}";
+		var ntrcontent = $("#ntRcontent").val();
+		var ntrwriter = $("#ntRwriter").val();
+		var sendData = {
+				"ntbno" : ntbno,
+				"ntrcontent" : ntrcontent,
+				"ntrwriter" : ntrwriter
+		};
+		console.log(sendData);
+		var url = "/replies/register";
+		
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			"dataType" :"text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+			}
+		});
+	});
+	
+	
+	// 댓글 목록 불러오기
+	function replyList() {
+		$("#replyList").empty();
+		var url = "/replies/all/${boardVo.not_num}";
+		$.getJSON(url, function(rData) {
+			console.log(rData);
+			var strHtml = "";
+			$(rData).each(function(){
+				strHtml += "<tr>";
+				strHtml += "<td>" + this.ntrno +"</td>";
+				strHtml += "<td>" + this.ntrcontent + "</td>";
+				strHtml += "<td>" + this.ntrwriter + "</td>";
+				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
+				strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
+				strHtml += " data-rno='" + this.ntrno + "'";
+				strHtml += " data-reply_text='" + this.ntrcontent + "'";
+				strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
+				strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
+				strHtml += " data-rno='" + this.ntrno + "'";
+				strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";
+				strHtml += "</tr>";
+			});
+			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
+		});
+	}
+	// 댓글 수정 버튼
+	$("#replyList").on("click", ".btnReplyUpdate", function() {
+		
+		var ntrno = $(this).attr("data-rno");
+		var ntrcontent = $(this).attr("data-reply_text");
+		var ntrwriter = $(this).attr("data-replyer");
+		$("#modal_rno").val(ntrno);
+		$("#modal_reply_text").val(ntrcontent);
+		$("#modal_replyer").val(ntrwriter);
+// 		$("#modal-a").trigger("click");
+		$("#modal-a").modal();
+		console.log("댓글 수정 버튼");
+		
+	});
+	
+	replyList(); // 기능 실행
 });
 	
 </script>
@@ -61,7 +138,7 @@ $(document).ready(function() {
 		<div class="row">
 		<div class="col-md-12">
 			 <a id="modal-a" href="#modal-container" role="button" class="btn" data-toggle="modal"
-			 	style="display:none;">Launch demo modal</a>
+			 	>Launch demo modal</a>
 			
 			 <div class="modal fade" id="modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -112,30 +189,50 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-md-1"></div>
 			<div class="col-md-10 main_grid_contact" >
+			<br>
 			<form id="myform" role="form" method="post" 
-				action="/board/ntUpdate" style="padding:30px;">
+				action="/board/ntUpdate">
 			<input type="hidden" name="not_num" value="${boardVo.not_num}"/>
 			<input type="hidden" name="page" value="${pagingDto.page}"/>
 			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
-				<div class="form-group">
-					<label for="title">제목</label>
-					<input type="text" class="form-control" id="not_title" 
-						name="not_title" value="${boardVo.not_title}"
-						readonly/>
-				</div>
-				<div class="form-group">
-					<label for="content">내용</label><br>
-					<textarea rows="5" id="not_content" class="form-control"
-						name="not_content" readonly>${boardVo.not_content}</textarea>
-				</div>
-				<div class="form-group">
-					<label for="writer">작성자</label>
-					<input type="text" class="form-control" id="not_writer" 
-						name="not_writer" value="${boardVo.not_writer}"
-						readonly/>
-				</div>
-				<hr>
-				<div style="clear:both;">
+			<table class="table">
+		<colgroup>
+			<col style="width:10%;">
+			<col style="width:50%;">
+			<col style="width:10%;">
+			<col style="width:40%;">
+		</colgroup>
+		<tbody>
+			<tr>
+				<th scope="row">제목</th>
+				<td class="form-group">
+				<input type="text" id="not_title" 
+						name="not_title" value="${boardVo.not_title}" style="border:none" 
+						readonly/></td>
+				<th scope="row">조회수</th>
+				<td>${boardVo.not_viewcount}</td>
+			</tr>
+			<tr>
+				<th scope="row">작성자</th>
+				<td class="form-group">
+				<input type="text" id="not_writer" 
+						name="not_writer" value="${boardVo.not_writer}" style="border:none"
+						readonly/></td>
+				<th scope="row">작성일</th>
+				<td>${boardVo.not_regdate}</td>
+			</tr>
+			<tr>
+				<th scope="row" colspan="5" class="form-group" >
+				<textarea rows="10" id="not_content" 
+						name="not_content" style="border:none" readonly>${boardVo.not_content}</textarea>
+				</th>
+			</tr>
+		</tbody>
+	</table>
+			
+			<hr>
+			
+			<div style="clear:both;">
 					<button type="submit" class="btn btn-success" id="btnSuccess"
 						style="display:none;">완료</button>
 					<button type="button" class="btn btn-warning" id="btnCancel"
@@ -146,36 +243,38 @@ $(document).ready(function() {
 						style="display:none;">중요공지등록완료</button>
 					<button type="button" class="btn btn-warning" id="btnHotCancel"
 						style="display:none;">중요공지등록삭제</button>
+			</div>
+			</form>
+				<div style="clear:both;">
+				<c:if test="${mem_id == 'admin'}">
 					<button type="button" class="btn btn-warning"
 						id="btnModify">수정</button>
 					<button type="button" class="btn btn-danger"
-						id="btnDelete">삭제</button>
+						id="btnDelete">삭제</button>				
+				</c:if>
 					<button type="button" class="btn btn-primary"
 						id="btnListAll">목록</button>
 				</div>
-			</form>
 			<!-- 댓글 작성 -->
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="reply_text">댓글내용</label>
-				<input type="text" id="reply_text"
+				<label for="ntRcontent">댓글내용</label>
+				<input type="text" id="ntRcontent"
 					class="form-control"/>
 			</div>
 			<div class="form-group">
-				<label for="replyer">작성자</label>
-				<input type="text" id="replyer"
+				<label for="ntRwriter">작성자</label>
+				<input type="text" id="ntRwriter"
 					class="form-control"/>
 			</div>
 			<div class="form-group">
 				<button type="button" class="btn-xs btn-success"
-					id="btnReply">작성완료</button>
+					id="btn_ntReply">작성완료</button>
 			</div>
 		</div>
 	</div>
 	<!-- // 댓글 작성 -->
-	
-	<hr/>
 	
 	<!-- 댓글 목록 -->
 	<div class="row">
