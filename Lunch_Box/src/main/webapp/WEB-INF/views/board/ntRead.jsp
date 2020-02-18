@@ -111,14 +111,17 @@ $(document).ready(function() {
 	}
 	// 댓글 수정 버튼
 	$("#replyList").on("click", ".btnReplyUpdate", function() {
-		console.log("댓글 수정 버튼");
+		
 		var ntrno = $(this).attr("data-rno");
 		var ntrcontent = $(this).attr("data-reply_text");
 		var ntrwriter = $(this).attr("data-replyer");
 		$("#modal_rno").val(ntrno);
 		$("#modal_reply_text").val(ntrcontent);
 		$("#modal_replyer").val(ntrwriter);
-		$("#modal-a").trigger("click");
+// 		$("#modal-a").trigger("click");
+		$("#modal-a").modal();
+		console.log("댓글 수정 버튼");
+		
 	});
 	
 	replyList(); // 기능 실행
