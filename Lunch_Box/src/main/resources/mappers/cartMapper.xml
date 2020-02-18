@@ -26,4 +26,9 @@
 		delete from tbl_cart
 	</delete>
 	
+	<update id="updateCount">
+		update tbl_cart set
+		cart_count = #{count}
+		where cart_num = #{cart_num}
+	</update>
 </mapper>  

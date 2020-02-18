@@ -1,6 +1,8 @@
 package com.kh.team2.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -35,6 +37,14 @@ public class CartDaoImpl implements CartDao {
 	@Override
 	public void allDelete() throws Exception {
 		sqlSession.delete(NAMESPACE+".deleteAll");
+	}
+
+	@Override
+	public void updataCount(int count, int cart_num) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("count", count);
+		paramMap.put("cart_num", cart_num);
+		sqlSession.update(NAMESPACE+".updateCount",paramMap);
 	}
 
 }

@@ -36,4 +36,9 @@ public class CartServiceImpl implements CartService {
 		cartDao.allDelete();
 	}
 
+	@Override
+	public void updateCount(int count, int cart_num) throws Exception {
+		cartDao.updataCount(count, cart_num);
+	}
+
 }

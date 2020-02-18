@@ -14,4 +14,7 @@ public interface MemberService {
 	
 	// 아이디 비밀번호 체크
 	public MemberVo readWithPw(String mem_id, String mem_pass) throws Exception;
+	
+	// 아이디 중복체크
+	public int idCheck(String mem_id) throws Exception;
 }

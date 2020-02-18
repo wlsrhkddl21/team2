@@ -7,6 +7,15 @@ public class CartVo {
 	private int pdt_price;
 	private int cart_count;
 	private String mem_id;
+	private int pdt_total;
+
+	public int getPdt_total() {
+		return pdt_price*cart_count;
+	}
+
+	public void setPdt_total(int pdt_total) {
+		this.pdt_total = pdt_total;
+	}
 
 	public CartVo() {
 		super();
@@ -74,7 +83,9 @@ public class CartVo {
 	@Override
 	public String toString() {
 		return "CartVo [pdt_num=" + pdt_num + ", cart_num=" + cart_num + ", pdt_name=" + pdt_name + ", pdt_price="
-				+ pdt_price + ", cart_count=" + cart_count + ", mem_id=" + mem_id + "]";
+				+ pdt_price + ", cart_count=" + cart_count + ", mem_id=" + mem_id + ", pdt_total=" + pdt_total + "]";
 	}
+
+	
 
 }

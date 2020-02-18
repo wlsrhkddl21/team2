@@ -43,7 +43,6 @@ th {
 	background: #f7f7f7;
 	color: #333;
 	font-size: 15px;
-	font-weight: 900;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -52,7 +51,7 @@ td {
 	border-bottom: 1px solid #e6e6e6;
 	color: #333;
 	font-size: 14px;
-	font-weight: 900;
+	font-weight: 600;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -152,7 +151,7 @@ input[type=checkbox] {
 	display: block;
 }
 #count {
- width: 27px;
+ width: 22px;
  height: 23px;
  padding: 0 0 0 5px;
  line-height: 25px;
