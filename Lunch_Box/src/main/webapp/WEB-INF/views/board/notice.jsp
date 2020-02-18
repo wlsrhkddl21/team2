@@ -124,16 +124,6 @@ $(document).ready(function(){
 					</ul>
 				</nav>
 			</div>
-			<!-- <div class="container-fluid ">
-			<div class="row" >
-							<div class="col-md-2"></div>
-							<div class="col-md-8 ">
-								
-								<div style="height: 50px"></div>
-								</div>
-								<div class="col-md-2"></div>
-						</div>
-					</div> -->
 				</div>
 		</div>
 		<div class="col-md-2">
