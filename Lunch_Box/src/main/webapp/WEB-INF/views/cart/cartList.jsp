@@ -6,6 +6,7 @@
 
 <script>
 $(document).ready(function() {
+	// all Check
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
 			console.log($("#allCheck"));
@@ -16,6 +17,7 @@ $(document).ready(function() {
 			
 	});
 	
+	// check delete
 	$("#btnDelete").click(function() {
 		var checkArr = [];
 		$(".chk:checked").each(function() {
@@ -32,10 +34,24 @@ $(document).ready(function() {
 		});
 	});
 	
-	$("#btnAllDelete").click(function() {
-		location.href="/cart/deleteAll";
+	// select Delete
+	$(".oneDelete").click(function() {
+		var cart_num = $(this).parents("tr").find(".chk").val();
+		var myDecision = confirm("정말 삭제하시겠습니까?");
+		if (myDecision == true) {
+			location.href="/cart/oneDelete/"+cart_num;
+		}
 	});
 	
+	// Cart clean
+	$("#btnAllDelete").click(function() {
+		var myDecision = confirm("장바구니를 비우시겠습니까?");
+		if (myDecision == true) {
+		location.href="/cart/deleteAll";
+		}
+	});
+	
+	// count up
 	$(".up").click(function() {
 		var cart_num = $(this).parents("tr").find(".chk").val();
 		var count = $(this).parent().parent().find("#count").val();
@@ -44,24 +60,10 @@ $(document).ready(function() {
 				"cart_num" : cart_num
 		};
 		var url = "/cart/updateCount";
-		
-		$.ajax({
-			"type" : "put",
-			"url" : url,
-			"headers" : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "put"
-			},
-			"dataType" : "text",
-			"data" : JSON.stringify(sData),
-			"success" : function(rData) {
-				var msg = rData.trim();
-				if (msg == "success") {
-					location.href="/cart/list";
-				}
-			}
-		});
+		countAjax(url,sData);
 	});
+	
+	//count down
 	$(".down").click(function() {
 		var cart_num = $(this).parents("tr").find(".chk").val();
 		var count = $(this).parent().parent().find("#count").val();
@@ -71,24 +73,10 @@ $(document).ready(function() {
 		};
 		var url = "/cart/updateCount";
 		
-		$.ajax({
-			"type" : "put",
-			"url" : url,
-			"headers" : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "put"
-			},
-			"dataType" : "text",
-			"data" : JSON.stringify(sData),
-			"success" : function(rData) {
-				var msg = rData.trim();
-				if (msg == "success") {
-					location.href="/cart/list";
-				}
-			}
-		});
+		countAjax(url,sData);
 	});
 	
+	// count update
 	$(".update").click(function() {
 		var cart_num = $(this).parents("tr").find(".chk").val();
 		var count = $(this).parent().parent().find("#count").val();
@@ -98,6 +86,60 @@ $(document).ready(function() {
 		};
 		var url = "/cart/updateCount";
 		
+		countAjax(url,sData);
+	});
+	
+	// all buy
+	$(".allBuy").click(function() {
+		var arr = new Array();
+		$(".chk").each(function() {
+			var obj = new Object();
+			obj.pdt_num = $(this).parents("tr").find("#pdt_num").val();
+			obj.cart_count = $(this).parents("tr").find("#count").val();
+			arr.push(obj);
+		});
+		var sData = JSON.stringify(arr);
+		buyAjax(sData)
+	});
+	
+	// check buy
+	$(".checkBuy").click(function() {
+		var arr = new Array();
+		$(".chk:checked").each(function() {
+			var obj = new Object();
+			obj.pdt_num = $(this).parents("tr").find("#pdt_num").val();
+			obj.cart_count = $(this).parents("tr").find("#count").val();
+			arr.push(obj);
+		});
+		var sData = JSON.stringify(arr);
+		buyAjax(sData)
+	});
+	// select buy
+	$(".oneBuy").click(function() {
+		var arr = new Array();
+		var obj = new Object();
+		obj.pdt_num = $(this).parent().find("#pdt_num").val();
+		obj.cart_count = $(this).parents("tr").find("#count").val();
+		arr.push(obj);
+		var sData = JSON.stringify(arr);
+		buyAjax(sData);
+	});
+	
+	// buy ajax
+	function buyAjax(sData) {
+		$.ajax({
+			url : "/cart/buy",
+			type : "post",
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			data : sData,
+			dataType : "text"
+		});
+	}
+	// count ajax
+	function countAjax(url,sData) {
 		$.ajax({
 			"type" : "put",
 			"url" : url,
@@ -114,7 +156,7 @@ $(document).ready(function() {
 				}
 			}
 		});
-	});
+	}
 });
 </script>
 	<!-- contact -->
@@ -188,10 +230,11 @@ $(document).ready(function() {
 													<td></td>
 													<td>${vo.pdt_total}</td>
 													<td><div>
-													<span class="btn_box block white middle">
+													<span class="btn_box block white middle oneBuy">
+													<input id="pdt_num" type="hidden" value="${vo.pdt_num}"/>
 													<a>구매</a>
 													</span>
-													<span class="btn_box block white middle">
+													<span class="btn_box block white middle oneDelete">
 													<a>삭제</a>
 													</span>
 													</div></td>
@@ -242,8 +285,8 @@ $(document).ready(function() {
 							</div>
 							<div class="order">
 								<span class="box_btn"><a class="large black" href="/shop/single">계속 쇼핑하기</a></span>
-								<span class="box_btn"><a class="large black" href="#">선택상품 주문하기</a></span>
-								<span class="box_btn"><a class="large green" href="#">전체상품 주문하기</a></span>
+								<span class="box_btn checkBuy"><a class="large black" href="#">선택상품 주문하기</a></span>
+								<span class="box_btn allBuy"><a class="large green" href="#">전체상품 주문하기</a></span>
 							</div>
 						</div>
 						</form>
