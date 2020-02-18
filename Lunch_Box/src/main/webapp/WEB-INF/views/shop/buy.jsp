@@ -11,7 +11,9 @@
 <script type="text/javascript">
 	$(function(){
 		$("#btn_point").click(function(){
-			var mem_point = ${memberVo.mem_point};
+			var mem_point = "${memberVo.mem_point}";
+			var total_price = "${#result_price}.attr("data-price")";
+			console.log(total_price);
 			var point = $("input[name=use_point]").val();
 			
 			if(mem_point<point){
@@ -90,7 +92,7 @@
 											</tr>
 											</c:forEach>
 											<tr>
-												<td colspan="6">적립 예정 포인트 : ${total_point} P</td>
+												<td colspan="6">적립 예정 포인트 :<fmt:formatNumber value="${total_point}" type="number"/> P</td>
 											</tr>
 										</thead>
 									</table>
@@ -126,13 +128,13 @@
 										<div class="col-md-6">
 											<h4 style="margin-top: 30px; margin-bottom: 15px;"
 												class="buy_text text-center">
-												총 결제 금액 : <span id="result_price"> <fmt:formatNumber
+												총 결제 금액 : <span id="result_price" data-price="${total_price }"> <fmt:formatNumber
 														value="${total_price }" type="number" /></span>
 											</h4>
 											<div>
 												<table class="table tbl_result">
 													<tr>
-														<th>상품 가격 : (+) <fmt:formatNumber
+														<th>상품 가격:(+) <fmt:formatNumber
 																value="${total_pdt_price }" type="number" /></th>
 													</tr>
 													<tr>
