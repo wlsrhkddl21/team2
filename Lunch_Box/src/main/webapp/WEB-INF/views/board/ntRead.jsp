@@ -111,36 +111,25 @@ $(document).ready(function() {
 	}
 	// 댓글 수정 버튼
 	$("#replyList").on("click", ".btnReplyUpdate", function() {
-		
+		console.log("댓글 수정 버튼");
 		var ntrno = $(this).attr("data-rno");
 		var ntrcontent = $(this).attr("data-reply_text");
 		var ntrwriter = $(this).attr("data-replyer");
 		$("#modal_rno").val(ntrno);
 		$("#modal_reply_text").val(ntrcontent);
 		$("#modal_replyer").val(ntrwriter);
-// 		$("#modal-a").trigger("click");
-		$("#modal-a").modal();
-		console.log("댓글 수정 버튼");
-		
+		$("#modal-a").trigger("click");
+		$("#myModal").modal("show"); 
 	});
 	
 	replyList(); // 기능 실행
 });
 	
 </script>
-<div class="container-fluid">
-<!-- 댓글 수정 모달 창 -->
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		<div style="height: 20px"></div>
-		<div class="row">
-		<div class="col-md-12">
-			 <a id="modal-a" href="#modal-container" role="button" class="btn" data-toggle="modal"
+		<a id="modal-a" href="#myModal" role="button" class="btn" data-toggle="modal"
 			 	>Launch demo modal</a>
 			
-			 <div class="modal fade" id="modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -173,6 +162,16 @@ $(document).ready(function() {
 					</div>
 				</div>
 			</div>
+<div class="container-fluid">
+<!-- 댓글 수정 모달 창 -->
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+		<div style="height: 20px"></div>
+		<div class="row">
+		<div class="col-md-12">
+			 
 		</div>
 	</div>
 
