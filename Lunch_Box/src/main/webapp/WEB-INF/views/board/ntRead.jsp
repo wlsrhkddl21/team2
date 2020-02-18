@@ -4,7 +4,7 @@
 
 <script>
 $(document).ready(function() {
-	// 수정 버튼
+	// 	수정 버튼
 	$("#btnModify").click(function() {
 		$("#not_title").prop("readonly", false);
 		$("#not_content").prop("readonly", false);
@@ -14,7 +14,7 @@ $(document).ready(function() {
 		$("button[type=submit]").show(100);
 		$("#btnCancel").show(100);
 		$("#btnHot").show(100);
-		if(${boardVo.not_hot} == 1) {
+		if("${boardVo.not_hot}" == 1) {
 			console.log("중요공지임");
 			$("#btnHot").hide(100);
 			$("#btnHotCancel").show(100);
@@ -83,6 +83,7 @@ $(document).ready(function() {
 		});
 	});
 	
+	
 	// 댓글 목록 불러오기
 	function replyList() {
 		$("#replyList").empty();
@@ -108,6 +109,21 @@ $(document).ready(function() {
 			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
 		});
 	}
+	// 댓글 수정 버튼
+	$("#replyList").on("click", ".btnReplyUpdate", function() {
+		
+		var ntrno = $(this).attr("data-rno");
+		var ntrcontent = $(this).attr("data-reply_text");
+		var ntrwriter = $(this).attr("data-replyer");
+		$("#modal_rno").val(ntrno);
+		$("#modal_reply_text").val(ntrcontent);
+		$("#modal_replyer").val(ntrwriter);
+// 		$("#modal-a").trigger("click");
+		$("#modal-a").modal();
+		console.log("댓글 수정 버튼");
+		
+	});
+	
 	replyList(); // 기능 실행
 });
 	
@@ -122,7 +138,7 @@ $(document).ready(function() {
 		<div class="row">
 		<div class="col-md-12">
 			 <a id="modal-a" href="#modal-container" role="button" class="btn" data-toggle="modal"
-			 	style="display:none;">Launch demo modal</a>
+			 	>Launch demo modal</a>
 			
 			 <div class="modal fade" id="modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">

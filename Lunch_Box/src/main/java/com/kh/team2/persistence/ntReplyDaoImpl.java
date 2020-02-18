@@ -27,4 +27,14 @@ public class ntReplyDaoImpl implements ntReplyDao {
 		return sqlSession.selectList(NAMESPACE + ".list", ntbno);
 	}
 
+	@Override
+	public void update(ntReplyVo ntreplyVo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update", ntreplyVo);
+	}
+
+	@Override
+	public void delete(int ntrno) throws Exception {
+		sqlSession.delete(NAMESPACE + ".delete", ntrno);
+	}
+
 }

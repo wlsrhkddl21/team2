@@ -31,4 +31,11 @@ public class ReplyController {
 		return ntReplyService.list(ntbno);
 	}
 	
+	@RequestMapping(value="/update", method = RequestMethod.PUT)
+	public String update(@RequestBody ntReplyVo ntreplyVo) throws Exception {
+		ntReplyService.update(ntreplyVo);
+		return "댓글수정성공";
+	}
+	
+	
 }
