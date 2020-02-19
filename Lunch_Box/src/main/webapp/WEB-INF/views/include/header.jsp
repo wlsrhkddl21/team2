@@ -13,10 +13,12 @@
 $(document).ready(function(){
 	var msg = "${msg}";
 	var memberVo = "${memberVo}";
-	if (msg == "성공") {
-		
+	if (msg == "success") {	
 		var mem_name = "${sessionScope.mem_name}";
+	} else if (msg == "실패"){	
+		alert("비밀번호가 일치하지 않습니다");	
 	}
+	
 });
 </script>
 <head>
