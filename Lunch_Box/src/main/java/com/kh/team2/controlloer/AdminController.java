@@ -121,4 +121,9 @@ public class AdminController {
 		is.close();
 		return bytes;
 	}
+	
+	@RequestMapping(value="orderList",method = RequestMethod.GET)
+	public String orderList() throws Exception{
+		return "admin/orderList";
+	}
 }
