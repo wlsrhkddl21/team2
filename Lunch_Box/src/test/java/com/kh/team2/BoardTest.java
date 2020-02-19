@@ -8,8 +8,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team2.domain.BoardVo;
+import com.kh.team2.domain.QnaVo;
 import com.kh.team2.domain.ntReplyVo;
 import com.kh.team2.persistence.BoardDao;
+import com.kh.team2.persistence.QnaDao;
 import com.kh.team2.persistence.ntReplyDao;
 import com.kh.team2.service.BoardService;
 
@@ -22,6 +24,8 @@ public class BoardTest {
 	private BoardDao dao;
 	@Inject
 	private ntReplyDao ntDao;
+	@Inject
+	private QnaDao qnaDao;
 	
 	@Inject
 	private BoardService service;
