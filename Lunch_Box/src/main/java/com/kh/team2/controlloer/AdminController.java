@@ -80,16 +80,18 @@ public class AdminController {
 //		System.out.println("mFile:"+originalFilename);
 		System.out.println("productVo:"+productVo);
 		if(originalFilename!=null) {
-			AdminFileUploadUtil.delete(productVo.getPdt_image(), uploadPath+"/product",true);
-			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes(),true);
-			String path = dirPath.replace("\\", "/");
-			productVo.setPdt_image(path);
+//			AdminFileUploadUtil.delete(productVo.getPdt_image(), uploadPath+"/product",true);
+//			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes(),false);
+//			String path = dirPath.replace("\\", "/");
+//			productVo.setPdt_image(path);
+			System.out.println("ori변경안함");
 		}
 		if(originalSubFilename!=null) {
-			AdminFileUploadUtil.delete(productVo.getPdt_subimage(), uploadPath+"/product",false);
-			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalSubFilename, sFile.getBytes(),false);
-			String path = dirPath.replace("\\", "/");
-			productVo.setPdt_subimage(path);
+//			AdminFileUploadUtil.delete(productVo.getPdt_subimage(), uploadPath+"/product",false);
+//			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalSubFilename, sFile.getBytes(),false);
+//			String path = dirPath.replace("\\", "/");
+//			productVo.setPdt_subimage(path);
+			System.out.println("sub변경안함");
 		}
 		service.updatePDT(productVo);
 		return "redirect:/admin/content?pdt_num="+productVo.getPdt_num();

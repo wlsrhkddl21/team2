@@ -105,20 +105,22 @@ $(document).ready(function(){
 			</div>
 			<!-- //nav -->
 			<!-- dwn -->
-			<c:choose>
-			<c:when test="${empty mem_name }">
 			<div class="text-center" id="divLogin">
+			<c:if test="${mem_id=='admin' }">
 			
 				<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">관리자창 </a>
+			</c:if>
+			<c:choose>
+			<c:when test="${empty mem_name }">
 				<a href="/lb/login" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">로그인 </a>
 				<a href="/lb/joinGet" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">회원가입 </a>
-			</div>
 			</c:when>
 			<c:otherwise>
 				<a>${mem_name} 님 환영합니다</a>
-				<a href="/lb/logout"><button>로그아웃</button></a>
+				<a href="/lb/logout" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">로그아웃</a>
 			</c:otherwise>
 			</c:choose>
+			</div>
 			<!-- //dwn -->
 		</div>
 	</div>
