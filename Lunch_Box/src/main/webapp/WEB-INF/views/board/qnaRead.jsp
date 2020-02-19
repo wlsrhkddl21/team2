@@ -196,7 +196,7 @@ $(document).ready(function() {
 			<br>
 			<form id="myform" role="form" method="post" 
 				action="/board/ntUpdate">
-			<input type="hidden" name="not_num" value="${boardVo.not_num}"/>
+			<input type="hidden" name="not_num" value="${qnaVo.qna_num}"/>
 			<input type="hidden" name="page" value="${pagingDto.page}"/>
 			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
 			<table class="table">
@@ -211,24 +211,24 @@ $(document).ready(function() {
 				<th scope="row">제목</th>
 				<td class="form-group">
 				<input type="text" id="not_title" 
-						name="not_title" value="${boardVo.not_title}" style="border:none" 
+						name="not_title" value="${qnaVo.qno_title}" style="border:none" 
 						readonly/></td>
 				<th scope="row">조회수</th>
-				<td>${boardVo.not_viewcount}</td>
+				<td>${qnaVo.qna_viewcount}</td>
 			</tr>
 			<tr>
 				<th scope="row">작성자</th>
 				<td class="form-group">
 				<input type="text" id="not_writer" 
-						name="not_writer" value="${boardVo.not_writer}" style="border:none"
+						name="not_writer" value="${qnaVo.qna_writer}" style="border:none"
 						readonly/></td>
 				<th scope="row">작성일</th>
-				<td>${boardVo.not_regdate}</td>
+				<td>${qnaVo.qna_regdate}</td>
 			</tr>
 			<tr>
 				<th scope="row" colspan="5" class="form-group" >
 				<textarea rows="10" id="not_content" 
-						name="not_content" style="border:none" readonly>${boardVo.not_content}</textarea>
+						name="not_content" style="border:none" readonly>${qnaVo.qna_content}</textarea>
 				</th>
 			</tr>
 		</tbody>

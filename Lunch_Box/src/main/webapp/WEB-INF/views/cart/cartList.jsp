@@ -6,13 +6,41 @@
 
 <script>
 $(document).ready(function() {
+	function chagePrice(){
+		var price = 0;
+		var tip = 2500;
+		$(".chk:checked").each(function() {
+			var isThis = $(this);
+			var thisPrice = isThis.attr("data-price");
+			console.log(thisPrice);
+			price += parseInt(thisPrice);
+		});
+		
+		$("#result").text(price);
+		
+		if(price>50000){
+			$("#tip").text(0);
+		}else{
+			$("#tip").text(2500);
+		}
+		
+		$("#total").text(2500+price);
+		
+		console.log(price);
+	}
+	
+	$(".chk").change(function(){
+		chagePrice();
+	});
 	
 	// all Check
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
 			$("input[type=checkbox]").prop("checked",true);
+			chagePrice();
 		} else {
 			$("input[type=checkbox]").prop("checked",false);
+			chagePrice();
 		}
 			
 	});
@@ -94,14 +122,26 @@ $(document).ready(function() {
 			var isThis = $(this);
 			getHidden(isThis);
 		});
+		$("#cartForm").submit();
 	});
 	
 	// check buy
 	$(".checkBuy").click(function() {
+		var cnt=0;
+		
 		$(".chk:checked").each(function() {
 			var isThis = $(this);
+			cnt +=1;
 			getHidden(isThis);
+// 			console.log(cnt);
 		});
+		
+		if(cnt==0){
+			console.log("선택 상품 없음");
+		}else{
+			$("#cartForm").submit();
+		}
+		
 	});
 	// select buy
 	$(".oneBuy").click(function() {
@@ -173,8 +213,8 @@ $(document).ready(function() {
 		var countHidden = document.createElement("input");
 		countHidden.setAttribute("type", "hidden");
 		countHidden.setAttribute("value", isThis.parents("tr").find("#count").val());
-		countHidden.setAttribute("name", "cart_count");
-		countHidden.setAttribute("id","cart_count");
+		countHidden.setAttribute("name", "buy_count");
+		countHidden.setAttribute("id","buy_count");
 		document.getElementById("cartForm").appendChild(countHidden);
 		
 	}
@@ -208,7 +248,7 @@ $(document).ready(function() {
 					</div>
 					<div class="form-w3ls p-md-5 p-4">
 						<div>
-						<form id="cartForm" action="#" method="POST" style="margin: 0px;">
+						<form id="cartForm" action="/shop/buy" method="POST" style="margin: 0px;">
 							<table class="tbl_col" >
 								<colgroup>
 									<col style="width:5%;">
@@ -221,7 +261,7 @@ $(document).ready(function() {
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col"><input type="checkbox" id="allCheck"/></th>
+										<th scope="col"><input type="checkbox" id="allCheck" checked/></th>
 										<th scope="col"></th>
 										<th scope="col">상품명</th>
 										<th scope="col">판매가</th>
@@ -235,7 +275,8 @@ $(document).ready(function() {
 										<c:when test="${isEmpty == false}">
 											<c:forEach items="${list}" var="vo">
 												<tr>
-													<td><input type="checkbox" class="chk" value="${vo.cart_num}"/></td>
+													<c:set var="chkPrice" value="${vo.pdt_price* vo.cart_count}"></c:set>
+													<td><input type="checkbox" class="chk" value="${vo.cart_num}" data-price="${chkPrice}" checked/></td>
 													<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
 													<td class="left">${vo.pdt_name}</td>
 													<td class="price">${vo.pdt_price}</td>

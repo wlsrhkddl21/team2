@@ -4,17 +4,28 @@
 <%@ include file="../include/buyStyle.jsp"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <style>
 .buy_text {
 	color: #343a40;
+}
+#btnBuy{
+    background: #fd5c63;
+    font-size: 25px;
+    display: inline-block;
+    margin: 5px;
+    padding: 15px;
+    color: white;
 }
 </style>
 <script type="text/javascript">
 
 	$(function() {
+		$("#btn_buy").click(function(){
+			//주소 수정시 세부주소 data-mem-add에 합치기 form hidden값에 다 넣기
+			
+		});
 
+		//포인트 사용 버튼
 		$("#btn_point").click(function() {
 			//현재 가지고있는 포인트
 			var mem_point = "${memberVo.mem_point}";
@@ -57,7 +68,8 @@
 			span_price.attr("data-price-total",total_price);
 			
 		});
-
+		
+		// 포인트 사용 취소 버튼
 		$("#btn_point_cancle").click(function() {
 			var th_point = $("#th_point");
 			th_point.css("visibility", "hidden");
@@ -68,19 +80,21 @@
 			$("#span_point").attr("data-use-point",0);
 		});
 		
+		//주소 수정 버튼
 		$("#btnAdd").click(function() {
-			
 			new daum.Postcode({
 				oncomplete : function(data) {
 					$("#add_span").text(data.address);
+					$("#subAdd").css("display","block");
 				}
-			
 			}).open();
 		});
+		
 		
 	});
 </script>
 <div class="container-fluid">
+<!--구매 페이지 -->
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
@@ -213,11 +227,30 @@
 								<h4 style="margin-top: 30px; margin-bottom: 15px;"class="buy_text">배송지 정보</h4>
 								<table class="table text-center">
 									<tr class="buy_text">
-										<td style="font-size: 18px; font-weight: 300">배송 주소 :
-											 <span id="add_span">${memberVo.mem_address }</span> <br> 
-											<input type="button" id="btnAdd" value="주소 변경" class="btn btn-outline-dark" style="margin-top: 10px;"/>
+										<td style="font-size: 18px; font-weight: 300;">배송 주소 : <span
+											id="add_span" data-mem-add="${memberVo.mem_address }">
+												${memberVo.mem_address }</span> <br> <input type="button"
+											id="btnAdd" value="주소 변경" class="btn btn-outline-dark"
+											style="margin-top: 10px;" /><br>
+											<div
+												style="margin-bottom: 20px; margin-top: 20px; display: none;">
+												세부 주소 입력 : <input type="text" id="addSub"
+													style="height: 18px; width: 600px;"
+													placeholder="세부 주소를 입력하세요." />
+											</div>
 										</td>
 									</tr>
+									<tr id="mem_tel">
+										<td style="font-size: 18px; font-weight: 300;">휴대 전화 번호 :
+											<span id="span_tel" data-mem-tel="${memberVo.mem_tel}">
+												${memberVo.mem_tel}</span> <input type="button"
+											class="btn btn-outline-dark" id="btnTel" value="번호 변경">
+											<input type="text"
+											style="height: 18px; width: 600px; display: none;"
+											placeholder="수정할 번호를 입력하세요.">
+										</td>
+									</tr>
+
 								</table>
 								<div class="container-fluid">
 									<div class="row">
@@ -225,8 +258,7 @@
 										<div class="col-md-6">
 											<div class="btn_cart" align="center">
 												<div class="order">
-													<span class="box_btn"><a class="large green"
-														href="#" style="font-size: 25px;">결제 하기</a></span>
+													<input type="submit" id="btnBuy" class="btn" value="결제 하기" />
 												</div>
 											</div>
 										</div>
@@ -243,47 +275,9 @@
 		</div>
 	</div>
 </div>
-<table class="table">
 	<!-- 테이블 먼저 만들기 -->
 	<!-- 구매 폼 만들기 1개상품 구매 완료 
 				mapper, test 만들기 -->
-</table>
-<div class="col-md-2"></div> 
-<!-- 세부 주소 모달 -->
-<div class="row">
-		<div class="col-md-12">
-			 <a id="modal-32239" href="#modal-container-32239" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
-			
-			<div class="modal fade" id="modal-container-32239" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="myModalLabel">
-								Modal title
-							</h5> 
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							...
-						</div>
-						<div class="modal-footer">
-							 
-							<button type="button" class="btn btn-primary">
-								Save changes
-							</button> 
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">
-								Close
-							</button>
-						</div>
-					</div>
-					
-				</div>
-				
-			</div>
-			
-		</div>
-	</div>
+<div class="col-md-2"></div>
 
 <%@ include file="../include/footer.jsp"%>
