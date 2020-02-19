@@ -76,14 +76,14 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		String go = "";
 		if (memberVo != null) {
-			model.addAttribute("msg", "성공");
+			model.addAttribute("msg", "success");
 			model.addAttribute("memberVo", memberVo);
 			session.setAttribute("mem_name", memberVo.getMem_name());
 			session.setAttribute("mem_id", memberVo.getMem_id());
 			session.setAttribute("mem_pass", memberVo.getMem_pass());
 			go = "index";
 		} else {	
-			model.addAttribute("msg","실패");
+			model.addAttribute("msg","fail");
 			model.addAttribute("memberVo", memberVo);
 			go = "member/login";
 		}

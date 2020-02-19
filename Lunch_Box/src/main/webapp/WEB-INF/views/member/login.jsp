@@ -4,15 +4,7 @@
 <%@ include file="../include/header.jsp" %>
 <script>
 $(document).ready(function(){
-	var msg = "${msg}";
-	var mem_name = "";
-	if (msg == "실패") {
-		alert("비밀번호가 일치하지 않습니다");
-	}
-	
-	
-	
-	
+
 });
 </script>	
 

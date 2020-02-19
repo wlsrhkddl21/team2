@@ -5,16 +5,18 @@
 <html lang="zxx">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="/js/myscript.js"></script>
 <script>
-
 
 $(document).ready(function(){
 	var msg = "${msg}";
 	var memberVo = "${memberVo}";
-	if (msg == "성공") {
-		
+	if (msg == "success") {	
 		var mem_name = "${sessionScope.mem_name}";
+	} else if (msg == "실패"){	
+		alert("비밀번호가 일치하지 않습니다");	
 	}
 	
 });
@@ -85,7 +87,7 @@ $(document).ready(function(){
 							</ul>
 						</li>
 						<li><a href="/shop/sub">정기배송</a></li>
-						<li><a href="/board/reviewBoard">리뷰 게시판</a></li>
+						<li><a href="/review/reviewBoard">리뷰 게시판</a></li>
 						<li>
 							<!-- First Tier Drop Down -->
 							<label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"
@@ -103,20 +105,22 @@ $(document).ready(function(){
 			</div>
 			<!-- //nav -->
 			<!-- dwn -->
-			<c:choose>
-			<c:when test="${empty mem_name }">
 			<div class="text-center" id="divLogin">
+			<c:if test="${mem_id=='admin' }">
 			
 				<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">관리자창 </a>
+			</c:if>
+			<c:choose>
+			<c:when test="${empty mem_name }">
 				<a href="/lb/login" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">로그인 </a>
 				<a href="/lb/joinGet" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">회원가입 </a>
-			</div>
 			</c:when>
 			<c:otherwise>
 				<a>${mem_name} 님 환영합니다</a>
-				<a href="/lb/logout"><button>로그아웃</button></a>
+				<a href="/lb/logout" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">로그아웃</a>
 			</c:otherwise>
 			</c:choose>
+			</div>
 			<!-- //dwn -->
 		</div>
 	</div>

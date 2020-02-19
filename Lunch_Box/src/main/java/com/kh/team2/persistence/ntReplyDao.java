@@ -10,4 +10,9 @@ public interface ntReplyDao {
 	public void create(ntReplyVo ntreplyVo) throws Exception;
 	// 댓글 목록
 	public List<ntReplyVo> list(int ntbno) throws Exception;
+	// 댓글 수정
+	public void update(ntReplyVo ntreplyVo) throws Exception;
+	// 댓글 삭제
+	public void delete(int ntrno) throws Exception;
+	
 }

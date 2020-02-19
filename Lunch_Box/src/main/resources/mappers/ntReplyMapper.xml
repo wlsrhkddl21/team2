@@ -18,6 +18,18 @@
 		order by ntrno desc
 	</select>
 	
+	<delete id="delete">
+		delete from tbl_ntReply
+		where ntrno = #{ntrno}
+	</delete>
+	
+	<update id="update">
+		update tbl_ntReply set
+			ntrcontent = #{ntrcontent},
+			ntrudate = sysdate
+		where ntrno = #{ntrno}
+	</update>
+	
 	
 </mapper>
 

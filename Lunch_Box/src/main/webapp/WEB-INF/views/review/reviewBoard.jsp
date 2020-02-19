@@ -10,7 +10,7 @@
     background-color: #e0e0eb;
     border-color: #e0e0eb;
 }
-.not_title {
+.readTitle {
 	cursor: pointer;
 }
 </style>
@@ -24,29 +24,32 @@ $(document).ready(function(){
 	});
 	$("#btnRegister").click(function() {
 		console.log("클릭됨");
-		$("#frmPage").attr("action", "/board/ntRegister");
-		$("input[name=not_num]").remove();
-		$("#frmPage").submit();
+// 		$("#frmPage").attr("action", "/board/ntRegister");
+// 		$("input[name=not_num]").remove();
+// 		$("#frmPage").submit();
+		location.href = "/review/reviewRegister";
 	});
-	$(".not_title").click(function(e){
+	$(".readTitle").click(function(e){
 		e.preventDefault();
-		var not_num = $(this).attr("data-bno");
-		$("input[name=not_num]").val(not_num);
-		$("#frmRead").attr("action", "/board/ntRead");
+		console.log("타이틀 클릭됨");
+		var rev_num = $(this).attr("data-rno");
+		$("input[name=rev_num]").val(rev_num);
+		$("#frmRead").attr("action", "/review/reviewContent");
 		$("#frmRead").submit();
 	});
 });
 </script>
 <div class="container-fluid">
-	<form id="frmPage" action="/board/notice" method="get">
-		<input type="hidden" name="not_num"/>
+
+	<form id="frmPage" action="/review/reviewBoard" method="get">
+		<input type="hidden" name="rev_num"/>
 		<input type="hidden" name="page" 
 			value="${pagingDto.page }"/>
 		<input type="hidden" name="perPage"
 			value="${pagingDto.perPage }"/>
 	</form>
-	<form id="frmRead" action="/board/notice" method="get">
-		<input type="hidden" name="not_num"/>
+	<form id="frmRead" action="/review/reviewBoard" method="get">
+		<input type="hidden" name="rev_num"/>
 		<input type="hidden" name="page" 
 			value="${pagingDto.page }"/>
 		<input type="hidden" name="perPage"
@@ -59,10 +62,11 @@ $(document).ready(function(){
 		<div class="col-md-8">
 		<br>
 		<div style="height: 20px"></div>
-		<h3 class="title-w3ls text-center text-bl mb-5">공지사항</h3>
-		<c:if test="${mem_id == 'admin'}">
+		<h3 class="title-w3ls text-center text-bl mb-5">리뷰 게시판</h3>
+<%-- 		<c:if test="${mem_id}"> --%>
 		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
-		</c:if>
+<%-- 		</c:if> --%>
+		<form action = "/review/reviewBoard" method="get">
 		<div style="height: 20px"></div>
 		<table class="table text-center table-striped">
 				<thead>
@@ -75,29 +79,20 @@ $(document).ready(function(){
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${hotList }" var="boardVo">
-					<tr style="font-weight:bold;">
-						<td style="color:red">공지</td>
-						<td><a data-bno="${boardVo.not_num}" class="not_title"> ${boardVo.not_title } </a></td>
-						<td>${boardVo.not_writer }</td>
-						<td><fmt:formatDate value="${boardVo.not_regdate }" 
-								pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>${boardVo.not_viewcount }</td>
-					</tr>
-				</c:forEach>
 					
-				<c:forEach items="${list }" var="boardVo">
+				<c:forEach items="${list }" var="reviewVo">
 					<tr>
-						<td>${boardVo.not_num }</td>
-						<td><a data-bno="${boardVo.not_num}" class="not_title"> ${boardVo.not_title } </a></td>
-						<td>${boardVo.not_writer }</td>
-						<td><fmt:formatDate value="${boardVo.not_regdate }" 
+						<td>${reviewVo.rev_num }</td>
+						<td><a data-rno="${reviewVo.rev_num}" class="readTitle">${reviewVo.rev_title }</a></td>
+						<td>${reviewVo.rev_writer }</td>
+						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>${boardVo.not_viewcount }</td>
+						<td>${reviewVo.rev_viewcnt }</td>
 					</tr>
 				</c:forEach>
 				</tbody>
 			</table>
+			</form>
 			<div style="height: 50px">
 				<nav class="navbar">
 					<ul class="pagination mx-auto">
@@ -126,6 +121,7 @@ $(document).ready(function(){
 					</ul>
 				</nav>
 			</div>
+			
 				</div>
 		</div>
 		<div style="height: 30px">

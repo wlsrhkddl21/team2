@@ -24,4 +24,14 @@ public class NtReplyServiceImpl implements NtReplyService {
 		return ntreplyDao.list(ntbno);
 	}
 
+	@Override
+	public void update(ntReplyVo ntreplyVo) throws Exception {
+		ntreplyDao.update(ntreplyVo);
+	}
+
+	@Override
+	public void delete(int ntrno) throws Exception {
+		ntreplyDao.delete(ntrno);
+	}
+
 }
