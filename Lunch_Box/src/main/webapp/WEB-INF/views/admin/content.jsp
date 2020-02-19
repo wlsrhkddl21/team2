@@ -101,30 +101,30 @@
 						<div class="form-group">
 							<label for="pdt_price" style="font-weight: bold">가격</label> <input
 								type="text" class="form-control" id="pdt_price" name="pdt_price"
-								value="${productVo.pdt_price } 원">
+								value="${productVo.pdt_price } ">
 
 						</div>
 						<div class="form-group">
-							<label for="pdt_image" style="font-weight: bold">상품이미지</label> <input
+							<label for="pdt_image" style="font-weight: bold">상품이미지</label><br> <input
 								type="file" class="form-control-file" id="pdt_file" name="file"
 								style="display: none;" />
 							<c:if test="${not empty productVo.pdt_image }">
 								<img src="/admin/displayFile?fileName=${productVo.pdt_image}"
-									id="pdt_image" width="600px" height="600px" class="updateHide" />
+									id="pdt_image" width="800px" class="updateHide" />
 							</c:if>
-							<br>
+							
 							<button type="button" class="btn btn-primary updateShow"
 								id="btnFile" style="display: none;">메인 사진 변경</button>
 						</div>
 						<div class="form-group">
-							<label for="pdt_Subimage" style="font-weight: bold;">상품서브이미지</label>
+							<label for="pdt_Subimage" style="font-weight: bold;">상품서브이미지</label><br>
 							<input type="file" class="form-control-file" id="pdt_Subfile"
 								name="subFile" style="display: none;" />
 <%-- 							<c:if test="${not empty productVo.pdt_subimage }"> --%>
 								<img src="/admin/displayFile?fileName=${productVo.pdt_subimage}"
-									id="pdt_Subfile"  width="600px" height="600px" class="updateHide" />
+									id="pdt_Subfile"  width="800px"  class="updateHide" />
 <%-- 							</c:if> --%>
-							<br>
+							
 							<button type="button" class="btn btn-primary updateShow"
 								id="btnSubfile" style="display: none;">서브 사진 변경</button>
 						</div>

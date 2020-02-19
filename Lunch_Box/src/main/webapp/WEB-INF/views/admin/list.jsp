@@ -17,6 +17,11 @@ $(document).ready(function(){
 // 		location.href = "/admin/content";
 		location.href = "/admin/content?pdt_num="+pdt_num;
 	});
+	
+	$("#orderList").click(function(){
+		location.href="/admin/orderList";
+	});
+	
 	function thumbnail(){
 		$(".pdtImg").each(function(){
 			var fileName = $(this).attr("data-img");
@@ -44,6 +49,7 @@ $(document).ready(function(){
 			<div class="col-lg-12 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
 					<div style = "text-align:right">
+			<a href="#" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2" id="orderList">주문내역</a>
 			<a href="/admin/insertPDT" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">상품등록</a>
 			</div>
 			<table class="table table-striped text-center">

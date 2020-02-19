@@ -16,4 +16,8 @@ public interface CartService {
 	public void allDelete() throws Exception;
 	// 장바구니 수량 수정
 	public void updateCount(int count,int cart_num) throws Exception;
+	// 장바구니 체크
+	public int isCart(int pdt_num) throws Exception;
+	// 장바구니 중복 합
+	public void countUp(int cart_count,int pdt_num) throws Exception;
 }

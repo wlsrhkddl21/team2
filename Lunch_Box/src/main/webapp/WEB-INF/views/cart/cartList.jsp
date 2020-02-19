@@ -6,10 +6,10 @@
 
 <script>
 $(document).ready(function() {
+	
 	// all Check
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
-			console.log($("#allCheck"));
 			$("input[type=checkbox]").prop("checked",true);
 		} else {
 			$("input[type=checkbox]").prop("checked",false);
@@ -23,7 +23,6 @@ $(document).ready(function() {
 		$(".chk:checked").each(function() {
 			checkArr.push($(this).val());
 		});
-		console.log("checkArr:" , checkArr);
 		var sArr = checkArr.join(",");
 		var d = {"checkArr" : sArr }
 		$.post("/cart/delete", d , function(rData) {
@@ -55,108 +54,133 @@ $(document).ready(function() {
 	$(".up").click(function() {
 		var cart_num = $(this).parents("tr").find(".chk").val();
 		var count = $(this).parent().parent().find("#count").val();
+		var isThis = $(this);
 		var sData = {
 				"cart_count" : ++count,
 				"cart_num" : cart_num
 		};
-		var url = "/cart/updateCount";
-		countAjax(url,sData);
+		countAjax(isThis,sData);
 	});
 	
 	//count down
 	$(".down").click(function() {
+		var isThis = $(this);
 		var cart_num = $(this).parents("tr").find(".chk").val();
 		var count = $(this).parent().parent().find("#count").val();
 		var sData = {
 				"cart_count" : --count,
 				"cart_num" : cart_num
 		};
-		var url = "/cart/updateCount";
 		
-		countAjax(url,sData);
+		countAjax(isThis,sData);
 	});
 	
 	// count update
 	$(".update").click(function() {
 		var cart_num = $(this).parents("tr").find(".chk").val();
 		var count = $(this).parent().parent().find("#count").val();
+		var isThis = $(this);
 		var sData = {
 				"cart_count" : count,
 				"cart_num" : cart_num
 		};
-		var url = "/cart/updateCount";
 		
-		countAjax(url,sData);
+		countAjax(isThis,sData);
 	});
 	
 	// all buy
 	$(".allBuy").click(function() {
-		var arr = new Array();
 		$(".chk").each(function() {
-			var obj = new Object();
-			obj.pdt_num = $(this).parents("tr").find("#pdt_num").val();
-			obj.cart_count = $(this).parents("tr").find("#count").val();
-			arr.push(obj);
+			var isThis = $(this);
+			getHidden(isThis);
 		});
-		var sData = JSON.stringify(arr);
-		buyAjax(sData)
 	});
 	
 	// check buy
 	$(".checkBuy").click(function() {
-		var arr = new Array();
 		$(".chk:checked").each(function() {
-			var obj = new Object();
-			obj.pdt_num = $(this).parents("tr").find("#pdt_num").val();
-			obj.cart_count = $(this).parents("tr").find("#count").val();
-			arr.push(obj);
+			var isThis = $(this);
+			getHidden(isThis);
 		});
-		var sData = JSON.stringify(arr);
-		buyAjax(sData)
 	});
 	// select buy
 	$(".oneBuy").click(function() {
-		var arr = new Array();
-		var obj = new Object();
-		obj.pdt_num = $(this).parent().find("#pdt_num").val();
-		obj.cart_count = $(this).parents("tr").find("#count").val();
-		arr.push(obj);
-		var sData = JSON.stringify(arr);
-		buyAjax(sData);
+		var isThis = $(this);
+		getHidden(isThis);
 	});
 	
-	// buy ajax
-	function buyAjax(sData) {
-		$.ajax({
-			url : "/cart/buy",
-			type : "post",
-			headers : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "post"
-			},
-			data : sData,
-			dataType : "text"
-		});
-	}
 	// count ajax
-	function countAjax(url,sData) {
+	function countAjax(isThis,sData) {
 		$.ajax({
-			"type" : "put",
-			"url" : url,
+			"type" : "post",
+			"url" : "/cart/updateCount",
 			"headers" : {
 				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "put"
+				"X-HTTP-Method-Override" : "post"
 			},
 			"dataType" : "text",
 			"data" : JSON.stringify(sData),
 			"success" : function(rData) {
-				var msg = rData.trim();
-				if (msg == "success") {
-					location.href="/cart/list";
-				}
+				isThis.parents("tr").find("#count").val(rData);
+				getPrice();
 			}
 		});
 	}
+	
+	// ajax price
+	function getPrice() {
+		$.ajax({
+			url : "/cart/totalPrice",
+			type : "post",
+			success : function(rData) {
+				$("#result").text(rData.strResult);
+				$("#tip").text(rData.strTip);
+				$("#total").text(rData.strTotalPrice);
+			}
+		});
+		
+		$(".chk").each(function() {
+			var me = $(this);
+			var price = me.parents("tr").find(".price").text();
+			var count = me.parents("tr").find("#count").val();
+			var sData = {
+					"price" : price,
+					"count" : count
+			}
+			$.ajax({
+				url : "/cart/price",
+				type : "post",
+				data : sData,
+				success : function(rData) {
+					
+				me.parents("tr").find(".totalPrice").text(rData.strTotal);
+				me.parents("tr").find(".point").text(rData.strPoint);
+				
+				}
+			});
+		});
+	} 
+	
+	function getHidden(isThis) {
+		
+		var numHidden = document.createElement("input");
+		numHidden.setAttribute("type", "hidden");
+		numHidden.setAttribute("value", isThis.parents("tr").find("#num").val());
+		numHidden.setAttribute("name", "pdt_num");
+		numHidden.setAttribute("id","pdt_num");
+		document.getElementById("cartForm").appendChild(numHidden);
+		
+		var countHidden = document.createElement("input");
+		countHidden.setAttribute("type", "hidden");
+		countHidden.setAttribute("value", isThis.parents("tr").find("#count").val());
+		countHidden.setAttribute("name", "cart_count");
+		countHidden.setAttribute("id","cart_count");
+		document.getElementById("cartForm").appendChild(countHidden);
+		
+	}
+	
+	getPrice();
+	
 });
 </script>
 	<!-- contact -->
@@ -185,18 +209,14 @@ $(document).ready(function() {
 					<div class="form-w3ls p-md-5 p-4">
 						<div>
 						<form id="cartForm" action="#" method="POST" style="margin: 0px;">
-						<input type="hidden" name="mem_id">
-						<input type="hidden" name="pdt_num">
-						<input type="hidden" name="cart_count">
 							<table class="tbl_col" >
 								<colgroup>
 									<col style="width:5%;">
 									<col style="width:20%;">
 									<col style="width:25%;">
+									<col style="width:15%;">
 									<col style="width:10%;">
-									<col style="width:10%;">
-									<col style="width:10%;">
-									<col style="width:10%;">
+									<col style="width:15%;">
 									<col style="width:10%;">
 								</colgroup>
 								<thead>
@@ -206,7 +226,6 @@ $(document).ready(function() {
 										<th scope="col">상품명</th>
 										<th scope="col">판매가</th>
 										<th scope="col">수량</th>
-										<th scope="col">적립금</th>
 										<th scope="col">합계</th>
 										<th scope="col">선택</th>
 									</tr>
@@ -227,11 +246,10 @@ $(document).ready(function() {
 													<a class="btn_box white middle update">변경</a>
 													</span>
 													</td>
-													<td></td>
-													<td>${vo.pdt_total}</td>
+													<td class="totalPrice"></td>
 													<td><div>
 													<span class="btn_box block white middle oneBuy">
-													<input id="pdt_num" type="hidden" value="${vo.pdt_num}"/>
+													<input id="num" type="hidden" value="${vo.pdt_num}"/>
 													<a>구매</a>
 													</span>
 													<span class="btn_box block white middle oneDelete">
@@ -243,7 +261,7 @@ $(document).ready(function() {
 										</c:when>
 										<c:otherwise>
 											<tr>
-												<td colspan="6" class="empty">장바구니가 비었습니다.</td>
+												<td colspan="7" class="empty">장바구니가 비었습니다.</td>
 											</tr>
 										</c:otherwise>
 									</c:choose>
@@ -263,15 +281,15 @@ $(document).ready(function() {
 									</tr>
 									<tr>
 										<th scope="row">주문금액</th>
-										<td><span>${result}</span>원</td>
+										<td><span id="result"></span>원</td>
 									</tr>
 									<tr>
 										<th scope="row">배송료</th>
-										<td>${tip}원</td>
+										<td><span id="tip"></span>원</td>
 									</tr>
 									<tr>
 										<th scope="row">결제금액</th>
-										<td><span style="color :#fd5c63; font-size: 20px">${total}</span>원</td>
+										<td><span style="color :#fd5c63; font-size: 20px" id="total"></span>원</td>
 									</tr>
 								</tbody>
 								</table>

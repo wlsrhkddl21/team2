@@ -80,16 +80,15 @@ public class AdminFileUploadUtil {
 		ImageIO.write(destImg, getFormatName(uuidName), target);
 	}
 	
-	public static void delete(String fileName,String uploadPath,boolean thumbnail) throws Exception {
-		List<String> list = new ArrayList<String>();
-		list.add(fileName);
-		delete(list,uploadPath,thumbnail);
-	}
+//	public static void delete(String fileName,String uploadPath,boolean thumbnail) throws Exception {
+//		List<String> list = new ArrayList<String>();
+//		list.add(fileName);
+//		delete(list,uploadPath,thumbnail);
+//	}
 	// 삭제
-	public static void delete(List<String> fileNames, String uploadPath,boolean thumbnail) throws Exception {
+	public static void delete(String fileName, String uploadPath,boolean thumbnail) throws Exception {
 		
-		for (String fileName : fileNames) {
-			String filePath = uploadPath + File.separator + fileName.replace("/", "\\");
+			String filePath = uploadPath + File.separator + fileName;
 			System.out.println("delete:"+filePath);
 			File f = new File(filePath);
 			if (f.exists()) {
@@ -104,12 +103,12 @@ public class AdminFileUploadUtil {
 				String front = fileName.substring(0, slashIndex + 1);
 				String rear = fileName.substring(slashIndex + 1);
 				String thumbnailName = front + "s_" + rear;
-				String thumbnailPath = uploadPath + File.separator + thumbnailName.replace("/", "\\");
+				String thumbnailPath = uploadPath + File.separator + thumbnailName;
 				File fThumb = new File(thumbnailPath);
 				if (fThumb.exists()) {
 					fThumb.delete();
 				}
 			}
-		}
+		
 	}
 }
