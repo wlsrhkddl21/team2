@@ -91,55 +91,22 @@ $(document).ready(function() {
 	// all buy
 	$(".allBuy").click(function() {
 		$(".chk").each(function() {
-			var numHidden = document.createElement("input");
-			numHidden.setAttribute("type", "hidden");
-			numHidden.setAttribute("value", $(this).parents("tr").find("#num").val() );
-			numHidden.setAttribute("name", "pdt_num");
-			numHidden.setAttribute("id","pdt_num");
-			document.getElementById("cartForm").appendChild(numHidden);
-			
-			var countHidden = document.createElement("input");
-			countHidden.setAttribute("type", "hidden");
-			countHidden.setAttribute("value", $(this).parents("tr").find("#count").val());
-			countHidden.setAttribute("name", "cart_count");
-			countHidden.setAttribute("id","cart_count");
-			document.getElementById("cartForm").appendChild(countHidden);
+			var isThis = $(this);
+			getHidden(isThis);
 		});
 	});
 	
 	// check buy
 	$(".checkBuy").click(function() {
 		$(".chk:checked").each(function() {
-			var numHidden = document.createElement("input");
-			numHidden.setAttribute("type", "hidden");
-			numHidden.setAttribute("value", $(this).parents("tr").find("#num").val() );
-			numHidden.setAttribute("name", "pdt_num");
-			numHidden.setAttribute("id","pdt_num");
-			document.getElementById("cartForm").appendChild(numHidden);
-			
-			var countHidden = document.createElement("input");
-			countHidden.setAttribute("type", "hidden");
-			countHidden.setAttribute("value", $(this).parents("tr").find("#count").val());
-			countHidden.setAttribute("name", "cart_count");
-			countHidden.setAttribute("id","cart_count");
-			document.getElementById("cartForm").appendChild(countHidden);
+			var isThis = $(this);
+			getHidden(isThis);
 		});
 	});
 	// select buy
 	$(".oneBuy").click(function() {
-		var numHidden = document.createElement("input");
-		numHidden.setAttribute("type", "hidden");
-		numHidden.setAttribute("value", $(this).parent().find("#num").val());
-		numHidden.setAttribute("name", "pdt_num");
-		numHidden.setAttribute("id","pdt_num");
-		document.getElementById("cartForm").appendChild(numHidden);
-		
-		var countHidden = document.createElement("input");
-		countHidden.setAttribute("type", "hidden");
-		countHidden.setAttribute("value", $(this).parents("tr").find("#count").val());
-		countHidden.setAttribute("name", "cart_count");
-		countHidden.setAttribute("id","cart_count");
-		document.getElementById("cartForm").appendChild(countHidden);
+		var isThis = $(this);
+		getHidden(isThis);
 	});
 	
 	// count ajax
@@ -194,6 +161,24 @@ $(document).ready(function() {
 		});
 	} 
 	
+	function getHidden(isThis) {
+		
+		var numHidden = document.createElement("input");
+		numHidden.setAttribute("type", "hidden");
+		numHidden.setAttribute("value", isThis.parents("tr").find("#num").val());
+		numHidden.setAttribute("name", "pdt_num");
+		numHidden.setAttribute("id","pdt_num");
+		document.getElementById("cartForm").appendChild(numHidden);
+		
+		var countHidden = document.createElement("input");
+		countHidden.setAttribute("type", "hidden");
+		countHidden.setAttribute("value", isThis.parents("tr").find("#count").val());
+		countHidden.setAttribute("name", "cart_count");
+		countHidden.setAttribute("id","cart_count");
+		document.getElementById("cartForm").appendChild(countHidden);
+		
+	}
+	
 	getPrice();
 	
 });
@@ -229,10 +214,9 @@ $(document).ready(function() {
 									<col style="width:5%;">
 									<col style="width:20%;">
 									<col style="width:25%;">
+									<col style="width:15%;">
 									<col style="width:10%;">
-									<col style="width:10%;">
-									<col style="width:10%;">
-									<col style="width:10%;">
+									<col style="width:15%;">
 									<col style="width:10%;">
 								</colgroup>
 								<thead>
@@ -242,7 +226,6 @@ $(document).ready(function() {
 										<th scope="col">상품명</th>
 										<th scope="col">판매가</th>
 										<th scope="col">수량</th>
-										<th scope="col">포인트 적립</th>
 										<th scope="col">합계</th>
 										<th scope="col">선택</th>
 									</tr>
@@ -263,7 +246,6 @@ $(document).ready(function() {
 													<a class="btn_box white middle update">변경</a>
 													</span>
 													</td>
-													<td style="color : lightcoral"><span class="point"></span>P</td>
 													<td class="totalPrice"></td>
 													<td><div>
 													<span class="btn_box block white middle oneBuy">
@@ -279,7 +261,7 @@ $(document).ready(function() {
 										</c:when>
 										<c:otherwise>
 											<tr>
-												<td colspan="8" class="empty">장바구니가 비었습니다.</td>
+												<td colspan="7" class="empty">장바구니가 비었습니다.</td>
 											</tr>
 										</c:otherwise>
 									</c:choose>
@@ -300,9 +282,6 @@ $(document).ready(function() {
 									<tr>
 										<th scope="row">주문금액</th>
 										<td><span id="result"></span>원</td>
-									</tr>
-									<tr>
-										<th colspan="2" style="text-align: right;">총 적립 포인트</th>
 									</tr>
 									<tr>
 										<th scope="row">배송료</th>
