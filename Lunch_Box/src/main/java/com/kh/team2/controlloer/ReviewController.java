@@ -37,6 +37,18 @@ public class ReviewController {
 		model.addAttribute("pagingDto", pagingDto);
 		return "/review/reviewBoard";
 	}
+	@RequestMapping(value ="/reviewRegister",method = RequestMethod.GET)
+	public String reviewRegister(Model model, PagingDto pagingDto) throws Exception {
+		System.out.println("±Û¾²±â Æû µé¾î¿È");
+		
+		return "/review/reviewRegister";
+	}
+	@RequestMapping(value ="/reviewContent",method = RequestMethod.GET)
+	public String reviewContent(Model model, PagingDto pagingDto) throws Exception {
+		System.out.println("»ó¼¼º¸±â Æû µé¾î¿È");
+		
+		return "/review/reviewContent";
+	}
 
 		
 }

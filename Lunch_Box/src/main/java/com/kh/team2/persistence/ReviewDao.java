@@ -14,4 +14,10 @@ public interface ReviewDao {
 	
 	// 페이지
 	public int listCount(PagingDto pagingDto) throws Exception;
+	
+	// 리뷰 글쓰기
+	public void insertReview(ReviewVo reviewVo) throws Exception;
+	
+	// 리뷰 상세보기
+	public ReviewVo readReview(int rev_num) throws Exception;
 }

@@ -10,7 +10,7 @@
     background-color: #e0e0eb;
     border-color: #e0e0eb;
 }
-.readTitle {
+.not_title {
 	cursor: pointer;
 }
 </style>
@@ -24,17 +24,15 @@ $(document).ready(function(){
 	});
 	$("#btnRegister").click(function() {
 		console.log("클릭됨");
-// 		$("#frmPage").attr("action", "/board/ntRegister");
-// 		$("input[name=not_num]").remove();
-// 		$("#frmPage").submit();
-		location.href = "/review/reviewRegister";
+		$("#frmPage").attr("action", "/board/ntRegister");
+		$("input[name=not_num]").remove();
+		$("#frmPage").submit();
 	});
-	$(".readTitle").click(function(e){
+	$(".not_title").click(function(e){
 		e.preventDefault();
-		console.log("타이틀 클릭됨");
-		var rev_num = $(this).attr("data-rno");
-		$("input[name=rev_num]").val(rev_num);
-		$("#frmRead").attr("action", "/review/reviewContent");
+		var not_num = $(this).attr("data-bno");
+		$("input[name=not_num]").val(not_num);
+		$("#frmRead").attr("action", "/board/ntRead");
 		$("#frmRead").submit();
 	});
 });
@@ -62,10 +60,7 @@ $(document).ready(function(){
 		<div class="col-md-8">
 		<br>
 		<div style="height: 20px"></div>
-		<h3 class="title-w3ls text-center text-bl mb-5">리뷰 게시판</h3>
-<%-- 		<c:if test="${mem_id}"> --%>
-		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
-<%-- 		</c:if> --%>
+		<h3 class="title-w3ls text-center text-bl mb-5">리뷰 상세보기</h3>
 		<form action = "/review/reviewBoard" method="get">
 		<div style="height: 20px"></div>
 		<table class="table text-center table-striped">
@@ -83,7 +78,7 @@ $(document).ready(function(){
 				<c:forEach items="${list }" var="reviewVo">
 					<tr>
 						<td>${reviewVo.rev_num }</td>
-						<td><a data-rno="${reviewVo.rev_num}" class="readTitle">${reviewVo.rev_title }</a></td>
+						<td>${reviewVo.rev_title }</td>
 						<td>${reviewVo.rev_writer }</td>
 						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>
@@ -93,34 +88,7 @@ $(document).ready(function(){
 				</tbody>
 			</table>
 			</form>
-			<div style="height: 50px">
-				<nav class="navbar">
-					<ul class="pagination mx-auto">
-						<c:if test="${pagingDto.hasPrev == true }">
-							<li class="page-item"><a class="page-link"
-								data-page="${pagingDto.startPage - 1}">Previous</a></li>
-						</c:if>
-						<c:forEach begin="${pagingDto.startPage }"
-							end="${pagingDto.endPage }" var="v">
-							<li
-								<c:choose>
-									<c:when test="${pagingDto.page == v}">
-									class="page-item active"
-									</c:when>
-									<c:otherwise>
-									class="page-item"
-									</c:otherwise>
-								</c:choose>>
-								<a class="page-link" data-page="${v}">${v}</a>
-							</li>
-						</c:forEach>
-						<c:if test="${pagingDto.hasNext == true }">
-							<li class="page-item"><a class="page-link"
-								data-page="${pagingDto.endPage + 1}">Next</a></li>
-						</c:if>
-					</ul>
-				</nav>
-			</div>
+			
 			
 				</div>
 		</div>

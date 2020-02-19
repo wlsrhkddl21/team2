@@ -17,24 +17,15 @@ public class AdminFileUploadUtil {
 
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData,boolean thumbnail) throws Exception {
 		UUID uuid = UUID.randomUUID(); // 겹치지 않는 고유한 값 생성
-		System.out.println("uuid:" + uuid);
 		String uuidName = uuid + "_" + originalName;
 		System.out.println("uuidName:" + uuidName);
 		File f = new File(uploadPath);
 		if(!f.exists()) {
 			f.mkdir();
 		}
-//		// 업로드 된 원본 이미지를 메모리에 로딩
-//		BufferedImage sourceImg = ImageIO.read(new File(uploadPath));
-//		// pom.xml =>> imgscalr-lib
-//		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 600);
 		String filePath = uploadPath + File.separator + uuidName;
 		File target = new File(filePath);
 		FileCopyUtils.copy(fileData, target);
-//		String formatName = getFormatName(originalName);
-//		System.out.println("formatName: " + formatName);
-//		boolean isImage = isImage(formatName);
-//		System.out.println(isImage);
 		if (thumbnail) {
 			makeThumbnail(uploadPath,uuidName);
 		}
@@ -80,7 +71,7 @@ public class AdminFileUploadUtil {
 		String uploadedPath = uploadPath + File.separator + uuidName;
 	
 		// 업로드 된 원본 이미지를 메모리에 로딩
-		System.out.println("uploadPath:"+uploadedPath);
+		System.out.println("uploadedPath:"+uploadedPath);
 		BufferedImage sourceImg = ImageIO.read(new File(uploadedPath));
 		// pom.xml =>> imgscalr-lib
 		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 50);
@@ -88,6 +79,7 @@ public class AdminFileUploadUtil {
 		File target = new File(thumbnailName);
 		ImageIO.write(destImg, getFormatName(uuidName), target);
 	}
+	
 	public static void delete(String fileName,String uploadPath,boolean thumbnail) throws Exception {
 		List<String> list = new ArrayList<String>();
 		list.add(fileName);
