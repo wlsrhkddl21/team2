@@ -3,7 +3,19 @@
 <%@ include file="../include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../include/cartStyle.jsp" %>
-
+<style>
+	.test {
+		text-align : center;
+		position:fixed;
+		right:100px;
+		width:200px;
+		height:800px;
+		background-color: #9775f0;
+		z-index: 1000;
+		padding: 20px;
+		border: 1px solid blue;
+	}
+</style>
 <script>
 $(document).ready(function() {
 	
@@ -183,6 +195,11 @@ $(document).ready(function() {
 	
 });
 </script>
+	<div class="test">
+		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
+		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
+		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
+	</div>
 	<!-- contact -->
 	<section class="contact py-5" id="contact">
 		<div class="container">
@@ -318,8 +335,6 @@ $(document).ready(function() {
 		</div>
 	</section>
 	<!-- //contact -->
-
 	
-
 	
 <%@ include file="../include/footer.jsp" %>
