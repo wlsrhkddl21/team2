@@ -21,6 +21,15 @@
 		select count(*) from tbl_review
 	</select>
 	
+	<insert id="insertReview">
+		insert into tbl_review(rev_num, rev_title, rev_writer, rev_content)
+		values (seq_rev_num.nextval, #{rev_title}, #{rev_writer}, #{rev_content})
+	</insert>
+	
+	<select id="readReview" resultType="ReviewVo">
+		select * from tbl_review
+		where rev_num = #{rev_num}
+	</select>
 </mapper>  
 
 
