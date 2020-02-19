@@ -11,6 +11,13 @@
  		from tbl_cart a,tbl_product b
  		where a.mem_id = #{mem_id} and b.pdt_num = a.pdt_num
 	</select>
+	
+	<select id="isCart" resultType="int">
+		select count(*)
+		from tbl_cart
+		where pdt_num = #{pdt_num}
+	</select>
+	
 
 	<insert id="addCart">
 		insert into tbl_cart
@@ -30,5 +37,11 @@
 		update tbl_cart set
 		cart_count = #{count}
 		where cart_num = #{cart_num}
+	</update>
+	
+	<update id="countUp">
+		update tbl_cart set
+		cart_count = cart_count + #{cart_count}
+		where pdt_num = #{pdt_num}
 	</update>
 </mapper>  

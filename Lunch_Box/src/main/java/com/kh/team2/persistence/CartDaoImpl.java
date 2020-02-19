@@ -47,4 +47,18 @@ public class CartDaoImpl implements CartDao {
 		sqlSession.update(NAMESPACE+".updateCount",paramMap);
 	}
 
+	@Override
+	public int isCart(int pdt_num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".isCart",pdt_num);
+	}
+
+	@Override
+	public void countUp(int cart_count, int pdt_num) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("cart_count", cart_count);
+		paramMap.put("pdt_num", pdt_num);
+		sqlSession.update(NAMESPACE+".countUp",paramMap);
+	}
+
+
 }
