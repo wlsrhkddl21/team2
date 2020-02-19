@@ -3,12 +3,16 @@ package com.kh.team2.controlloer;
 
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,29 +40,29 @@ public class MemberController {
 		return "member/join";
 	}
 	@ResponseBody
-	@RequestMapping(value = "/joinPost", method = RequestMethod.POST)
-	public String insertMember(HttpServletRequest request, MemberVo memberVo, Model model) throws Exception{
-		// text ¿¡¼­ ¾ÆÀÌµğ ¿Í ÆĞ½º¿öµå¿Í Áßº¹Ã¼Å© ¿©ºÎ °ª ¹Ş¾Æ¿È
-		System.out.println(request.getParameter("mem_id"));
+	@RequestMapping(value = "/joinCheck", method = RequestMethod.POST)
+	public String check(HttpServletRequest request, MemberVo memberVo, Model model) throws Exception{
 		System.out.println(request.getParameter("mem_pass"));
 		System.out.println(request.getParameter("mem_pass2"));
 		System.out.println(request.getParameter("isCheck"));
-		String mem_id = request.getParameter("mem_id");
 		String mem_pass = request.getParameter("mem_pass");
 		String mem_pass2 = request.getParameter("mem_pass2");
 		String isCheck = request.getParameter("isCheck");
-		// isChk true  == °ø¹éÀ» È®ÀÎ
-		// pass ¿öµå °ø¹é ÀÌ ¾Æ´Ï°Å³ª ¼­·Î °°À» °æ¿ì 
-		// msg Áà
-		String msg = "fail";
-		if (isCheck.equals("true") && !mem_id.equals("")) {
-			msg = "success";
-		} else if (mem_pass == mem_pass2 && !mem_pass.equals("") && !mem_pass2.equals("")) {
-			msg = "fail";
+		String msg = "msgCheck";
+		if (isCheck.equals("true")) {
+			if(mem_pass.equals(mem_pass2) && !mem_pass.equals("")) {
+				msg = "success";
+			} else {
+				msg = "fail";
+			}
 		}
-		
-		
 		return msg;
+	}
+	
+	@RequestMapping(value = "/joinPost", method = RequestMethod.POST)
+	public String insertMember(MemberVo memberVo) throws Exception {
+		service.insertMember(memberVo);
+		return "member/login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -90,23 +94,32 @@ public class MemberController {
 		return go;
 	}
 	
-	// ·Î±×¾Æ¿ô
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
 		return "index";
 	}
 	
-	// ¾ÆÀÌµğ Áßº¹Ã¼Å©
 	@ResponseBody
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
-	public String idCheck(HttpServletRequest request, Model model) throws Exception {
+	public Map<String, Object> idCheck(HttpServletRequest request, Model model) throws Exception {
 		String mem_id = request.getParameter("mem_id");
-		int idChk = 2;
+		String isCheck = request.getParameter("isCheck");
+		String msg = "ì¤‘ë³µì²´í¬ í•´ì¤­";
+		int chk = service.idCheck(mem_id);
+		System.out.println(chk);
 		if (!mem_id.equals("")) {
-		idChk = service.idCheck(mem_id);
+			if (chk == 0) {
+				isCheck = "true";
+				msg = "ì‚¬ìš©ê°€ëŠ¥í•œì•„ì´ë””";
+			} else {
+				msg = "ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë””";
+			}
 		}
-		return String.valueOf(idChk);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", msg);
+		map.put("isCheck", isCheck);
+		return map;
 	}
 
 					

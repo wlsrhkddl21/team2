@@ -7,8 +7,25 @@
 #idCheck {
 	height: 44px;
 }
-.rOnly {
-	readonly : readonly;
+.btn_box {
+	display: inline-block;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: top;
+	margin: 0;
+	padding: 0 10px;
+	outline: 0;
+	font-weight: 400;
+	cursor:pointer;
+}
+.black {
+	border: 1px solid #333;
+	color: #fff;
+	background: #333;
+}
+.middle {
+	height: 30px;
+	line-height: 30px;
 }
 </style>
 <script
@@ -19,7 +36,6 @@
 		var msg = "${msg}";
 		var isCheck = false;
 		$("#mem_address").click(function() {
-			
 			new daum.Postcode({
 				oncomplete : function(data) {
 					$("#mem_address").val(data.address);
@@ -28,38 +44,37 @@
 		});
 		
 		// 아이디 체크
-		$("#btnCheck").on("click", function(e){
-			e.preventDefault();
+		$("#btnCheck").click(function() {
+			var mem_id = $("#mem_id").val();
+			sData = {
+					"mem_id" : mem_id,
+					"isCheck" : isCheck
+			};
 			$.ajax({
-				type : "post",
-				url  : "/lb/idCheck",
-				data : {
-					"mem_id" : $("#mem_id").val()
-				},
-				success : function(data) {
-					if ($.trim(data) == 0) {
-						alert("사용 가능한 아이디");
-						isCheck = true;
-						$("#mem_id").addClass("rOnly");
-					} else if ($.trim(data) == 2) {
-						alert("아이디를 입력 해주세요.");
-						isCheck = false;
-					} else {
-						alert("사용중인 아이디입니다.");
-						isCheck = false;
+					url : "/lb/idCheck",
+					type : "post",
+					data : sData,
+					success : function(rData) {
+						alert(rData.msg);
+						if (rData.isCheck == "true") {
+							isCheck = true;
+							console.log(isCheck);
+						}
 					}
-				}
 			});
 		});
+		$("#mem_id").change(function() {
+			isCheck = false;
+		});
+		// 아이디 체크 끝 
 		
 		// 회원 가입
 		
 		$("#btnSubmit").click(function(e) {
 			e.preventDefault();
-			console.log("클릭");
 			$.ajax({
 				type : "post",
-				url : "/lb/joinPost",
+				url : "/lb/joinCheck",
 				data : {
 					"mem_id" : $("#mem_id").val(),
 					"mem_pass" : $("#mem_pass").val(),
@@ -68,10 +83,14 @@
 				},
 				success : function(data) {
 					console.log(data);
-					if (msg == "succees") {
-						alert("회원가입을 축하합니다");
-					} else {
+					if (data == "success") {
+						alert("회원가입성공");
+						$("#joinForm").submit();
+					} else if (data == "fail") {
 						alert("비밀번호가 일치하지 않습니다");
+					}
+					if (data == "msgCheck") {
+						alert("이메일 중복체크를 해주세요");
 					}
 				}
 			});
@@ -94,17 +113,15 @@
 					<h4 class="mb-4 sec-title-w3 let-spa text-bl">Send us a
 						message</h4>
 					<form id="joinForm" action="/lb/joinPost" method="post">
-						
 							<div class="form-group">
 							<input id="mem_name" class="form-control" type="text"
 								name="mem_name" placeholder="Name"  required/>
 						</div>
 							<div class="form-group">
-							<p><input id="mem_id" class="form-control rOnly" type="text", 
-								name="mem_id" placeholder="Email" style="width: 86%; display: initial;" required/>
-								<button id="btnCheck">중복확인</button></p>
+							<p><input id="mem_id" class="form-control" type="text" placeholder="Email" 
+								name="mem_id" style="width: 86%; display: initial;"/>
+								<span class="box_btn"><a id="btnCheck" class="middle black" href="#">중복체크</a></span></p>
 						</div>
-						
 						
 							<div class="form-group">
 							<input id="mem_pass" class="form-control" type="text"
@@ -124,7 +141,6 @@
 							<input id="mem_tel" class="form-control" type="text"
 								name="mem_tel" placeholder="Phone Number"  required/>
 						</div>
-
 						<div class="input-group1 text-right">
 							<button  type="submit" id="btnSubmit">Submit</button>
 						</div>
