@@ -34,4 +34,15 @@ public class ReviewDaoImpl implements ReviewDao {
 		return count;
 	}
 
+	@Override
+	public void insertReview(ReviewVo reviewVo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertReview", reviewVo);
+		
+	}
+
+	@Override
+	public ReviewVo readReview(int rev_num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".readReview", rev_num);
+	}
+
 }
