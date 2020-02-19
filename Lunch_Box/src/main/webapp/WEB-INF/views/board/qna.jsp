@@ -31,22 +31,22 @@ $(document).ready(function(){
 	$(".not_title").click(function(e){
 		e.preventDefault();
 		var not_num = $(this).attr("data-bno");
-		$("input[name=not_num]").val(not_num);
-		$("#frmRead").attr("action", "/board/ntRead");
+		$("input[name=qna_num]").val(qna_num);
+		$("#frmRead").attr("action", "/board/qnaRead");
 		$("#frmRead").submit();
 	});
 });
 </script>
 <div class="container-fluid">
-	<form id="frmPage" action="/board/notice" method="get">
-		<input type="hidden" name="not_num"/>
+	<form id="frmPage" action="/board/qna" method="get">
+		<input type="hidden" name="qna_num"/>
 		<input type="hidden" name="page" 
 			value="${pagingDto.page }"/>
 		<input type="hidden" name="perPage"
 			value="${pagingDto.perPage }"/>
 	</form>
-	<form id="frmRead" action="/board/notice" method="get">
-		<input type="hidden" name="not_num"/>
+	<form id="frmRead" action="/board/qna" method="get">
+		<input type="hidden" name="qna_num"/>
 		<input type="hidden" name="page" 
 			value="${pagingDto.page }"/>
 		<input type="hidden" name="perPage"
@@ -75,25 +75,15 @@ $(document).ready(function(){
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${hotList }" var="boardVo">
-					<tr style="font-weight:bold;">
-						<td style="color:red">공지</td>
-						<td><a data-bno="${boardVo.not_num}" class="not_title"> ${boardVo.not_title } </a></td>
-						<td>${boardVo.not_writer }</td>
-						<td><fmt:formatDate value="${boardVo.not_regdate }" 
-								pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>${boardVo.not_viewcount }</td>
-					</tr>
-				</c:forEach>
 					
-				<c:forEach items="${list }" var="boardVo">
+				<c:forEach items="${list }" var="qnaVo">
 					<tr>
-						<td>${boardVo.not_num }</td>
-						<td><a data-bno="${boardVo.not_num}" class="not_title"> ${boardVo.not_title } </a></td>
-						<td>${boardVo.not_writer }</td>
-						<td><fmt:formatDate value="${boardVo.not_regdate }" 
+						<td>${qnaVo.qna_num }</td>
+						<td><a data-bno="${qnaVo.qna_num}" class="not_title"> ${qnaVo.qna_title } </a></td>
+						<td>${qnaVo.qna_writer }</td>
+						<td><fmt:formatDate value="${qnaVo.qna_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>${boardVo.not_viewcount }</td>
+						<td>${qnaVo.qna_viewcount }</td>
 					</tr>
 				</c:forEach>
 				</tbody>

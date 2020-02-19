@@ -17,11 +17,11 @@
 	
 	
 	<select id="listCount" resultType="int">
-		select count(*) from tbl_notice
+		select count(*) from tbl_qna
 	</select>
 	
 	<select id="getNextVal" resultType="int">
-		select seq_notice_num.nextval
+		select seq_qna_num.nextval
 		from dual
 	</select>
 	

@@ -2,9 +2,6 @@ package com.kh.team2.controlloer;
 
 import java.util.List;
 
-
-
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -16,18 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.team2.domain.BoardVo;
 import com.kh.team2.domain.PagingDto;
-import com.kh.team2.service.BoardService;
+import com.kh.team2.domain.QnaVo;
+import com.kh.team2.service.QnaService;
 
 @Controller
 @RequestMapping("/board/")
 public class QnaController {
 	@Inject
-	BoardService boardService;
+	QnaService qnaService;
 	
 	@RequestMapping(value ="qna",method = RequestMethod.GET)
 	public String list(Model model, PagingDto pagingDto) throws Exception {
-		List<BoardVo> list = boardService.listAll(pagingDto);
-		int totalCount = boardService.listCount(pagingDto);
+		List<QnaVo> list = qnaService.listAll(pagingDto);
+		int totalCount = qnaService.listCount(pagingDto);
 		pagingDto.setTotalCount(totalCount);
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", pagingDto);
@@ -41,22 +39,22 @@ public class QnaController {
 		return "board/ntRegister";
 	}
 	
-	// QnA 등록하기
-	@RequestMapping(value= "/qnaRegister", method = RequestMethod.POST)
-	public String ntRegisterPOST(BoardVo boardVo, PagingDto pagingDto) throws Exception {
-//		System.out.println(boardVo);
-		boardService.create(boardVo);
-		return "redirect:/board/qna?page=1&perPage=" + pagingDto.getPerPage();
-	}
-	
-//	// 글읽기
-//	@RequestMapping(value="/qnaRead", method = RequestMethod.GET)
-//	public String read(@RequestParam("not_num") int not_num,
-//			@ModelAttribute PagingDto pagingDto, Model model) throws Exception {
-//		BoardVo boardVo = boardService.read(not_num);
-//		model.addAttribute("boardVo", boardVo);
-//		return "board/ntRead";
+//	// QnA 등록하기
+//	@RequestMapping(value= "/qnaRegister", method = RequestMethod.POST)
+//	public String ntRegisterPOST(BoardVo boardVo, PagingDto pagingDto) throws Exception {
+////		System.out.println(boardVo);
+//		qnaService.create(boardVo);
+//		return "redirect:/board/qna?page=1&perPage=" + pagingDto.getPerPage();
 //	}
+//	
+	// 글읽기
+	@RequestMapping(value="/qnaRead", method = RequestMethod.GET)
+	public String read(@RequestParam("qna_num") int qna_num,
+			@ModelAttribute PagingDto pagingDto, Model model) throws Exception {
+		QnaVo qnaVo = qnaService.read(qna_num);
+		model.addAttribute("qnaVo", qnaVo);
+		return "board/qnaRead";
+	}
 //	
 //	// 글수정
 //	@RequestMapping(value="/qnaUpdate", method = RequestMethod.POST)
