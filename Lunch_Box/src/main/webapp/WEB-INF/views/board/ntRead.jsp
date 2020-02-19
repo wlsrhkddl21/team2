@@ -123,6 +123,8 @@ $(document).ready(function() {
 		$("#modal-a").trigger("click");
 		$("#myModal").modal("show"); 
 	});
+	// 댓글 모달창 완료 버튼
+	
 	
 	replyList(); // 기능 실행
 });

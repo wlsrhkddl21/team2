@@ -20,7 +20,7 @@ import com.kh.team2.service.BoardService;
 
 @Controller
 @RequestMapping("/board/")
-public class BoardController {
+public class NoticeController {
 	@Inject
 	BoardService boardService;
 	
@@ -51,7 +51,7 @@ public class BoardController {
 		return "redirect:/board/notice?page=1&perPage=" + pagingDto.getPerPage();
 	}
 	
-	// 湲��씫湲�
+	// 글읽기
 	@RequestMapping(value="/ntRead", method = RequestMethod.GET)
 	public String read(@RequestParam("not_num") int not_num,
 			@ModelAttribute PagingDto pagingDto, Model model) throws Exception {
@@ -60,7 +60,7 @@ public class BoardController {
 		return "board/ntRead";
 	}
 	
-	// 湲��닔�젙
+	// 글수정
 	@RequestMapping(value="/ntUpdate", method = RequestMethod.POST)
 	public String update(BoardVo boardVo, 
 			@ModelAttribute PagingDto pagingDto) throws Exception {
@@ -74,7 +74,7 @@ public class BoardController {
 		boardService.delete(not_num);
 		return "redirect:/board/notice";
 	}
-	// 以묒슂怨듭��벑濡�
+	// 중요공지등록
 	@RequestMapping(value="/hotUpdate", method = RequestMethod.POST)
 	public String hotUpdate(BoardVo boardVo, 
 			@ModelAttribute PagingDto pagingDto) throws Exception {
@@ -83,7 +83,7 @@ public class BoardController {
 				+ pagingDto.getPage() + "&perPage=" + pagingDto.getPerPage();
 	}
 	
-	// 以묒슂怨듭�以묒�
+	// 중요공지등록삭제
 	@RequestMapping(value="/hotDelete", method = RequestMethod.POST)
 	public String hotDelete(BoardVo boardVo, 
 			@ModelAttribute PagingDto pagingDto) throws Exception {

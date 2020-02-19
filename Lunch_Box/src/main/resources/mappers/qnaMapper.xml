@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.mappers.qnaMapper">
+	
+	<select id="listAll" resultType="QnaVo">
+		select * 
+			from (select rownum rnum, a.* 
+        	  from (select * 
+        	  		from tbl_qna order by qna_num desc
+                   ) a
+             )
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+	</select>
+	
+	
+	<select id="listCount" resultType="int">
+		select count(*) from tbl_notice
+	</select>
+	
+	<select id="getNextVal" resultType="int">
+		select seq_notice_num.nextval
+		from dual
+	</select>
+	
+	
+</mapper>  
+
+
