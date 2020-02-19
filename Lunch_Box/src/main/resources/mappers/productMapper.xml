@@ -13,6 +13,7 @@
 
 	<select id="readAllPDT" resultType="ProductVo">
 		select * from tbl_product
+		order by pdt_num
 	</select>
 
 	<select id="readPDT" resultType="ProductVo">
@@ -26,7 +27,8 @@
 		pdt_name=#{pdt_name},
 		pdt_date=#{pdt_date},
 		pdt_price=#{pdt_price},
-		pdt_image=#{pdt_image}
+		pdt_image=#{pdt_image},
+		pdt_subimage=#{pdt_subimage}
 		where pdt_num = #{pdt_num}
 	</update>
 
