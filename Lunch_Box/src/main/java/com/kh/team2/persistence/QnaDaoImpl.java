@@ -36,7 +36,7 @@ public class QnaDaoImpl implements QnaDao {
 
 	@Override
 	public QnaVo read(int qna_num) throws Exception {
-		QnaVo vo = sqlSession.selectOne(NAMESPACE + ".read");
+		QnaVo vo = sqlSession.selectOne(NAMESPACE + ".read", qna_num);
 		return vo;
 	}
 
