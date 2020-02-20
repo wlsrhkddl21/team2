@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.team2.domain.BoardVo;
 import com.kh.team2.domain.PagingDto;
+import com.kh.team2.domain.ProductVo;
 import com.kh.team2.domain.ReviewVo;
+import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BoardService;
 import com.kh.team2.service.ReviewService;
 
@@ -27,25 +29,30 @@ public class ReviewController {
 	@Inject
 	ReviewService reviewService;
 	
+	@Inject
+	AdminService adminService;
+	
 	@RequestMapping(value ="/reviewBoard",method = RequestMethod.GET)
 	public String list(Model model, PagingDto pagingDto) throws Exception {
-		System.out.println("¸®ºä°Ô½ÃÆÇ µé¾î¿È");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		List<ReviewVo> list = reviewService.listAll(pagingDto);
+		List<ProductVo> productList = adminService.readAllPDT();
 		int totalCount = reviewService.listCount(pagingDto);
 		pagingDto.setTotalCount(totalCount);
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", pagingDto);
+		model.addAttribute("productList", productList);
 		return "/review/reviewBoard";
 	}
 	@RequestMapping(value ="/reviewRegister",method = RequestMethod.GET)
 	public String reviewRegister(Model model, PagingDto pagingDto) throws Exception {
-		System.out.println("±Û¾²±â Æû µé¾î¿È");
+		System.out.println("ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		
 		return "/review/reviewRegister";
 	}
 	@RequestMapping(value ="/reviewContent",method = RequestMethod.GET)
 	public String reviewContent(Model model, PagingDto pagingDto) throws Exception {
-		System.out.println("»ó¼¼º¸±â Æû µé¾î¿È");
+		System.out.println("ï¿½ó¼¼ºï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		
 		return "/review/reviewContent";
 	}

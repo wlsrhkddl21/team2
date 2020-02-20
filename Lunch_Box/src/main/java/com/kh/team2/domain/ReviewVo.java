@@ -7,8 +7,8 @@ public class ReviewVo {
 	private String rev_title;
 	private String rev_writer;
 	private Timestamp rev_regdate;
-	private int rev_viewcnt;
 	private String rev_content;
+	private int rev_pdt_name;
 	public int getRev_num() {
 		return rev_num;
 	}
@@ -33,22 +33,22 @@ public class ReviewVo {
 	public void setRev_regdate(Timestamp rev_regdate) {
 		this.rev_regdate = rev_regdate;
 	}
-	public int getRev_viewcnt() {
-		return rev_viewcnt;
-	}
-	public void setRev_viewcnt(int rev_viewcnt) {
-		this.rev_viewcnt = rev_viewcnt;
-	}
 	public String getRev_content() {
 		return rev_content;
 	}
 	public void setRev_content(String rev_content) {
 		this.rev_content = rev_content;
 	}
+	public int getRev_pdt_name() {
+		return rev_pdt_name;
+	}
+	public void setRev_pdt_name(int rev_pdt_name) {
+		this.rev_pdt_name = rev_pdt_name;
+	}
 	@Override
 	public String toString() {
 		return "ReviewVo [rev_num=" + rev_num + ", rev_title=" + rev_title + ", rev_writer=" + rev_writer
-				+ ", rev_regdate=" + rev_regdate + ", rev_viewcnt=" + rev_viewcnt + ", rev_content=" + rev_content
+				+ ", rev_regdate=" + rev_regdate + ", rev_content=" + rev_content + ", rev_pdt_name=" + rev_pdt_name
 				+ "]";
 	}
 	
