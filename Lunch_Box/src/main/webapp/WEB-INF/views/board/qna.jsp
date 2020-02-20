@@ -30,7 +30,7 @@ $(document).ready(function(){
 	});
 	$(".not_title").click(function(e){
 		e.preventDefault();
-		var not_num = $(this).attr("data-bno");
+		var qna_num = $(this).attr("data-bno");
 		$("input[name=qna_num]").val(qna_num);
 		$("#frmRead").attr("action", "/board/qnaRead");
 		$("#frmRead").submit();
@@ -54,6 +54,7 @@ $(document).ready(function(){
 	</form>
 	
 	<div class="row">
+	${mem_id }
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
@@ -79,7 +80,22 @@ $(document).ready(function(){
 				<c:forEach items="${list }" var="qnaVo">
 					<tr>
 						<td>${qnaVo.qna_num }</td>
-						<td><a data-bno="${qnaVo.qna_num}" class="not_title"> ${qnaVo.qna_title } </a></td>
+						<td>
+							<c:choose>
+								<c:when test="${mem_id == qnaVo.qna_writer || mem_id == 'admin'}">
+								<span style="color:#fd5c63;">
+									
+								</span>
+								<a data-bno="${qnaVo.qna_num}" class="not_title" style="font-weight:bold">
+									${qnaVo.qna_title }</a>
+								</c:when>
+								<c:when test="${mem_id != qnaVo.qna_writer}">
+									<span style="color:#b3b3b3;">
+											본인이 작성한 글만 읽을수 있습니다.		
+									</span>
+								</c:when>
+							</c:choose>
+							  </td>
 						<td>${qnaVo.qna_writer }</td>
 						<td><fmt:formatDate value="${qnaVo.qna_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>
