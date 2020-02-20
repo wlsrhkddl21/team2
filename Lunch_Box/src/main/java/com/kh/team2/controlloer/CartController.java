@@ -22,8 +22,9 @@ public class CartController {
 	@Inject
 	CartService cartService;
 	
+	
 	@RequestMapping(value = "/list" , method = RequestMethod.GET)
-	public String view(Model model,CartVo vo) throws Exception {
+	public String view(Model model) throws Exception {
 		List<CartVo> list = cartService.cartList("jang");
 		boolean isEmpty = false;
 		if (list.isEmpty()) {

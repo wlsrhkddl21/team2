@@ -15,10 +15,13 @@ $(document).ready(function(){
 	var memberVo = "${memberVo}";
 	if (msg == "success") {	
 		var mem_name = "${sessionScope.mem_name}";
-	} else if (msg == "실패"){	
+		alert("로그인 성공");
+	} else if (msg == "fail"){	
 		alert("비밀번호가 일치하지 않습니다");	
 	}
-	
+	$("#btnLogout").click(function(){
+		alert("로그아웃 되었습니다");
+	});
 });
 </script>
 <head>
@@ -115,7 +118,7 @@ $(document).ready(function(){
 			
 			<c:otherwise>
 				<a>${mem_name} 님 환영합니다</a>
-				<a href="/lb/logout" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">로그아웃</a>
+				<a href="/lb/logout" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2" id="btnLogout">로그아웃</a>
 			</c:otherwise>
 			</c:choose>
 			<c:if test="${mem_id=='admin' }">
