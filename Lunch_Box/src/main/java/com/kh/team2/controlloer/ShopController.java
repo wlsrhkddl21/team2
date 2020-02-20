@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.team2.domain.BuyDto;
 import com.kh.team2.domain.BuyVo;
@@ -23,7 +22,6 @@ import com.kh.team2.domain.ProductVo;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
 import com.kh.team2.service.MemberService;
-import com.kh.team2.service.ProductService;
 
 @Controller
 @RequestMapping("/shop/*")
@@ -31,9 +29,6 @@ public class ShopController {
 	// 상품 정보 불러오기 (readPDT)
 	@Inject
 	private AdminService adminService;
-
-	@Inject
-	private ProductService productService;
 
 	@Inject
 	MemberService memberService;
@@ -75,7 +70,7 @@ public class ShopController {
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
 	public String detail(@PathVariable("pdt_num") int pdt_num, Model model) throws Exception {
 		System.out.println("detail Shop Controller");
-		ProductVo productVo = productService.readByPdtNum(pdt_num);
+		ProductVo productVo = adminService.readPDT(pdt_num);
 
 		model.addAttribute("productVo", productVo);
 
@@ -93,7 +88,7 @@ public class ShopController {
 
 		for (int i = 0; i < pdt_num.length; i++) {
 //			System.out.println("상품번호:" + pdt_num[i] + "갯수:" + buy_count[i]);
-			ProductVo pdtVo = productService.readByPdtNum(pdt_num[i]);
+			ProductVo pdtVo = adminService.readPDT(pdt_num[i]);
 
 			BuyDto dto = new BuyDto(); // 주문 내역 보여주는 dto
 			dto.setPdt_num(pdt_num[i]);
