@@ -3,23 +3,9 @@
 <%@ include file="../include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../include/cartStyle.jsp" %>
-<style>
-	.test {
-		text-align : center;
-		position:fixed;
-		right:100px;
-		width:200px;
-		height:800px;
-		background-color: #9775f0;
-		z-index: 1000;
-		padding: 20px;
-		border: 1px solid blue;
-	}
-</style>
 <script>
 $(document).ready(function() {
 	
-	// all Check
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
 			$("input[type=checkbox]").prop("checked",true);
@@ -179,6 +165,7 @@ $(document).ready(function() {
 		}
 		
 		if ($(".chk").is(":checked") == false) {
+			$("#allCheck").prop("checked",false);
 			$("#tip").text("0");
 			$("#result").text("0");
 		}
@@ -192,7 +179,7 @@ $(document).ready(function() {
 		numHidden.setAttribute("name", "pdt_num");
 		numHidden.setAttribute("id","pdt_num");
 		document.getElementById("cartForm").appendChild(numHidden);
-		
+	
 		var countHidden = document.createElement("input");
 		countHidden.setAttribute("type", "hidden");
 		countHidden.setAttribute("value", isThis.parents("tr").find("#count").val());
@@ -221,18 +208,69 @@ $(document).ready(function() {
 	getPrice();
 });
 </script>
-	<div class="test">
-		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
-		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
-		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
-	</div>
+<style>
+	.test {
+		position:absolute;
+		top : 120px;
+		margin-left: 1125px;
+		background-color: #fff;
+		z-index: 1;
+		border-top: 5px solid #fd5c63;
+	}
+	.box {
+		width: 200px;
+		border: 1px	solid #e6e5e5;
+		text-align: -webkit-center;
+	}
+	.title {
+		padding-bottom: 25px;
+		font-size: 20px;
+		color: #333;
+		font-weight: 500;
+	}
+	.list {
+		list-style: none;
+	}
+	.list li {
+		float:inherit;
+		padding: 4px 0;
+	}
+	.cartList {
+		background: #fd5c63;
+		color: #fff;
+		border: 1px	solid #e6e5e5;
+		font-weight : bold;
+		padding: 10px;
+	}
+	.cart_count {
+		color : steelblue;
+	}
+	
+</style>
 	<!-- contact -->
 	<section class="contact py-5" id="contact">
 		<div class="container">
+					<!-- 최근 목록 -->
+			<div class="test">
+				<div class="box">
+				<p class="title">최근 본 상품</p>
+					<div>
+					<ul class="list">
+						<li><a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a></li>
+						<li><a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a></li>
+						<li><a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a></li>
+						<li><a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a></li>
+					</ul>
+					</div>
+					<p class="cartList">장바구니<span class="cart_count">3</span></p>
+					<p class="cartList">마이페이지</p>
+					<p class="cartList">EVENT</p>
+				</div>
+			</div>
+					<!-- /최근 목록 -->
 			<div class="row mx-sm-0 mx-2">
 				<!-- map -->
 				<div class="col-lg-2 map">
-					
 				</div>
 				<!-- //map -->
 				<!-- contact form -->
@@ -243,7 +281,9 @@ $(document).ready(function() {
 							<div class="process">
 								<ol>
 									<li><span class="num selected">1</span>장바구니</li>
+									<li>></li>
 									<li><span class="num">2</span>주문서 작성/결제</li>
+									<li>></li>
 									<li><span class="num">3</span>주문 완료</li>
 								</ol>
 							</div>
@@ -338,7 +378,7 @@ $(document).ready(function() {
 								</table>
 							</div>
 							</div>
-							</c:if>
+							</c:if> 
 						<div class="btn_cart">
 							<div class="check">
 								<span class="box_btn" ><a class="white large" href="#" id="btnDelete">선택삭제</a></span>
