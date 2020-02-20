@@ -25,8 +25,10 @@ import com.kh.team2.util.AdminFileUploadUtil;
 @Controller
 @RequestMapping("/admin/")
 public class AdminController {
+	
 	@Inject
 	AdminService service;
+	
 	@Resource
 	private String uploadPath;
 	
@@ -122,13 +124,4 @@ public class AdminController {
 		return bytes;
 	}
 	
-	@RequestMapping(value="orderList",method = RequestMethod.GET)
-	public String orderList() throws Exception{
-		return "admin/orderList";
-	}
-	
-	@RequestMapping(value="myLunchBoxList",method = RequestMethod.GET)
-	public String myLunchBoxList() throws Exception{
-		return "admin/myLunchBoxList";
-	}
 }
