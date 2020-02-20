@@ -61,8 +61,9 @@ public class ReviewController {
 	// 글등록
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.POST)
 	public String insertReview(Model model, PagingDto pagingDto, ReviewVo reviewVo) throws Exception {
-		
-		return "/redirect:/review/reviewBoard";
+//		reviewService.insertReview(reviewVo);
+
+		return "redirect:/review/reviewBoard";
 	}
 	
 	// 글 상세보기
