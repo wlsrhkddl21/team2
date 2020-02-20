@@ -21,7 +21,6 @@ $(document).ready(function(){
 				<!-- contact form -->
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
-						<h4 class="mb-4 sec-title-w3 let-spa text-bl">로 그 인 폼</h4>
 						<form action="/lb/loginPost" method="post">
 							
 							<div class="form-group">
@@ -30,7 +29,7 @@ $(document).ready(function(){
 							</div>
 							<div class="form-group">
 								<input id="mem_pass" class="form-control" type="text" name="mem_pass" placeholder="Password"
-									>
+									required="">
 							</div>
 							
 							<div class="input-group1 text-right">
