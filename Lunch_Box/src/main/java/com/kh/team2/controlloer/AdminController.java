@@ -126,4 +126,9 @@ public class AdminController {
 	public String orderList() throws Exception{
 		return "admin/orderList";
 	}
+	
+	@RequestMapping(value="myLunchBoxList",method = RequestMethod.GET)
+	public String myLunchBoxList() throws Exception{
+		return "admin/myLunchBoxList";
+	}
 }
