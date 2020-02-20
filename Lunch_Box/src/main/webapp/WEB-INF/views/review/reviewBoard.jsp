@@ -10,7 +10,10 @@
     background-color: #e0e0eb;
     border-color: #e0e0eb;
 }
-#pdtContent {
+.pdtContent {
+	cursor: pointer;
+}
+.readTitle {
 	cursor: pointer;
 }
 </style>
@@ -22,21 +25,21 @@ $(document).ready(function(){
 		$("input[name=page]").val(page);
 		$("#frmPage").submit();
 	});
-// 	$("#btnRegister").click(function() {
-// 		console.log("클릭됨");
-// 		$("#frmPage").attr("action", "/board/ntRegister");
-// // 		$("input[name=not_num]").remove();
-// 		$("#frmPage").submit();
-// 		location.href = "/review/reviewRegister";
-// 	});
-// 	$(".pdtContent").click(function(e){
-// 		e.preventDefault();
-// 		console.log("타이틀 클릭됨");
-// 		var rev_pdt_name = $(this).attr("data-pno");
-// 		$("input[name=rev_pdt_name]").val(rev_pdt_name);
-// 		$("#frmRead").attr("action", "/shop/detail");
-// 		$("#frmRead").submit();
-// 	});
+	$("#btnRegister").click(function() {
+		console.log("클릭됨");
+		$("#frmPage").attr("action", "/review/ntRegister");
+// 		$("input[name=not_num]").remove();
+		$("#frmPage").submit();
+		location.href = "/review/reviewRegister";
+	});
+	$(".readTitle").click(function(e){
+		e.preventDefault();
+		console.log("타이틀 클릭됨");
+		var rev_num = $(this).attr("data-rno");
+		$("input[name=rev_num]").val(rev_num);
+		$("#frmRead").attr("action", "/review/reviewContent");
+		$("#frmRead").submit();
+	});
 
 // 	$("#pdtContent").click(function(){
 // 		console.log("클릭됨");
@@ -54,13 +57,13 @@ $(document).ready(function(){
 		<input type="hidden" name="perPage"
 			value="${pagingDto.perPage }"/>
 	</form>
-	<form id="frmRead" action="/review/pdtContent" method="get">
-<!-- 		<input type="hidden" name="rev_num"/> -->
+	<form id="frmRead" action="/review/reviewContent" method="get">
+		<input type="hidden" name="rev_num"/> 
 		<input type="hidden" name="rev_pdt_name"/>
-<!-- 		<input type="hidden" name="page"  -->
-<%-- 			value="${pagingDto.page }"/> --%>
-<!-- 		<input type="hidden" name="perPage" -->
-<%-- 			value="${pagingDto.perPage }"/> --%>
+		<input type="hidden" name="page"  
+			value="${pagingDto.page }"/> 
+ 		<input type="hidden" name="perPage" 
+			value="${pagingDto.perPage }"/> 
 	</form>
 	
 	<div class="row">
@@ -79,6 +82,7 @@ $(document).ready(function(){
 				<thead>
 					<tr>
 						<th>글번호</th> 
+						<th>이미지</th> 
 						<th>상품명</th> 
 						<th>글제목</th>
 						<th>작성자</th>
@@ -90,6 +94,7 @@ $(document).ready(function(){
 				<c:forEach items="${list }" var="reviewVo">
 					<tr>
 						<td>${reviewVo.rev_num }</td>
+						<td>${reviewVo.rev_image }</td>
 						<td>
 							<c:forEach items="${productList}" var="ProductVo">
 								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}">

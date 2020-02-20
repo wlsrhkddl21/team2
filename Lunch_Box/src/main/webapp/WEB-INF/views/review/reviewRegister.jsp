@@ -36,29 +36,25 @@
 </style>
 <script>
 $(document).ready(function(){
-	$('.starRev span').click(function(){
-		  $(this).parent().children('span').removeClass('on');
-		  $(this).addClass('on').prevAll('span').addClass('on');
-		  return false;
-		});
+	$()
 });
 </script>
 <div class="container-fluid">
 
-	<form id="frmPage" action="/review/reviewBoard" method="get">
-		<input type="hidden" name="rev_num"/>
-		<input type="hidden" name="page" 
-			value="${pagingDto.page }"/>
-		<input type="hidden" name="perPage"
-			value="${pagingDto.perPage }"/>
-	</form>
-	<form id="frmRead" action="/review/reviewBoard" method="get">
-		<input type="hidden" name="rev_num"/>
-		<input type="hidden" name="page" 
-			value="${pagingDto.page }"/>
-		<input type="hidden" name="perPage"
-			value="${pagingDto.perPage }"/>
-	</form>
+<!-- 	<form id="frmPage" action="/review/reviewBoard" method="get"> -->
+<!-- 		<input type="hidden" name="rev_num"/> -->
+<!-- 		<input type="hidden" name="page"  -->
+<%-- 			value="${pagingDto.page }"/> --%>
+<!-- 		<input type="hidden" name="perPage" -->
+<%-- 			value="${pagingDto.perPage }"/> --%>
+<!-- 	</form> -->
+<!-- 	<form id="frmRead" action="/review/reviewBoard" method="get"> -->
+<!-- 		<input type="hidden" name="rev_num"/> -->
+<!-- 		<input type="hidden" name="page"  -->
+<%-- 			value="${pagingDto.page }"/> --%>
+<!-- 		<input type="hidden" name="perPage" -->
+<%-- 			value="${pagingDto.perPage }"/> --%>
+<!-- 	</form> -->
 	
 	<section class="contact py-5" id="contact">
 		<div class="container">
@@ -72,7 +68,7 @@ $(document).ready(function(){
 				<!-- contact form -->
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
-						<form action="/review/reviewRegister" method="post">
+						<form action="/review/reviewBoard" method="post">
 							
 							<div class="form-group">
 								<label>제목</label>
@@ -98,7 +94,7 @@ $(document).ready(function(){
 							</div>
 							<!-- /별점 -->	
 							<div class="input-group1 text-right">
-								<button id="btnLogin" class="btn" type="submit">Submit</button>
+								<button id="btnSubmit" class="btn" type="submit">Submit</button>
 							</div>
 						</form>
 					</div>

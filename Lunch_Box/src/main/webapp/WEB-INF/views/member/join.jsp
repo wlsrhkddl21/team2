@@ -122,11 +122,11 @@
 						</div>
 						
 							<div class="form-group">
-							<input id="mem_pass" class="form-control" type="text"
+							<input id="mem_pass" class="form-control" type="password"
 								name="mem_pass" placeholder="Password"  required/>
 						</div>
 							<div class="form-group">
-							<input id="mem_pass2" class="form-control" type="text"
+							<input id="mem_pass2" class="form-control" type="password"
 								name="mem_pass2" placeholder="Password Check"  required/>
 						</div>
 						
@@ -134,6 +134,10 @@
 						<div class="form-group">
 							<input id="mem_address" class="form-control" type="text"
 								name="mem_address" placeholder="Address"  required/>
+						</div>
+						<div class="form-group">
+							<input id="mem_address" class="form-control" type="text"
+								name="mem_address" placeholder="Detailed Address"  required/>
 						</div>
 						<div class="form-group">
 							<input id="mem_tel" class="form-control" type="text"
