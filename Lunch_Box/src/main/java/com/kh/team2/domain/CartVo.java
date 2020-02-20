@@ -11,10 +11,26 @@ public class CartVo {
 	private String str_price;
 	private int cart_count;
 	private String mem_id;
+	private String pdt_image;
+
+	@Override
+	public String toString() {
+		return "CartVo [pdt_num=" + pdt_num + ", cart_num=" + cart_num + ", pdt_name=" + pdt_name + ", pdt_price="
+				+ pdt_price + ", str_price=" + str_price + ", cart_count=" + cart_count + ", mem_id=" + mem_id
+				+ ", pdt_image=" + pdt_image + "]";
+	}
 
 	public CartVo() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getPdt_image() {
+		return pdt_image;
+	}
+
+	public void setPdt_image(String pdt_image) {
+		this.pdt_image = pdt_image;
 	}
 
 	public CartVo(int pdt_num, int cart_num, String pdt_name, int pdt_price, String str_price, int cart_count,

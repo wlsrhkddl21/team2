@@ -279,7 +279,7 @@ $(document).ready(function() {
 											<c:forEach items="${list}" var="vo">
 												<tr>
 													<td><input type="checkbox" class="chk" value="${vo.cart_num}" checked/></td>
-													<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
+													<td><img src="/admin/displayFile?fileName=${vo.pdt_image}" width="70" height="70" border="0"/></td>
 													<td class="left">${vo.pdt_name}</td>
 													<td class="price">${vo.str_price}</td>
 													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}"  />
