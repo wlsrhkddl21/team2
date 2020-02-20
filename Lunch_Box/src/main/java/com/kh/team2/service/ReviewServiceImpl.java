@@ -26,4 +26,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.listCount(pagingDto);
 	}
 
+	@Override
+	public void insertReview(ReviewVo reviewVo) throws Exception {
+		dao.insertReview(reviewVo);
+		
+	}
+
 }

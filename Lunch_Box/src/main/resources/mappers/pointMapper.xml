@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.mappers.pointMapper">
+
+	<update id="updateMemPoint">
+		update tbl_member set mem_point = mem_point+(#{point})
+		where mem_id = #{mem_id}
+	</update>
+	
+	<insert id="insertPoint">
+		insert into tbl_point(point_num,mem_id,point,buy_num)
+		values(seq_point.nextval,#{mem_id},#{point},#{buy_num})
+	</insert>
+
+</mapper>
