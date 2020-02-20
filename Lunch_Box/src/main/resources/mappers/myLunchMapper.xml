@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kh.mappers.myLunchMapper">
+	<insert id="insertMLB">
+		insert into
+		tbl_mylunch(lunch_num,lunch_type,lunch_name,lunch_price)
+		values(seq_mylunch.nextval,#{lunch_type},#{lunch_name},#{lunch_price})
+	</insert>
+
+	<select id="readAllMLB" resultType="MyLunchVo">
+		select * from tbl_mylunch
+		<if test="lunch_type != '' and lunch_type != 'all'">
+		where lunch_type=#{lunch_type}
+		</if>
+		order by lunch_num
+	</select>
+
+	<select id="readMLB" resultType="MyLunchVo">
+		select * from tbl_mylunch
+		where lunch_num = #{lunch_num}
+	</select>
+
+	<update id="updateMLB">
+		update tbl_mylunch set
+		lunch_type=#{lunch_type},
+		lunch_name=#{lunch_name},
+		lunch_price=#{lunch_price},
+		where lunch_num = #{lunch_num}
+	</update>
+
+	<delete id="deleteMLB">
+		delete from tbl_mylunch
+		where lunch_num = #{lunch_num}
+	</delete>
+
+</mapper>  

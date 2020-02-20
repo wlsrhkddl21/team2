@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.mappers.qnaMapper">
+	
+	<select id="listAll" resultType="QnaVo">
+		select * 
+			from (select rownum rnum, a.* 
+        	  from (select * 
+        	  		from tbl_qna order by qna_ref desc, qna_restep asc
+                   ) a
+             )
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+	</select>
+	
+	<select id="listCount" resultType="int">
+		select count(*) from tbl_qna
+	</select>
+	
+	<select id="getNextVal" resultType="int">
+		select seq_qna_num.nextval
+		from dual
+	</select>
+	
+	<select id="read" resultType="QnaVo">
+		select * from tbl_qna
+		where qna_num = #{qna_num}
+	</select>
+	
+	<insert id="create">
+		insert into tbl_qna (qna_num, qna_title, qna_content, qna_writer, qna_ref)
+		values (seq_qna_num.nextval, #{qna_title}, #{qna_content}, #{qna_writer}, seq_qna_num.nextval)
+	</insert>
+	
+	<insert id="answer">
+		insert into tbl_qna (qna_num, qna_title, qna_content, qna_writer, qna_success, qna_ref, qna_restep, qna_relevel)
+		values (seq_qna_num.nextval, #{qna_title}, #{qna_content}, #{qna_writer}, #{qna_success}, #{qna_ref}, 1, 1)
+	</insert>
+	
+	<update id="success">
+		update tbl_qna set
+			qna_resuccess = '#{qna_writer}'
+		where qna_num = #{qna_num}
+	</update>
+</mapper>  
+
+

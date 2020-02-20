@@ -46,4 +46,10 @@ public class CartTest {
 		cartDao.updataCount(3, 125);
 	}
 	
+	@Test
+	public void TestisCart() throws Exception {
+		int result = cartDao.isCart(85);
+		System.out.println(result);
+	}
+	
 }

@@ -4,17 +4,19 @@ import com.kh.team2.domain.LogingDto;
 import com.kh.team2.domain.MemberVo;
 
 public interface MemberService {
+	// íšŒì›ì¶”ê°€
 	public void insertMember(MemberVo memberVo) throws Exception;
 	
-	// ·Î±×ÀÎ
+	// ï¿½Î±ï¿½ï¿½ï¿½
 	public MemberVo login(LogingDto logingDto) throws Exception;
 	
-	// ¾ÆÀÌµğ Ã¼Å©
+	// ï¿½ï¿½ï¿½Ìµï¿½ Ã¼Å©
 	public MemberVo readMember(String mem_id) throws Exception;
 	
-	// ¾ÆÀÌµğ ºñ¹Ğ¹øÈ£ Ã¼Å©
+	// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Ğ¹ï¿½È£ Ã¼Å©
 	public MemberVo readWithPw(String mem_id, String mem_pass) throws Exception;
 	
-	// ¾ÆÀÌµğ Áßº¹Ã¼Å©
+	// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
 	public int idCheck(String mem_id) throws Exception;
+	
 }

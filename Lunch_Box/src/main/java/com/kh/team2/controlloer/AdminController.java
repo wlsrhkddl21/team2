@@ -25,8 +25,10 @@ import com.kh.team2.util.AdminFileUploadUtil;
 @Controller
 @RequestMapping("/admin/")
 public class AdminController {
+	
 	@Inject
 	AdminService service;
+	
 	@Resource
 	private String uploadPath;
 	
@@ -79,18 +81,21 @@ public class AdminController {
 		System.out.println("subFile:"+originalSubFilename);
 //		System.out.println("mFile:"+originalFilename);
 		System.out.println("productVo:"+productVo);
-		if(originalFilename!=null) {
+		if(originalFilename!=null&&!originalFilename.equals("")) {
 			AdminFileUploadUtil.delete(productVo.getPdt_image(), uploadPath+"/product",true);
 			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes(),true);
 			String path = dirPath.replace("\\", "/");
 			productVo.setPdt_image(path);
+			System.out.println("ori변경");
 		}
-		if(originalSubFilename!=null) {
+		if(originalSubFilename!=null&&!originalSubFilename.equals("")) {
 			AdminFileUploadUtil.delete(productVo.getPdt_subimage(), uploadPath+"/product",false);
 			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalSubFilename, sFile.getBytes(),false);
 			String path = dirPath.replace("\\", "/");
 			productVo.setPdt_subimage(path);
+			System.out.println("sub변경");
 		}
+		System.out.println(productVo);
 		service.updatePDT(productVo);
 		return "redirect:/admin/content?pdt_num="+productVo.getPdt_num();
 	}
@@ -118,4 +123,5 @@ public class AdminController {
 		is.close();
 		return bytes;
 	}
+	
 }

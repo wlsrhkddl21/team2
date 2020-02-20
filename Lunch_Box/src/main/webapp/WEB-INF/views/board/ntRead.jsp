@@ -97,13 +97,15 @@ $(document).ready(function() {
 				strHtml += "<td>" + this.ntrcontent + "</td>";
 				strHtml += "<td>" + this.ntrwriter + "</td>";
 				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
-				strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
-				strHtml += " data-rno='" + this.ntrno + "'";
-				strHtml += " data-reply_text='" + this.ntrcontent + "'";
-				strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
-				strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
-				strHtml += " data-rno='" + this.ntrno + "'";
-				strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";
+				if("${mem_id}" == this.ntrwriter) {
+					strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
+					strHtml += " data-rno='" + this.ntrno + "'";
+					strHtml += " data-reply_text='" + this.ntrcontent + "'";
+					strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
+					strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
+					strHtml += " data-rno='" + this.ntrno + "'";
+					strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
+				}
 				strHtml += "</tr>";
 			});
 			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
@@ -121,13 +123,44 @@ $(document).ready(function() {
 		$("#modal-a").trigger("click");
 		$("#myModal").modal("show"); 
 	});
+	// 댓글 모달창 완료 버튼
+	$("#btnModalReply").click(function(){
+		console.log("댓글완료");
+		var ntrno = $("#modal_rno").val();
+		var ntrcontent = $("#modal_reply_text").val();
+		var ntrwriter = $("#modal_replyer").val();
+		
+		var sendData = {
+				"ntrno" : ntrno,
+				"ntrcontent" : ntrcontent,
+				"ntrwriter" : ntrwriter
+		}
+		var url = "/replies/update";
+		
+		$.ajax({
+			"type" : "put",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+				$("#btnModalClose").trigger("click");
+			}
+		});
+	});
 	
 	replyList(); // 기능 실행
 });
 	
 </script>
+
 		<a id="modal-a" href="#myModal" role="button" class="btn" data-toggle="modal"
-			 	>Launch demo modal</a>
+			 	style="display:none;">Launch demo modal</a>
 			
 			 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -147,7 +180,7 @@ $(document).ready(function() {
 								id="modal_reply_text"/>
 							<label for="modal_replyer">작성자</label>
 							<input type="text" class="form-control"
-								id="modal_replyer"/>
+								id="modal_replyer" readonly/>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary"
@@ -255,6 +288,7 @@ $(document).ready(function() {
 						id="btnListAll">목록</button>
 				</div>
 			<!-- 댓글 작성 -->
+	<c:if test="${mem_id != null && mem_id != ''}">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
@@ -264,8 +298,8 @@ $(document).ready(function() {
 			</div>
 			<div class="form-group">
 				<label for="ntRwriter">작성자</label>
-				<input type="text" id="ntRwriter"
-					class="form-control"/>
+				<input type="text" id="ntRwriter" value="${mem_id }"
+					class="form-control" readonly/>
 			</div>
 			<div class="form-group">
 				<button type="button" class="btn-xs btn-success"
@@ -273,6 +307,7 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
+	</c:if>
 	<!-- // 댓글 작성 -->
 	
 	<!-- 댓글 목록 -->
@@ -285,8 +320,10 @@ $(document).ready(function() {
 						<th>댓글내용</th>
 						<th>작성자</th>
 						<th>날짜</th>
+					<c:if test="${mem_id == boardVo.not_writer}">
 						<th>수정</th>
 						<th>삭제</th>
+					</c:if>
 					</tr>
 				</thead>
 				<tbody id="replyList">

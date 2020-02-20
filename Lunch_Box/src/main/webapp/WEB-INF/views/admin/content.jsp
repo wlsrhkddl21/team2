@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 </style>
 <script>
@@ -67,16 +68,18 @@
 				<div class="form-w3ls p-md-5 p-4">
 					<form role="form" id="updateForm" action="/admin/updatePDT"
 						method="post" enctype="multipart/form-data">
-						<input type="hidden" name="pdt_image" value="${productVo.pdt_image }">
-						<input type="hidden" name="pdt_subimage" value="${productVo.pdt_subimage }">
+						<input type="hidden" name="pdt_image"
+							value="${productVo.pdt_image }"> 
+						<input type="hidden" name="pdt_subimage" 
+						value="${productVo.pdt_subimage }">
 						<div class="form-group">
-							<label for="pdt_num" style="font-weight:bold">상품번호</label> <input type="text"
-								value="${productVo.pdt_num }" id="pdt_num" name="pdt_num"
-								style="border:none;" readonly />
+							<label for="pdt_num" style="font-weight: bold">상품번호</label> <input
+								type="text" value="${productVo.pdt_num }" id="pdt_num"
+								name="pdt_num" style="border: none;" readonly />
 						</div>
 						<div class="form-group">
-							<label for="pdt_category" style="font-weight:bold">종류</label> <input type="text"
-								value="${productVo.pdt_category}"
+							<label for="pdt_category" style="font-weight: bold">종류</label> <input
+								type="text" value="${productVo.pdt_category}"
 								class="form-control updateHide" /> <select
 								class="form-control updateShow" id="pdt_category"
 								name="pdt_category" style="display: none;">
@@ -86,40 +89,44 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="pdt_name" style="font-weight:bold">상품명</label> <input type="text"
-								value="${productVo.pdt_name}" class="form-control" id="pdt_name"
-								name="pdt_name" />
+							<label for="pdt_name" style="font-weight: bold">상품명</label> <input
+								type="text" value="${productVo.pdt_name}" class="form-control"
+								id="pdt_name" name="pdt_name" />
 						</div>
 						<div class="form-group">
-							<label for="pdt_date" style="font-weight:bold">총일수</label> <input type="text"
-								value="${productVo.pdt_date}" class="form-control" id="pdt_date"
-								name="pdt_date" />
+							<label for="pdt_date" style="font-weight: bold">총일수</label> <input
+								type="text" value="${productVo.pdt_date}" class="form-control"
+								id="pdt_date" name="pdt_date" />
 						</div>
 						<div class="form-group">
-							<label for="pdt_price" style="font-weight:bold">가격</label> <input type="text"
-								value="${productVo.pdt_price}" class="form-control"
-								id="pdt_price" name="pdt_price" />
+							<label for="pdt_price" style="font-weight: bold">가격</label> <input
+								type="text" class="form-control" id="pdt_price" name="pdt_price"
+								value="${productVo.pdt_price } ">
+
 						</div>
 						<div class="form-group">
-							<label for="pdt_image" style="font-weight:bold">상품이미지</label> <input type="file"
-								class="form-control-file" id="pdt_file" name="file" style="display: none;" /> 
-								<c:if test="${not empty productVo.pdt_image }">
+							<label for="pdt_image" style="font-weight: bold">상품이미지</label><br> <input
+								type="file" class="form-control-file" id="pdt_file" name="file"
+								style="display: none;" />
+							<c:if test="${not empty productVo.pdt_image }">
 								<img src="/admin/displayFile?fileName=${productVo.pdt_image}"
-								id="pdt_image" width="600px" height="600px" class="updateHide" />
-								</c:if>
-								<br>
+									id="pdt_image" width="800px" class="updateHide" />
+							</c:if>
+							
 							<button type="button" class="btn btn-primary updateShow"
-								id="btnFile" style="display: none;"> 메인 사진 변경</button>
+								id="btnFile" style="display: none;">메인 사진 변경</button>
 						</div>
 						<div class="form-group">
-							<label for="pdt_Subimage" style="font-weight:bold;">상품서브이미지</label> <input type="file"
-								class="form-control-file" id="pdt_Subfile" name="subFile" style="display: none;" /> 
-								<c:if test="${not empty productVo.pdt_subimage }">
+							<label for="pdt_Subimage" style="font-weight: bold;">상품서브이미지</label><br>
+							<input type="file" class="form-control-file" id="pdt_Subfile"
+								name="subFile" style="display: none;" />
+<%-- 							<c:if test="${not empty productVo.pdt_subimage }"> --%>
 								<img src="/admin/displayFile?fileName=${productVo.pdt_subimage}"
-								id="pdt_Subfile" class="updateHide" />
-								</c:if>
-							<br><button type="button" class="btn btn-primary updateShow"
-								id="btnSubfile" style="display: none;"> 서브 사진 변경</button>
+									id="pdt_Subfile"  width="800px"  class="updateHide" />
+<%-- 							</c:if> --%>
+							
+							<button type="button" class="btn btn-primary updateShow"
+								id="btnSubfile" style="display: none;">서브 사진 변경</button>
 						</div>
 						<button type="button" class="btn btn-primary" id="btnList">목록</button>
 						<button type="button" class="btn btn-primary updateHide"

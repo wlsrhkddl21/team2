@@ -41,4 +41,14 @@ public class CartServiceImpl implements CartService {
 		cartDao.updataCount(count, cart_num);
 	}
 
+	@Override
+	public int isCart(int pdt_num) throws Exception {
+		return cartDao.isCart(pdt_num);
+	}
+
+	@Override
+	public void countUp(int cart_count, int pdt_num) throws Exception {
+		cartDao.countUp(cart_count, pdt_num);
+	}
+
 }

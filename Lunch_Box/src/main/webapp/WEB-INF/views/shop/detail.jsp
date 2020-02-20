@@ -6,6 +6,7 @@
 	.div_text{
 		font-size: 18px;
 	}
+
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -87,10 +88,31 @@
 						</div>
 				</form>				
 				</div>
-					<img src="../../images/test/pdt_detail.jpg" alt=" " class="img-fluid"/>
-					
-					<!-- 리뷰게시판 -->
-					
+			</div>
+			<div class="col-md-12 text-center" style="margin-top: 20px;">
+				<table class="table" id="detail_img"> 
+					<tr>
+						<td style="font-size: 30px;"><a 
+						style="color:  gray;" href="#detail_img">상세보기 이미지</a></td>
+						<td style="font-size: 30px;"><a href="#review" style="color:  gray;">리뷰 게시판</a></td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-12 text-center">
+				<img src="/admin/displayFile?fileName=${productVo.pdt_subimage}"
+					alt="상세보기 이미지" class="img-fluid" />
+			</div>
+			<div class="col-md-12 text-center">
+				<table class="table" id="review"> 
+					<tr>
+						<td style="font-size: 30px;"><a 
+						style="color: gray;" href="#detail_img">상세보기 이미지</a></td>
+						<td style="font-size: 30px;"><a href="#review" style="color: gray;">리뷰 게시판</a></td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-12 text-center">
+				<h1>리뷰게시판</h1>
 			</div>
 		</div>
 		<div class="col-md-2"></div>

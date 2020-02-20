@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.mappers.buyMapper">
+
+	<insert id="insertBuy">
+		insert into tbl_buy(buy_num,mem_id,buy_address,buy_tel,buy_price)
+		values (#{buy_num}, #{mem_id}, #{buy_address}, #{buy_tel}, #{buy_price})
+	</insert>
+
+	<insert id="insertBuyDetail">
+		insert into tbl_buy_detail(buy_num,pdt_num,buy_count)
+		values(#{buy_num},#{pdt_num},#{buy_count})
+	</insert>
+		
+	<select id="getSeqBuyNextVal" resultType="int">
+		select seq_buy.nextval
+		from dual
+	</select>
+
+	<update id="updateMemPoint">
+		update tbl_member set mem_point = mem_point+(#{point})
+		where mem_id = #{mem_id}
+	</update>
+	
+	<insert id="insertPoint">
+		insert into tbl_point(point_num,mem_id,point,buy_num)
+		values(seq_point.nextval,#{mem_id},#{point},#{buy_num})
+	</insert>
+
+</mapper>

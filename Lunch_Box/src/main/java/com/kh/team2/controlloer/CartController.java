@@ -1,6 +1,5 @@
 package com.kh.team2.controlloer;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,46 +22,33 @@ public class CartController {
 	@Inject
 	CartService cartService;
 	
+	
 	@RequestMapping(value = "/list" , method = RequestMethod.GET)
-	public String view(Model model,CartVo vo) throws Exception {
+	public String view(Model model) throws Exception {
 		List<CartVo> list = cartService.cartList("jang");
 		boolean isEmpty = false;
-		int totalPrice = 0;
-		int tip = 0;
-		int result = 0;
-		DecimalFormat tp = new DecimalFormat("###,###,###,###");
 		if (list.isEmpty()) {
 			isEmpty = true;
-			System.out.println("비어있음");
 		}
-		for (int i = 0; i < list.size() ; i++ ) {
-			result += list.get(i).getPdt_total();
-		}
-		totalPrice = result;
-		if ( totalPrice < 50000) {
-			tip = 2500;
-			totalPrice = result - tip;
-		}
-		String strResult = tp.format(result);
-		String strTotalPrice = tp.format(totalPrice);
-		String strTip = tp.format(tip);
-		model.addAttribute("tip",strTip);
-		model.addAttribute("result",strResult);
-		model.addAttribute("total",strTotalPrice);
 		model.addAttribute("list",list);
 		model.addAttribute("isEmpty",isEmpty);
 		return "cart/cartList"; 
 		
 	}
 	
-	@RequestMapping(value = "/insert/{num}/{count}", method = RequestMethod.GET)
-	public String inset(@PathVariable("num") int num,
-						@PathVariable("count") int count,CartVo vo) throws Exception {
-		vo.setPdt_num(num);
-		vo.setCart_count(count);
-		vo.setMem_id("jang");
-		System.out.println(vo);
-		cartService.cartInsert(vo);
+	@RequestMapping(value = "/insert/{pdt_num}/{count}", method = RequestMethod.GET)
+	public String inset(@PathVariable("pdt_num") int pdt_num,
+						@PathVariable("count") int count) throws Exception {
+		CartVo vo = new CartVo();
+		int isCart = cartService.isCart(pdt_num);
+		if (isCart > 0) {
+			cartService.countUp(count, pdt_num);
+		} else {
+			vo.setMem_id("jang");
+			vo.setPdt_num(pdt_num);
+			vo.setCart_count(count);
+			cartService.cartInsert(vo);
+		}
 		return "redirect:/cart/list";
 	}
 	
@@ -76,7 +62,6 @@ public class CartController {
 	@ResponseBody
 	public String delete(@RequestParam("checkArr") List<String> checkArr) throws Exception {
 		for (int i = 0; i < checkArr.size() ; i++) {
-			System.out.println(checkArr.get(i));
 			cartService.cartDelete(Integer.parseInt(checkArr.get(i)));
 		}
 		return "success";
@@ -86,6 +71,8 @@ public class CartController {
 		cartService.allDelete();
 		return "redirect:/cart/list";
 	}
+	
+	
 	
 }
 

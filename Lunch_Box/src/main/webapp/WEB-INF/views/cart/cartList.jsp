@@ -3,18 +3,34 @@
 <%@ include file="../include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../include/cartStyle.jsp" %>
-
+<style>
+	.test {
+		text-align : center;
+		position:fixed;
+		right:100px;
+		width:200px;
+		height:800px;
+		background-color: #9775f0;
+		z-index: 1000;
+		padding: 20px;
+		border: 1px solid blue;
+	}
+</style>
 <script>
 $(document).ready(function() {
+	
 	// all Check
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
-			console.log($("#allCheck"));
 			$("input[type=checkbox]").prop("checked",true);
 		} else {
 			$("input[type=checkbox]").prop("checked",false);
 		}
-			
+		getPrice();
+	});
+	
+	$(".chk").change(function() {
+		getPrice();
 	});
 	
 	// check delete
@@ -23,7 +39,6 @@ $(document).ready(function() {
 		$(".chk:checked").each(function() {
 			checkArr.push($(this).val());
 		});
-		console.log("checkArr:" , checkArr);
 		var sArr = checkArr.join(",");
 		var d = {"checkArr" : sArr }
 		$.post("/cart/delete", d , function(rData) {
@@ -55,110 +70,165 @@ $(document).ready(function() {
 	$(".up").click(function() {
 		var cart_num = $(this).parents("tr").find(".chk").val();
 		var count = $(this).parent().parent().find("#count").val();
+		var isThis = $(this);
 		var sData = {
 				"cart_count" : ++count,
 				"cart_num" : cart_num
 		};
-		var url = "/cart/updateCount";
-		countAjax(url,sData);
+		countAjax(isThis,sData);
 	});
 	
 	//count down
 	$(".down").click(function() {
+		var isThis = $(this);
 		var cart_num = $(this).parents("tr").find(".chk").val();
 		var count = $(this).parent().parent().find("#count").val();
 		var sData = {
 				"cart_count" : --count,
 				"cart_num" : cart_num
 		};
-		var url = "/cart/updateCount";
 		
-		countAjax(url,sData);
+		countAjax(isThis,sData);
 	});
 	
 	// count update
 	$(".update").click(function() {
 		var cart_num = $(this).parents("tr").find(".chk").val();
 		var count = $(this).parent().parent().find("#count").val();
+		var isThis = $(this);
 		var sData = {
 				"cart_count" : count,
 				"cart_num" : cart_num
 		};
-		var url = "/cart/updateCount";
 		
-		countAjax(url,sData);
+		countAjax(isThis,sData);
 	});
 	
 	// all buy
 	$(".allBuy").click(function() {
-		var arr = new Array();
 		$(".chk").each(function() {
-			var obj = new Object();
-			obj.pdt_num = $(this).parents("tr").find("#pdt_num").val();
-			obj.cart_count = $(this).parents("tr").find("#count").val();
-			arr.push(obj);
+			var isThis = $(this);
+			getHidden(isThis);
 		});
-		var sData = JSON.stringify(arr);
-		buyAjax(sData)
+		$("#cartForm").submit();
 	});
 	
 	// check buy
 	$(".checkBuy").click(function() {
-		var arr = new Array();
 		$(".chk:checked").each(function() {
-			var obj = new Object();
-			obj.pdt_num = $(this).parents("tr").find("#pdt_num").val();
-			obj.cart_count = $(this).parents("tr").find("#count").val();
-			arr.push(obj);
+			var isThis = $(this);
+			getHidden(isThis);
 		});
-		var sData = JSON.stringify(arr);
-		buyAjax(sData)
+		$("#cartForm").submit();
 	});
 	// select buy
 	$(".oneBuy").click(function() {
-		var arr = new Array();
-		var obj = new Object();
-		obj.pdt_num = $(this).parent().find("#pdt_num").val();
-		obj.cart_count = $(this).parents("tr").find("#count").val();
-		arr.push(obj);
-		var sData = JSON.stringify(arr);
-		buyAjax(sData);
+		var isThis = $(this);
+		getHidden(isThis);
+		$("#cartForm").submit();
 	});
 	
-	// buy ajax
-	function buyAjax(sData) {
-		$.ajax({
-			url : "/cart/buy",
-			type : "post",
-			headers : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "post"
-			},
-			data : sData,
-			dataType : "text"
-		});
-	}
 	// count ajax
-	function countAjax(url,sData) {
+	function countAjax(isThis,sData) {
 		$.ajax({
-			"type" : "put",
-			"url" : url,
+			"type" : "post",
+			"url" : "/cart/updateCount",
 			"headers" : {
 				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "put"
+				"X-HTTP-Method-Override" : "post"
 			},
 			"dataType" : "text",
 			"data" : JSON.stringify(sData),
 			"success" : function(rData) {
-				var msg = rData.trim();
-				if (msg == "success") {
-					location.href="/cart/list";
-				}
+				isThis.parents("tr").find("#count").val(rData);
+				getPrice();
 			}
 		});
 	}
+	
+	// ajax price
+	function getPrice() {
+		
+		var allPrice = 0;
+		$(".chk").each(function() {
+			var isThis = $(this);
+			var price = isThis.parents("tr").find(".price").text().replace(",","");
+			var count = isThis.parents("tr").find("#count").val();
+			var sData = {
+					"price" : price,
+					"count" : count
+			}
+			$.ajax({
+				url : "/cart/price",
+				type : "post",
+				async : false,
+				data : sData,
+				success : function(rData) {
+				isThis.parents("tr").find(".totalPrice").text(rData);
+				if (isThis.is(":checked") == true ) {
+				allPrice += parseInt(rData.replace(",",""));
+				}
+				}
+			});
+		});
+		$("#total").text(format(allPrice));
+		if (allPrice < 50000) {
+			$("#tip").text("2,500");
+			allPrice += 2500;
+			$("#result").text(format(allPrice));
+		} else {
+			$("#tip").text("0");
+			$("#result").text(format(allPrice));
+		}
+		
+		if ($(".chk").is(":checked") == false) {
+			$("#tip").text("0");
+			$("#result").text("0");
+		}
+	} 
+	
+	function getHidden(isThis) {
+		
+		var numHidden = document.createElement("input");
+		numHidden.setAttribute("type", "hidden");
+		numHidden.setAttribute("value", isThis.parents("tr").find("#num").val());
+		numHidden.setAttribute("name", "pdt_num");
+		numHidden.setAttribute("id","pdt_num");
+		document.getElementById("cartForm").appendChild(numHidden);
+		
+		var countHidden = document.createElement("input");
+		countHidden.setAttribute("type", "hidden");
+		countHidden.setAttribute("value", isThis.parents("tr").find("#count").val());
+		countHidden.setAttribute("name", "buy_count");
+		countHidden.setAttribute("id","buy_count");
+		document.getElementById("cartForm").appendChild(countHidden);
+		
+	}
+	
+	function format(price) {
+		var data;
+		sData = {
+				"price" : price	
+		};
+		$.ajax({
+			url : "/cart/format",
+			type : "post",
+			async : false,
+			data : sData,
+			success : function(rData) {				
+				data = rData;
+			}
+		});
+		return data;
+	}	
+	getPrice();
 });
 </script>
+	<div class="test">
+		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
+		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
+		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
+	</div>
 	<!-- contact -->
 	<section class="contact py-5" id="contact">
 		<div class="container">
@@ -184,29 +254,24 @@ $(document).ready(function() {
 					</div>
 					<div class="form-w3ls p-md-5 p-4">
 						<div>
-						<form id="cartForm" action="#" method="POST" style="margin: 0px;">
-						<input type="hidden" name="mem_id">
-						<input type="hidden" name="pdt_num">
-						<input type="hidden" name="cart_count">
+						<form id="cartForm" action="/shop/buy" method="POST" style="margin: 0px;">
 							<table class="tbl_col" >
 								<colgroup>
 									<col style="width:5%;">
 									<col style="width:20%;">
 									<col style="width:25%;">
+									<col style="width:15%;">
 									<col style="width:10%;">
-									<col style="width:10%;">
-									<col style="width:10%;">
-									<col style="width:10%;">
+									<col style="width:15%;">
 									<col style="width:10%;">
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col"><input type="checkbox" id="allCheck"/></th>
+										<th scope="col"><input type="checkbox" id="allCheck" checked/></th>
 										<th scope="col"></th>
 										<th scope="col">상품명</th>
 										<th scope="col">판매가</th>
 										<th scope="col">수량</th>
-										<th scope="col">적립금</th>
 										<th scope="col">합계</th>
 										<th scope="col">선택</th>
 									</tr>
@@ -216,10 +281,10 @@ $(document).ready(function() {
 										<c:when test="${isEmpty == false}">
 											<c:forEach items="${list}" var="vo">
 												<tr>
-													<td><input type="checkbox" class="chk" value="${vo.cart_num}"/></td>
-													<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
+													<td><input type="checkbox" class="chk" value="${vo.cart_num}" checked/></td>
+													<td><img src="/admin/displayFile?fileName=${vo.pdt_image}" width="70" height="70" border="0"/></td>
 													<td class="left">${vo.pdt_name}</td>
-													<td class="price">${vo.pdt_price}</td>
+													<td class="price">${vo.str_price}</td>
 													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}"  />
 													<a><img class="up" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"/></a>
 													<a><img class="down" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"/></a>
@@ -227,11 +292,10 @@ $(document).ready(function() {
 													<a class="btn_box white middle update">변경</a>
 													</span>
 													</td>
-													<td></td>
-													<td>${vo.pdt_total}</td>
+													<td class="totalPrice"></td>
 													<td><div>
 													<span class="btn_box block white middle oneBuy">
-													<input id="pdt_num" type="hidden" value="${vo.pdt_num}"/>
+													<input id="num" type="hidden" value="${vo.pdt_num}"/>
 													<a>구매</a>
 													</span>
 													<span class="btn_box block white middle oneDelete">
@@ -243,7 +307,7 @@ $(document).ready(function() {
 										</c:when>
 										<c:otherwise>
 											<tr>
-												<td colspan="6" class="empty">장바구니가 비었습니다.</td>
+												<td colspan="7" class="empty">장바구니가 비었습니다.</td>
 											</tr>
 										</c:otherwise>
 									</c:choose>
@@ -263,15 +327,15 @@ $(document).ready(function() {
 									</tr>
 									<tr>
 										<th scope="row">주문금액</th>
-										<td><span>${result}</span>원</td>
+										<td><span id="total"></span>원</td>
 									</tr>
 									<tr>
 										<th scope="row">배송료</th>
-										<td>${tip}원</td>
+										<td><span id="tip">0</span>원</td>
 									</tr>
 									<tr>
 										<th scope="row">결제금액</th>
-										<td><span style="color :#fd5c63; font-size: 20px">${total}</span>원</td>
+										<td><span style="color :#fd5c63; font-size: 20px" id="result"></span>원</td>
 									</tr>
 								</tbody>
 								</table>
@@ -300,8 +364,6 @@ $(document).ready(function() {
 		</div>
 	</section>
 	<!-- //contact -->
-
 	
-
 	
 <%@ include file="../include/footer.jsp" %>
