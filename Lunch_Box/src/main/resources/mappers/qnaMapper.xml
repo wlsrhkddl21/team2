@@ -15,7 +15,6 @@
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select>
 	
-	
 	<select id="listCount" resultType="int">
 		select count(*) from tbl_qna
 	</select>
@@ -25,6 +24,10 @@
 		from dual
 	</select>
 	
+	<select id="read" resultType="QnaVo">
+		select * from tbl_qna
+		where qna_num = #{qna_num}
+	</select>
 	
 </mapper>  
 

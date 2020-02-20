@@ -20,15 +20,9 @@ $(document).ready(function() {
 			$("#btnHotCancel").show(100);
 		}
 	});
-	// 중요공지삭제버튼
-	$("#btnHotCancel").click(function(){
-		if(confirm("중요공지를 중단하시겠습니까?")) {
-			$("#myform").attr("action", "/board/hotDelete").submit();
-		}
-	});
 	// 목록 버튼
 	$("#btnListAll").click(function(){
-		location.href = "/board/notice";
+		location.href = "/board/qna";
 	});
 	// 삭제 버튼
 	$("#btnDelete").click(function(){
@@ -82,7 +76,10 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
+	// 댓글 모달창 완료 버튼
+	$("#btnModalReply").click(function(){
+		console.log("댓글완료");		
+	});
 	
 	// 댓글 목록 불러오기
 	function replyList() {
@@ -123,7 +120,6 @@ $(document).ready(function() {
 		$("#modal-a").trigger("click");
 		$("#myModal").modal("show"); 
 	});
-	// 댓글 모달창 완료 버튼
 	
 	
 	replyList(); // 기능 실행
@@ -182,8 +178,8 @@ $(document).ready(function() {
 
 
 	<form id="frmList" action="/board/notice" method="get">
-		<input type="hidden" name="not_num" 
-			value="${boardVo.not_num}" />
+		<input type="hidden" name="qna_num" 
+			value="${qnaVo.qna_num}" />
 		<input type="hidden" name="page" 
 			value="${pagingDto.page}"/>
 		<input type="hidden" name="perPage" 
@@ -196,7 +192,7 @@ $(document).ready(function() {
 			<br>
 			<form id="myform" role="form" method="post" 
 				action="/board/ntUpdate">
-			<input type="hidden" name="not_num" value="${qnaVo.qna_num}"/>
+			<input type="hidden" name="qna_num" value="${qnaVo.qna_num}"/>
 			<input type="hidden" name="page" value="${pagingDto.page}"/>
 			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
 			<table class="table">
@@ -211,7 +207,7 @@ $(document).ready(function() {
 				<th scope="row">제목</th>
 				<td class="form-group">
 				<input type="text" id="not_title" 
-						name="not_title" value="${qnaVo.qno_title}" style="border:none" 
+						name="not_title" value="${qnaVo.qna_title}" style="border:none" 
 						readonly/></td>
 				<th scope="row">조회수</th>
 				<td>${qnaVo.qna_viewcount}</td>

@@ -52,19 +52,20 @@
 					<!-- 					</div> -->
 					<!-- 		<div class="col-md-6"></div> -->
 					
-					<div class="col-md-6 text-left">
-					
-					<a href="/admin/myLunchBoxList"
-						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">나만의
-						도시락 메뉴</a> 
-					</div>
-					<div class="col-md-6 text-right">
-		
+					<div class="row">
+				<div class="col-md-6 text-left">
+					<a href="/myLunch/readAll" 
+					class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">
+					나만의 도시락 메뉴</a> 
+				</div>
+				<div class="col-md-6 text-right">
 						<a href="/admin/orderList"
 						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문내역</a>
 						<a href="/admin/insertPDT"
 						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">상품등록</a>
-					</div>
+				</div>
+			</div>
+		
 					
 				</div>
 				<table class="table table-striped text-center">

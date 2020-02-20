@@ -124,7 +124,35 @@ $(document).ready(function() {
 		$("#myModal").modal("show"); 
 	});
 	// 댓글 모달창 완료 버튼
-	
+	$("#btnModalReply").click(function(){
+		console.log("댓글완료");
+		var ntrno = $("#modal_rno").val();
+		var ntrcontent = $("#modal_reply_text").val();
+		var ntrwriter = $("#modal_replyer").val();
+		
+		var sendData = {
+				"ntrno" : ntrno,
+				"ntrcontent" : ntrcontent,
+				"ntrwriter" : ntrwriter
+		}
+		var url = "/replies/update";
+		
+		$.ajax({
+			"type" : "put",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+				$("#btnModalClose").trigger("click");
+			}
+		});
+	});
 	
 	replyList(); // 기능 실행
 });
