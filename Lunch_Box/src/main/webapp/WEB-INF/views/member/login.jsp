@@ -28,7 +28,7 @@ $(document).ready(function(){
 									required="">
 							</div>
 							<div class="form-group">
-								<input id="mem_pass" class="form-control" type="text" name="mem_pass" placeholder="Password"
+								<input id="mem_pass" class="form-control" type="password" name="mem_pass" placeholder="Password"
 									required="">
 							</div>
 							

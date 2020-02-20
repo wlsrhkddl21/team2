@@ -29,9 +29,10 @@ public class ReviewTest {
 	@Test
 	public void testInsert() throws Exception {
 		ReviewVo vo = new ReviewVo();
-		vo.setRev_title("502Á¦¸ñ");
-		vo.setRev_writer("502ÀÛ¼ºÀÚ");
-		vo.setRev_content("502³»¿ë");
+		vo.setRev_title("í…ŒìŠ¤íŠ¸ ì œëª©3");
+		vo.setRev_writer("ì‘ì„±ì í…ŒìŠ¤íŠ¸3");
+		vo.setRev_content("ë‚´ìš© í…ŒìŠ¤íŠ¸3");
+		vo.setRev_pdt_name(87);
 		dao.insertReview(vo);
 	}
 	

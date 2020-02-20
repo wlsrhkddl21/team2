@@ -13,4 +13,8 @@ public interface QnaService {
 	public int listCount(PagingDto pagingDto) throws Exception;
 	// 글 읽기
 	public QnaVo read(int qna_num) throws Exception;
+	// 글쓰기
+	public void create(QnaVo vo) throws Exception;
+	// 답변등록
+	public void answer(QnaVo vo) throws Exception;
 }

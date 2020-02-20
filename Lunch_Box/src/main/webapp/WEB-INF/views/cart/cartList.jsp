@@ -3,46 +3,34 @@
 <%@ include file="../include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../include/cartStyle.jsp" %>
-
+<style>
+	.test {
+		text-align : center;
+		position:fixed;
+		right:100px;
+		width:200px;
+		height:800px;
+		background-color: #9775f0;
+		z-index: 1000;
+		padding: 20px;
+		border: 1px solid blue;
+	}
+</style>
 <script>
 $(document).ready(function() {
-	function chagePrice(){
-		var price = 0;
-		var tip = 2500;
-		$(".chk:checked").each(function() {
-			var isThis = $(this);
-			var thisPrice = isThis.attr("data-price");
-			console.log(thisPrice);
-			price += parseInt(thisPrice);
-		});
-		
-		$("#result").text(price);
-		
-		if(price>50000){
-			$("#tip").text(0);
-		}else{
-			$("#tip").text(2500);
-		}
-		
-		$("#total").text(2500+price);
-		
-		console.log(price);
-	}
-	
-	$(".chk").change(function(){
-		chagePrice();
-	});
 	
 	// all Check
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
 			$("input[type=checkbox]").prop("checked",true);
-			chagePrice();
 		} else {
 			$("input[type=checkbox]").prop("checked",false);
-			chagePrice();
 		}
-			
+		getPrice();
+	});
+	
+	$(".chk").change(function() {
+		getPrice();
 	});
 	
 	// check delete
@@ -127,26 +115,17 @@ $(document).ready(function() {
 	
 	// check buy
 	$(".checkBuy").click(function() {
-		var cnt=0;
-		
 		$(".chk:checked").each(function() {
 			var isThis = $(this);
-			cnt +=1;
 			getHidden(isThis);
-// 			console.log(cnt);
 		});
-		
-		if(cnt==0){
-			console.log("선택 상품 없음");
-		}else{
-			$("#cartForm").submit();
-		}
-		
+		$("#cartForm").submit();
 	});
 	// select buy
 	$(".oneBuy").click(function() {
 		var isThis = $(this);
 		getHidden(isThis);
+		$("#cartForm").submit();
 	});
 	
 	// count ajax
@@ -169,20 +148,12 @@ $(document).ready(function() {
 	
 	// ajax price
 	function getPrice() {
-		$.ajax({
-			url : "/cart/totalPrice",
-			type : "post",
-			success : function(rData) {
-				$("#result").text(rData.strResult);
-				$("#tip").text(rData.strTip);
-				$("#total").text(rData.strTotalPrice);
-			}
-		});
 		
+		var allPrice = 0;
 		$(".chk").each(function() {
-			var me = $(this);
-			var price = me.parents("tr").find(".price").text();
-			var count = me.parents("tr").find("#count").val();
+			var isThis = $(this);
+			var price = isThis.parents("tr").find(".price").text().replace(",","");
+			var count = isThis.parents("tr").find("#count").val();
 			var sData = {
 					"price" : price,
 					"count" : count
@@ -190,15 +161,30 @@ $(document).ready(function() {
 			$.ajax({
 				url : "/cart/price",
 				type : "post",
+				async : false,
 				data : sData,
 				success : function(rData) {
-					
-				me.parents("tr").find(".totalPrice").text(rData.strTotal);
-				me.parents("tr").find(".point").text(rData.strPoint);
-				
+				isThis.parents("tr").find(".totalPrice").text(rData);
+				if (isThis.is(":checked") == true ) {
+				allPrice += parseInt(rData.replace(",",""));
+				}
 				}
 			});
 		});
+		$("#total").text(format(allPrice));
+		if (allPrice < 50000) {
+			$("#tip").text("2,500");
+			allPrice += 2500;
+			$("#result").text(format(allPrice));
+		} else {
+			$("#tip").text("0");
+			$("#result").text(format(allPrice));
+		}
+		
+		if ($(".chk").is(":checked") == false) {
+			$("#tip").text("0");
+			$("#result").text("0");
+		}
 	} 
 	
 	function getHidden(isThis) {
@@ -219,10 +205,30 @@ $(document).ready(function() {
 		
 	}
 	
+	function format(price) {
+		var data;
+		sData = {
+				"price" : price	
+		};
+		$.ajax({
+			url : "/cart/format",
+			type : "post",
+			async : false,
+			data : sData,
+			success : function(rData) {				
+				data = rData;
+			}
+		});
+		return data;
+	}	
 	getPrice();
-	
 });
 </script>
+	<div class="test">
+		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
+		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
+		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
+	</div>
 	<!-- contact -->
 	<section class="contact py-5" id="contact">
 		<div class="container">
@@ -275,11 +281,10 @@ $(document).ready(function() {
 										<c:when test="${isEmpty == false}">
 											<c:forEach items="${list}" var="vo">
 												<tr>
-													<c:set var="chkPrice" value="${vo.pdt_price* vo.cart_count}"></c:set>
-													<td><input type="checkbox" class="chk" value="${vo.cart_num}" data-price="${chkPrice}" checked/></td>
-													<td><img src="../images/blog3.jpg" width="70" height="70" border="0"/></td>
+													<td><input type="checkbox" class="chk" value="${vo.cart_num}" checked/></td>
+													<td><img src="/admin/displayFile?fileName=${vo.pdt_image}" width="70" height="70" border="0"/></td>
 													<td class="left">${vo.pdt_name}</td>
-													<td class="price">${vo.pdt_price}</td>
+													<td class="price">${vo.str_price}</td>
 													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}"  />
 													<a><img class="up" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"/></a>
 													<a><img class="down" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"/></a>
@@ -322,15 +327,15 @@ $(document).ready(function() {
 									</tr>
 									<tr>
 										<th scope="row">주문금액</th>
-										<td><span id="result"></span>원</td>
+										<td><span id="total"></span>원</td>
 									</tr>
 									<tr>
 										<th scope="row">배송료</th>
-										<td><span id="tip"></span>원</td>
+										<td><span id="tip">0</span>원</td>
 									</tr>
 									<tr>
 										<th scope="row">결제금액</th>
-										<td><span style="color :#fd5c63; font-size: 20px" id="total"></span>원</td>
+										<td><span style="color :#fd5c63; font-size: 20px" id="result"></span>원</td>
 									</tr>
 								</tbody>
 								</table>
@@ -359,8 +364,6 @@ $(document).ready(function() {
 		</div>
 	</section>
 	<!-- //contact -->
-
 	
-
 	
 <%@ include file="../include/footer.jsp" %>

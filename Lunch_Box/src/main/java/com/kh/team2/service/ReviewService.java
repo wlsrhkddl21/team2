@@ -7,9 +7,12 @@ import com.kh.team2.domain.ReviewVo;
 
 public interface ReviewService {
 
-	// µî·Ï ±Û ¸®½ºÆ®
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<ReviewVo> listAll(PagingDto pagingDto) throws Exception;
 	
-	// ÆäÀÌÁö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int listCount(PagingDto pagingDto) throws Exception;
+	
+	// ê¸€ ë“±ë¡
+	public void insertReview(ReviewVo reviewVo) throws Exception;
 }

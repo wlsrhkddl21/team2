@@ -1,20 +1,23 @@
 package com.kh.team2.domain;
 
+import java.text.DecimalFormat;
+
 public class CartVo {
 	private int pdt_num;
 	private int cart_num;
 	private String pdt_name;
 	private int pdt_price;
+	@SuppressWarnings("unused")
+	private String str_price;
 	private int cart_count;
 	private String mem_id;
-	private int pdt_total;
+	private String pdt_image;
 
-	public int getPdt_total() {
-		return pdt_price*cart_count;
-	}
-
-	public void setPdt_total(int pdt_total) {
-		this.pdt_total = pdt_total;
+	@Override
+	public String toString() {
+		return "CartVo [pdt_num=" + pdt_num + ", cart_num=" + cart_num + ", pdt_name=" + pdt_name + ", pdt_price="
+				+ pdt_price + ", str_price=" + str_price + ", cart_count=" + cart_count + ", mem_id=" + mem_id
+				+ ", pdt_image=" + pdt_image + "]";
 	}
 
 	public CartVo() {
@@ -22,12 +25,22 @@ public class CartVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CartVo(int pdt_num, int cart_num, String pdt_name, int pdt_price, int cart_count, String mem_id) {
+	public String getPdt_image() {
+		return pdt_image;
+	}
+
+	public void setPdt_image(String pdt_image) {
+		this.pdt_image = pdt_image;
+	}
+
+	public CartVo(int pdt_num, int cart_num, String pdt_name, int pdt_price, String str_price, int cart_count,
+			String mem_id) {
 		super();
 		this.pdt_num = pdt_num;
 		this.cart_num = cart_num;
 		this.pdt_name = pdt_name;
 		this.pdt_price = pdt_price;
+		this.str_price = str_price;
 		this.cart_count = cart_count;
 		this.mem_id = mem_id;
 	}
@@ -64,6 +77,11 @@ public class CartVo {
 		this.pdt_price = pdt_price;
 	}
 
+	public String getStr_price() {
+		DecimalFormat df = new DecimalFormat("###,###,###,###");
+		return df.format(pdt_price);
+	}
+
 	public int getCart_count() {
 		return cart_count;
 	}
@@ -79,13 +97,5 @@ public class CartVo {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
-
-	@Override
-	public String toString() {
-		return "CartVo [pdt_num=" + pdt_num + ", cart_num=" + cart_num + ", pdt_name=" + pdt_name + ", pdt_price="
-				+ pdt_price + ", cart_count=" + cart_count + ", mem_id=" + mem_id + ", pdt_total=" + pdt_total + "]";
-	}
-
-	
 
 }

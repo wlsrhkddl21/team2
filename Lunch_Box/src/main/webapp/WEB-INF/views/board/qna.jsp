@@ -25,7 +25,7 @@ $(document).ready(function(){
 	$("#btnRegister").click(function() {
 		console.log("클릭됨");
 		$("#frmPage").attr("action", "/board/qnaRegister");
-		$("input[name=not_num]").remove();
+		$("input[name=qna_num]").remove();
 		$("#frmPage").submit();
 	});
 	$(".not_title").click(function(e){
@@ -54,25 +54,24 @@ $(document).ready(function(){
 	</form>
 	
 	<div class="row">
-	${mem_id }
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
 		<br>
 		<div style="height: 20px"></div>
 		<h3 class="title-w3ls text-center text-bl mb-5">문의게시판</h3>
-		<c:if test="${mem_id == 'admin'}">
+		<c:if test="${mem_id != null}">
 		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
 		</c:if>
 		<div style="height: 20px"></div>
-		<table class="table text-center table-striped">
+		<table class="table text-center">
 				<thead>
 					<tr>
 						<th>글번호</th> 
 						<th>글제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
-						<th>조회수</th>
+						<th>답변여부</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -80,12 +79,12 @@ $(document).ready(function(){
 				<c:forEach items="${list }" var="qnaVo">
 					<tr>
 						<td>${qnaVo.qna_num }</td>
-						<td>
+						<td style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<c:choose>
 								<c:when test="${mem_id == qnaVo.qna_writer || mem_id == 'admin'}">
-								<span style="color:#fd5c63;">
-									
-								</span>
+									<c:if test="${qnaVo.qna_relevel gt 0}">
+										<img src="/images/nbsp.png" width="${qnaVo.qna_relevel * 20}"/>ㄴ
+									</c:if>
 								<a data-bno="${qnaVo.qna_num}" class="not_title" style="font-weight:bold">
 									${qnaVo.qna_title }</a>
 								</c:when>
@@ -99,7 +98,16 @@ $(document).ready(function(){
 						<td>${qnaVo.qna_writer }</td>
 						<td><fmt:formatDate value="${qnaVo.qna_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>${qnaVo.qna_viewcount }</td>
+						<td>
+							<c:choose>
+								<c:when test="${qnaVo.qna_success == 'n'}">
+									미답변
+								</c:when>
+								<c:otherwise>
+									답변완료
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

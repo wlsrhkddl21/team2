@@ -7,7 +7,7 @@
 <mapper namespace="com.kh.team2.mappers.cartMapper">
 
 	<select id="cartList" resultType="CartVo">
-		select a.cart_num,a.cart_count,a.mem_id,b.pdt_num,b.pdt_name,b.pdt_price
+		select a.cart_num,a.cart_count,a.mem_id,b.pdt_num,b.pdt_name,b.pdt_price,b.pdt_image
  		from tbl_cart a,tbl_product b
  		where a.mem_id = #{mem_id} and b.pdt_num = a.pdt_num
 	</select>
