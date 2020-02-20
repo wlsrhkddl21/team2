@@ -23,12 +23,12 @@
 					$(".pdtImg").each(
 							function() {
 								var fileName = $(this).attr("data-img");
-								console.log("fileName:" + fileName);
+// 								console.log("fileName:" + fileName);
 								var slice = fileName.lastIndexOf("/")
 								var path = fileName.substring(0, slice + 1);
 								var real = fileName.substring(slice + 1);
 								var thumbnail = path + "s_" + real;
-								console.log(thumbnail);
+// 								console.log(thumbnail);
 								$(this).attr(
 										"src",
 										"/admin/displayFile?fileName="

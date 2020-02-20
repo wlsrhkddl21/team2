@@ -1,4 +1,4 @@
-package com.kh.team2.persistence;
+package com.kh.team2.service;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.team2.domain.MyLunchVo;
+import com.kh.team2.persistence.MyLunchDao;
 
 @Service
 public class MyLunchServiceImpl implements MyLunchService {
@@ -29,8 +30,8 @@ public class MyLunchServiceImpl implements MyLunchService {
 	}
 
 	@Override
-	public List<MyLunchVo> readAllMLB() throws Exception {
-		return myLunchDao.readAllMLB();
+	public List<MyLunchVo> readAllMLB(String lunch_type) throws Exception {
+		return myLunchDao.readAllMLB(lunch_type);
 	}
 
 	@Override
