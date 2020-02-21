@@ -13,7 +13,7 @@
 
 	<select id="readAllMLB" resultType="MyLunchVo">
 		select * from tbl_mylunch
-		<if test="lunch_type != '' and lunch_type != 'all'">
+		<if test="lunch_type != null and lunch_type != 'all'">
 		where lunch_type=#{lunch_type}
 		</if>
 		order by lunch_num
