@@ -25,6 +25,8 @@ public class CartAjaxController {
 	
 	DecimalFormat df = new DecimalFormat("###,###,###,###");
 	
+	
+	
 	@RequestMapping(value ="/price", method = RequestMethod.POST)
 	@ResponseBody
 	public String price(@RequestParam("price")int price,@RequestParam("count")int count) throws Exception {

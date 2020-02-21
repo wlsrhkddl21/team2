@@ -111,6 +111,13 @@ $(document).ready(function() {
 		getHidden(isThis);
 	});
 	
+	// pdt_view_list
+	$("#btnCart").click(function() {
+		
+	});
+	
+	
+	// ============================================ajax function ===============
 	// count ajax
 	function countAjax(isThis,sData) {
 		$.ajax({
@@ -124,6 +131,7 @@ $(document).ready(function() {
 			"data" : JSON.stringify(sData),
 			"success" : function(rData) {
 				isThis.parents("tr").find("#count").val(rData);
+				isThis.parents("tr").find("#count").attr("data-type",rData);
 				getPrice();
 			}
 		});
@@ -135,7 +143,7 @@ $(document).ready(function() {
 		var allPrice = 0;
 		$(".chk").each(function() {
 			var isThis = $(this);
-			var price = isThis.parents("tr").find(".price").text().replace(",","");
+			var price = isThis.parents("tr").find(".price").text().replace(/,/g,"");
 			var count = isThis.parents("tr").find("#count").val();
 			var sData = {
 					"price" : price,
@@ -149,7 +157,8 @@ $(document).ready(function() {
 				success : function(rData) {
 				isThis.parents("tr").find(".totalPrice").text(rData);
 				if (isThis.is(":checked") == true ) {
-				allPrice += parseInt(rData.replace(",",""));
+				console.log(parseInt(rData.replace(/,/g,"")));
+				allPrice += parseInt(rData.replace(/,/g,""));
 				}
 				}
 			});
@@ -182,7 +191,7 @@ $(document).ready(function() {
 	
 		var countHidden = document.createElement("input");
 		countHidden.setAttribute("type", "hidden");
-		countHidden.setAttribute("value", isThis.parents("tr").find("#count").val());
+		countHidden.setAttribute("value", isThis.parents("tr").find("#count").attr("data-type"));
 		countHidden.setAttribute("name", "cart_count");
 		countHidden.setAttribute("id","cart_count");
 		document.getElementById("cartForm").appendChild(countHidden);
@@ -256,15 +265,14 @@ $(document).ready(function() {
 				<p class="title">최근 본 상품</p>
 					<div>
 					<ul class="list">
-						<li><a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a></li>
-						<li><a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a></li>
-						<li><a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a></li>
-						<li><a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a></li>
+						<c:forEach items="${veiwList}" var="veiw">
+						<li><a><img src="/admin/displayFile?fileName=${veiw.pdt_image}" width="150" height="100" border="10"></a></li>
+						</c:forEach>
 					</ul>
 					</div>
-					<p class="cartList">장바구니<span class="cart_count">3</span></p>
-					<p class="cartList">마이페이지</p>
-					<p class="cartList">EVENT</p>
+					<p class="cartList" id="btnCart">장바구니<span class="cart_count">3</span></p>
+					<p class="cartList" id="btnMyPage">마이페이지</p>
+					<p class="cartList" id="btnEvent">EVENT</p>
 				</div>
 			</div>
 					<!-- /최근 목록 -->
@@ -322,7 +330,7 @@ $(document).ready(function() {
 													<td><img src="/admin/displayFile?fileName=${vo.pdt_image}" width="70" height="70" border="0"/></td>
 													<td class="left">${vo.pdt_name}</td>
 													<td class="price">${vo.str_price}</td>
-													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}"  />
+													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}" data-type/>
 													<a><img class="up" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"/></a>
 													<a><img class="down" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"/></a>
 													</span>
