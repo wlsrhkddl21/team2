@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.team2.domain.BoardVo;
@@ -59,10 +60,10 @@ public class ReviewController {
 	}
 	
 	// 글등록
-	@RequestMapping(value = "/reviewWrite", method = RequestMethod.POST)
-	public String insertReview(Model model, PagingDto pagingDto, ReviewVo reviewVo) throws Exception {
+	@RequestMapping(value = "/reviewRegister", method = RequestMethod.POST)
+	public String insertReview(Model model, MultipartHttpServletRequest request ,ReviewVo reviewVo) throws Exception {
 //		reviewService.insertReview(reviewVo);
-
+		MultipartFile file = request.getFile("file");
 		return "redirect:/review/reviewBoard";
 	}
 	

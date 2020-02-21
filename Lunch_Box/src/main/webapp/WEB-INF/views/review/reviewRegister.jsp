@@ -39,6 +39,9 @@ $(document).ready(function(){
 	$("#btnSubmit").click(function(){
 		location.href = "/review/reviewBoard";
 	});
+	$("#btnFile").click(function(){
+		("#pdt_image").trigger("click");
+	});
 });
 </script>
 <div class="container-fluid">
@@ -71,7 +74,7 @@ $(document).ready(function(){
 				<!-- contact form -->
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
-						<form action="/review/reviewWrite" method="post" enctype="multipart/form-data">
+						<form action="/review/reviewRegister" method="post" enctype="multipart/form-data">
 							
 							<div class="form-group">
 								<label>제목</label>
