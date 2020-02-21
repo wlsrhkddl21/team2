@@ -41,9 +41,10 @@
 	
 	<update id="success">
 		update tbl_qna set
-			qna_resuccess = '#{qna_writer}'
-		where qna_num = #{qna_num}
+			qna_success = #{qna_writer}
+		where qna_num = #{qna_ref}
 	</update>
+	
 </mapper>  
 
 

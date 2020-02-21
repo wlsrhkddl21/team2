@@ -20,6 +20,8 @@ public interface QnaDao {
 	public void create(QnaVo vo) throws Exception;
 	// 답변 데이터 추가
 	public void answer(QnaVo vo) throws Exception;
+	// 답변추가시 success 변경
+	public void updateSuccess(QnaVo vo) throws Exception;
 //	// 데이터 삭제
 //	public void delete(int not_num)  throws Exception; 
 //	// 데이터 수정
