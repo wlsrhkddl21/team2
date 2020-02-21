@@ -13,6 +13,9 @@
 .not_title {
 	cursor: pointer;
 }
+th {
+	background-color:#f7f7f7;
+}
 </style>
 <script>
 $(document).ready(function(){
