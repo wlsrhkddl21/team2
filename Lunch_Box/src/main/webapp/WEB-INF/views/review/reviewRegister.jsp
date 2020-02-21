@@ -13,40 +13,23 @@
 .not_title {
 	cursor: pointer;
 }
-.starR1{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
-    background-size: auto 100%;
-    width: 15px;
-    height: 30px;
-    float:left;
-    text-indent: -9999px;
-    cursor: pointer;
-}
-.starR2{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-    background-size: auto 100%;
-    width: 15px;
-    height: 30px;
-    float:left;
-    text-indent: -9999px;
-    cursor: pointer;
-}
-.starR1.on{background-position:0  0;}
-.starR2.on{background-position:-15px 0;}
+
 </style>
 <script>
 $(document).ready(function(){
 	$("#btnSubmit").click(function(){
-		location.href = "/review/reviewBoard";
+// 		location.href = "/review/reviewBoard";
+		$("#registForm").submit();
+		console.log("클릭됨");
 	});
-	$("#btnFile").click(function(){
-		("#pdt_image").trigger("click");
-	});
+// 	$("#btnFile").click(function(){
+// 		("#pdt_image").trigger("click");
+// 	});
 });
 </script>
 <div class="container-fluid">
 
-<!-- 	<form id="frmPage" action="/review/reviewBoard" method="get"> -->
+<!-- 	<form id="frmRegist" action="/review/reviewBoard" method="post"> -->
 <!-- 		<input type="hidden" name="rev_num"/> -->
 <!-- 		<input type="hidden" name="page"  -->
 <%-- 			value="${pagingDto.page }"/> --%>
@@ -74,7 +57,7 @@ $(document).ready(function(){
 				<!-- contact form -->
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
-						<form action="/review/reviewRegister" method="post" enctype="multipart/form-data">
+						<form id="registForm" action="/review/reviewRegister" method="post" >
 							
 							<div class="form-group">
 								<label>제목</label>
@@ -85,22 +68,28 @@ $(document).ready(function(){
 								<input id="rev_content" class="form-control" type="text" name="rev_content">
 							</div>
 							<div class="form-group">
+								<label>writer</label>
+								<input id="rev_writer" class="form-control" type="text" name="rev_writer">
+							</div>
+							<div class="form-group">
 								<label>상품명</label>
 								<select name=rev_pdt_name class="form-control">
-									<option selected value="안심스테이크 도시락">안심스테이크 도시락</option>
-									<option  value="찹스테이크 도시락">찹스테이크 도시락</option>
-									<option value="그랜드 소불고기 & 전복도시락">그랜드 소불고기 & 전복도시락</option>
-									<option value="장어구이 도시락">장어구이 도시락</option>
+								<c:forEach items="${list}" var="list">
+									<option value="${list.pdt_name}">${list.pdt_name}</option>
+								</c:forEach>
 								</select>
-<!-- 								<input id="rev_content" class="form-control" type="select option" name="rev_content"> -->
 							</div>
+								
+									
+								
+								
 							
-							<div class="form-group">
+<!-- 							<div class="form-group"> -->
 							
-									<button type="button" class="btn btn-primary" id="btnFile">사진 첨부</button>
-							<input type="file" class="form-control-file" id="pdt_image" name="file" style="display:none;"/>
+<!-- 									<button type="button" class="btn btn-primary" id="btnFile">사진 첨부</button> -->
+<!-- 							<input type="file" class="form-control-file" id="pdt_image" name="file" /> -->
 							
-							</div>
+<!-- 							</div> -->
 							
 							<div class="input-group1 text-right">
 								<button id="btnSubmit" class="btn" type="submit">Submit</button>

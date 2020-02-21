@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team2.domain.PagingDto;
+import com.kh.team2.domain.ProductVo;
 import com.kh.team2.domain.ReviewVo;
 
 @Repository
@@ -45,4 +46,11 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.selectOne(NAMESPACE + ".readReview", rev_num);
 	}
 
+	@Override
+	public List<ProductVo> productName() throws Exception {
+		List<ProductVo> list = sqlSession.selectList(NAMESPACE+".productName");
+		return list;
+	}
+	
+	
 }
