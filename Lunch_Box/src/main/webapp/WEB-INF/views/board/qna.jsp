@@ -78,7 +78,6 @@ $(document).ready(function(){
 				<tbody>
 					
 				<c:forEach items="${list }" var="qnaVo">
-				${qnaVo }
 					<tr>
 						<td>${qnaVo.qna_num }</td>
 						<td style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
