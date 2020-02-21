@@ -9,7 +9,7 @@
 		select * 
 			from (select rownum rnum, a.* 
         	  from (select * 
-        	  		from tbl_qna order by qna_ref desc, qna_restep asc
+        	  		from tbl_qna order by qna_ref desc, qna_restep desc
                    ) a
              )
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
