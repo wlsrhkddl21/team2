@@ -40,5 +40,15 @@ public class QnaDaoImpl implements QnaDao {
 		return vo;
 	}
 
+	@Override
+	public void create(QnaVo vo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".create", vo);
+	}
+
+	@Override
+	public void answer(QnaVo vo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".answer", vo);
+	}
+
 
 }

@@ -31,4 +31,14 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDao.read(qna_num);
 	}
 
+	@Override
+	public void create(QnaVo vo) throws Exception {
+		qnaDao.create(vo);
+	}
+
+	@Override
+	public void answer(QnaVo vo) throws Exception {
+		qnaDao.answer(vo);
+	}
+
 }

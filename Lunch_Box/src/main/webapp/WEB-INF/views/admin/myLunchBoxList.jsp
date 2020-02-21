@@ -29,12 +29,14 @@ $(document).ready(function(){
 	});
 	
 	$("#typeSelect").change(function(){
-		var type = $(this).val();
-		var url = "/myLunch/readAll";
-		$.get(url,type,function(rData){
+		var lunch_type = $(this).val();
+// 		var type = {"lunch_type":$(this).val()};
+		
+		location.href = "/myLunch/readAll?lunch_type="+lunch_type;
+// 		var url = "/myLunch/readAll?lunch_type="+type;
+// 		$.get(url,type,function(rData){
 			
-			
-		});
+// 		});
 	});
 });
 </script>
@@ -94,11 +96,26 @@ $(document).ready(function(){
 				<thead>
 					<tr>
 						<th>No</th>
-						<th>종류
+						<th>종류${lunch_type }
 						<select name="type" id="typeSelect">
-						<option value="rice">밥</option>
-						<option value="side">반찬</option>
-						<option value="soup">국</option>
+						<option value="all"
+						<c:if test="${lunch_type=='null' or lunch_type == 'all' }">
+						selected
+						</c:if>
+						>모두</option>
+						<option value="rice"
+						<c:if test="${lunch_type=='rice' }">
+						selected
+						</c:if>
+						>밥</option>
+						<option value="side"
+						<c:if test="${lunch_type=='side' }">
+						selected
+						</c:if>>반찬</option>
+						<option value="soup"
+						<c:if test="${lunch_type=='soup' }">
+						selected
+						</c:if>>국</option>
 						</select>
 						</th>
 						<th>내용</th>
