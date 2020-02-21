@@ -2,11 +2,38 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+th{
+	background-color:#f7f7f7;
+}
+.form-control{
+	border:none;
+	text-align:center;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #fff;
+    opacity: 1;
+}
+
+</style>
 <script>
 $(document).ready(function(){
+	
+	
+	$(".form-control").each(function(){
+		$(this).attr("readonly","readonly");
+	});
+	
+	$(".checkbox").change(function(){
+		var el = $(this).parent().children().find(".form-control").attr("readonly" ,false);
+	});
+	
 	$("#insertMLB").click(function(){
 		$("#modal-a").trigger("click");		
 	});
+	
+	//모달창
 	$("#btnModal").click(function(){
 		var lunch_type = $("#lunch_type").val();
 		var lunch_name = $("#lunch_name").val();
@@ -28,6 +55,36 @@ $(document).ready(function(){
 		});
 	});
 	
+	//수정버튼클릭
+	$("#updateMLB").click(function(){
+		$(".update").show();
+		$(".updateHide").hide();
+	});
+	
+	$("#updateSubmit").click(function(){
+		$(".checkbox :checked").each(function() {
+			var lunch_type = $(this).parents("tr").find(".lunch_type").val();
+			console.log(lunch_type);
+			var sData = {
+					"lunch_type" : lunch_type
+			};
+			$.ajax({
+				url: "",
+				type : "post",
+				data : sData
+			});
+		});
+	});
+	//수정취소클릭
+	$("#updateCancel").click(function(){
+		$(".update").hide();
+		$(".updateHide").show();	
+		$(".checkbox :checked").each(function(){
+			$(this).prop("checked",false);
+		});
+// 		console.log($(".checkbox :checked"));
+	});
+	
 	$("#typeSelect").change(function(){
 		var lunch_type = $(this).val();
 // 		var type = {"lunch_type":$(this).val()};
@@ -39,6 +96,7 @@ $(document).ready(function(){
 // 		});
 	});
 });
+
 </script>
 <div class="container-fluid">
 	<div class="row">
@@ -85,18 +143,27 @@ $(document).ready(function(){
 			<div class="row">
 				<div class="col-md-6 text-left">
 					<a href="/admin/list"
-						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">목록</a>
+						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">뒤로</a>
 				</div>
 				<div class="col-md-6 text-right">
+					<a id="updateSubmit" href="#"
+						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2 update"
+						style="display:none;">수정완료</a>
+					<a id="updateCancel" href="#"
+						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2 update"
+						style="display:none;">수정취소</a>
+					<a id="updateMLB" href="#"
+						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2 updateHide">상품수정</a>
 					<a id="insertMLB" href="#"
 						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">상품등록</a>
 				</div>
 			</div>
-			<table class="table table-striped text-center">
+			<table class="table text-center">
 				<thead>
 					<tr>
+						<th style="display:none;" class="update"></th>
 						<th>No</th>
-						<th>종류${lunch_type }
+						<th>종류
 						<select name="type" id="typeSelect">
 						<option value="all"
 						<c:if test="${lunch_type=='null' or lunch_type == 'all' }">
@@ -125,10 +192,22 @@ $(document).ready(function(){
 				<tbody>
 					<c:forEach items="${list }" var="myLunchVo">
 						<tr>
-							<td>${myLunchVo.lunch_num }</td>
-							<td>${myLunchVo.lunch_type }</td>
-							<td>${myLunchVo.lunch_name }</td>
-							<td>${myLunchVo.lunch_price }</td>
+							<td style="display:none;" class="update checkbox"><input type="checkbox"></td>
+							<td><span class="lunch_num">${myLunchVo.lunch_num }</span></td>
+							<td>
+								<span class="updateHide">${myLunchVo.lunch_type }</span>
+								<span class="update" style="display:none;">
+									<select name="lunch_type" class="lunch_type">
+										<option value="rice">밥류</option>
+										<option value="side">반찬류</option>
+										<option value="soup">국류</option>
+									</select>
+								</span>
+							</td>
+							<td><input type="text" value="${myLunchVo.lunch_name }" class="form-control lunch_name"
+								name="lunch_name" /></td>
+							<td><input type="text" value="${myLunchVo.lunch_price }" class="form-control lunch_price"
+								name="lunch_price" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -25,7 +25,6 @@ $(function(){
 });
 </script>
 <div class="container-fluid">
-${pagingDto }
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -44,7 +43,6 @@ ${pagingDto }
 				<input type="hidden" name="perPage" value="${pagingDto.perPage }"/>
 				<input type="hidden" name="qna_writer" value="${mem_id }"/>
 				<input type="hidden" name="qna_ref" value="${qnaVo.qna_ref }"/>
-				<input type="hidden" name="qna_success" value="${qna_writer }"/>
 				
 				<div class="form-group">
 					<label for="qna_title">Title</label>

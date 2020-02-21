@@ -3,21 +3,25 @@ package com.kh.team2.persistence;
 import java.util.List;
 
 import com.kh.team2.domain.PagingDto;
+import com.kh.team2.domain.ProductVo;
 import com.kh.team2.domain.ReviewVo;
 
 public interface ReviewDao {
-	// ¸®½ºÆ® ÇÑ°³ Á¶È¸
+	// ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ñ°ï¿½ ï¿½ï¿½È¸
 	public ReviewVo selectList(int rev_num) throws Exception;
 	
-	// ¸®½ºÆ® Á¶È¸
+	// ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
 	public List<ReviewVo> listAll(PagingDto pagingDto) throws Exception;
 	
-	// ÆäÀÌÁö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int listCount(PagingDto pagingDto) throws Exception;
 	
-	// ¸®ºä ±Û¾²±â
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½
 	public void insertReview(ReviewVo reviewVo) throws Exception;
 	
-	// ¸®ºä »ó¼¼º¸±â
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½
 	public ReviewVo readReview(int rev_num) throws Exception;
+	
+	//
+	public List<ProductVo> productName() throws Exception;
 }

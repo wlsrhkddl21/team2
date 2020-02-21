@@ -19,26 +19,32 @@
 </style>
 <script>
 $(document).ready(function(){
-	$(".page-link").click(function(e){
-		e.preventDefault(); // 브라우저의 기본기능 막기 (a 태그 동작 막기)
-		var page = $(this).attr("data-page");
-		$("input[name=page]").val(page);
-		$("#frmPage").submit();
-	});
-	$("#btnRegister").click(function() {
-		console.log("클릭됨");
-		$("#frmPage").attr("action", "/review/ntRegister");
-// 		$("input[name=not_num]").remove();
-		$("#frmPage").submit();
+// 	$(".page-link").click(function(e){
+// 		e.preventDefault(); // 브라우저의 기본기능 막기 (a 태그 동작 막기)
+// 		var page = $(this).attr("data-page");
+// 		$("input[name=page]").val(page);
+// 		$("#frmPage").submit();
+// 	});
+// 	$("#btnRegister").click(function() {
+// 		console.log("클릭됨");
+// 		$("#frmPage").attr("action", "/review/ntRegister");
+// // 		$("input[name=not_num]").remove();
+// 		$("#frmPage").submit();
+// 		location.href = "/review/reviewRegister";
+// 	});
+// 	$(".readTitle").click(function(e){
+// 		e.preventDefault();
+// 		console.log("타이틀 클릭됨");
+// 		var rev_num = $(this).attr("data-rno");
+// 		$("input[name=rev_num]").val(rev_num);
+// 		$("#frmRead").attr("action", "/review/reviewContent");
+// 		$("#frmRead").submit();
+// 	});
+	$("#btnRegister").click(function(){
 		location.href = "/review/reviewRegister";
 	});
-	$(".readTitle").click(function(e){
-		e.preventDefault();
-		console.log("타이틀 클릭됨");
-		var rev_num = $(this).attr("data-rno");
-		$("input[name=rev_num]").val(rev_num);
-		$("#frmRead").attr("action", "/review/reviewContent");
-		$("#frmRead").submit();
+	$(".readTitle").click(function(){
+		location.href = "/review/reviewContent";
 	});
 
 // 	$("#pdtContent").click(function(){
@@ -49,7 +55,7 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid">
 
-	<form id="frmPage" action="/review/reviewBoard" method="get">
+	<form id="frmPage" action="/review/reviewContent" method="get">
 		<input type="hidden" name="rev_num"/>
 		<input type="hidden" name="rev_pdt_name"/>
 		<input type="hidden" name="page" 
@@ -76,7 +82,7 @@ $(document).ready(function(){
 <%-- 		<c:if test="${mem_id}"> --%>
 		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
 <%-- 		</c:if> --%>
-		<form action = "/review/pdtContent" method="get">
+		<form action = "/review/reviewBoard" method="post">
 		<div style="height: 20px"></div>
 		<table class="table text-center table-striped">
 				<thead>
@@ -98,11 +104,11 @@ $(document).ready(function(){
 						<td>
 							<c:forEach items="${productList}" var="ProductVo">
 								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}">
-									<a href="/shop/detail/${ProductVo.pdt_num }" class="pdtContent">${ProductVo.pdt_name}</a>
+									${ProductVo.pdt_name}
 								</c:if>
 							</c:forEach>
 						</td>
-						<td><a data-rno="${reviewVo.rev_num}" class="readTitle">${reviewVo.rev_title }</a></td>
+						<td><a href="/review/reviewContent/" data-rno="${reviewVo.rev_num}" class="readTitle" >${reviewVo.rev_title }</a></td>
 						<td>${reviewVo.rev_writer }</td>
 						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>

@@ -13,6 +13,9 @@
 .not_title {
 	cursor: pointer;
 }
+th {
+	background-color:#f7f7f7;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -38,6 +41,7 @@ $(document).ready(function(){
 });
 </script>
 <div class="container-fluid">
+
 	<form id="frmPage" action="/board/qna" method="get">
 		<input type="hidden" name="qna_num"/>
 		<input type="hidden" name="page" 
@@ -81,7 +85,7 @@ $(document).ready(function(){
 						<td>${qnaVo.qna_num }</td>
 						<td style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<c:choose>
-								<c:when test="${mem_id == qnaVo.qna_writer || mem_id == 'admin'}">
+								<c:when test="${mem_id == qnaVo.qna_writer || mem_id == 'admin' || mem_id == qnaVo.qna_success}">
 									<c:if test="${qnaVo.qna_relevel gt 0}">
 										<img src="/images/nbsp.png" width="${qnaVo.qna_relevel * 20}"/>ㄴ
 									</c:if>

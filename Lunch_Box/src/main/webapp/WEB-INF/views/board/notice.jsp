@@ -13,6 +13,10 @@
 .not_title {
 	cursor: pointer;
 }
+
+th {
+	background-color:#f7f7f7;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -64,7 +68,7 @@ $(document).ready(function(){
 		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
 		</c:if>
 		<div style="height: 20px"></div>
-		<table class="table text-center table-striped">
+		<table class="table text-center">
 				<thead>
 					<tr>
 						<th>글번호</th> 

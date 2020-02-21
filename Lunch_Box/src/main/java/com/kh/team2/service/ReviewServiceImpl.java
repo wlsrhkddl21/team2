@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.team2.domain.PagingDto;
+import com.kh.team2.domain.ProductVo;
 import com.kh.team2.domain.ReviewVo;
 import com.kh.team2.persistence.ReviewDao;
 
@@ -30,6 +31,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public void insertReview(ReviewVo reviewVo) throws Exception {
 		dao.insertReview(reviewVo);
 		
+	}
+
+	@Override
+	public List<ProductVo> productName() throws Exception {
+		return dao.productName();
 	}
 
 }
