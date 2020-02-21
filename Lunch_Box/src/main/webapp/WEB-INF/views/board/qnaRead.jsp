@@ -128,7 +128,6 @@ $(document).ready(function() {
 		$("#myModal").modal("show"); 
 	});
 	
-	
 	replyList(); // 기능 실행
 });
 	
@@ -190,7 +189,7 @@ $(document).ready(function() {
 			value="${qnaVo.qna_title}" />
 		<input type="hidden" name="qna_ref" 
 			value="${qnaVo.qna_ref}" />
-		<input type="hidden" name="qna_writer" 
+		<input type="hidden" name="qna_success" 
 			value="${qnaVo.qna_writer}" />
 		<input type="hidden" name="page" 
 			value="${pagingDto.page}"/>

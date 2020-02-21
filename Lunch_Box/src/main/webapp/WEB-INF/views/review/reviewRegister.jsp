@@ -36,7 +36,12 @@
 </style>
 <script>
 $(document).ready(function(){
-	$()
+	$("#btnSubmit").click(function(){
+		location.href = "/review/reviewBoard";
+	});
+	$("#btnFile").click(function(){
+		("#pdt_image").trigger("click");
+	});
 });
 </script>
 <div class="container-fluid">
@@ -56,7 +61,8 @@ $(document).ready(function(){
 <%-- 			value="${pagingDto.perPage }"/> --%>
 <!-- 	</form> -->
 	
-	<section class="contact py-5" id="contact">
+	
+	<section  class="contact py-5" id="contact" >
 		<div class="container">
 			<h3 class="title-w3ls text-center text-bl mb-5">리뷰작성</h3>
 			<div class="row mx-sm-0 mx-2">
@@ -68,7 +74,7 @@ $(document).ready(function(){
 				<!-- contact form -->
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
-						<form action="/review/reviewBoard" method="post">
+						<form action="/review/reviewRegister" method="post" enctype="multipart/form-data">
 							
 							<div class="form-group">
 								<label>제목</label>
@@ -78,21 +84,24 @@ $(document).ready(function(){
 								<label>글내용</label>
 								<input id="rev_content" class="form-control" type="text" name="rev_content">
 							</div>
-							<!-- 별점 -->
-							<label>만족도</label>
-							<div class="starRev">
-								<span class="starR1 on">별1_왼쪽</span>
-								<span class="starR2">별1_오른쪽</span>
-								<span class="starR1">별2_왼쪽</span>
-								<span class="starR2">별2_오른쪽</span>
-								<span class="starR1">별3_왼쪽</span>
-								<span class="starR2">별3_오른쪽</span>
-								<span class="starR1">별4_왼쪽</span>
-								<span class="starR2">별4_오른쪽</span>
-								<span class="starR1">별5_왼쪽</span>
-								<span class="starR2">별5_오른쪽</span>
+							<div class="form-group">
+								<label>상품명</label>
+								<select name=rev_pdt_name class="form-control">
+									<option selected value="안심스테이크 도시락">안심스테이크 도시락</option>
+									<option  value="찹스테이크 도시락">찹스테이크 도시락</option>
+									<option value="그랜드 소불고기 & 전복도시락">그랜드 소불고기 & 전복도시락</option>
+									<option value="장어구이 도시락">장어구이 도시락</option>
+								</select>
+<!-- 								<input id="rev_content" class="form-control" type="select option" name="rev_content"> -->
 							</div>
-							<!-- /별점 -->	
+							
+							<div class="form-group">
+							
+									<button type="button" class="btn btn-primary" id="btnFile">사진 첨부</button>
+							<input type="file" class="form-control-file" id="pdt_image" name="file" style="display:none;"/>
+							
+							</div>
+							
 							<div class="input-group1 text-right">
 								<button id="btnSubmit" class="btn" type="submit">Submit</button>
 							</div>
