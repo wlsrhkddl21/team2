@@ -22,13 +22,11 @@ public class MyLunchDaoImpl implements MyLunchDao {
 	@Override
 	public void insertMLB(MyLunchVo myLunchVo) throws Exception {
 		sqlSession.insert(NAMESPCE+".insertMLB",myLunchVo);
-		
 	}
 
 	@Override
 	public void updateMLB(MyLunchVo myLunchVo) throws Exception {
 		sqlSession.update(NAMESPCE+".updateMLB",myLunchVo);
-		
 	}
 
 	@Override
@@ -46,7 +44,5 @@ public class MyLunchDaoImpl implements MyLunchDao {
 	@Override
 	public void deleteMLB(int lunch_num) throws Exception {
 		sqlSession.delete(NAMESPCE+".deleteMLB");
-		
 	}
-
 }
