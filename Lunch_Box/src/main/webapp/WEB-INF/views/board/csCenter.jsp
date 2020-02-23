@@ -4,11 +4,11 @@
 <%@ include file="../include/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="http://www.homeal.net/_data/wing_homeal_temp.css">
 <style>
-/* .csCenter_info { */
-/* 	padding: 35px; */
-/* 	border: 5px solid #ededed; */
-/* 	margin-top: 20px; */
-/* } */
+ .csCenter_info { 
+ 	padding: 35px; 
+ 	border: 5px solid #ededed;
+ 	margin-top: 20px;
+} 
 </style>
 <div class="container-fluid">
 	<div class="row">
@@ -26,14 +26,12 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<div style="height: 20px;"></div>
 					<%@ include file="../include/csMenu.jsp"%>
 				</div>
-				<div class="col-md-9">
+				<div class="col-md-10">
 					<div class="row">
-						<div class="col-md-2"></div>
-						<div class="col-md-8">
 							<div class="csCenter_info text-center">
 							<div id="customer">
     <div class="board_group box_left"> <!-- 작업 완료 후 'box_left' 클래스명 추가 -->
@@ -240,7 +238,7 @@
 				<div class="col-md-2" style="height: 600px;"></div>
 			</div>
 		</div>
-	</div>
+</div>
 </div>
 </div>
 <%@ include file="../include/footer.jsp"%>
