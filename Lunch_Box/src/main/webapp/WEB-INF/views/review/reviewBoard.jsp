@@ -43,6 +43,9 @@ $(document).ready(function(){
 	$("#btnRegister").click(function(){
 		location.href = "/review/reviewRegister";
 	});
+	$(".readTitle").click(function(){
+		location.href = "/review/reviewContent";
+	});
 
 // 	$("#pdtContent").click(function(){
 // 		console.log("클릭됨");
@@ -101,11 +104,11 @@ $(document).ready(function(){
 						<td>
 							<c:forEach items="${productList}" var="ProductVo">
 								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}">
-									<a href="/shop/detail/${ProductVo.pdt_num }" class="pdtContent">${ProductVo.pdt_name}</a>
+									${ProductVo.pdt_name}
 								</c:if>
 							</c:forEach>
 						</td>
-						<td><a data-rno="${reviewVo.rev_num}" class="readTitle">${reviewVo.rev_title }</a></td>
+						<td><a href="/review/reviewContent/" data-rno="${reviewVo.rev_num}" class="readTitle" >${reviewVo.rev_title }</a></td>
 						<td>${reviewVo.rev_writer }</td>
 						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>

@@ -48,7 +48,7 @@ public class CartTest {
 	
 	@Test
 	public void TestisCart() throws Exception {
-		int result = cartDao.isCart(85);
+		int result = cartDao.isCart(85,"jang");
 		System.out.println(result);
 	}
 	

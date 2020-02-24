@@ -41,7 +41,7 @@ public class ShopController {
 	@RequestMapping(value = "/my")
 	public String my() {
 
-		return "shop/my";
+		return "shop/my"; 
 	}
 
 	// 정기 배송
@@ -81,12 +81,22 @@ public class ShopController {
 
 	// 상품 상세보기
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
-	public String detail(@PathVariable("pdt_num") int pdt_num, Model model) throws Exception {
-		System.out.println("detail Shop Controller");
-		ProductVo productVo = adminService.readPDT(pdt_num);
+	public String detail(@PathVariable("pdt_num") int pdt_num, Model model,HttpServletRequest request) throws Exception {
+		System.out.println("detail Shop Controller"); 
+		ProductVo productVo = adminService.readPDT(pdt_num); 
 
-		model.addAttribute("productVo", productVo);
-
+		model.addAttribute("productVo", productVo); 
+		HttpSession session = request.getSession();
+		// 최근본 상품 세션에 추가
+		List<ProductVo> list = (ArrayList)session.getAttribute("veiw");
+		if (list == null) {
+			list = new ArrayList<>();
+			session.setAttribute("veiw", list);
+		}
+		list.add(productVo);
+		// ----
+		System.out.println(list);
+		
 		return "shop/detail";
 	}
 

@@ -1,9 +1,7 @@
 package com.kh.team2.controlloer;
 
 import java.util.List;
-
-
-
+import java.util.concurrent.SynchronousQueue;
 
 import javax.inject.Inject;
 
@@ -52,18 +50,25 @@ public class ReviewController {
 	
 	// 글쓰러가기
 	@RequestMapping(value ="/reviewRegister",method = RequestMethod.GET)
-	public String reviewRegister(Model model) throws Exception {
+	public String reviewRegister(Model model, PagingDto pagingDto) throws Exception {
 		
 		System.out.println("글쓰기들어옴");
-		
+		List<ProductVo> list = reviewService.productName();
+		System.out.println(list);
+		model.addAttribute("list", list);
 		return "/review/reviewRegister";
 	}
 	
 	// 글등록
 	@RequestMapping(value = "/reviewRegister", method = RequestMethod.POST)
-	public String insertReview(Model model, MultipartHttpServletRequest request ,ReviewVo reviewVo) throws Exception {
+	public String insertReview(Model model, ReviewVo reviewVo) throws Exception {
 //		reviewService.insertReview(reviewVo);
-		MultipartFile file = request.getFile("file");
+//		MultipartFile file = request.getFile("file");
+//		String originalFileName = file.getOriginalFilename();
+//		System.out.println("file:" + originalFileName);
+		System.out.println("글쓰고 리뷰게시판옴");
+		
+		reviewService.insertReview(reviewVo);
 		return "redirect:/review/reviewBoard";
 	}
 	

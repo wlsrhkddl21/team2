@@ -10,7 +10,7 @@ public class CartVo {
 	@SuppressWarnings("unused")
 	private String str_price;
 	private int cart_count;
-	private String mem_id;
+	private String mem_id; 
 	private String pdt_image;
 
 	@Override

@@ -13,6 +13,9 @@
 .not_title {
 	cursor: pointer;
 }
+th {
+	background-color:#f7f7f7;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -78,7 +81,6 @@ $(document).ready(function(){
 				<tbody>
 					
 				<c:forEach items="${list }" var="qnaVo">
-				${qnaVo }
 					<tr>
 						<td>${qnaVo.qna_num }</td>
 						<td style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -87,8 +89,17 @@ $(document).ready(function(){
 									<c:if test="${qnaVo.qna_relevel gt 0}">
 										<img src="/images/nbsp.png" width="${qnaVo.qna_relevel * 20}"/>ㄴ
 									</c:if>
-								<a data-bno="${qnaVo.qna_num}" class="not_title" style="font-weight:bold">
-									${qnaVo.qna_title }</a>
+									<c:choose>
+										<c:when test="${qnaVo.qna_success == 'n' }">
+											<a data-bno="${qnaVo.qna_num}" class="not_title" style="font-weight:bold">
+											${qnaVo.qna_title }</a>		
+										</c:when>
+										<c:otherwise>
+											<a data-bno="${qnaVo.qna_num}" class="not_title">
+											${qnaVo.qna_title }</a>
+										</c:otherwise>
+									</c:choose>
+								
 								</c:when>
 								<c:when test="${mem_id != qnaVo.qna_writer}">
 									<span style="color:#b3b3b3;">
@@ -100,16 +111,18 @@ $(document).ready(function(){
 						<td>${qnaVo.qna_writer }</td>
 						<td><fmt:formatDate value="${qnaVo.qna_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>
-							<c:choose>
-								<c:when test="${qnaVo.qna_success == 'n'}">
+						<c:choose>
+							<c:when test="${qnaVo.qna_success == 'n'}">
+								<td style="font-weight:bold">
 									미답변
-								</c:when>
-								<c:otherwise>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
 									답변완료
-								</c:otherwise>
-							</c:choose>
-						</td>
+								</td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 				</c:forEach>
 				</tbody>

@@ -3,6 +3,7 @@ package com.kh.team2.service;
 import java.util.List;
 
 import com.kh.team2.domain.PagingDto;
+import com.kh.team2.domain.ProductVo;
 import com.kh.team2.domain.ReviewVo;
 
 public interface ReviewService {
@@ -15,4 +16,7 @@ public interface ReviewService {
 	
 	// 글 등록
 	public void insertReview(ReviewVo reviewVo) throws Exception;
+	
+	// 
+	public List<ProductVo> productName() throws Exception;
 }

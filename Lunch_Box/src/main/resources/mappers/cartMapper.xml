@@ -15,7 +15,7 @@
 	<select id="isCart" resultType="int">
 		select count(*)
 		from tbl_cart
-		where pdt_num = #{pdt_num}
+		where pdt_num = #{pdt_num} and mem_id = #{mem_id}
 	</select>
 	
 

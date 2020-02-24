@@ -91,6 +91,11 @@ public class NoticeController {
 		return "redirect:/board/ntRead?not_num=" + boardVo.getNot_num() + "&page=" 
 		+ pagingDto.getPage() + "&perPage=" + pagingDto.getPerPage();
 	}
+	// 고객센터
+	@RequestMapping(value="/csCenter", method = RequestMethod.GET)
+	public String csCenter() throws Exception {
+		return "board/csCenter";
+	}
 	
 	// 리뷰 게시판
 	@RequestMapping(value="/reviewBoard", method = RequestMethod.GET)
