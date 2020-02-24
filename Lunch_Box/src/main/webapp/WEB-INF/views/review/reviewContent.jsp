@@ -4,22 +4,22 @@
 
 <script>
 $(document).ready(function() {
-	// 	수정 버튼
-	$("#btnModify").click(function() {
-		$("#not_title").prop("readonly", false);
-		$("#not_content").prop("readonly", false);
-		$("#not_title").css("border","1px solid");
-		$("#not_content").css("border","1px solid");
-		$(this).hide(100);
-		$("button[type=submit]").show(100);
-		$("#btnCancel").show(100);
-		$("#btnHot").show(100);
-		if("${boardVo.not_hot}" == 1) {
-			console.log("중요공지임");
-			$("#btnHot").hide(100);
-			$("#btnHotCancel").show(100);
-		}
-	});
+// 	// 	수정 버튼
+// 	$("#btnModify").click(function() {
+// 		$("#not_title").prop("readonly", false);
+// 		$("#not_content").prop("readonly", false);
+// 		$("#not_title").css("border","1px solid");
+// 		$("#not_content").css("border","1px solid");
+// 		$(this).hide(100);
+// 		$("button[type=submit]").show(100);
+// 		$("#btnCancel").show(100);
+// 		$("#btnHot").show(100);
+// 		if("${boardVo.not_hot}" == 1) {
+// 			console.log("중요공지임");
+// 			$("#btnHot").hide(100);
+// 			$("#btnHotCancel").show(100);
+// 		}
+// 	});
 	
 	// 목록 버튼
 	$("#btnListAll").click(function(){
@@ -31,31 +31,31 @@ $(document).ready(function() {
 			$("#frmList").attr("action", "/review/reviewDelete").submit();	
 		}
 	});
-	// 수정취소 버튼
-	$("#btnCancel").click(function(){
-		$("#not_title").prop("readonly", true);
-		$("#not_content").prop("readonly", true);
-		$("#not_title").css("border","none");
-		$("#not_content").css("border","none");
-		$("button[type=submit]").hide(100);
-		$("#btnHotCancel").hide(100);
-		$(this).hide(100);
-		$("#btnModify").show(100);
-		$("#btnHot").hide(100);
-	});
+// 	// 수정취소 버튼
+// 	$("#btnCancel").click(function(){
+// 		$("#not_title").prop("readonly", true);
+// 		$("#not_content").prop("readonly", true);
+// 		$("#not_title").css("border","none");
+// 		$("#not_content").css("border","none");
+// 		$("button[type=submit]").hide(100);
+// 		$("#btnHotCancel").hide(100);
+// 		$(this).hide(100);
+// 		$("#btnModify").show(100);
+// 		$("#btnHot").hide(100);
+// 	});
 	
 	// 댓글 작성완료 버튼
-	$("#btn_ntReply").click(function(){
-		var ntbno = "${boardVo.not_num}";
-		var ntrcontent = $("#ntRcontent").val();
-		var ntrwriter = $("#ntRwriter").val();
+	$("#btn_reply").click(function(){
+		var rev_num = "${reviewVo.rev_num}";
+		var repContent = $("#repContent").val();
+		var repWriter = $("#repWriter").val();
 		var sendData = {
-				"ntbno" : ntbno,
-				"ntrcontent" : ntrcontent,
-				"ntrwriter" : ntrwriter
+				"rev_num" : rev_num,
+				"repContent" : repContent,
+				"repWriter" : repWriter
 		};
 		console.log(sendData);
-		var url = "/replies/register";
+		var url = "/reviewReply/insertReply";
 		
 		$.ajax({
 			"type" : "post",
@@ -68,83 +68,83 @@ $(document).ready(function() {
 			"data" : JSON.stringify(sendData),
 			"success" : function(rData) {
 				console.log(rData);
-				replyList();
+// 				replyList();
 			}
 		});
 	});
 	
 	
-	// 댓글 목록 불러오기
-	function replyList() {
-		$("#replyList").empty();
-		var url = "/replies/all/${boardVo.not_num}";
-		$.getJSON(url, function(rData) {
-			console.log(rData);
-			var strHtml = "";
-			$(rData).each(function(){
-				strHtml += "<tr>";
-				strHtml += "<td>" + this.ntrno +"</td>";
-				strHtml += "<td>" + this.ntrcontent + "</td>";
-				strHtml += "<td>" + this.ntrwriter + "</td>";
-				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
-				if("${mem_id}" == this.ntrwriter) {
-					strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
-					strHtml += " data-rno='" + this.ntrno + "'";
-					strHtml += " data-reply_text='" + this.ntrcontent + "'";
-					strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
-					strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
-					strHtml += " data-rno='" + this.ntrno + "'";
-					strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
-				}
-				strHtml += "</tr>";
-			});
-			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
-		});
-	}
-	// 댓글 수정 버튼
-	$("#replyList").on("click", ".btnReplyUpdate", function() {
-		console.log("댓글 수정 버튼");
-		var ntrno = $(this).attr("data-rno");
-		var ntrcontent = $(this).attr("data-reply_text");
-		var ntrwriter = $(this).attr("data-replyer");
-		$("#modal_rno").val(ntrno);
-		$("#modal_reply_text").val(ntrcontent);
-		$("#modal_replyer").val(ntrwriter);
-		$("#modal-a").trigger("click");
-		$("#myModal").modal("show"); 
-	});
-	// 댓글 모달창 완료 버튼
-	$("#btnModalReply").click(function(){
-		console.log("댓글완료");
-		var ntrno = $("#modal_rno").val();
-		var ntrcontent = $("#modal_reply_text").val();
-		var ntrwriter = $("#modal_replyer").val();
+// 	// 댓글 목록 불러오기
+// 	function replyList() {
+// 		$("#replyList").empty();
+// 		var url = "/replies/all/${boardVo.not_num}";
+// 		$.getJSON(url, function(rData) {
+// 			console.log(rData);
+// 			var strHtml = "";
+// 			$(rData).each(function(){
+// 				strHtml += "<tr>";
+// 				strHtml += "<td>" + this.ntrno +"</td>";
+// 				strHtml += "<td>" + this.ntrcontent + "</td>";
+// 				strHtml += "<td>" + this.ntrwriter + "</td>";
+// 				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
+// 				if("${mem_id}" == this.ntrwriter) {
+// 					strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
+// 					strHtml += " data-rno='" + this.ntrno + "'";
+// 					strHtml += " data-reply_text='" + this.ntrcontent + "'";
+// 					strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
+// 					strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
+// 					strHtml += " data-rno='" + this.ntrno + "'";
+// 					strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
+// 				}
+// 				strHtml += "</tr>";
+// 			});
+// 			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
+// 		});
+// 	}
+// 	// 댓글 수정 버튼
+// 	$("#replyList").on("click", ".btnReplyUpdate", function() {
+// 		console.log("댓글 수정 버튼");
+// 		var ntrno = $(this).attr("data-rno");
+// 		var ntrcontent = $(this).attr("data-reply_text");
+// 		var ntrwriter = $(this).attr("data-replyer");
+// 		$("#modal_rno").val(ntrno);
+// 		$("#modal_reply_text").val(ntrcontent);
+// 		$("#modal_replyer").val(ntrwriter);
+// 		$("#modal-a").trigger("click");
+// 		$("#myModal").modal("show"); 
+// 	});
+// 	// 댓글 모달창 완료 버튼
+// 	$("#btnModalReply").click(function(){
+// 		console.log("댓글완료");
+// 		var ntrno = $("#modal_rno").val();
+// 		var ntrcontent = $("#modal_reply_text").val();
+// 		var ntrwriter = $("#modal_replyer").val();
 		
- 		var sendData = {
-				"ntrno" : ntrno,
- 				"ntrcontent" : ntrcontent,
- 				"ntrwriter" : ntrwriter
- 		}
- 		var url = "/replies/update";
+//  		var sendData = {
+// 				"ntrno" : ntrno,
+//  				"ntrcontent" : ntrcontent,
+//  				"ntrwriter" : ntrwriter
+//  		}
+//  		var url = "/replies/update";
 		
-		$.ajax({
-			"type" : "put",
-			"url" : url,
-			"headers" : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "put"
-			},
-			"dataType" : "text",
-			"data" : JSON.stringify(sendData),
-			"success" : function(rData) {
-				console.log(rData);
-				replyList();
-				$("#btnModalClose").trigger("click");
-			}
-		});
-	});
+// 		$.ajax({
+// 			"type" : "put",
+// 			"url" : url,
+// 			"headers" : {
+// 				"Content-Type" : "application/json",
+// 				"X-HTTP-Method-Override" : "put"
+// 			},
+// 			"dataType" : "text",
+// 			"data" : JSON.stringify(sendData),
+// 			"success" : function(rData) {
+// 				console.log(rData);
+// 				replyList();
+// 				$("#btnModalClose").trigger("click");
+// 			}
+// 		});
+// 	});
 	
- 	replyList(); // 기능 실행
+//  	replyList(); // 기능 실행
 });
 	
 </script>
@@ -246,7 +246,7 @@ $(document).ready(function() {
 			<tr>
 				<th scope="row" colspan="5" class="form-group" >
 				<textarea rows="10" id="rev_content" 
-						name="rev_content" style="border:none" readonly>${reviewVo.rev_content} ${reviewVo.rev_writer}</textarea>
+						name="rev_content" style="border:none" readonly>${reviewVo.rev_content}</textarea>
 				</th>
 			</tr>
 		</tbody>
@@ -281,18 +281,18 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="ntRwriter">작성자</label>
-				<input type="text" id="ntRwriter" value="${mem_id }"
+				<label for="repWriter">작성자</label>
+				<input type="text" id="repWriter" value="${mem_id}"
 					class="form-control" readonly/>
 			</div>
 			<div class="form-group">
-				<label for="ntRcontent">댓글내용</label>
-				<input type="text" id="ntRcontent"
+				<label for="repContent">댓글내용</label>
+				<input type="text" id="repContent"
 					class="form-control"/>
 			</div>
 			<div class="form-group">
 				<button type="button" class="btn-xs btn-success"
-					id="btn_ntReply">작성완료</button>
+					id="btn_reply">작성완료</button>
 			</div>
 		</div>
 	</div>
@@ -300,36 +300,36 @@ $(document).ready(function() {
 	<!-- // 댓글 작성 -->
 	
 	<!-- 댓글 목록 -->
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>댓글내용</th>
-						<th>작성자</th>
-						<th>날짜</th>
-					<c:if test="${mem_id == boardVo.not_writer}">
-						<th>수정</th>
-						<th>삭제</th>
-					</c:if>
-					</tr>
-				</thead>
-				<tbody id="replyList">
+<!-- 	<div class="row"> -->
+<!-- 		<div class="col-md-12"> -->
+<!-- 			<table class="table"> -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th>번호</th> -->
+<!-- 						<th>댓글내용</th> -->
+<!-- 						<th>작성자</th> -->
+<!-- 						<th>날짜</th> -->
+<%-- 					<c:if test="${mem_id == boardVo.not_writer}"> --%>
+<!-- 						<th>수정</th> -->
+<!-- 						<th>삭제</th> -->
+<%-- 					</c:if> --%>
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody id="replyList"> -->
 					
-				</tbody>
-			</table>
-		</div>
-	</div>
-		</div>
-		<div class="col-md-1" ></div>
-	</div>
+<!-- 				</tbody> -->
+<!-- 			</table> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 		</div> -->
+<!-- 		<div class="col-md-1" ></div> -->
+<!-- 	</div> -->
 	
-	<hr/>
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
+<!-- 	<hr/> -->
+<!-- 		</div> -->
+<!-- 		<div class="col-md-2"> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	<!-- // 댓글 목록 -->
 </div>
 
