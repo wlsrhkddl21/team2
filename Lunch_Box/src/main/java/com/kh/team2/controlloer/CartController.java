@@ -1,8 +1,12 @@
 package com.kh.team2.controlloer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team2.domain.CartVo;
+import com.kh.team2.domain.ProductVo;
 import com.kh.team2.service.CartService;
 
 @Controller
@@ -24,12 +29,19 @@ public class CartController {
 	
 	
 	@RequestMapping(value = "/list" , method = RequestMethod.GET)
-	public String view(Model model) throws Exception {
-		List<CartVo> list = cartService.cartList("jang");
+	public String view(Model model,HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		String mem_id = (String)session.getAttribute("mem_id");
+		// 최근목록
+		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
+		// ----
+		List<CartVo> list = cartService.cartList(mem_id);
 		boolean isEmpty = false;
 		if (list.isEmpty()) {
 			isEmpty = true;
 		}
+		System.out.println(veiwList);
+		model.addAttribute("veiwList",veiwList);
 		model.addAttribute("list",list);
 		model.addAttribute("isEmpty",isEmpty);
 		return "cart/cartList"; 
@@ -38,13 +50,15 @@ public class CartController {
 	
 	@RequestMapping(value = "/insert/{pdt_num}/{count}", method = RequestMethod.GET)
 	public String inset(@PathVariable("pdt_num") int pdt_num,
-						@PathVariable("count") int count) throws Exception {
+						@PathVariable("count") int count,HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		String mem_id = (String)session.getAttribute("mem_id");
 		CartVo vo = new CartVo();
-		int isCart = cartService.isCart(pdt_num);
+		int isCart = cartService.isCart(pdt_num,mem_id);
 		if (isCart > 0) {
-			cartService.countUp(count, pdt_num);
+			cartService.countUp(count, pdt_num); 
 		} else {
-			vo.setMem_id("jang");
+			vo.setMem_id((String)session.getAttribute("mem_id"));
 			vo.setPdt_num(pdt_num);
 			vo.setCart_count(count);
 			cartService.cartInsert(vo);
