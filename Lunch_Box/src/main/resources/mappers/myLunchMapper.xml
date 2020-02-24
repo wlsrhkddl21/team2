@@ -13,6 +13,9 @@
 
 	<select id="readAllMLB" resultType="MyLunchVo">
 		select * from tbl_mylunch
+		<if test="lunch_type != null and lunch_type != 'all'">
+		where lunch_type=#{lunch_type}
+		</if>
 		order by lunch_num
 	</select>
 
@@ -25,7 +28,7 @@
 		update tbl_mylunch set
 		lunch_type=#{lunch_type},
 		lunch_name=#{lunch_name},
-		lunch_price=#{lunch_price},
+		lunch_price=#{lunch_price}
 		where lunch_num = #{lunch_num}
 	</update>
 

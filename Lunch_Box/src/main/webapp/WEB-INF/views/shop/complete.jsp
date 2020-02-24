@@ -3,6 +3,31 @@
 
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/buyStyle.jsp"%>
+<style>
+
+.btn-outline-light{
+	font-size: 20px;
+	margin: 15px;
+	padding: 15px;
+	padding-left:15px;
+	padding-right:15px;
+	font-weight: 600;
+}
+</style>
+<script>
+	$(function(){
+		
+		$("#btnHome").click(function(){
+			location.href="/";
+			console.log("클릭");
+		});
+		$("#btnBuyList").click(function(){
+			
+		});
+		
+	});
+
+</script>
 <div class="container-fluid">
 	<!--구매 페이지 -->
 	<div class="row">
@@ -28,9 +53,24 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-w3ls p-md-5 p-4"></div>
+							<div class="form-w3ls p-md-5 p-4">
+								<table class="table">
+									<tr>
+										<th height="100px"
+											style="font-size: 30px; font-weight: 800; align-content: center;">
+											<div style="margin-top: 15px;">주문이 성공적으로 완료 되었습니다.</div>
+										</th>
+									</tr>
+								</table>
+								<div class="text-center">
+									<button class="btn btn-outline-light" id="btnHome" type="button" style="background: #fd5c63;">홈
+										으로</button>
+									<button class="btn btn-outline-light" id="btnBuyList" type="button" style="background: #fd5c63;">주문
+										내역</button>
+								</div>
+							</div>
 						</div>
-						<div class="col-lg-2 map"></div>
+						<div class="col-lg-2 map" style="margin-bottom: 300px;"></div>
 						<!-- //contact form -->
 					</div>
 				</div>

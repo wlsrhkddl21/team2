@@ -95,7 +95,7 @@ $(document).ready(function(){
 							<!-- First Tier Drop Down -->
 							<label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"
 									aria-hidden="true"></span>							</label>
-							<a href="#">고객센터 <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+							<a href="/cs/">고객센터 <span class="fa fa-angle-down" aria-hidden="true"></span></a>
 							<input type="checkbox" id="drop-2" />
 							<ul>
 								<li><a href="/board/notice" class="drop-text">공지사항</a></li>

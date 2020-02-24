@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team2.domain.PagingDto;
 import com.kh.team2.domain.QnaVo;
@@ -30,5 +31,18 @@ public class QnaServiceImpl implements QnaService {
 	public QnaVo read(int qna_num) throws Exception {
 		return qnaDao.read(qna_num);
 	}
+
+	@Override
+	public void create(QnaVo vo) throws Exception {
+		qnaDao.create(vo);
+	}
+
+	@Override
+	@Transactional
+	public void answer(QnaVo vo) throws Exception {
+		qnaDao.answer(vo);
+		qnaDao.updateSuccess(vo);
+	}
+
 
 }

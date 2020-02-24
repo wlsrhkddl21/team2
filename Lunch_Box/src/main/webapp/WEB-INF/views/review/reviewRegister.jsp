@@ -13,35 +13,23 @@
 .not_title {
 	cursor: pointer;
 }
-.starR1{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
-    background-size: auto 100%;
-    width: 15px;
-    height: 30px;
-    float:left;
-    text-indent: -9999px;
-    cursor: pointer;
-}
-.starR2{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-    background-size: auto 100%;
-    width: 15px;
-    height: 30px;
-    float:left;
-    text-indent: -9999px;
-    cursor: pointer;
-}
-.starR1.on{background-position:0  0;}
-.starR2.on{background-position:-15px 0;}
+
 </style>
 <script>
 $(document).ready(function(){
-	$()
+	$("#btnSubmit").click(function(){
+// 		location.href = "/review/reviewBoard";
+		$("#registForm").submit();
+		console.log("클릭됨");
+	});
+// 	$("#btnFile").click(function(){
+// 		("#pdt_image").trigger("click");
+// 	});
 });
 </script>
 <div class="container-fluid">
 
-<!-- 	<form id="frmPage" action="/review/reviewBoard" method="get"> -->
+<!-- 	<form id="frmRegist" action="/review/reviewBoard" method="post"> -->
 <!-- 		<input type="hidden" name="rev_num"/> -->
 <!-- 		<input type="hidden" name="page"  -->
 <%-- 			value="${pagingDto.page }"/> --%>
@@ -56,7 +44,8 @@ $(document).ready(function(){
 <%-- 			value="${pagingDto.perPage }"/> --%>
 <!-- 	</form> -->
 	
-	<section class="contact py-5" id="contact">
+	
+	<section  class="contact py-5" id="contact" >
 		<div class="container">
 			<h3 class="title-w3ls text-center text-bl mb-5">리뷰작성</h3>
 			<div class="row mx-sm-0 mx-2">
@@ -68,7 +57,7 @@ $(document).ready(function(){
 				<!-- contact form -->
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
-						<form action="/review/reviewBoard" method="post">
+						<form id="registForm" action="/review/reviewRegister" method="post" >
 							
 							<div class="form-group">
 								<label>제목</label>
@@ -78,21 +67,30 @@ $(document).ready(function(){
 								<label>글내용</label>
 								<input id="rev_content" class="form-control" type="text" name="rev_content">
 							</div>
-							<!-- 별점 -->
-							<label>만족도</label>
-							<div class="starRev">
-								<span class="starR1 on">별1_왼쪽</span>
-								<span class="starR2">별1_오른쪽</span>
-								<span class="starR1">별2_왼쪽</span>
-								<span class="starR2">별2_오른쪽</span>
-								<span class="starR1">별3_왼쪽</span>
-								<span class="starR2">별3_오른쪽</span>
-								<span class="starR1">별4_왼쪽</span>
-								<span class="starR2">별4_오른쪽</span>
-								<span class="starR1">별5_왼쪽</span>
-								<span class="starR2">별5_오른쪽</span>
+							<div class="form-group">
+								<label>writer</label>
+								<input id="rev_writer" class="form-control" type="text" name="rev_writer">
 							</div>
-							<!-- /별점 -->	
+							<div class="form-group">
+								<label>상품명</label>
+								<select name=rev_pdt_name class="form-control">
+								<c:forEach items="${list}" var="list">
+									<option value="${list.pdt_name}">${list.pdt_name}</option>
+								</c:forEach>
+								</select>
+							</div>
+								
+									
+								
+								
+							
+<!-- 							<div class="form-group"> -->
+							
+<!-- 									<button type="button" class="btn btn-primary" id="btnFile">사진 첨부</button> -->
+<!-- 							<input type="file" class="form-control-file" id="pdt_image" name="file" /> -->
+							
+<!-- 							</div> -->
+							
 							<div class="input-group1 text-right">
 								<button id="btnSubmit" class="btn" type="submit">Submit</button>
 							</div>

@@ -12,18 +12,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.team2.domain.BuyDto;
 import com.kh.team2.domain.BuyVo;
 import com.kh.team2.domain.CartDto;
 import com.kh.team2.domain.MemberVo;
+import com.kh.team2.domain.PagingDto;
 import com.kh.team2.domain.PointDto;
 import com.kh.team2.domain.ProductVo;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
 import com.kh.team2.service.MemberService;
-import com.kh.team2.service.ProductService;
 
 @Controller
 @RequestMapping("/shop/*")
@@ -31,9 +30,6 @@ public class ShopController {
 	// 상품 정보 불러오기 (readPDT)
 	@Inject
 	private AdminService adminService;
-
-	@Inject
-	private ProductService productService;
 
 	@Inject
 	MemberService memberService;
@@ -50,7 +46,7 @@ public class ShopController {
 
 	// 정기 배송
 	@RequestMapping(value = "/sub")
-	public String subscription(Model model) throws Exception {
+	public String subscription(Model model,PagingDto pagingDto) throws Exception {
 		System.out.println("subscription Shop Controller");
 
 		List<ProductVo> list = adminService.readAllPDT();
@@ -60,8 +56,19 @@ public class ShopController {
 	}
 
 	// 일반 상품
+	@RequestMapping(value = "/singleT")
+	public String singleT(Model model,PagingDto pagingDto) throws Exception {
+		
+		System.out.println("single Shop Controller");
+		
+		List<ProductVo> list = adminService.readAllPDT();
+		model.addAttribute("list", list);
+		
+		return "shop/single";
+	}
+	// 일반 상품
 	@RequestMapping(value = "/single")
-	public String single(Model model) throws Exception {
+	public String single(Model model,PagingDto pagingDto) throws Exception {
 
 		System.out.println("single Shop Controller");
 
@@ -74,9 +81,10 @@ public class ShopController {
 	// 상품 상세보기
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
 	public String detail(@PathVariable("pdt_num") int pdt_num, Model model,HttpServletRequest request) throws Exception {
-		System.out.println("detail Shop Controller");
-		ProductVo productVo = productService.readByPdtNum(pdt_num);
-		model.addAttribute("productVo", productVo);
+		System.out.println("detail Shop Controller"); 
+		ProductVo productVo = adminService.readPDT(pdt_num); 
+
+		model.addAttribute("productVo", productVo); 
 		HttpSession session = request.getSession();
 		// 최근본 상품 세션에 추가
 		List<ProductVo> list = (ArrayList)session.getAttribute("veiw");
@@ -102,7 +110,7 @@ public class ShopController {
 
 		for (int i = 0; i < pdt_num.length; i++) {
 //			System.out.println("상품번호:" + pdt_num[i] + "갯수:" + buy_count[i]);
-			ProductVo pdtVo = productService.readByPdtNum(pdt_num[i]);
+			ProductVo pdtVo = adminService.readPDT(pdt_num[i]);
 
 			BuyDto dto = new BuyDto(); // 주문 내역 보여주는 dto
 			dto.setPdt_num(pdt_num[i]);
@@ -126,13 +134,14 @@ public class ShopController {
 		return "shop/buy";
 	}
 
-	@RequestMapping(value = "/complete", method = RequestMethod.POST)
-	public String complete(BuyVo buyVo,CartDto cartDto,PointDto pointDto) throws Exception {
+	@RequestMapping(value = "/complete")
+	//BuyVo buyVo,CartDto cartDto,PointDto pointDto), method = RequestMethod.POST)
+	public String complete() throws Exception {
 		// buy 마스터 테이블 추가
 		// 디테일 테이블 추가
 		// 결제 완료 후 멤버 포인트 수정
 		
-		buyService.buy(buyVo, pointDto, cartDto);
+//		buyService.buy(buyVo, pointDto, cartDto);
 
 		return "shop/complete";
 	}

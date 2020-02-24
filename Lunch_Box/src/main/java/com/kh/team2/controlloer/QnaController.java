@@ -36,17 +36,32 @@ public class QnaController {
 	@RequestMapping(value="/qnaRegister", method = RequestMethod.GET)
 	public String ntRegist(Model model, PagingDto pagingDto) throws Exception {
 		model.addAttribute("pagingDto", pagingDto);
-		return "board/ntRegister";
+		return "board/qnaRegister";
 	}
 	
-//	// QnA 등록하기
-//	@RequestMapping(value= "/qnaRegister", method = RequestMethod.POST)
-//	public String ntRegisterPOST(BoardVo boardVo, PagingDto pagingDto) throws Exception {
-////		System.out.println(boardVo);
-//		qnaService.create(boardVo);
-//		return "redirect:/board/qna?page=1&perPage=" + pagingDto.getPerPage();
-//	}
-//	
+	// QnA 등록하기
+	@RequestMapping(value= "/qnaRegister", method = RequestMethod.POST)
+	public String ntRegisterPOST(QnaVo qnaVo, PagingDto pagingDto) throws Exception {
+//		System.out.println(boardVo);
+		qnaService.create(qnaVo);
+		return "redirect:/board/qna?page=1&perPage=" + pagingDto.getPerPage();
+	}
+	
+	// QnA 답변작성 페이지로 이동
+		@RequestMapping(value="/qnaAnswer", method = RequestMethod.GET)
+		public String qnaAnswer(Model model, PagingDto pagingDto) throws Exception {
+			model.addAttribute("pagingDto", pagingDto);
+			return "board/qnaAnswer";
+		}
+		
+	// QnA 답변등록하기
+	@RequestMapping(value= "/qnaAnswer", method = RequestMethod.POST)
+	public String answerPOST(QnaVo qnaVo, PagingDto pagingDto) throws Exception {
+//		System.out.println(boardVo);
+		qnaService.answer(qnaVo);
+		return "redirect:/board/qna?page=1&perPage=" + pagingDto.getPerPage();
+	}
+	
 	// 글읽기
 	@RequestMapping(value="/qnaRead", method = RequestMethod.GET)
 	public String read(@RequestParam("qna_num") int qna_num,

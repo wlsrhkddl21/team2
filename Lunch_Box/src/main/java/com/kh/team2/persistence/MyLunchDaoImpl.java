@@ -1,6 +1,8 @@
 package com.kh.team2.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,13 +22,11 @@ public class MyLunchDaoImpl implements MyLunchDao {
 	@Override
 	public void insertMLB(MyLunchVo myLunchVo) throws Exception {
 		sqlSession.insert(NAMESPCE+".insertMLB",myLunchVo);
-		
 	}
 
 	@Override
 	public void updateMLB(MyLunchVo myLunchVo) throws Exception {
 		sqlSession.update(NAMESPCE+".updateMLB",myLunchVo);
-		
 	}
 
 	@Override
@@ -35,15 +35,14 @@ public class MyLunchDaoImpl implements MyLunchDao {
 	}
 
 	@Override
-	public List<MyLunchVo> readAllMLB() throws Exception {
-		
-		return sqlSession.selectList(NAMESPCE+".readAllMLB");
+	public List<MyLunchVo> readAllMLB(String lunch_type) throws Exception {
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("lunch_type", lunch_type);
+		return sqlSession.selectList(NAMESPCE+".readAllMLB", m);
 	}
 
 	@Override
 	public void deleteMLB(int lunch_num) throws Exception {
-		sqlSession.delete(NAMESPCE+".deleteMLB");
-		
+		sqlSession.delete(NAMESPCE+".deleteMLB",lunch_num);
 	}
-
 }

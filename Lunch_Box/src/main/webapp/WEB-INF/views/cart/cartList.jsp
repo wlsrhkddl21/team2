@@ -96,6 +96,7 @@ $(document).ready(function() {
 			var isThis = $(this);
 			getHidden(isThis);
 		});
+		$("#cartForm").submit();
 	});
 	
 	// check buy
@@ -104,11 +105,13 @@ $(document).ready(function() {
 			var isThis = $(this);
 			getHidden(isThis);
 		});
+		$("#cartForm").submit();
 	});
 	// select buy
 	$(".oneBuy").click(function() {
 		var isThis = $(this);
 		getHidden(isThis);
+		$("#cartForm").submit();
 	});
 	
 	// pdt_view_list
@@ -192,8 +195,8 @@ $(document).ready(function() {
 		var countHidden = document.createElement("input");
 		countHidden.setAttribute("type", "hidden");
 		countHidden.setAttribute("value", isThis.parents("tr").find("#count").attr("data-type"));
-		countHidden.setAttribute("name", "cart_count");
-		countHidden.setAttribute("id","cart_count");
+		countHidden.setAttribute("name", "buy_count");
+		countHidden.setAttribute("id","buy_count");
 		document.getElementById("cartForm").appendChild(countHidden);
 		
 	}
@@ -246,7 +249,7 @@ $(document).ready(function() {
 					</div>
 					<div class="form-w3ls p-md-5 p-4">
 						<div>
-						<form id="cartForm" action="#" method="POST" style="margin: 0px;">
+						<form id="cartForm" action="/shop/buy" method="POST" style="margin: 0px;">
 							<table class="tbl_col" >
 								<colgroup>
 									<col style="width:5%;">

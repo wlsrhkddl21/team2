@@ -13,6 +13,9 @@
 .not_title {
 	cursor: pointer;
 }
+th {
+	background-color:#f7f7f7;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -25,7 +28,7 @@ $(document).ready(function(){
 	$("#btnRegister").click(function() {
 		console.log("클릭됨");
 		$("#frmPage").attr("action", "/board/qnaRegister");
-		$("input[name=not_num]").remove();
+		$("input[name=qna_num]").remove();
 		$("#frmPage").submit();
 	});
 	$(".not_title").click(function(e){
@@ -38,6 +41,7 @@ $(document).ready(function(){
 });
 </script>
 <div class="container-fluid">
+
 	<form id="frmPage" action="/board/qna" method="get">
 		<input type="hidden" name="qna_num"/>
 		<input type="hidden" name="page" 
@@ -54,25 +58,24 @@ $(document).ready(function(){
 	</form>
 	
 	<div class="row">
-	${mem_id }
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
 		<br>
 		<div style="height: 20px"></div>
 		<h3 class="title-w3ls text-center text-bl mb-5">문의게시판</h3>
-		<c:if test="${mem_id == 'admin'}">
+		<c:if test="${mem_id != null}">
 		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
 		</c:if>
 		<div style="height: 20px"></div>
-		<table class="table text-center table-striped">
+		<table class="table text-center">
 				<thead>
 					<tr>
 						<th>글번호</th> 
 						<th>글제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
-						<th>조회수</th>
+						<th>답변여부</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -80,14 +83,23 @@ $(document).ready(function(){
 				<c:forEach items="${list }" var="qnaVo">
 					<tr>
 						<td>${qnaVo.qna_num }</td>
-						<td>
+						<td style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<c:choose>
-								<c:when test="${mem_id == qnaVo.qna_writer || mem_id == 'admin'}">
-								<span style="color:#fd5c63;">
-									
-								</span>
-								<a data-bno="${qnaVo.qna_num}" class="not_title" style="font-weight:bold">
-									${qnaVo.qna_title }</a>
+								<c:when test="${mem_id == qnaVo.qna_writer || mem_id == 'admin' || mem_id == qnaVo.qna_success}">
+									<c:if test="${qnaVo.qna_relevel gt 0}">
+										<img src="/images/nbsp.png" width="${qnaVo.qna_relevel * 20}"/>ㄴ
+									</c:if>
+									<c:choose>
+										<c:when test="${qnaVo.qna_success == 'n' }">
+											<a data-bno="${qnaVo.qna_num}" class="not_title" style="font-weight:bold">
+											${qnaVo.qna_title }</a>		
+										</c:when>
+										<c:otherwise>
+											<a data-bno="${qnaVo.qna_num}" class="not_title">
+											${qnaVo.qna_title }</a>
+										</c:otherwise>
+									</c:choose>
+								
 								</c:when>
 								<c:when test="${mem_id != qnaVo.qna_writer}">
 									<span style="color:#b3b3b3;">
@@ -99,7 +111,18 @@ $(document).ready(function(){
 						<td>${qnaVo.qna_writer }</td>
 						<td><fmt:formatDate value="${qnaVo.qna_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>${qnaVo.qna_viewcount }</td>
+						<c:choose>
+							<c:when test="${qnaVo.qna_success == 'n'}">
+								<td style="font-weight:bold">
+									미답변
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+									답변완료
+								</td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 				</c:forEach>
 				</tbody>

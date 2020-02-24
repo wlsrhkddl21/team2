@@ -24,6 +24,13 @@ $(document).ready(function() {
 	$("#btnListAll").click(function(){
 		location.href = "/board/qna";
 	});
+	// 답변작성 버튼
+	$("#btnAnswer").click(function() {
+		console.log("클릭됨");
+		$("#frmList").attr("action", "/board/qnaAnswer");
+		$("input[name=qna_num]").remove();
+		$("#frmList").submit();
+	});
 	// 삭제 버튼
 	$("#btnDelete").click(function(){
 		if(confirm("삭제하시겠습니까?")) {
@@ -121,7 +128,6 @@ $(document).ready(function() {
 		$("#myModal").modal("show"); 
 	});
 	
-	
 	replyList(); // 기능 실행
 });
 	
@@ -176,10 +182,15 @@ $(document).ready(function() {
 		</div>
 	</div>
 
-
 	<form id="frmList" action="/board/notice" method="get">
 		<input type="hidden" name="qna_num" 
 			value="${qnaVo.qna_num}" />
+		<input type="hidden" name="qna_title" 
+			value="${qnaVo.qna_title}" />
+		<input type="hidden" name="qna_ref" 
+			value="${qnaVo.qna_ref}" />
+		<input type="hidden" name="qna_success" 
+			value="${qnaVo.qna_writer}" />
 		<input type="hidden" name="page" 
 			value="${pagingDto.page}"/>
 		<input type="hidden" name="perPage" 
@@ -209,8 +220,17 @@ $(document).ready(function() {
 				<input type="text" id="not_title" 
 						name="not_title" value="${qnaVo.qna_title}" style="border:none" 
 						readonly/></td>
-				<th scope="row">조회수</th>
-				<td>${qnaVo.qna_viewcount}</td>
+				<th scope="row">답변여부</th>
+				<td>
+					<c:choose>
+						<c:when test="${qnaVo.qna_success == 'n'}">
+							미답변
+						</c:when>
+						<c:otherwise>
+							답변완료
+						</c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 			<tr>
 				<th scope="row">작성자</th>
@@ -251,6 +271,8 @@ $(document).ready(function() {
 						id="btnModify">수정</button>
 					<button type="button" class="btn btn-danger"
 						id="btnDelete">삭제</button>				
+					<button type="button" class="btn btn-danger"
+						id="btnAnswer">답변하기</button>				
 				</c:if>
 					<button type="button" class="btn btn-primary"
 						id="btnListAll">목록</button>
