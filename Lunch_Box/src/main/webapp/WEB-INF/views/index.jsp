@@ -46,8 +46,6 @@
 	<section class="banner-bottom-w3layouts pb-5" id="services">
 		<div class="container">
 			<div class="row">
-<!-- 				<div class="col-lg-4 about-in text-center"> -->
-<!-- 					<div class="serv-cont-wthree"> -->
 					<c:forEach items="${top3List}" var="productVo" varStatus="status">
 						<div class="col-lg-4 about-in text-center" 
 						<c:if test="${status.count == 2 }">
@@ -60,28 +58,6 @@
 					</div>
 					</c:forEach>
 					</div>
-<!-- 				</div> -->
-<!-- 				<div class="col-lg-4 about-in text-center my-lg-0 my-4"> -->
-<!-- 					<div class="serv-cont-wthree"> -->
-<!-- 						<div class="icon-wthrees"> -->
-<!-- 							<span class="fa fa-smile-o"></span> -->
-<!-- 						</div> -->
-<!-- 						<h5 class="card-title mb-3 mt-4">Heading Here</h5> -->
-<!-- 						<p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit -->
-<!-- 							tempor.</p> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-lg-4 about-in text-center"> -->
-<!-- 					<div class="serv-cont-wthree"> -->
-<!-- 						<div class="icon-wthrees"> -->
-<!-- 							<span class="fa fa-birthday-cake"></span> -->
-<!-- 						</div> -->
-<!-- 						<h5 class="card-title mb-3 mt-4">Heading Here</h5> -->
-<!-- 						<p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit -->
-<!-- 							tempor.</p> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
 		</div>
 	</section>
 <!-- 	//banner bottom grids -->
