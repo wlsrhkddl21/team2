@@ -242,7 +242,7 @@ $(document).ready(function() {
 						name="rev_title" value="${reviewVo.rev_title}" style="border:none" 
 						readonly/></td>
 				<th scope="row">조회수</th>
-				<td>${boardVo.not_viewcount}</td>
+				<td>${reviewVo.rev_viewcount}</td>
 			</tr>
 			<tr>
 				<th scope="row">작성자</th>

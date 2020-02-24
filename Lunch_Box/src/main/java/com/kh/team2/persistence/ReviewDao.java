@@ -22,8 +22,10 @@ public interface ReviewDao {
 	// ���� �۾���
 	public void insertReview(ReviewVo reviewVo) throws Exception;
 		
-	//
+	// productVo 에서 상품명 가져오기
 	public List<ProductVo> productName() throws Exception;
 	
+	// 조회수
+	public void viewCount(int rev_num) throws Exception;
 	
 }

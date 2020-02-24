@@ -40,6 +40,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public ReviewVo readReview(int rev_num) throws Exception {
+		dao.viewCount(rev_num);
 		return dao.readReview(rev_num);
 	}
 

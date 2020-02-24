@@ -66,6 +66,7 @@ $(document).ready(function(){
 								</select>
 							</div>
 								
+								
 								<div class="form-group">
 								<label>사진첨부</label>
 								<input id="rev_image" class="form-control" type="file" name="file">

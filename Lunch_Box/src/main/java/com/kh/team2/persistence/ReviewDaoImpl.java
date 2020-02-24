@@ -51,6 +51,12 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<ReviewVo> reviewList(PagingDto pagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".reviewList", pagingDto);
 	}
+
+	@Override
+	public void viewCount(int rev_num) throws Exception {
+		sqlSession.update(NAMESPACE + ".viewCount", rev_num);
+		
+	}
 	
 	
 }
