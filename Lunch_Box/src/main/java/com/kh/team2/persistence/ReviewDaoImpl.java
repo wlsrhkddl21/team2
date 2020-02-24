@@ -14,14 +14,14 @@ import com.kh.team2.domain.ReviewVo;
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
 	
-	public static final String NAMESPACE = "com.kh.team2.mappers.reviewMapper";
+	public static final String NAMESPACE = "com.kh.mappers.reviewMapper";
 	
 	@Inject
 	private SqlSession sqlSession;
 
 	@Override
-	public ReviewVo selectList(int rev_num) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".selectList", rev_num);
+	public ReviewVo readReview(int rev_num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".readReview", rev_num);
 	}
 
 	@Override
@@ -42,14 +42,26 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
-	public ReviewVo readReview(int rev_num) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".readReview", rev_num);
-	}
-
-	@Override
 	public List<ProductVo> productName() throws Exception {
 		List<ProductVo> list = sqlSession.selectList(NAMESPACE+".productName");
 		return list;
+	}
+
+	@Override
+	public List<ReviewVo> reviewList(PagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".reviewList", pagingDto);
+	}
+
+	@Override
+	public void viewCount(int rev_num) throws Exception {
+		sqlSession.update(NAMESPACE + ".viewCount", rev_num);
+		
+	}
+
+	@Override
+	public void reviewDelete(int rev_num) throws Exception {
+		sqlSession.delete(NAMESPACE + ".reviewDelete", rev_num);
+		
 	}
 	
 	

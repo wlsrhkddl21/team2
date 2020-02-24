@@ -42,4 +42,10 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.insertPDT(productVo);
 	}
 
+	@Override
+	public List<ProductVo> readTOP3() throws Exception {
+		// TODO Auto-generated method stub
+		return adminDao.readTOP3();
+	}
+
 }

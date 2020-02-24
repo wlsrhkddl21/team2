@@ -1,104 +1,336 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../include/header.jsp" %>
-<style>
- .page-item.active .page-link {
-    z-index: 1;
-    color: #000 ;
-    background-color: #e0e0eb;
-    border-color: #e0e0eb;
-}
-.not_title {
-	cursor: pointer;
-}
-</style>
-<script>
-$(document).ready(function(){
-	$(".page-link").click(function(e){
-		e.preventDefault(); // 브라우저의 기본기능 막기 (a 태그 동작 막기)
-		var page = $(this).attr("data-page");
-		$("input[name=page]").val(page);
-		$("#frmPage").submit();
-	});
-	$("#btnRegister").click(function() {
-		console.log("클릭됨");
-		$("#frmPage").attr("action", "/board/ntRegister");
-		$("input[name=not_num]").remove();
-		$("#frmPage").submit();
-	});
-	$(".not_title").click(function(e){
-		e.preventDefault();
-		var not_num = $(this).attr("data-bno");
-		$("input[name=not_num]").val(not_num);
-		$("#frmRead").attr("action", "/board/ntRead");
-		$("#frmRead").submit();
-	});
-});
-</script>
-<div class="container-fluid">
 
-	<form id="frmPage" action="/review/reviewBoard" method="get">
-		<input type="hidden" name="rev_num"/>
-		<input type="hidden" name="page" 
-			value="${pagingDto.page }"/>
-		<input type="hidden" name="perPage"
-			value="${pagingDto.perPage }"/>
-	</form>
-	<form id="frmRead" action="/review/reviewBoard" method="get">
-		<input type="hidden" name="rev_num"/>
-		<input type="hidden" name="page" 
-			value="${pagingDto.page }"/>
-		<input type="hidden" name="perPage"
-			value="${pagingDto.perPage }"/>
-	</form>
+<script>
+$(document).ready(function() {
+	// 	수정 버튼
+	$("#btnModify").click(function() {
+		$("#not_title").prop("readonly", false);
+		$("#not_content").prop("readonly", false);
+		$("#not_title").css("border","1px solid");
+		$("#not_content").css("border","1px solid");
+		$(this).hide(100);
+		$("button[type=submit]").show(100);
+		$("#btnCancel").show(100);
+		$("#btnHot").show(100);
+		if("${boardVo.not_hot}" == 1) {
+			console.log("중요공지임");
+			$("#btnHot").hide(100);
+			$("#btnHotCancel").show(100);
+		}
+	});
 	
+	// 목록 버튼
+	$("#btnListAll").click(function(){
+		location.href = "/review/reviewBoard";
+	});
+	// 삭제 버튼
+	$("#btnDelete").click(function(){
+		if(confirm("삭제하시겠습니까?")) {
+			$("#frmList").attr("action", "/review/reviewDelete").submit();	
+		}
+	});
+	// 수정취소 버튼
+	$("#btnCancel").click(function(){
+		$("#not_title").prop("readonly", true);
+		$("#not_content").prop("readonly", true);
+		$("#not_title").css("border","none");
+		$("#not_content").css("border","none");
+		$("button[type=submit]").hide(100);
+		$("#btnHotCancel").hide(100);
+		$(this).hide(100);
+		$("#btnModify").show(100);
+		$("#btnHot").hide(100);
+	});
+	
+	// 댓글 작성완료 버튼
+	$("#btn_ntReply").click(function(){
+		var ntbno = "${boardVo.not_num}";
+		var ntrcontent = $("#ntRcontent").val();
+		var ntrwriter = $("#ntRwriter").val();
+		var sendData = {
+				"ntbno" : ntbno,
+				"ntrcontent" : ntrcontent,
+				"ntrwriter" : ntrwriter
+		};
+		console.log(sendData);
+		var url = "/replies/register";
+		
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			"dataType" :"text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+			}
+		});
+	});
+	
+	
+	// 댓글 목록 불러오기
+	function replyList() {
+		$("#replyList").empty();
+		var url = "/replies/all/${boardVo.not_num}";
+		$.getJSON(url, function(rData) {
+			console.log(rData);
+			var strHtml = "";
+			$(rData).each(function(){
+				strHtml += "<tr>";
+				strHtml += "<td>" + this.ntrno +"</td>";
+				strHtml += "<td>" + this.ntrcontent + "</td>";
+				strHtml += "<td>" + this.ntrwriter + "</td>";
+				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
+				if("${mem_id}" == this.ntrwriter) {
+					strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
+					strHtml += " data-rno='" + this.ntrno + "'";
+					strHtml += " data-reply_text='" + this.ntrcontent + "'";
+					strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
+					strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
+					strHtml += " data-rno='" + this.ntrno + "'";
+					strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
+				}
+				strHtml += "</tr>";
+			});
+			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
+		});
+	}
+	// 댓글 수정 버튼
+	$("#replyList").on("click", ".btnReplyUpdate", function() {
+		console.log("댓글 수정 버튼");
+		var ntrno = $(this).attr("data-rno");
+		var ntrcontent = $(this).attr("data-reply_text");
+		var ntrwriter = $(this).attr("data-replyer");
+		$("#modal_rno").val(ntrno);
+		$("#modal_reply_text").val(ntrcontent);
+		$("#modal_replyer").val(ntrwriter);
+		$("#modal-a").trigger("click");
+		$("#myModal").modal("show"); 
+	});
+	// 댓글 모달창 완료 버튼
+	$("#btnModalReply").click(function(){
+		console.log("댓글완료");
+		var ntrno = $("#modal_rno").val();
+		var ntrcontent = $("#modal_reply_text").val();
+		var ntrwriter = $("#modal_replyer").val();
+		
+ 		var sendData = {
+				"ntrno" : ntrno,
+ 				"ntrcontent" : ntrcontent,
+ 				"ntrwriter" : ntrwriter
+ 		}
+ 		var url = "/replies/update";
+		
+		$.ajax({
+			"type" : "put",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+				$("#btnModalClose").trigger("click");
+			}
+		});
+	});
+	
+ 	replyList(); // 기능 실행
+});
+	
+</script>
+
+		<a id="modal-a" href="#myModal" role="button" class="btn" data-toggle="modal"
+			 	style="display:none;">Launch demo modal</a>
+			
+			 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">
+								댓글 수정하기
+							</h5> 
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<input type="hidden" id="modal_rno"/>
+							<label for="modal_reply_text">댓글내용</label>
+							<input type="text" class="form-control"
+								id="modal_reply_text"/>
+							<label for="modal_replyer">작성자</label>
+							<input type="text" class="form-control"
+								id="modal_replyer" readonly/>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary"
+								id="btnModalReply">
+								수정완료
+							</button> 
+							<button type="button" class="btn btn-secondary" data-dismiss="modal"
+								id="btnModalClose">
+								닫기
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+<div class="container-fluid">
+<!-- 댓글 수정 모달 창 -->
 	<div class="row">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
-		<br>
 		<div style="height: 20px"></div>
-		<h3 class="title-w3ls text-center text-bl mb-5">리뷰 상세보기</h3>
-		<form action = "/review/reviewBoard" method="get">
-		<div style="height: 20px"></div>
-		<table class="table text-center table-striped">
+		<div class="row">
+		<div class="col-md-12">
+			 
+		</div>
+	</div>
+
+
+	<form id="frmList" action="/review/reviewBoard" method="get">
+		<input type="hidden" name="rev_num" 
+			value="${reviewVo.rev_num}" />
+		<input type="hidden" name="page" 
+			value="${pagingDto.page}"/>
+		<input type="hidden" name="perPage" 
+			value="${pagingDto.perPage}"/>
+	</form>
+
+	<div class="row">
+		<div class="col-md-1"></div>
+			<div class="col-md-10 main_grid_contact" >
+			<br>
+			<form id="myform" role="form" method="get" 
+				action="/review/reviewContent">
+			<input type="hidden" name="rev_num" value="${reviewVo.rev_num}"/>
+			<input type="hidden" name="page" value="${pagingDto.page}"/>
+			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
+			<table class="table">
+		<colgroup>
+			<col style="width:10%;">
+			<col style="width:50%;">
+			<col style="width:10%;">
+			<col style="width:40%;">
+		</colgroup>
+		<tbody>
+			<tr>
+				<th scope="row">제목</th>
+				<td class="form-group">
+				<input type="text" id="rev_title" 
+						name="rev_title" value="${reviewVo.rev_title}" style="border:none" 
+						readonly/></td>
+				<th scope="row">조회수</th>
+				<td>${reviewVo.rev_viewcount}</td>
+			</tr>
+			<tr>
+				<th scope="row">작성자</th>
+				<td class="form-group">
+				<input type="text" id="rev_writer" 
+						name="rev_writer" value="${reviewVo.rev_writer}" style="border:none"
+						readonly/></td>
+				<th scope="row">작성일</th>
+				<td>${reviewVo.rev_regdate}</td>
+			</tr>
+			<tr>
+				<th scope="row" colspan="5" class="form-group" >
+				<textarea rows="10" id="rev_content" 
+						name="rev_content" style="border:none" readonly>${reviewVo.rev_content} ${reviewVo.rev_writer}</textarea>
+				</th>
+			</tr>
+		</tbody>
+	</table>
+			
+			<hr>
+			
+			<div style="clear:both;">
+					<button type="submit" class="btn btn-success" id="btnSuccess"
+						style="display:none;">완료</button>
+					<button type="button" class="btn btn-warning" id="btnCancel"
+						style="display:none;">수정취소</button>
+					<button type="button" class="btn btn-warning" id="btnHot"
+						style="display:none;">중요공지등록</button>
+					<button type="button" class="btn btn-warning" id="btnHotSuccess"
+						style="display:none;">중요공지등록완료</button>
+					<button type="button" class="btn btn-warning" id="btnHotCancel"
+						style="display:none;">중요공지등록삭제</button>
+			</div>
+			</form>
+				<div style="clear:both;">
+				<c:if test="${ mem_id == 'admin' || mem_id == reviewVo.rev_writer }">
+					
+					<button type="button" class="btn btn-danger"
+						id="btnDelete">삭제</button>				
+				</c:if>
+					<button type="button" class="btn btn-primary"
+						id="btnListAll">목록</button>
+				</div>
+			<!-- 댓글 작성 -->
+	<c:if test="${mem_id != null && mem_id != ''}">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label for="ntRwriter">작성자</label>
+				<input type="text" id="ntRwriter" value="${mem_id }"
+					class="form-control" readonly/>
+			</div>
+			<div class="form-group">
+				<label for="ntRcontent">댓글내용</label>
+				<input type="text" id="ntRcontent"
+					class="form-control"/>
+			</div>
+			<div class="form-group">
+				<button type="button" class="btn-xs btn-success"
+					id="btn_ntReply">작성완료</button>
+			</div>
+		</div>
+	</div>
+	</c:if>
+	<!-- // 댓글 작성 -->
+	
+	<!-- 댓글 목록 -->
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
 				<thead>
 					<tr>
-						<th>글번호</th> 
-						<th>글제목</th>
+						<th>번호</th>
+						<th>댓글내용</th>
 						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
+						<th>날짜</th>
+					<c:if test="${mem_id == boardVo.not_writer}">
+						<th>수정</th>
+						<th>삭제</th>
+					</c:if>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="replyList">
 					
-				<c:forEach items="${list }" var="reviewVo">
-					<tr>
-						<td>${reviewVo.rev_num }</td>
-						<td>${reviewVo.rev_title }</td>
-						<td>${reviewVo.rev_writer }</td>
-						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
-								pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>${reviewVo.rev_viewcnt }</td>
-					</tr>
-				</c:forEach>
 				</tbody>
 			</table>
-			</form>
-			
-			
-				</div>
 		</div>
-		<div style="height: 30px">
+	</div>
+		</div>
+		<div class="col-md-1" ></div>
+	</div>
+	
+	<hr/>
+		</div>
 		<div class="col-md-2">
 		</div>
 	</div>
-	</div>
-	<!-- pagination -->
-	<!-- 페이지 -->
-		
-	<!-- // pagination -->
+	<!-- // 댓글 목록 -->
+</div>
+
 <%@ include file="../include/footer.jsp" %>

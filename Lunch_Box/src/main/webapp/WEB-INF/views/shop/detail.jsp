@@ -116,13 +116,17 @@
 					<tr>
 						<td style="font-size: 30px;"><a 
 						style="color: gray;" href="#detail_img">상세보기 이미지</a></td>
-						<td style="font-size: 30px;"><a href="#review" style="color: gray;">리뷰 게시판</a></td>
+						<td style="font-size: 30px;"><a href="/review/reviewBoard" style="color: gray;">리뷰 게시판</a></td>
 					</tr>
 				</table>
 			</div>
+			
+			<!-- 리뷰게시판 -->
 			<div class="col-md-12 text-center">
+				
 				<h1>리뷰게시판</h1>
 			</div>
+			<!-- 리뷰게시판 끝 -->
 		</div>
 		<div class="col-md-2"></div>
 	</div>

@@ -8,20 +8,29 @@ import com.kh.team2.domain.ReviewVo;
 
 public interface ReviewDao {
 	// ����Ʈ �Ѱ� ��ȸ
-	public ReviewVo selectList(int rev_num) throws Exception;
+	public ReviewVo readReview(int rev_num) throws Exception;
 	
 	// ����Ʈ ��ȸ
 	public List<ReviewVo> listAll(PagingDto pagingDto) throws Exception;
+
+	// 고객센터 리뷰목록
+	public List<ReviewVo> reviewList(PagingDto pagingDto) throws Exception;
 	
 	// ������
 	public int listCount(PagingDto pagingDto) throws Exception;
 	
 	// ���� �۾���
 	public void insertReview(ReviewVo reviewVo) throws Exception;
-	
-	// ���� �󼼺���
-	public ReviewVo readReview(int rev_num) throws Exception;
-	
-	//
+		
+	// productVo 에서 상품명 가져오기
 	public List<ProductVo> productName() throws Exception;
+	
+	// 조회수
+	public void viewCount(int rev_num) throws Exception;
+	
+	// 리뷰 삭제
+	public void reviewDelete(int rev_num) throws Exception;
+
+	
+	
 }

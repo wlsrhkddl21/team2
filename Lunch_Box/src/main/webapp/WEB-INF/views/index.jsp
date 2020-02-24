@@ -46,37 +46,18 @@
 	<section class="banner-bottom-w3layouts pb-5" id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 about-in text-center">
-					<div class="serv-cont-wthree">
-						<div class="icon-wthrees">
-							<span class="fa fa-cutlery"></span>
-						</div>
-						<h5 class="card-title mb-3 mt-4">Heading Here</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit
-							tempor.</p>
+					<c:forEach items="${top3List}" var="productVo" varStatus="status">
+						<div class="col-lg-4 about-in text-center" 
+						<c:if test="${status.count == 2 }">
+						 class="text-center my-lg-0 my-4"
+						 </c:if>
+						>
+						<a href="/shop/detail/${productVo.pdt_num }">
+					<img alt="사진" src="/admin/displayFile?fileName=${productVo.pdt_image }" width="270" height="196"></a><br>
+					${status.count }위 메뉴(${productVo.pdt_name })
 					</div>
-				</div>
-				<div class="col-lg-4 about-in text-center my-lg-0 my-4">
-					<div class="serv-cont-wthree">
-						<div class="icon-wthrees">
-							<span class="fa fa-smile-o"></span>
-						</div>
-						<h5 class="card-title mb-3 mt-4">Heading Here</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit
-							tempor.</p>
+					</c:forEach>
 					</div>
-				</div>
-				<div class="col-lg-4 about-in text-center">
-					<div class="serv-cont-wthree">
-						<div class="icon-wthrees">
-							<span class="fa fa-birthday-cake"></span>
-						</div>
-						<h5 class="card-title mb-3 mt-4">Heading Here</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit
-							tempor.</p>
-					</div>
-				</div>
-			</div>
 		</div>
 	</section>
 <!-- 	//banner bottom grids -->

@@ -288,4 +288,27 @@
 /* 鍮꾪솢�� */
 .calendar_box .tbl_calendar tbody td.disabled {background:#f7f7f7; color:#999;}
 .calendar_box .tbl_calendar tbody td.disabled * {color:inherit !important; cursor:default !important;}
+
+#boardlist {width:100%; margin:0 auto 16px;}
+#boardlist .board_col {table-layout:fixed; width:100%; margin:0 auto; border-bottom:1px solid #aeaeae;}
+#boardlist .board_col th {padding:16px 0; background:#f7f7f7; color:#333; font-size:15px; font-weight:normal; text-align:center;}
+#boardlist .board_col td {padding:14px 0 12px; border-bottom:1px solid #e6e6e6; color:#333; font-size:14px; vertical-align:middle; text-align:center;}
+#boardlist .board_col td a {color:#837d81;}
+#boardlist .board_col td img {vertical-align:middle;}
+#boardlist .board_col td.left {text-align:left;}
+#boardlist .board_col td.subject {padding-left:34px; background:url('/board/_skin/basic_faq/img/icon_question.gif') no-repeat left center;}
+#boardlist .board_col td.subject span {color:#181818;}
+#boardlist .board_col td.faqcnt {padding:35px 20px 35px 82px; background:url('/board/_skin/basic_faq/img/icon_answer.gif') no-repeat 39px 30px; text-align:left; word-break:break-all; word-wrap:break-word;}
+#boardlist .board_col td.faqcnt .cnt * {font-family:inherit; font-size:inherit; text-align:inherit; line-height:inherit;}
+#boardlist .board_col td.faqcnt .btn {padding-top:10px; text-align:right;}
+#boardlist .cateList {margin:10px 0 30px; text-align:left;}
+#boardlist .cateList li {display:inline; background:url('/board/_skin/basic_faq/img/cate_bar.gif') no-repeat left center;}
+#boardlist .cateList li:first-child {background:none;}
+#boardlist .cateList li a {padding:0 15px; color:#181818;}
+#boardlist .board_search {margin-top:30px; text-align:center;}
+#boardlist .board_search select {height:30px; line-height:30px; vertical-align:middle;}
+#boardlist .board_search input {vertical-align:middle;}
+#boardlist .board_search .boardsearch {width:238px; height:18px; padding:5px; line-height:30px;}
+#boardlist .board_search .btn {padding-left:2px;}
+#boardlist .btn_write {margin:30px 0; text-align:right;}
 /*# sourceMappingURL=bootstrap.css.map */

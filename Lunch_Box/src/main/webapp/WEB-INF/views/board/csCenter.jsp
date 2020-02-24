@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!-- <link rel="stylesheet" type="text/css" href="http://www.homeal.net/_data/wing_homeal_temp.css"> -->
 <link rel="stylesheet" href="/css/homeal.css">
+<script type="text/javascript" src="http://www.homeal.net/wm_engine_SW/_engine/common/truelife.js?v=11"></script>
+<script type="text/javascript" src="http://www.homeal.net/wm_engine_SW/_engine/common/auto_scroll.js"></script>
+<script src="http://www.homeal.net/_skin/homeal/img/../jquery.cycle.all.js"></script>
 <style>
  .csCenter_info { 
  	padding: 35px; 
@@ -16,6 +19,7 @@ a {
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  cursor : pointer;
 } 
 </style>
 <script>
@@ -27,6 +31,36 @@ $(document).ready(function(){
 		$("#frmRead").attr("action", "/board/ntRead");
 		$("#frmRead").submit();
 	});
+	
+	$("#faqTag").click(function(){
+		$("#faq97").toggle();
+	});
+	
+	$(".pdt_name").click(function(e) {
+		e.preventDefault();
+		// 		console.log("클릭됨");
+		var pdt_num = $(this).attr("data-num");
+		// 		location.href = "/admin/content";
+		location.href = "/admin/content?pdt_num=" + pdt_num;
+	});
+
+		function thumbnail() {
+			$(".pdtImg").each(
+					function() {
+						var fileName = $(this).attr("data-img");
+//							console.log("fileName:" + fileName);
+						var slice = fileName.lastIndexOf("/")
+						var path = fileName.substring(0, slice + 1);
+						var real = fileName.substring(slice + 1);
+						var thumbnail = path + "s_" + real;
+							console.log(thumbnail);
+						$(this).attr(
+								"src",
+								"/review/displayFile?fileName="
+										+ thumbnail);
+					});
+		}
+		thumbnail();
 });
 </script>
 <div class="container-fluid">
@@ -113,43 +147,19 @@ $(document).ready(function(){
                 <th scope="col">제목</th>
             </tr>
             </thead>
-            <tbody><tr>
-					<td class="img">
-						<a href="https://blog.naver.com/andher/221758367684" target='_blank'>
-							<img src="http://truelife.wisacdn.com/_data/review/202001/04/be2eca4a6cf32774ca1389c69567168f.jpeg">
-						</a>
-					</td>
-					<td class="left">
-						<a href="https://blog.naver.com/andher/221758367684" target='_blank'>맞벌이 부부가 겨울방학 아이 식단으로 선택한 호밀 한식</a>
-					</td>
-				</tr><tr>
-					<td class="img">
-						<a href="https://blog.naver.com/PostView.nhn?blogId=grfog211&logNo=221734903222&redirect=Dlog&widgetTypeCall=true&directAccess=false" target='_blank'>
-							<img src="http://truelife.wisacdn.com/_data/review/201912/27/aae67c3aaee338e60719080eb28cc943.jpeg">
-						</a>
-					</td>
-					<td class="left">
-						<a href="https://blog.naver.com/PostView.nhn?blogId=grfog211&logNo=221734903222&redirect=Dlog&widgetTypeCall=true&directAccess=false" target='_blank'>편식대왕 우리 꼬맹이 다양한 식단으로 겨울방학~ 밥먹는 시간이 즐거워</a>
-					</td>
-				</tr><tr>
-					<td class="img">
-						<a href="https://blog.naver.com/minadie/221749344912" target='_blank'>
-							<img src="http://truelife.wisacdn.com/_data/review/201912/27/1c42cf5e11db1089355473985e69d916.gif">
-						</a>
-					</td>
-					<td class="left">
-						<a href="https://blog.naver.com/minadie/221749344912" target='_blank'>외기러기 아빠가 아이들에게 대접한 미안함 없는 푸짐한 겨울방학 식단</a>
-					</td>
-				</tr><tr>
-					<td class="img">
-						<a href="https://blog.naver.com/hotshout/221738320297" target='_blank'>
-							<img src="http://truelife.wisacdn.com/_data/review/201912/27/9da42739f307d4d47680c4010285181b.jpeg">
-						</a>
-					</td>
-					<td class="left">
-						<a href="https://blog.naver.com/hotshout/221738320297" target='_blank'>워킹맘! 겨울방학 아이들 건강식단 당당하게 트루라이프로 결정!!</a>
-					</td>
-				</tr></tbody>
+            <tbody>
+            		<c:forEach items="${reviewList}" var="reviewVo">
+							<tr>
+								<c:if test="${not empty reviewVo.rev_image}">
+									<td class="img" style="padding-top: 3px;">
+										<img alt="상품이미지" class="pdtImg" style="height:50px;"
+										data-img="${reviewVo.rev_image}"></td>
+								</c:if>
+								<td class="left"><a class="pdt_name" href="#"
+									data-num="${reviewVo.rev_num}">${reviewVo.rev_title}</a></td>
+							</tr>
+					</c:forEach>
+				</tbody>
         </table>
         <!-- //개발 영역 (작업 완료 후 상단 div 클래스명 추가 필수) -->
     </div>
@@ -177,9 +187,9 @@ $(document).ready(function(){
 	<tbody><tr class="faq_subject">
 			<td class="type"><img src="http://www.homeal.net/_skin/homeal/img/bg/faq_q.png" alt="Question"></td>
 			<td class="left">주문/결제/증빙</td>
-			<td class="left"><a href="javascript:faqTgg('97');">[호밀]현금영수증 발급 방법은요?</a></td>
+			<td class="left subject" id="faqTag"><a href="javascript:faqTgg('97');">[호밀]현금영수증 발급 방법은요?</a></td>
 		</tr>
-		<tr class="faq_content" id="faq97">
+		<tr class="faq_content" id="faq97" style="display:table-row;">
 			<td class="type"><img src="http://www.homeal.net/_skin/homeal/img/bg/faq_a.png" alt="Answer"></td>
 			<td colspan="2" class="left">
 				트루라이프 호밀은 현금영수증 자진발급&nbsp;업체입니다.&nbsp;하여 증빙이 누락되는 부분은 전혀 없습니다. 다만, 결제 전 현금영수증 안내 부분을 꼼꼼히 읽어주시고, 확인해주시기 바라며, 홈페이지&nbsp;결제 시에는&nbsp;현금영수증 체크 부분을 정확히 체크 후 결제해 주시면 됩니다.! * 그 외 유선상으로&nbsp;연락 주실경우에는 현금영수증&nbsp;요청 고객님께서는&nbsp;원하시는 번호를 미리 안내해주시면 빠른 처리가 가능합니다.
@@ -190,7 +200,7 @@ $(document).ready(function(){
 			<td class="left">BEST</td>
 			<td class="left"><a href="javascript:faqTgg('95');">[호밀] 제품이 배송되지 않았어요!</a></td>
 		</tr>
-		<tr class="faq_content" id="faq95">
+		<tr class="faq_content" id="faq95" style="display:none;">
 			<td class="type"><img src="http://www.homeal.net/_skin/homeal/img/bg/faq_a.png" alt="Answer"></td>
 			<td colspan="2" class="left">
 				호밀 제품이 배송되지 않으셨나요? 만일 배송상 문제나, 제품상 문제로 호밀이 배송되지 않았을 경우에는 즉각 연락 부탁드립니다. 배송일 이후 3일 이후 연락해주시는 부분에 대해서는 확인 및 처리가 어려우므로, 배송은 반드시 확인해주시고, 가급적&nbsp;배송 후&nbsp;3일 이전&nbsp;연락 부탁드립니다.&nbsp;호밀 배송은&nbsp;폭설,&nbsp;폭우에도 정상적으로 진행되오니, 참고해주세요!!
@@ -251,7 +261,7 @@ $(document).ready(function(){
 						<div class="col-md-2"></div>
 					</div>
 				</div>
-				<div class="col-md-2" style="height: 600px;"></div>
+				<div class="col-md-2" style="height: 200px;"></div>
 			</div>
 		</div>
 </div>

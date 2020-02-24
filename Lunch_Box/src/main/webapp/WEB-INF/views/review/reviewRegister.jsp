@@ -19,32 +19,16 @@
 $(document).ready(function(){
 	$("#btnSubmit").click(function(){
 // 		location.href = "/review/reviewBoard";
-		$("#registForm").submit();
+		$("#registForm").submit(); 
 		console.log("클릭됨");
-	});
+// 	});
 // 	$("#btnFile").click(function(){
 // 		("#pdt_image").trigger("click");
 // 	});
 });
 </script>
 <div class="container-fluid">
-
-<!-- 	<form id="frmRegist" action="/review/reviewBoard" method="post"> -->
-<!-- 		<input type="hidden" name="rev_num"/> -->
-<!-- 		<input type="hidden" name="page"  -->
-<%-- 			value="${pagingDto.page }"/> --%>
-<!-- 		<input type="hidden" name="perPage" -->
-<%-- 			value="${pagingDto.perPage }"/> --%>
-<!-- 	</form> -->
-<!-- 	<form id="frmRead" action="/review/reviewBoard" method="get"> -->
-<!-- 		<input type="hidden" name="rev_num"/> -->
-<!-- 		<input type="hidden" name="page"  -->
-<%-- 			value="${pagingDto.page }"/> --%>
-<!-- 		<input type="hidden" name="perPage" -->
-<%-- 			value="${pagingDto.perPage }"/> --%>
-<!-- 	</form> -->
-	
-	
+		
 	<section  class="contact py-5" id="contact" >
 		<div class="container">
 			<h3 class="title-w3ls text-center text-bl mb-5">리뷰작성</h3>
@@ -57,30 +41,36 @@ $(document).ready(function(){
 				<!-- contact form -->
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
-						<form id="registForm" action="/review/reviewRegister" method="post" >
+						<form id="registForm" action="/review/reviewInsert" method="post" enctype="multipart/form-data">
 							
 							<div class="form-group">
-								<label>제목</label>
-								<input id="rev_title" class="form-control" type="text" name="rev_title">
+								<label>리뷰 제목</label>
+								<input id="rev_title" class="form-control" 
+									type="text" name="rev_title">
 							</div>
 							<div class="form-group">
-								<label>글내용</label>
-								<input id="rev_content" class="form-control" type="text" name="rev_content">
+								<label>리뷰 내용</label>
+								<textarea rows="5" id="rev_content" class="form-control"
+									name="rev_content"></textarea>
 							</div>
 							<div class="form-group">
-								<label>writer</label>
-								<input id="rev_writer" class="form-control" type="text" name="rev_writer">
+								<label>작성자</label>
+								<input id="rev_writer" value="${mem_id}"class="form-control" type="text" name="rev_writer" readonly>
 							</div>
 							<div class="form-group">
 								<label>상품명</label>
-								<select name=rev_pdt_name class="form-control">
+								<select name="rev_pdt_name" id="rev_pdt_name"class="form-control">
 								<c:forEach items="${list}" var="list">
-									<option value="${list.pdt_name}">${list.pdt_name}</option>
+									<option value="${list.pdt_num}">${list.pdt_name}</option>
 								</c:forEach>
 								</select>
 							</div>
 								
-									
+								
+								<div class="form-group">
+								<label>사진첨부</label>
+								<input id="rev_image" class="form-control" type="file" name="file">
+							</div>	
 								
 								
 							

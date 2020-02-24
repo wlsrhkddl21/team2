@@ -10,4 +10,5 @@ public interface AdminDao {
 	public void updatePDT(ProductVo productVo) throws Exception;
 	public ProductVo readPDT(int pdt_num) throws Exception;
 	public List<ProductVo> readAllPDT() throws Exception;
+	public List<ProductVo> readTOP3() throws Exception;
 }
