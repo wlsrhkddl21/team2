@@ -30,16 +30,17 @@ public class CartController {
 	@RequestMapping(value = "/list" , method = RequestMethod.GET)
 	public String view(Model model,HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
-		String mem_id = (String)session.getAttribute("mem_id");
+		String mem_id = (String)session.getAttribute("mem_id"); 
 		// 최근목록
 		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
 		// --
 		List<CartVo> list = cartService.cartList(mem_id);
+		int cartCount = cartService.cartCount(mem_id);
 		boolean isEmpty = false;
 		if (list.isEmpty()) {
 			isEmpty = true;
 		}
-		System.out.println(veiwList);
+		model.addAttribute("cartCount", cartCount);
 		model.addAttribute("veiwList",veiwList);
 		model.addAttribute("list",list);
 		model.addAttribute("isEmpty",isEmpty);
@@ -52,7 +53,7 @@ public class CartController {
 						@PathVariable("count") int count,HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String mem_id = (String)session.getAttribute("mem_id");
-		CartVo vo = new CartVo();
+		CartVo vo = new CartVo(); 
 		int isCart = cartService.isCart(pdt_num,mem_id);
 		if (isCart > 0) {
 			cartService.countUp(count, pdt_num,mem_id); 

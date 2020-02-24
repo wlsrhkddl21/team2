@@ -17,7 +17,7 @@ div {
 .selected {
 	background-color: #fd5c63;
 }
-li {
+.process li {
     float: left;
     padding: 0 0 0 30px;
 /*     background: url(http://www.homeal.net/_skin/homeal/img/common/arr_step.png) no-repeat 15px 50%; */
@@ -80,6 +80,9 @@ td {
 .left {
 	padding-left: 15px;
 	text-align: left;
+}
+.left a{
+	color: #fd5c63;
 }
 p {
  	margin: 0;

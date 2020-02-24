@@ -19,4 +19,6 @@ public interface CartDao {
 	public int isCart(int pdt_num,String mem_id) throws Exception;
 	// 장바구니 수량 합 
 	public void countUp(int cart_count,int pdt_num,String mem_id) throws Exception;
+	// 장바구니리스트 카운트
+	public int cartCount(String mem_id) throws Exception;
 }

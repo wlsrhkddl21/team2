@@ -1,9 +1,11 @@
 package com.kh.team2.controlloer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.print.attribute.Size2DSyntax;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -45,7 +47,7 @@ public class ShopController {
 	}
 
 	// 정기 배송
-	@RequestMapping(value = "/sub")
+	@RequestMapping(value = "/sub") 
 	public String subscription(Model model,PagingDto pagingDto) throws Exception {
 		System.out.println("subscription Shop Controller");
 
@@ -93,9 +95,27 @@ public class ShopController {
 			list = new ArrayList<>();
 			session.setAttribute("veiw", list);
 		}
+		boolean numcheck = true;
+		for(int j=0 ;  j <list.size(); j++) {
+		if(productVo.getPdt_num() ==list.get(j).getPdt_num()){
+			list.remove(j);
+			}
+		}
 		list.add(productVo);
+		if(list.size() > 1) { 
+			ProductVo productVo1 = list.get(list.size()-1);
+			System.out.println(productVo1);
+			for(int i =list.size(); i>1 ; i-- ) {
+				list.set(i-1, list.get(i-2));
+			}
+			list.set(0, productVo1);
+		}
+		if(list.size()==6) {
+			list.remove(5);
+		}
 		// ----
-		System.out.println(list);
+//		System.out.println("list크기" + list.size());
+//		System.out.println(list);
 		
 		return "shop/detail";
 	}

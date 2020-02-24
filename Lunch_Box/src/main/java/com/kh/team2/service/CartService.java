@@ -20,4 +20,6 @@ public interface CartService {
 	public int isCart(int pdt_num,String mem_id) throws Exception;
 	// 장바구니 중복 합
 	public void countUp(int cart_count,int pdt_num,String mem_id) throws Exception;
+	// 장바구니리스트 갯수
+	public int cartCount(String mem_id) throws Exception;
 }

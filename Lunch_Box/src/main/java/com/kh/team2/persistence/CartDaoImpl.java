@@ -64,5 +64,10 @@ public class CartDaoImpl implements CartDao {
 		sqlSession.update(NAMESPACE+".countUp",paramMap);
 	}
 
+	@Override
+	public int cartCount(String mem_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".cartCount",mem_id);
+	}
+
 
 }

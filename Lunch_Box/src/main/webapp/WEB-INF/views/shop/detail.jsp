@@ -6,7 +6,9 @@
 	.div_text{
 		font-size: 18px;
 	}
-
+	.margin_self{
+		margin-left: 1253px;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -37,9 +39,15 @@
 			$("#span_pdt_count").text(count);
 			$("#span_pdt_price").text(count*pdt_price);	
 		});
-		$("#bntCart").click(function() {
+		$("#bntCart").click(function(e) {
+			e.preventDefault();
 			var count = $("#pdt_count").val();
-			location.href="/cart/insert/"+"${productVo.pdt_num}"+"/"+count;
+			if (mem_id != "") {
+				location.href="/cart/insert/"+"${productVo.pdt_num}"+"/"+count;
+			} else {
+				alert("로그인이 필요합니다.");
+				location.href="/lb/login";
+			}
 		});
 		
 		$("#bntBuy").click(function(){
@@ -58,6 +66,7 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+		<%@ include file="../include/recentListDiv.jsp"%>
 			<div class="row">
 				<div class="col-md-4">
 				<div style="height: 30px;"></div>

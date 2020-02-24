@@ -3,8 +3,15 @@
 <%@ include file="../include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../include/cartStyle.jsp" %>
+<style>
+ .margin_self {
+		top : 120px;
+		margin-left: 1125px;
+	}
+</style>
 <script>
 $(document).ready(function() {
+	
 	
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
@@ -91,12 +98,13 @@ $(document).ready(function() {
 	});
 	
 	// all buy
-	$(".allBuy").click(function() {
+	$(".allBuy").click(function(e) {
+// 		e.preventDefault();
 		$(".chk").each(function() {
 			var isThis = $(this);
 			getHidden(isThis);
 		});
-		$("#cartForm").submit();
+// 		$("#cartForm").submit();
 	});
 	
 	// check buy
@@ -218,6 +226,7 @@ $(document).ready(function() {
 		return data;
 	}	
 	getPrice();
+	
 });
 </script>
 	<!-- contact -->
@@ -277,10 +286,10 @@ $(document).ready(function() {
 											<c:forEach items="${list}" var="vo">
 												<tr>
 													<td><input type="checkbox" class="chk" value="${vo.cart_num}" checked/></td>
-													<td><img src="/admin/displayFile?fileName=${vo.pdt_image}" width="70" height="70" border="0"/></td>
-													<td class="left">${vo.pdt_name}</td>
+													<td><a href="/shop/detail/${vo.pdt_num}"><img src="/admin/displayFile?fileName=${vo.pdt_image}" width="70" height="70" border="0"/></a></td>
+													<td class="left"><a href="/shop/detail/${vo.pdt_num}">${vo.pdt_name}</a></td>
 													<td class="price">${vo.str_price}</td>
-													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}" data-type/>
+													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}"  data-type="${vo.cart_count}"/>
 													<a><img class="up" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"/></a>
 													<a><img class="down" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"/></a>
 													</span>
@@ -345,7 +354,7 @@ $(document).ready(function() {
 							<div class="order">
 								<span class="box_btn"><a class="large black" href="/shop/single">계속 쇼핑하기</a></span>
 								<span class="box_btn checkBuy"><a class="large black" href="#">선택상품 주문하기</a></span>
-								<span class="box_btn allBuy"><a class="large green" href="#">전체상품 주문하기</a></span>
+								<span class="box_btn allBuy"><a class="large green" href="#" id="buy2">전체상품 주문하기</a></span>
 							</div>
 						</div>
 						</form>
