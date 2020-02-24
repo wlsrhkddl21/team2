@@ -217,64 +217,11 @@ $(document).ready(function() {
 	getPrice();
 });
 </script>
-<style>
-	.test {
-		position:absolute;
-		top : 120px;
-		margin-left: 1125px;
-		background-color: #fff;
-		z-index: 1;
-		border-top: 5px solid #fd5c63;
-	}
-	.box {
-		width: 200px;
-		border: 1px	solid #e6e5e5;
-		text-align: -webkit-center;
-	}
-	.title {
-		padding-bottom: 25px;
-		font-size: 20px;
-		color: #333;
-		font-weight: 500;
-	}
-	.list {
-		list-style: none;
-	}
-	.list li {
-		float:inherit;
-		padding: 4px 0;
-	}
-	.cartList {
-		background: #fd5c63;
-		color: #fff;
-		border: 1px	solid #e6e5e5;
-		font-weight : bold;
-		padding: 10px;
-	}
-	.cart_count {
-		color : steelblue;
-	}
-	
-</style>
 	<!-- contact -->
 	<section class="contact py-5" id="contact">
 		<div class="container">
 					<!-- 최근 목록 -->
-			<div class="test">
-				<div class="box">
-				<p class="title">최근 본 상품</p>
-					<div>
-					<ul class="list">
-						<c:forEach items="${veiwList}" var="veiw">
-						<li><a><img src="/admin/displayFile?fileName=${veiw.pdt_image}" width="150" height="100" border="10"></a></li>
-						</c:forEach>
-					</ul>
-					</div>
-					<p class="cartList" id="btnCart">장바구니<span class="cart_count">3</span></p>
-					<p class="cartList" id="btnMyPage">마이페이지</p>
-					<p class="cartList" id="btnEvent">EVENT</p>
-				</div>
-			</div>
+	<%@ include file="../include/recentListDiv.jsp" %>
 					<!-- /최근 목록 -->
 			<div class="row mx-sm-0 mx-2">
 				<!-- map -->

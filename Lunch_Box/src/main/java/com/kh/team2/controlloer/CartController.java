@@ -32,7 +32,9 @@ public class CartController {
 	public String view(Model model,HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String mem_id = (String)session.getAttribute("mem_id");
+		// 최근목록
 		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
+		// ----
 		List<CartVo> list = cartService.cartList(mem_id);
 		boolean isEmpty = false;
 		if (list.isEmpty()) {
@@ -54,7 +56,7 @@ public class CartController {
 		CartVo vo = new CartVo();
 		int isCart = cartService.isCart(pdt_num,mem_id);
 		if (isCart > 0) {
-			cartService.countUp(count, pdt_num);
+			cartService.countUp(count, pdt_num); 
 		} else {
 			vo.setMem_id((String)session.getAttribute("mem_id"));
 			vo.setPdt_num(pdt_num);

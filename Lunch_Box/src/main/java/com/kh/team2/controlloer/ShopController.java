@@ -45,7 +45,7 @@ public class ShopController {
 	@RequestMapping(value = "/my")
 	public String my() {
 
-		return "shop/my";
+		return "shop/my"; 
 	}
 
 	// 정기 배송

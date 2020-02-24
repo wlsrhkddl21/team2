@@ -12,6 +12,9 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+		<!-- 최근목록 보기 -->
+		<%@ include file="../include/recentListDiv.jsp" %>
+		<!-- /최근목록 보기 -->
 			<div class="row no-gutters">
 				<c:forEach items="${list }" var="productVo">
 					<c:if test="${productVo.pdt_date == 1}">
@@ -34,7 +37,8 @@
 				</c:forEach>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-2">
+		</div>
 		<!-- 페이지 -->
 		<div style="height: 50px"></div>
 		<div class="container-fluid">
