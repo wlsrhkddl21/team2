@@ -6,6 +6,9 @@
 .pdt_name {
 	cursor: pointer;
 }
+th{
+	background-color:#f7f7f7;
+}
 </style>
 <script>
 	// 	console.log("${list }");
@@ -45,8 +48,9 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 
-			<div class="col-lg-12 main_grid_contact">
-				<div class="form-w3ls p-md-5 p-4">
+			<div class="col-lg-12 main_grid_contact form-w3ls p-md-5 p-4">
+				<div>
+<!-- 				<div class="form-w3ls p-md-5 p-4"> -->
 
 					<!-- 					<div class="col-md-6"> -->
 					<!-- 					</div> -->
@@ -54,9 +58,9 @@
 					
 					<div class="row">
 				<div class="col-md-6 text-left">
-					<a href="/myLunch/readAll" 
-					class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">
-					나만의 도시락 메뉴</a> 
+					<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">전체상품</a>
+		<a href="/myLunch/readAll" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">나만의도시락</a>
+		<a href="/admin/orderList" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문목록</a>
 				</div>
 				<div class="col-md-6 text-right">
 						<a href="/admin/orderList"
@@ -68,7 +72,7 @@
 		
 					
 				</div>
-				<table class="table table-striped text-center">
+				<table class="table text-center">
 					<tr>
 						<th>No</th>
 						<th style="text-align: center">Image</th>
