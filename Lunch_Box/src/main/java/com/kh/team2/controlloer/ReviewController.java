@@ -1,10 +1,14 @@
 package com.kh.team2.controlloer;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.concurrent.SynchronousQueue;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -22,6 +27,7 @@ import com.kh.team2.domain.ReviewVo;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BoardService;
 import com.kh.team2.service.ReviewService;
+import com.kh.team2.util.ReviewFileUploadUtil;
 
 @Controller
 @RequestMapping("/review")
@@ -33,9 +39,13 @@ public class ReviewController {
 	@Inject
 	AdminService adminService;
 	
+	@Resource
+	private String uploadPath;
+	
 	// 리뷰게시판
 	@RequestMapping(value ="/reviewBoard",method = RequestMethod.GET)
 	public String list(Model model, PagingDto pagingDto) throws Exception {
+		System.out.println(pagingDto);
 		List<ReviewVo> list = reviewService.listAll(pagingDto);
 		List<ProductVo> productList = adminService.readAllPDT();
 		int totalCount = reviewService.listCount(pagingDto);
@@ -50,7 +60,7 @@ public class ReviewController {
 	
 	// 글쓰러가기
 	@RequestMapping(value ="/reviewRegister",method = RequestMethod.GET)
-	public String reviewRegister(Model model, PagingDto pagingDto) throws Exception {
+	public String reviewRegister(Model model) throws Exception {
 		
 		System.out.println("글쓰기들어옴");
 		List<ProductVo> list = reviewService.productName();
@@ -60,14 +70,17 @@ public class ReviewController {
 	}
 	
 	// 글등록
-	@RequestMapping(value = "/reviewRegister", method = RequestMethod.POST)
-	public String insertReview(Model model, ReviewVo reviewVo) throws Exception {
+	@RequestMapping(value = "/reviewInsert", method = RequestMethod.POST)
+	public String insertReview(ReviewVo reviewVo, MultipartHttpServletRequest request) throws Exception { 
+		System.out.println(reviewVo);
 //		reviewService.insertReview(reviewVo);
-//		MultipartFile file = request.getFile("file");
-//		String originalFileName = file.getOriginalFilename();
-//		System.out.println("file:" + originalFileName);
-		System.out.println("글쓰고 리뷰게시판옴");
-		
+		MultipartFile file = request.getFile("file");
+		String originalFileName = file.getOriginalFilename();
+		System.out.println("file:" + originalFileName);
+		String revPath = ReviewFileUploadUtil.uploadFile(uploadPath+"/review", originalFileName, file.getBytes(), true);
+		String revMainPath = revPath.replace("\\", "/");
+		reviewVo.setRev_image(revMainPath);
+//		System.out.println("글쓰고 리뷰게시판옴");
 		reviewService.insertReview(reviewVo);
 		return "redirect:/review/reviewBoard";
 	}
@@ -78,6 +91,15 @@ public class ReviewController {
 		
 		return "/review/reviewContent";
 	}
-
+	
+	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
+		String realPath = uploadPath+"\\review" + File.separator + fileName.replace("/", "\\");
+		FileInputStream is = new FileInputStream(realPath);
+		byte[] bytes = IOUtils.toByteArray(is);
+		is.close();
+		return bytes;
+	}
 		
 }
