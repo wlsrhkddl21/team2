@@ -27,7 +27,36 @@ $(document).ready(function(){
 		$("#frmRead").attr("action", "/board/ntRead");
 		$("#frmRead").submit();
 	});
+	
+	function() {
+		$(".pdt_name").click(function(e) {
+			e.preventDefault();
+			// 		console.log("클릭됨");
+			var pdt_num = $(this).attr("data-num");
+			// 		location.href = "/admin/content";
+			location.href = "/admin/content?pdt_num=" + pdt_num;
+		});
+
+		function thumbnail() {
+			$(".pdtImg").each(
+					function() {
+						var fileName = $(this).attr("data-img");
+//							console.log("fileName:" + fileName);
+						var slice = fileName.lastIndexOf("/")
+						var path = fileName.substring(0, slice + 1);
+						var real = fileName.substring(slice + 1);
+						var thumbnail = path + "s_" + real;
+//							console.log(thumbnail);
+						$(this).attr(
+								"src",
+								"/review/displayFile?fileName="
+										+ thumbnail);
+					});
+		}
+		thumbnail();
 });
+});
+
 </script>
 <div class="container-fluid">
 	<form id="frmRead" action="/board/notice" method="get">
@@ -113,7 +142,18 @@ $(document).ready(function(){
                 <th scope="col">제목</th>
             </tr>
             </thead>
-            <tbody><tr>
+            <tbody>
+            		<c:forEach items="${listAll}" var="reviewVo">
+							<tr>
+								<c:if test="${not empty reviewVo.rev_image}">
+									<td class="img"><img alt="상품이미지" class="pdtImg"
+										data-img="${reviewVo.rev_image}"></td>
+								</c:if>
+								<td class="left"><a class="pdt_name" href="#"
+									data-num="${reviewVo.rev_num}">${reviewVo.rev_title}</a></td>
+							</tr>
+					</c:forEach>
+            <tr>
 					<td class="img">
 						<a href="https://blog.naver.com/andher/221758367684" target='_blank'>
 							<img src="http://truelife.wisacdn.com/_data/review/202001/04/be2eca4a6cf32774ca1389c69567168f.jpeg">
