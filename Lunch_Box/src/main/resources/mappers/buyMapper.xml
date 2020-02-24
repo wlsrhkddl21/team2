@@ -20,10 +20,10 @@
 		from dual
 	</select>
 	
-<!-- 	<select id="selectJoin" resultType="BuyDetailVo"> -->
-<!-- 		select *  -->
-<!-- 		from tbl_buy b, tbl_buy_detail bd -->
-<!-- 		where #{buy_num} = #{buy_num}; -->
-<!-- 	</select> -->
+	<select id="selectJoinByMemId" resultType="BuyJoinDto">
+		select * 
+		from tbl_buy b, tbl_buy_detail bd
+		where b.mem_id = #{mem_id}
+	</select>
 
 </mapper>
