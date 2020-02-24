@@ -42,8 +42,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int isCart(int pdt_num) throws Exception {
-		return cartDao.isCart(pdt_num);
+	public int isCart(int pdt_num,String mem_id) throws Exception {
+		return cartDao.isCart(pdt_num,mem_id);
 	}
 
 	@Override

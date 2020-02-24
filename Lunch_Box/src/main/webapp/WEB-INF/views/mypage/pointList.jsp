@@ -25,8 +25,8 @@
 						<div class="col-md-2"></div>
 						<div class="col-md-8">
 							<div class="mypage_info text-center">
-								<div>${memberVo.mem_name}님 안녕하세요</div>
-								<div>보유 포인트: ${memberVo.mem_point }P</div>
+								<div>${memberVo}</div>
+								<div>보유 포인트: 500P</div>
 							</div>
 						</div>
 						<div class="col-md-2"></div>

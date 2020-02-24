@@ -48,8 +48,11 @@ public class CartDaoImpl implements CartDao {
 	}
 
 	@Override
-	public int isCart(int pdt_num) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+".isCart",pdt_num);
+	public int isCart(int pdt_num,String mem_id) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("pdt_num", pdt_num);
+		paramMap.put("mem_id", mem_id);
+		return sqlSession.selectOne(NAMESPACE+".isCart",paramMap);
 	}
 
 	@Override

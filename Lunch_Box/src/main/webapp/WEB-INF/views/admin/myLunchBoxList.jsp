@@ -6,10 +6,6 @@
 th{
 	background-color:#f7f7f7;
 }
-.form-control{
-	border:none;
-	text-align:center;
-}
 
 .form-control:disabled, .form-control[readonly] {
     background-color: #fff;
@@ -23,6 +19,8 @@ $(document).ready(function(){
 	
 	$(".form-control").each(function(){
 		$(this).attr("readonly","readonly");
+		$(this).css("border", "none");
+		$(this).css("text-align","center");
 	});
 	
 	$(".checkbox").change(function(){
@@ -54,7 +52,21 @@ $(document).ready(function(){
 			
 		});
 	});
-	
+	$("#btnDelete").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			$(".checkbox :checked").each(function() {
+				var lunch_num = $(this).parents("tr").find(".lunch_num").text();
+				
+				var sData = {
+						"lunch_num"  : lunch_num,
+				};
+				$.get("/myLunch/delete",sData,function(rData){
+					console.log("삭제됨");
+				});
+			});
+		}
+		location.href="/myLunch/readAll";
+	});
 	//수정버튼클릭
 	$("#updateMLB").click(function(){
 		$(".update").show();
@@ -64,16 +76,32 @@ $(document).ready(function(){
 	$("#updateSubmit").click(function(){
 		$(".checkbox :checked").each(function() {
 			var lunch_type = $(this).parents("tr").find(".lunch_type").val();
+			var lunch_num = $(this).parents("tr").find(".lunch_num").text();
+			var lunch_name = $(this).parents("tr").find(".lunch_name").val();
+			var lunch_price = $(this).parents("tr").find(".lunch_price").val();
+			
 			console.log(lunch_type);
 			var sData = {
-					"lunch_type" : lunch_type
+					"lunch_type" : lunch_type,
+					"lunch_num"  : lunch_num,
+					"lunch_name" : lunch_name,
+					"lunch_price": lunch_price
 			};
 			$.ajax({
-				url: "",
-				type : "post",
-				data : sData
-			});
+				"type" : "post",
+				"url" : "/myLunch/update",
+				"headers" : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "post"
+				},
+				"dataType" : "text",
+				"data" : JSON.stringify(sData),
+				"success" : function(rData) {
+					console.log("업데이트됨");
+				}
+			});		
 		});
+		location.href="/myLunch/readAll";
 	});
 	//수정취소클릭
 	$("#updateCancel").click(function(){
@@ -100,7 +128,7 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12 main_grid_contact">
+		<div class="col-md-12 ">
 			<a id="modal-a" href="#modal-container" role="button" class="btn"
 				data-toggle="modal" style="display: none;">Launch demo modal</a>
 			<div class="modal fade" id="modal-container" role="dialog"
@@ -138,20 +166,24 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-6">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 main_grid_contact form-w3ls p-md-5 p-4">
 			<div class="row">
 				<div class="col-md-6 text-left">
-					<a href="/admin/list"
-						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">뒤로</a>
+					<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">전체상품</a>
+					<a href="/myLunch/readAll" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">나만의도시락</a>
+					<a href="/admin/orderList" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문목록</a>
 				</div>
 				<div class="col-md-6 text-right">
 					<a id="updateSubmit" href="#"
 						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2 update"
 						style="display:none;">수정완료</a>
+					<a id="btnDelete" href="#"
+						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2 update"
+						style="display:none;">선택삭제</a>
 					<a id="updateCancel" href="#"
 						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2 update"
-						style="display:none;">수정취소</a>
+						style="display:none;">취소</a>
 					<a id="updateMLB" href="#"
 						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2 updateHide">상품수정</a>
 					<a id="insertMLB" href="#"
@@ -213,7 +245,7 @@ $(document).ready(function(){
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-3"></div>
+		<div class="col-md-2"></div>
 	</div>
 </div>
 <%@include file="../include/footer.jsp"%>

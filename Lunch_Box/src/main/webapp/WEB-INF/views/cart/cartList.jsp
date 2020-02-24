@@ -3,23 +3,9 @@
 <%@ include file="../include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../include/cartStyle.jsp" %>
-<style>
-	.test {
-		text-align : center;
-		position:fixed;
-		right:100px;
-		width:200px;
-		height:800px;
-		background-color: #9775f0;
-		z-index: 1000;
-		padding: 20px;
-		border: 1px solid blue;
-	}
-</style>
 <script>
 $(document).ready(function() {
 	
-	// all Check
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
 			$("input[type=checkbox]").prop("checked",true);
@@ -128,6 +114,13 @@ $(document).ready(function() {
 		$("#cartForm").submit();
 	});
 	
+	// pdt_view_list
+	$("#btnCart").click(function() {
+		
+	});
+	
+	
+	// ============================================ajax function ===============
 	// count ajax
 	function countAjax(isThis,sData) {
 		$.ajax({
@@ -141,6 +134,7 @@ $(document).ready(function() {
 			"data" : JSON.stringify(sData),
 			"success" : function(rData) {
 				isThis.parents("tr").find("#count").val(rData);
+				isThis.parents("tr").find("#count").attr("data-type",rData);
 				getPrice();
 			}
 		});
@@ -152,7 +146,7 @@ $(document).ready(function() {
 		var allPrice = 0;
 		$(".chk").each(function() {
 			var isThis = $(this);
-			var price = isThis.parents("tr").find(".price").text().replace(",","");
+			var price = isThis.parents("tr").find(".price").text().replace(/,/g,"");
 			var count = isThis.parents("tr").find("#count").val();
 			var sData = {
 					"price" : price,
@@ -166,7 +160,8 @@ $(document).ready(function() {
 				success : function(rData) {
 				isThis.parents("tr").find(".totalPrice").text(rData);
 				if (isThis.is(":checked") == true ) {
-				allPrice += parseInt(rData.replace(",",""));
+				console.log(parseInt(rData.replace(/,/g,"")));
+				allPrice += parseInt(rData.replace(/,/g,""));
 				}
 				}
 			});
@@ -182,6 +177,7 @@ $(document).ready(function() {
 		}
 		
 		if ($(".chk").is(":checked") == false) {
+			$("#allCheck").prop("checked",false);
 			$("#tip").text("0");
 			$("#result").text("0");
 		}
@@ -195,10 +191,10 @@ $(document).ready(function() {
 		numHidden.setAttribute("name", "pdt_num");
 		numHidden.setAttribute("id","pdt_num");
 		document.getElementById("cartForm").appendChild(numHidden);
-		
+	
 		var countHidden = document.createElement("input");
 		countHidden.setAttribute("type", "hidden");
-		countHidden.setAttribute("value", isThis.parents("tr").find("#count").val());
+		countHidden.setAttribute("value", isThis.parents("tr").find("#count").attr("data-type"));
 		countHidden.setAttribute("name", "buy_count");
 		countHidden.setAttribute("id","buy_count");
 		document.getElementById("cartForm").appendChild(countHidden);
@@ -224,18 +220,15 @@ $(document).ready(function() {
 	getPrice();
 });
 </script>
-	<div class="test">
-		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
-		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
-		<a><img src="../images/blog3.jpg" width="150" height="100" border="10"/></a>
-	</div>
 	<!-- contact -->
 	<section class="contact py-5" id="contact">
 		<div class="container">
+					<!-- 최근 목록 -->
+	<%@ include file="../include/recentListDiv.jsp" %>
+					<!-- /최근 목록 -->
 			<div class="row mx-sm-0 mx-2">
 				<!-- map -->
 				<div class="col-lg-2 map">
-					
 				</div>
 				<!-- //map -->
 				<!-- contact form -->
@@ -246,7 +239,9 @@ $(document).ready(function() {
 							<div class="process">
 								<ol>
 									<li><span class="num selected">1</span>장바구니</li>
+									<li>></li>
 									<li><span class="num">2</span>주문서 작성/결제</li>
+									<li>></li>
 									<li><span class="num">3</span>주문 완료</li>
 								</ol>
 							</div>
@@ -285,7 +280,7 @@ $(document).ready(function() {
 													<td><img src="/admin/displayFile?fileName=${vo.pdt_image}" width="70" height="70" border="0"/></td>
 													<td class="left">${vo.pdt_name}</td>
 													<td class="price">${vo.str_price}</td>
-													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}"  />
+													<td><span><span id="qty"><input type="text" id="count" value="${vo.cart_count}" data-type/>
 													<a><img class="up" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"/></a>
 													<a><img class="down" src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"/></a>
 													</span>
@@ -341,7 +336,7 @@ $(document).ready(function() {
 								</table>
 							</div>
 							</div>
-							</c:if>
+							</c:if> 
 						<div class="btn_cart">
 							<div class="check">
 								<span class="box_btn" ><a class="white large" href="#" id="btnDelete">선택삭제</a></span>
