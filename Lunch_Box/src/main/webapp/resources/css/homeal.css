@@ -1,0 +1,291 @@
+/*!
+ * Bootstrap v4.0.0 (https://getbootstrap.com)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+/* 怨좉컼�쇳꽣 - 硫붿씤(/content/content.php?cont=customer) */
+#customer .board_group {
+	margin-bottom: 50px;
+}
+
+#customer .board_group .title {
+	position: relative;
+	border-bottom: 1px solid #333;
+	text-align: left;
+}
+
+#customer .board_group .title h4 {
+	padding-bottom: 13px;
+	color: #333;
+	font-size: 19px;
+	font-weight: 500;
+	line-height: 100%;
+}
+
+#customer .board_group .title .more {
+	position: absolute;
+	right: 0;
+	bottom: 13px;
+	font-size: 13px;
+}
+
+#customer .board_group .tbl_board {
+	table-layout: fixed;
+	width: 100%;
+}
+
+#customer .board_group .tbl_board thead {
+	display: none;
+}
+
+#customer .board_group .tbl_board td {
+	height: 48px;
+	padding: 0 10px;
+	border-bottom: 1px solid #e6e6e6;
+	color: #333;
+	font-size: 13px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+#customer .board_group .tbl_board td a {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#customer .board_group .tbl_board td.date {
+	color: #a4a4a4;
+	text-align: right;
+}
+
+#customer .board_group .tbl_board.prd td {
+	padding: 0;
+}
+
+#customer .board_group .tbl_board.prd td.img img {
+	width: 90px;
+	height: auto;
+}
+
+#customer .board_group .tbl_board.prd td.left {
+	padding-left: 20px;
+	text-align: left;
+}
+
+#customer .board_group .tbl_board_faq {
+	table-layout: fixed;
+	width: 100%;
+}
+
+#customer .board_group .tbl_board_faq thead {
+	display: none;
+}
+
+#customer .board_group .tbl_board_faq td {
+	padding: 11px 0 12px;
+	border-bottom: 1px solid #e6e6e6;
+	color: #333;
+	font-size: 13px;
+	text-align: center;
+}
+
+#customer .board_group .tbl_board_faq td.left {
+	padding-left: 5px;
+	text-align: left;
+}
+
+#customer .board_group .tbl_board_faq td.type img {
+	vertical-align: middle;
+}
+
+#customer .board_group .tbl_board_faq td a {
+	display: block;
+}
+
+#customer .board_group .tbl_board_faq .faq_content {
+	display: none;
+}
+
+#customer .board_group .tbl_board_faq .faq_content td {
+	background: #f7f7f7;
+}
+
+#customer .board_group .tbl_board_faq .faq_content td.left {
+	padding: 26px 35px 27px 5px;
+}
+
+#customer .box_left {
+	float: left;
+	width: 470px;
+}
+
+#customer .box_right {
+	float: right;
+	width: 470px;
+}
+
+#main .title {margin:100px 0 30px; text-align:center;}
+#main .title h3 {color:#333; font-size:34px; font-weight:500; line-height:31px; letter-spacing:-1px;}
+
+.clear {clear:both;}
+
+.customer_info {width:1200px; margin:0 auto 35px; padding:40px 0; background:#f7f7f7; text-align:center;}
+.customer_info * {vertical-align:middle;}
+.customer_info h3 {display:inline; color:#333; font-size:19px;}
+.customer_info strong {display:inline; margin-left:10px; color:#6fb82b; font-size:26px; font-weight:700;}
+.customer_info span {display:inline; margin-left:15px; color:#a4a4a4; font-size:14px;}
+.customer_info .btn {display:inline; margin-left:15px; font-size:0; text-align:left;}
+.customer_info .btn .box_btn {margin:0 5px;}
+
+#join_agree .btn {font-size:0; text-align:center;}
+#join_agree .btn .box_btn {margin:0 5px;}
+
+#join_input .btn .box_btn {margin:0 5px;}
+
+#mypage .tbl_col td.no,
+#mypage .tbl_col td.date {color:#808080;}
+#mypage .tbl_col td.order_number a {color:inherit; text-decoration:underline;}
+
+#order_list .tbl_col td.no,
+#order_list .tbl_col td.date {color:#808080;}
+#order_list .tbl_col td.order_number a {color:inherit; text-decoration:underline;}
+#order_list .msg {padding:11px 0 37px;}
+#order_list .msg li {padding-top:8px; color:#a4a4a4; font-size:13px;}
+
+#attend .date {margin-bottom:30px; color:#040404; text-align:center;}
+#attend .date a {display:inline-block; width:12px; height:12px; border:1px solid #c7c7c7; color:#ff5300; font-size:9px; text-align:center; vertical-align:top; line-height:12px;}
+
+/* �뚯씠釉� �ㅽ��� - 媛�濡� */
+.tbl_col {table-layout:fixed; clear:both; width:100%; border-collapse:collapse;}
+.tbl_col caption {padding:0 0 17px; color:#333; font-size:16px; font-weight:400; text-align:left;}
+.tbl_col th {padding:15px 0; background:#f7f7f7; color:#333; font-size:15px; font-weight:400; text-align:center; vertical-align:middle;}
+.tbl_col td {padding:15px 0; border-bottom:1px solid #e6e6e6; color:#333; font-size:14px;  text-align:center; vertical-align:middle;}
+.tbl_col td a {color:#333;}
+.tbl_col td * {vertical-align:middle;}
+.tbl_col td.left {padding-left:15px; text-align:left;}
+.tbl_col td.img img {width:100px;}
+.tbl_col th input[type=checkbox],
+.tbl_col td input[type=checkbox] {width:20px; height:20px;}
+.tbl_col td select {height:30px;}
+.tbl_col td .add_opt {margin-top:5px; color:#7ebf27; line-height:140%;}
+
+/* �뚯씠釉� �ㅽ��� - 媛�濡� (由щ럭, 臾몄쓽) */
+.tbl_col td.left .prd_name {margin-bottom:5px;}
+.tbl_col td.left .prd_name a {color:#a4a4a4;}
+.tbl_col td.left .subject,
+.tbl_col td.left .subject a {color:#181818;}
+.tbl_col td.basic {padding:0; border-bottom:0}
+.tbl_col tr.notice_row td a {color:#000;} /* 怨듭� */
+.tbl_col tr.notice_row td.no {color:#f46665; font-weight:bold;} 
+.tbl_col td.notice_cnt {border:0; padding:0;}
+.tbl_col td.notice_cnt .cnt {padding:15px 20px; border-bottom:1px solid #ddd; text-align:left;}
+
+/* �뚯씠釉� �ㅽ��� - �몃줈 */
+.tbl_row {table-layout:fixed; width:100%; margin:0 auto; border-top:1px solid #000;}
+.tbl_row caption {padding:0 0 17px; color:#333; font-size:16px; font-weight:400; text-align:left;}
+.tbl_row th {padding:10px 0 10px 30px; border-bottom:1px solid #d7d7d7; color:#181818; font-weight:normal; text-align:left; vertical-align:middle;}
+.tbl_row th label {color:#181818;}
+.tbl_row td {padding:10px 0 10px 10px; border-bottom:1px solid #d7d7d7; color:#837d81; text-align:left; vertical-align:middle; word-break:break-all; word-wrap:break-word;}
+.tbl_row td label {color:#837d81;}
+.tbl_row td a {color:#231f20;}
+
+#attend {width:100%; padding-top:30px;}
+#attend .date {margin-bottom:30px; color:#040404; text-align:center;}
+#attend .date a {display:inline-block; width:12px; height:12px; border:1px solid #c7c7c7; color:#ff5300; font-size:9px; text-align:center; vertical-align:top; line-height:12px;}
+#attend #calendar .attenY {background:url('http://www.homeal.net/_skin/homeal/img/mypage/attend_ok.gif') no-repeat center;}
+#attend #calendar .attenN {background:url('http://www.homeal.net/_skin/homeal/img/mypage/attend_no.gif') no-repeat center;}
+#attend #calendar .attenR {background:url('http://www.homeal.net/_skin/homeal/img/mypage/attend_today.gif') no-repeat center;}
+#attend #calendar table {width:100%; border-top:1px solid #ddd; border-left:1px solid #ddd;}
+#attend #calendar table thead th {padding:10px 0; border-bottom:1px solid #ddd; border-right:1px solid #ddd; background:#000; color:#fff; font-family:'verdana'; font-size:10px; font-weight:normal; text-align:center;}
+#attend #calendar table thead th.sun {color:#da2128;}
+#attend #calendar table thead th.sat {color:#7cb4d1;}
+#attend #calendar table tbody td {height:100px; padding:10px; border-bottom:1px solid #ddd; border-right:1px solid #ddd; color:#040404; text-align:left; vertical-align:top;}
+#attend .info {overflow:hidden; margin-top:28px; padding:30px 50px; border:1px solid #000; text-align:left;}
+#attend .info strong {color:#ea0000;}
+#attend .info .explain {float:left; text-align:left;}
+#attend .info .sum {float:right;}
+
+.input {padding:3px 5px; border:1px solid #e6e6e6; font-family:'NanumBarunGothic','�섎닎 諛붾Ⅸ 怨좊뵓', '�뗭�', Dotum, sans-serif; font-size:13px;} /* �명뭼諛뺤뒪 */
+.input_file {-webkit-appearance:none; padding:0; border:0;} /* �명뭼諛뺤뒪 - �뚯씪 */
+.hidden {visibility:hidden; overflow:hidden; width:0 !important; height:0 !important; margin:0 !important; padding:0 !important; font-size:0; line-height:0;} /* �덈뱺 */
+.point_cursor {cursor:pointer;} /* 而ㅼ꽌 �ㅽ��� */
+.point_color {color:#7ebf27 !important;} /* �ъ씤�� 而щ윭 */
+.point_color2 {color:#e73232 !important;} /* �ъ씤�� 而щ윭2 */
+.empty {padding:100px 0 !important; text-align:center;} /* 鍮� �곹깭 */
+.clear {clear:both;}
+.break {word-break:break-all; word-wrap:break-word;}
+.blind {display:block; overflow:hidden; visibility:hidden; position:absolute; left:0; top:0; z-index:-1; width:0; height:0; font-size:0; line-height:0; text-indent:-9999px;}
+
+/* 留덉씠�섏씠吏� 硫붿씤(/mypage/mypage.php) */
+#mypage .my_info {padding:28px 0; border:1px solid #e6e6e6;}
+#mypage .my_info table {table-layout:fixed; width:100%;}
+#mypage .my_info table th {min-height:80px; padding:0 40px 0 142px; background:url('http://www.homeal.net/_skin/homeal/img/mypage/icon_my.png') no-repeat 41px center; text-align:left; vertical-align:middle;}
+#mypage .my_info table th p {padding-bottom:14px; color:#333; font-size:18px; font-weight:normal;}
+#mypage .my_info table th .box_btn * {height:30px; font-size:14px; font-weight:300; line-height:30px;}
+#mypage .my_info table td {border-left:1px solid #e6e6e6;; text-align:center;}
+#mypage .my_info table td a {display:block; padding:51px 0 9px; color:#333; font-size:16px;}
+#mypage .my_info table td.diet a {background:url('http://www.homeal.net/_skin/homeal/img/mypage/icon_diet.png') no-repeat center 15px;}
+#mypage .my_info table td.order a {background:url('http://www.homeal.net/_skin/homeal/img/mypage/icon_order.png') no-repeat center 19px;}
+#mypage .my_info table td.counsel a {background:url('http://www.homeal.net/_skin/homeal/img/mypage/icon_counsel.png') no-repeat center 15px;}
+#mypage .my_info table td.add a {background:url('http://www.homeal.net/_skin/homeal/img/mypage/icon_add.png') no-repeat center 17px;}
+#mypage h4 {position:relative; padding:39px 0 16px; color:#333; font-size:16px; font-weight:400; text-align:left;}
+#mypage h4 a {display:inline-block; zoom:1; *display:inline; position:absolute; top:44px; right:0; z-index:10; color:#333; font-size:13px; font-weight:400;}
+#mypage .tbl_col td.no,
+#mypage .tbl_col td.date {color:#808080;}
+#mypage .tbl_col td.order_number a {color:inherit; text-decoration:underline;}
+#mypage .msg {padding:11px 0 37px;}
+#mypage .msg li {padding-top:8px; color:#a4a4a4; font-size:13px;}
+#mypage .slides_bnr {overflow:hidden; position:relative; width:100%; height:250px;}
+#mypage .slides_bnr .slides_container {width:100%; height:250px;}
+#mypage .slides_bnr .slides_container li {text-align:center; cursor:pointer;}
+#mypage .slides_bnr .slides_container li img {width:100%; height:250px;}
+#mypage .slides_bnr .pagination {position:absolute; top:20px; right:20px; z-index:10;}
+#mypage .slides_bnr .pagination li {float:left; margin-left:9px;}
+#mypage .slides_bnr .pagination li a {display:block; width:15px; height:14px; background:url('http://www.homeal.net/_skin/homeal/img/mypage/mypage_slides.png') no-repeat center;}
+#mypage .slides_bnr .pagination li.activeSlide a {background:url('http://www.homeal.net/_skin/homeal/img/mypage/mypage_slides_over.png') no-repeat center;}
+
+
+/* 踰꾪듉�ㅽ��� - 湲곕낯 */
+.box_btn {display:inline-block; *display:inline; zoom:1; overflow:hidden; text-align:center; vertical-align:top;}
+.box_btn > * {-webkit-appearance:none; display:inline-block; *display:inline; zoom:1; min-width:110px; height:40px; margin:0; padding:0 10px; border:1px solid #7ebf27; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; outline:0; background:#7ebf27; color:#fff !important; font-family:'NanumBarunGothic','�섎닎 諛붾Ⅸ 怨좊뵓', '�뗭�', Dotum, sans-serif; font-size:14px; font-weight:400; text-align:center; line-height:40px; cursor:pointer;}
+.box_btn img {margin:-2px 10px 0 0; font-size:0; line-height:0; vertical-align:middle;}
+.box_btn:hover > * {opacity:0.8;}
+
+/* 踰꾪듉�ㅽ��� - 紐⑥뼇 */
+.box_btn.block {display:block;}
+.box_btn.block > * {display:block; min-width:100% !important; width:100% !important;}
+
+/* 踰꾪듉�ㅽ��� - �ш린 */
+.box_btn.small > * {min-width:70px; height:25px; line-height:25px;}
+.box_btn.middle > * {min-width:110px; height:30px; line-height:30px;}
+.box_btn.middle2 > * {min-width:110px; height:35px; line-height:35px;}
+.box_btn.large > * {min-width:180px; height:50px; font-size:15px; line-height:50px;}
+.box_btn.big > * {min-width:180px; height:70px; font-size:20px; line-height:70px;}
+.box_btn.cmt > * {min-width:85px; height:63px; line-height:63px;}
+
+/* 踰꾪듉�ㅽ��� - �됱긽 */
+.box_btn.black > * {border:1px solid #333; background:#333;}
+.box_btn.white > * {border:1px solid #e6e6e6; background:#fff; color:#333 !important;}
+.box_btn.white2 > * {border:1px solid #e6e6e6; background:#fff; color:#a4a4a4 !important;}
+.box_btn.white3 > * {border:1px solid #7ebf27; background:#fff; color:#6fb82b !important;}
+.box_btn.gray > * {border:1px solid #f0f0f0; background:#f0f0f0; color:#333 !important;}
+
+.calendar_box .tbl_calendar tbody tr:first-child td {border-top:0;}
+.calendar_box .tbl_calendar tbody td {padding:10px 15px; border-top:1px solid #e6e6e6; color:#333; font-size:14px; text-align:left; vertical-align:top;}
+.calendar_box .tbl_calendar tbody td .info_hd {font-size:0; text-align:left;}
+.calendar_box .tbl_calendar tbody td .info_hd .date_chk {width:18px; height:18px;}
+.calendar_box .tbl_calendar tbody td .info_hd .date_day {display:inline-block; *display:inline; zoom:1; width:36px; height:36px; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; color:#333; font-family:'Lato', sans-serif; font-size:20px; font-weight:700; text-align:center; line-height:34px;}
+.calendar_box .tbl_calendar tbody td .info_cnt {clear:both;}
+.calendar_box .tbl_calendar tbody td .info_cnt dl {padding:10px 0;}
+.calendar_box .tbl_calendar tbody td .info_cnt dl dt {padding:0 0 10px; color:#333; line-height:18px; cursor:pointer;}
+.calendar_box .tbl_calendar tbody td .info_cnt dl dt .icon img {height:16px; margin:-2px 0 0 3px; font-size:0; vertical-align:middle;}
+.calendar_box .tbl_calendar tbody td .info_cnt dl dd {color:#dbdbdb; line-height:140%; cursor:pointer;}
+/* �좏깮 */
+.calendar_box .tbl_calendar tbody td.selected .info_hd .date_day {border:1px solid #ed5e2c; border-radius:100%; color:#ed5e2c;}
+/* 鍮꾪솢�� */
+.calendar_box .tbl_calendar tbody td.disabled {background:#f7f7f7; color:#999;}
+.calendar_box .tbl_calendar tbody td.disabled * {color:inherit !important; cursor:default !important;}
+/*# sourceMappingURL=bootstrap.css.map */

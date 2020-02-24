@@ -33,7 +33,7 @@ public class ShopController {
 
 	@Inject
 	MemberService memberService;
-
+	
 	@Inject
 	BuyService buyService;
 
@@ -41,7 +41,7 @@ public class ShopController {
 	@RequestMapping(value = "/my")
 	public String my() {
 
-		return "shop/my";
+		return "shop/my"; 
 	}
 
 	// 정기 배송
@@ -55,7 +55,7 @@ public class ShopController {
 		return "shop/sub";
 	}
 
-	// 일반 상품
+	// 일반 상품테스트
 	@RequestMapping(value = "/singleT")
 	public String singleT(Model model,PagingDto pagingDto) throws Exception {
 		
@@ -66,6 +66,7 @@ public class ShopController {
 		
 		return "shop/single";
 	}
+	
 	// 일반 상품
 	@RequestMapping(value = "/single")
 	public String single(Model model,PagingDto pagingDto) throws Exception {
@@ -80,12 +81,22 @@ public class ShopController {
 
 	// 상품 상세보기
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
-	public String detail(@PathVariable("pdt_num") int pdt_num, Model model) throws Exception {
-		System.out.println("detail Shop Controller");
-		ProductVo productVo = adminService.readPDT(pdt_num);
+	public String detail(@PathVariable("pdt_num") int pdt_num, Model model,HttpServletRequest request) throws Exception {
+		System.out.println("detail Shop Controller"); 
+		ProductVo productVo = adminService.readPDT(pdt_num); 
 
-		model.addAttribute("productVo", productVo);
-
+		model.addAttribute("productVo", productVo); 
+		HttpSession session = request.getSession();
+		// 최근본 상품 세션에 추가
+		List<ProductVo> list = (ArrayList)session.getAttribute("veiw");
+		if (list == null) {
+			list = new ArrayList<>();
+			session.setAttribute("veiw", list);
+		}
+		list.add(productVo);
+		// ----
+		System.out.println(list);
+		
 		return "shop/detail";
 	}
 
@@ -124,20 +135,15 @@ public class ShopController {
 		return "shop/buy";
 	}
 
-	@RequestMapping(value = "/complete")
+	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	//BuyVo buyVo,CartDto cartDto,PointDto pointDto), method = RequestMethod.POST)
-	public String complete() throws Exception {
+	public String complete(BuyVo buyVo,CartDto cartDto,PointDto pointDto) throws Exception {
 		// buy 마스터 테이블 추가
 		// 디테일 테이블 추가
 		// 결제 완료 후 멤버 포인트 수정
 		
-//		buyService.buy(buyVo, pointDto, cartDto);
+		buyService.buy(buyVo, pointDto, cartDto);
 
 		return "shop/complete";
-	}
-
-	@RequestMapping(value = "/buy/detail")
-	public String buyDetail() {
-		return "mypage/buy";
 	}
 }

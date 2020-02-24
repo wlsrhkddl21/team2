@@ -43,6 +43,6 @@ public class MyLunchDaoImpl implements MyLunchDao {
 
 	@Override
 	public void deleteMLB(int lunch_num) throws Exception {
-		sqlSession.delete(NAMESPCE+".deleteMLB");
+		sqlSession.delete(NAMESPCE+".deleteMLB",lunch_num);
 	}
 }
