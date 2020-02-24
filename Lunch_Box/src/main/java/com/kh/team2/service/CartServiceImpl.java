@@ -11,7 +11,7 @@ import com.kh.team2.persistence.CartDao;
 
 @Service
 public class CartServiceImpl implements CartService {
-
+ 
 	@Inject
 	private CartDao cartDao;
 	
@@ -46,9 +46,11 @@ public class CartServiceImpl implements CartService {
 		return cartDao.isCart(pdt_num,mem_id);
 	}
 
-	@Override
-	public void countUp(int cart_count, int pdt_num) throws Exception {
-		cartDao.countUp(cart_count, pdt_num);
+	@Override 
+	public void countUp(int cart_count,int pdt_num,String mem_id) throws Exception {
+		cartDao.countUp(cart_count, pdt_num, mem_id);
 	}
+
+	
 
 }

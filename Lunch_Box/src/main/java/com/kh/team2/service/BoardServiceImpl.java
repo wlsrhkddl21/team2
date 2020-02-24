@@ -68,6 +68,11 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public List<BoardVo> listPage(PagingDto pagingDto) throws Exception {
+		return boardDao.listPage(pagingDto);
+	}
+
 
 
 

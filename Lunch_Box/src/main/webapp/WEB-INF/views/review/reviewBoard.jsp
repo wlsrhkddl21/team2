@@ -19,12 +19,12 @@
 </style>
 <script>
 $(document).ready(function(){
-// 	$(".page-link").click(function(e){
-// 		e.preventDefault(); // 브라우저의 기본기능 막기 (a 태그 동작 막기)
-// 		var page = $(this).attr("data-page");
-// 		$("input[name=page]").val(page);
-// 		$("#frmPage").submit();
-// 	});
+	$(".page-link").click(function(e){
+		e.preventDefault(); // 브라우저의 기본기능 막기 (a 태그 동작 막기)
+		var page = $(this).attr("data-page");
+		$("input[name=page]").val(page);
+		$("#frmPage").submit();
+	});
 // 	$("#btnRegister").click(function() {
 // 		console.log("클릭됨");
 // 		$("#frmPage").attr("action", "/review/ntRegister");
@@ -46,7 +46,24 @@ $(document).ready(function(){
 	$(".readTitle").click(function(){
 		location.href = "/review/reviewContent";
 	});
-
+	
+	function image() {
+		$(".revImage").each(
+				function() {
+					var fileName = $(this).attr("data-img");
+//						console.log("fileName:" + fileName);
+					var slice = fileName.lastIndexOf("/")
+					var path = fileName.substring(0, slice + 1);
+					var real = fileName.substring(slice + 1);
+					var thumbnail = path + "s_" + real;
+//						console.log(thumbnail);
+					$(this).attr(
+							"src",
+							"/review/displayFile?fileName="
+									+ thumbnail);
+				});
+	}
+	image();
 // 	$("#pdtContent").click(function(){
 // 		console.log("클릭됨");
 // 		location.href = "/shop/detail";
@@ -55,9 +72,9 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid">
 
-	<form id="frmPage" action="/review/reviewContent" method="get">
+	<form id="frmPage" action="/review/reviewBoard" method="get">
 		<input type="hidden" name="rev_num"/>
-		<input type="hidden" name="rev_pdt_name"/>
+<!-- 		<input type="hidden" name="rev_pdt_name"/> -->
 		<input type="hidden" name="page" 
 			value="${pagingDto.page }"/>
 		<input type="hidden" name="perPage"
@@ -100,7 +117,9 @@ $(document).ready(function(){
 				<c:forEach items="${list }" var="reviewVo">
 					<tr>
 						<td>${reviewVo.rev_num }</td>
-						<td>${reviewVo.rev_image }</td>
+						<c:if test="${not empty reviewVo.rev_image}">
+							<td><img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}"></td>
+						</c:if>
 						<td>
 							<c:forEach items="${productList}" var="ProductVo">
 								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}">

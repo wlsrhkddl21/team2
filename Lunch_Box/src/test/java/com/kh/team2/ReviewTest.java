@@ -22,8 +22,8 @@ public class ReviewTest {
 	
 	@Test
 	public void testRead() throws Exception {
-		int rev_num = 502;
-		dao.selectList(rev_num);
+		int rev_num = 54;
+		dao.readReview(rev_num);
 	}
 	
 	@Test
@@ -32,7 +32,6 @@ public class ReviewTest {
 		vo.setRev_title("테스트 제목3");
 		vo.setRev_writer("작성자 테스트3");
 		vo.setRev_content("내용 테스트3");
-		vo.setRev_pdt_name(87);
 		dao.insertReview(vo);
 	}
 	

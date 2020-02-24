@@ -14,6 +14,18 @@
              )
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select>
+
+	<select id="listPage" resultType="BoardVo">
+		select * 
+        from (select rownum rnum, a.* 
+        	  from (select * 
+        	  		from tbl_notice
+        	  		
+        	  		order by not_num desc
+                   ) a
+             )
+		where rnum &gt;= 1 and rnum &lt;= 6
+	</select>
 	
 	<select id="hotList" resultType="BoardVo">
 		select * 

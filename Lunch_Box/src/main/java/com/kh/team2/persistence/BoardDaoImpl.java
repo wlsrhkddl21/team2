@@ -80,4 +80,9 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSession.update(NAMESPACE + ".updateViewCount", not_num); 
 	}
 
+	@Override
+	public List<BoardVo> listPage(PagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listPage", pagingDto);
+	}
+
 }
