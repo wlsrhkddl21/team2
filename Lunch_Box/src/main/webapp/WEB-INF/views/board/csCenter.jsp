@@ -32,8 +32,8 @@ $(document).ready(function(){
 		$("#frmRead").submit();
 	});
 	
-	$("#faqTag").click(function(){
-		$("#faq97").toggle();
+	$(".faq_subject").click(function(){
+		$(".faq_content").toggle();
 	});
 	
 	$(".pdt_name").click(function(e) {
@@ -148,17 +148,17 @@ $(document).ready(function(){
             </tr>
             </thead>
             <tbody>
-            		<c:forEach items="${reviewList}" var="reviewVo">
-							<tr>
-								<c:if test="${not empty reviewVo.rev_image}">
-									<td class="img" style="padding-top: 3px;">
-										<img alt="상품이미지" class="pdtImg" style="height:50px;"
-										data-img="${reviewVo.rev_image}"></td>
-								</c:if>
-								<td class="left"><a class="pdt_name" href="#"
-									data-num="${reviewVo.rev_num}">${reviewVo.rev_title}</a></td>
-							</tr>
-					</c:forEach>
+<%--             		<c:forEach items="${reviewList}" var="reviewVo"> --%>
+<!-- 							<tr> -->
+<%-- 								<c:if test="${not empty reviewVo.rev_image}"> --%>
+<!-- 									<td class="img" style="padding-top: 3px;"> -->
+<!-- 										<img alt="상품이미지" class="pdtImg" style="height:50px;" -->
+<%-- 										data-img="${reviewVo.rev_image}"></td> --%>
+<%-- 								</c:if> --%>
+<!-- 								<td class="left"><a class="pdt_name" href="#" -->
+<%-- 									data-num="${reviewVo.rev_num}">${reviewVo.rev_title}</a></td> --%>
+<!-- 							</tr> -->
+<%-- 					</c:forEach> --%>
 				</tbody>
         </table>
         <!-- //개발 영역 (작업 완료 후 상단 div 클래스명 추가 필수) -->
@@ -189,7 +189,7 @@ $(document).ready(function(){
 			<td class="left">주문/결제/증빙</td>
 			<td class="left subject" id="faqTag"><a href="javascript:faqTgg('97');">[호밀]현금영수증 발급 방법은요?</a></td>
 		</tr>
-		<tr class="faq_content" id="faq97" style="display:table-row;">
+		<tr class="faq_content" id="faq97" style="display:none;">
 			<td class="type"><img src="http://www.homeal.net/_skin/homeal/img/bg/faq_a.png" alt="Answer"></td>
 			<td colspan="2" class="left">
 				트루라이프 호밀은 현금영수증 자진발급&nbsp;업체입니다.&nbsp;하여 증빙이 누락되는 부분은 전혀 없습니다. 다만, 결제 전 현금영수증 안내 부분을 꼼꼼히 읽어주시고, 확인해주시기 바라며, 홈페이지&nbsp;결제 시에는&nbsp;현금영수증 체크 부분을 정확히 체크 후 결제해 주시면 됩니다.! * 그 외 유선상으로&nbsp;연락 주실경우에는 현금영수증&nbsp;요청 고객님께서는&nbsp;원하시는 번호를 미리 안내해주시면 빠른 처리가 가능합니다.
