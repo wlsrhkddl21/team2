@@ -48,6 +48,12 @@ public class AdminDaoimpl implements AdminDao {
 		
 	}
 
+	@Override
+	public List<ProductVo> readTOP3() throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE+".readTOP3");
+	}
+
 	
 
 }
