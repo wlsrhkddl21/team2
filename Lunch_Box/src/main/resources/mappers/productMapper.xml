@@ -20,6 +20,14 @@
 		select * from tbl_product
 		where pdt_num = #{pdt_num}
 	</select>
+	
+	<select id="readTOP3" resultType="ProductVo">
+		select PDT_NUM,PDT_CATEGORY,PDT_NAME,PDT_DATE,PDT_PRICE,PDT_IMAGE,PDT_SALES,PDT_SUBIMAGE 
+		from (select rownum r,p.* 
+			 from (select * from tbl_product
+			 order by pdt_sales desc)p)
+			 where 4 &gt; r
+	</select>
 
 	<update id="updatePDT">
 		update tbl_product set

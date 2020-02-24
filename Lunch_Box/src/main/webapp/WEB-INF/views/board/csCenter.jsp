@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!-- <link rel="stylesheet" type="text/css" href="http://www.homeal.net/_data/wing_homeal_temp.css"> -->
 <link rel="stylesheet" href="/css/homeal.css">
+<script type="text/javascript" src="http://www.homeal.net/wm_engine_SW/_engine/common/truelife.js?v=11"></script>
+<script type="text/javascript" src="http://www.homeal.net/wm_engine_SW/_engine/common/auto_scroll.js"></script>
+<script src="http://www.homeal.net/_skin/homeal/img/../jquery.cycle.all.js"></script>
 <style>
  .csCenter_info { 
  	padding: 35px; 
@@ -16,6 +19,7 @@ a {
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  cursor : pointer;
 } 
 </style>
 <script>
@@ -26,6 +30,10 @@ $(document).ready(function(){
 		$("input[name=not_num]").val(not_num);
 		$("#frmRead").attr("action", "/board/ntRead");
 		$("#frmRead").submit();
+	});
+	
+	$("#faqTag").click(function(){
+		$("#faq97").toggle();
 	});
 	
 	$(".pdt_name").click(function(e) {
@@ -179,9 +187,9 @@ $(document).ready(function(){
 	<tbody><tr class="faq_subject">
 			<td class="type"><img src="http://www.homeal.net/_skin/homeal/img/bg/faq_q.png" alt="Question"></td>
 			<td class="left">주문/결제/증빙</td>
-			<td class="left"><a href="javascript:faqTgg('97');">[호밀]현금영수증 발급 방법은요?</a></td>
+			<td class="left subject" id="faqTag"><a href="javascript:faqTgg('97');">[호밀]현금영수증 발급 방법은요?</a></td>
 		</tr>
-		<tr class="faq_content" id="faq97">
+		<tr class="faq_content" id="faq97" style="display:table-row;">
 			<td class="type"><img src="http://www.homeal.net/_skin/homeal/img/bg/faq_a.png" alt="Answer"></td>
 			<td colspan="2" class="left">
 				트루라이프 호밀은 현금영수증 자진발급&nbsp;업체입니다.&nbsp;하여 증빙이 누락되는 부분은 전혀 없습니다. 다만, 결제 전 현금영수증 안내 부분을 꼼꼼히 읽어주시고, 확인해주시기 바라며, 홈페이지&nbsp;결제 시에는&nbsp;현금영수증 체크 부분을 정확히 체크 후 결제해 주시면 됩니다.! * 그 외 유선상으로&nbsp;연락 주실경우에는 현금영수증&nbsp;요청 고객님께서는&nbsp;원하시는 번호를 미리 안내해주시면 빠른 처리가 가능합니다.
@@ -192,7 +200,7 @@ $(document).ready(function(){
 			<td class="left">BEST</td>
 			<td class="left"><a href="javascript:faqTgg('95');">[호밀] 제품이 배송되지 않았어요!</a></td>
 		</tr>
-		<tr class="faq_content" id="faq95">
+		<tr class="faq_content" id="faq95" style="display:none;">
 			<td class="type"><img src="http://www.homeal.net/_skin/homeal/img/bg/faq_a.png" alt="Answer"></td>
 			<td colspan="2" class="left">
 				호밀 제품이 배송되지 않으셨나요? 만일 배송상 문제나, 제품상 문제로 호밀이 배송되지 않았을 경우에는 즉각 연락 부탁드립니다. 배송일 이후 3일 이후 연락해주시는 부분에 대해서는 확인 및 처리가 어려우므로, 배송은 반드시 확인해주시고, 가급적&nbsp;배송 후&nbsp;3일 이전&nbsp;연락 부탁드립니다.&nbsp;호밀 배송은&nbsp;폭설,&nbsp;폭우에도 정상적으로 진행되오니, 참고해주세요!!
@@ -253,7 +261,7 @@ $(document).ready(function(){
 						<div class="col-md-2"></div>
 					</div>
 				</div>
-				<div class="col-md-2" style="height: 600px;"></div>
+				<div class="col-md-2" style="height: 200px;"></div>
 			</div>
 		</div>
 </div>
