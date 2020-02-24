@@ -49,7 +49,7 @@ $(document).ready(function(){
 //							console.log(thumbnail);
 						$(this).attr(
 								"src",
-								"/admin/displayFile?fileName="
+								"/review/displayFile?fileName="
 										+ thumbnail);
 					});
 		}
