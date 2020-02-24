@@ -44,4 +44,10 @@
 		cart_count = cart_count + #{cart_count}
 		where pdt_num = #{pdt_num} and mem_id = #{mem_id}
 	</update>
+	
+	<select id="cartCount" resultType="int">
+		select count(*)
+		from tbl_cart
+		where mem_id = #{mem_id}
+	</select>
 </mapper>  

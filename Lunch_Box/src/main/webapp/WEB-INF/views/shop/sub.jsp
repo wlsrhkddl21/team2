@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp" %>
-
+<style>
+	.margin_self {
+		margin-left: 1253px;
+	}
+</style>
 <div style="height: 20px"></div>
 <h3 class="title-w3ls text-center text-bl mb-5">정기 배송</h3>
 <div style="height: 20px"></div>
@@ -12,6 +16,7 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+		<%@ include file="../include/recentListDiv.jsp" %>
 			<div class="row no-gutters">
 				<c:forEach items="${list }" var="productVo">
 					<c:if test="${productVo.pdt_date != 1}">

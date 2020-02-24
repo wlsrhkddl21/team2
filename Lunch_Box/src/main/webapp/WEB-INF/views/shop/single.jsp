@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
-
+<style>
+	.margin_self {
+		margin-left: 1253px;
+	}
+</style>
 <div style="height: 20px"></div>
 <h3 class="title-w3ls text-center text-bl mb-5">일반 도시락</h3>
 <div style="height: 20px"></div>

@@ -19,7 +19,7 @@ public class CartServiceImpl implements CartService {
 	public List<CartVo> cartList(String mem_id) throws Exception {
 		 return cartDao.cartList(mem_id);
 		
-	}
+	} 
 
 	@Override
 	public void cartInsert(CartVo vo) throws Exception {
@@ -50,6 +50,12 @@ public class CartServiceImpl implements CartService {
 	public void countUp(int cart_count,int pdt_num,String mem_id) throws Exception {
 		cartDao.countUp(cart_count, pdt_num, mem_id);
 	}
+
+	@Override
+	public int cartCount(String mem_id) throws Exception {
+		return cartDao.cartCount(mem_id);
+	}
+
 
 	
 

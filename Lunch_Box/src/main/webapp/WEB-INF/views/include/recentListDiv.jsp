@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	.margin_self {
-		top : 120px;
-		margin-left: 1125px;
-	}
 	.recentList {
 		position:absolute;
 		background-color: #fff;
@@ -40,7 +36,7 @@
 	.cart_count {
 		color : steelblue;
 	}
-	p:hover {
+	.cartList:hover {
 		opacity: .8;
     	text-decoration: none;
     	transition: 0.5s all;
@@ -50,13 +46,22 @@
     	-ms-transition : 0.5s all;
     	color: #0056b3;
 	}
+	.countSpan {
+		color: #7ebf27 !important;
+		font-size: inherit;
+	}
 	
 </style>
 <script>
 $(function() {
+	console.log($("body").prop("scrollHeight"));
+
 	$(".cartList").click(function() {
 		location.href="/cart/list";
 	});
+	$(window).scroll(function() {
+			$(".recentList").animate({top:$(window).scrollTop()+120+"px"},{queue: false, duration: 350});
+	});  
 });
 
 </script>
@@ -66,11 +71,11 @@ $(function() {
 					<div>
 					<ul class="list">
 						<c:forEach items="${veiwList}" var="veiw">
-						<li><a><img src="/admin/displayFile?fileName=${veiw.pdt_image}" width="150" height="100" border="10"></a></li>
+						<li><a href="/shop/detail/${veiw.pdt_num}"><img src="/admin/displayFile?fileName=${veiw.pdt_image}" width="150" height="100" border="10" style="cursor: pointer;"></a></li>
 						</c:forEach>
 					</ul>
 					</div>
-					<p class="cartList">장바구니<span>3</span></p>
+					<p class="cartList">장바구니 (<span class="countSpan">${cartCount}</span>)</p>
 					<p class="cartList">마이페이지</p>
 				</div>
-</div>
+			</div>
