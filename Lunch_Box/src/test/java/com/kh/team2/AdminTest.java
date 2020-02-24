@@ -40,7 +40,9 @@ public class AdminTest {
 	
 	@Test
 	public void testreadAll() throws Exception{
-		mydao.readAllMLB("side");
+		dao.readTOP3();
 	}
+	
+	
 	
 }
