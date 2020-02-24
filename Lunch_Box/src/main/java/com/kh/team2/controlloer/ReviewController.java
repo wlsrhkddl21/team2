@@ -90,6 +90,7 @@ public class ReviewController {
 	@RequestMapping(value ="/reviewContent",method = RequestMethod.GET)
 	public String reviewContent(@RequestParam("rev_num") int rev_num,@ModelAttribute PagingDto pagingDto,Model model) throws Exception {
 		ReviewVo reviewVo = reviewService.readReview(rev_num);
+		System.out.println(reviewVo);
 		model.addAttribute("reviewVo", reviewVo);
 		return "/review/reviewContent";
 	}
@@ -103,5 +104,11 @@ public class ReviewController {
 		is.close();
 		return bytes;
 	}
-		
+	
+	// 리뷰삭제
+	@RequestMapping(value = "/reviewDelete", method = RequestMethod.GET)
+	public String reviewDelete(@RequestParam("rev_num") int rev_num) throws Exception {
+		reviewService.reviewDelete(rev_num);
+		return "redirect:/review/reviewBoard";
+	}
 }

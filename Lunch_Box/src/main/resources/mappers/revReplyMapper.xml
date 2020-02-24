@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.mappers.revReplyMapper">
+	
+	<select id="readReply" resultType="RevReplyVo">
+		select * from tbl_revReply
+		where rev_num = #{rev_num}
+	</select>
+	
+	<select id="replyAll" resultType="RevReplyVo">
+		select * from 
+		(select rownum rnum, a.* from 
+		(select * from tbl_review	order by rev_num desc) a)
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+	</select>
+	
+	<select id="listCount" resultType="int">
+		select count(*) from tbl_revReply
+	</select>
+	
+	<insert id="insertReply">
+		insert into tbl_revReply(rep_num, rep_bno, rep_content, rep_writer)
+		values (seq_rev_num.nextval,#{rep_bno} ,#{rep_content}, #{rep_writer})
+	</insert>
+	
+	
+	
+	
+	<select id="reviewList" resultType="RevReplyVo">
+		select * from 
+		(select rownum rnum, a.* from 
+		(select * from tbl_review	order by rev_num desc) a)
+		where rnum &gt;= 1 and rnum &lt;= 4
+	</select>
+	
+	
+</mapper>  
+
+

@@ -20,12 +20,7 @@ $(document).ready(function() {
 			$("#btnHotCancel").show(100);
 		}
 	});
-	// 중요공지삭제버튼
-	$("#btnHotCancel").click(function(){
-		if(confirm("중요공지를 중단하시겠습니까?")) {
-			$("#myform").attr("action", "/board/hotDelete").submit();
-		}
-	});
+	
 	// 목록 버튼
 	$("#btnListAll").click(function(){
 		location.href = "/review/reviewBoard";
@@ -33,7 +28,7 @@ $(document).ready(function() {
 	// 삭제 버튼
 	$("#btnDelete").click(function(){
 		if(confirm("삭제하시겠습니까?")) {
-			$("#frmList").attr("action", "/board/ntDelete").submit();	
+			$("#frmList").attr("action", "/review/reviewDelete").submit();	
 		}
 	});
 	// 수정취소 버튼
@@ -48,12 +43,7 @@ $(document).ready(function() {
 		$("#btnModify").show(100);
 		$("#btnHot").hide(100);
 	});
-	// 중요공지등록 버튼
-	$("#btnHot").click(function() {
-		if(confirm("중요공지로 등록하시겠습니까?")) {
-			$("#myform").attr("action", "/board/hotUpdate").submit();
-		}
-	});
+	
 	// 댓글 작성완료 버튼
 	$("#btn_ntReply").click(function(){
 		var ntbno = "${boardVo.not_num}";
@@ -209,14 +199,14 @@ $(document).ready(function() {
 	</div>
 
 
-<!-- 	<form id="frmList" action="/board/notice" method="get"> -->
-<!-- 		<input type="hidden" name="not_num"  -->
-<%-- 			value="${boardVo.not_num}" /> --%>
-<!-- 		<input type="hidden" name="page"  -->
-<%-- 			value="${pagingDto.page}"/> --%>
-<!-- 		<input type="hidden" name="perPage"  -->
-<%-- 			value="${pagingDto.perPage}"/> --%>
-<!-- 	</form> -->
+	<form id="frmList" action="/review/reviewBoard" method="get">
+		<input type="hidden" name="rev_num" 
+			value="${reviewVo.rev_num}" />
+		<input type="hidden" name="page" 
+			value="${pagingDto.page}"/>
+		<input type="hidden" name="perPage" 
+			value="${pagingDto.perPage}"/>
+	</form>
 
 	<div class="row">
 		<div class="col-md-1"></div>
@@ -256,7 +246,7 @@ $(document).ready(function() {
 			<tr>
 				<th scope="row" colspan="5" class="form-group" >
 				<textarea rows="10" id="rev_content" 
-						name="rev_content" style="border:none" readonly>${reviewVo.rev_content}</textarea>
+						name="rev_content" style="border:none" readonly>${reviewVo.rev_content} ${reviewVo.rev_writer}</textarea>
 				</th>
 			</tr>
 		</tbody>
@@ -278,9 +268,8 @@ $(document).ready(function() {
 			</div>
 			</form>
 				<div style="clear:both;">
-				<c:if test="${mem_id == 'admin'}">
-					<button type="button" class="btn btn-warning"
-						id="btnModify">수정</button>
+				<c:if test="${ mem_id == 'admin' || mem_id == reviewVo.rev_writer }">
+					
 					<button type="button" class="btn btn-danger"
 						id="btnDelete">삭제</button>				
 				</c:if>
@@ -292,14 +281,14 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="ntRcontent">댓글내용</label>
-				<input type="text" id="ntRcontent"
-					class="form-control"/>
-			</div>
-			<div class="form-group">
 				<label for="ntRwriter">작성자</label>
 				<input type="text" id="ntRwriter" value="${mem_id }"
 					class="form-control" readonly/>
+			</div>
+			<div class="form-group">
+				<label for="ntRcontent">댓글내용</label>
+				<input type="text" id="ntRcontent"
+					class="form-control"/>
 			</div>
 			<div class="form-group">
 				<button type="button" class="btn-xs btn-success"

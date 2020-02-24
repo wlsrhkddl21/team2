@@ -28,4 +28,9 @@ public interface ReviewDao {
 	// 조회수
 	public void viewCount(int rev_num) throws Exception;
 	
+	// 리뷰 삭제
+	public void reviewDelete(int rev_num) throws Exception;
+
+	
+	
 }

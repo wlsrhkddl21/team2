@@ -49,4 +49,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.reviewList(pagingDto);
 	}
 
+	@Override
+	public void reviewDelete(int rev_num) throws Exception {
+		dao.reviewDelete(rev_num);
+		
+	}
+
 }

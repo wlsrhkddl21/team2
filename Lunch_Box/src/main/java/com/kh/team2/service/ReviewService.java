@@ -25,4 +25,7 @@ public interface ReviewService {
 	
 	// 리뷰상세보기
 	public ReviewVo readReview(int rev_num) throws Exception;
+	
+	// 리뷰삭제
+	public void reviewDelete(int rev_num) throws Exception;
 }

@@ -43,6 +43,11 @@
 			rev_viewcount = rev_viewcount + 1
 		where rev_num = #{rev_num}
 	</update>
+	
+	<delete id="reviewDelete">
+		delete from tbl_review
+		where rev_num = #{rev_num}
+	</delete>
 </mapper>  
 
 
