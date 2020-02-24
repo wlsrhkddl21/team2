@@ -30,13 +30,13 @@ public class csCenterController {
 	public String list(Model model, PagingDto pagingDto) throws Exception {
 		List<BoardVo> listPage = boardService.listPage(pagingDto);
 		List<BoardVo> hotList = boardService.hotList(pagingDto);
-		List<ReviewVo> reviewPage = reviewService.listAll(pagingDto);
+		List<ReviewVo> reviewList = reviewService.reviewList(pagingDto);
 		
 		int totalCount = boardService.listCount(pagingDto);
 		pagingDto.setTotalCount(totalCount);
 		model.addAttribute("listPage", listPage);
 		model.addAttribute("hotList", hotList);
-		model.addAttribute("listAll", reviewPage);
+		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("pagingDto", pagingDto);
 		return "board/csCenter";
 	}

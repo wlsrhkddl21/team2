@@ -28,14 +28,13 @@ $(document).ready(function(){
 		$("#frmRead").submit();
 	});
 	
-	function() {
-		$(".pdt_name").click(function(e) {
-			e.preventDefault();
-			// 		console.log("클릭됨");
-			var pdt_num = $(this).attr("data-num");
-			// 		location.href = "/admin/content";
-			location.href = "/admin/content?pdt_num=" + pdt_num;
-		});
+	$(".pdt_name").click(function(e) {
+		e.preventDefault();
+		// 		console.log("클릭됨");
+		var pdt_num = $(this).attr("data-num");
+		// 		location.href = "/admin/content";
+		location.href = "/admin/content?pdt_num=" + pdt_num;
+	});
 
 		function thumbnail() {
 			$(".pdtImg").each(
@@ -46,7 +45,7 @@ $(document).ready(function(){
 						var path = fileName.substring(0, slice + 1);
 						var real = fileName.substring(slice + 1);
 						var thumbnail = path + "s_" + real;
-//							console.log(thumbnail);
+							console.log(thumbnail);
 						$(this).attr(
 								"src",
 								"/review/displayFile?fileName="
@@ -55,8 +54,6 @@ $(document).ready(function(){
 		}
 		thumbnail();
 });
-});
-
 </script>
 <div class="container-fluid">
 	<form id="frmRead" action="/board/notice" method="get">
@@ -143,53 +140,18 @@ $(document).ready(function(){
             </tr>
             </thead>
             <tbody>
-            		<c:forEach items="${listAll}" var="reviewVo">
+            		<c:forEach items="${reviewList}" var="reviewVo">
 							<tr>
 								<c:if test="${not empty reviewVo.rev_image}">
-									<td class="img"><img alt="상품이미지" class="pdtImg"
+									<td class="img" style="padding-top: 3px;">
+										<img alt="상품이미지" class="pdtImg" style="height:50px;"
 										data-img="${reviewVo.rev_image}"></td>
 								</c:if>
 								<td class="left"><a class="pdt_name" href="#"
 									data-num="${reviewVo.rev_num}">${reviewVo.rev_title}</a></td>
 							</tr>
 					</c:forEach>
-            <tr>
-					<td class="img">
-						<a href="https://blog.naver.com/andher/221758367684" target='_blank'>
-							<img src="http://truelife.wisacdn.com/_data/review/202001/04/be2eca4a6cf32774ca1389c69567168f.jpeg">
-						</a>
-					</td>
-					<td class="left">
-						<a href="https://blog.naver.com/andher/221758367684" target='_blank'>맞벌이 부부가 겨울방학 아이 식단으로 선택한 호밀 한식</a>
-					</td>
-				</tr><tr>
-					<td class="img">
-						<a href="https://blog.naver.com/PostView.nhn?blogId=grfog211&logNo=221734903222&redirect=Dlog&widgetTypeCall=true&directAccess=false" target='_blank'>
-							<img src="http://truelife.wisacdn.com/_data/review/201912/27/aae67c3aaee338e60719080eb28cc943.jpeg">
-						</a>
-					</td>
-					<td class="left">
-						<a href="https://blog.naver.com/PostView.nhn?blogId=grfog211&logNo=221734903222&redirect=Dlog&widgetTypeCall=true&directAccess=false" target='_blank'>편식대왕 우리 꼬맹이 다양한 식단으로 겨울방학~ 밥먹는 시간이 즐거워</a>
-					</td>
-				</tr><tr>
-					<td class="img">
-						<a href="https://blog.naver.com/minadie/221749344912" target='_blank'>
-							<img src="http://truelife.wisacdn.com/_data/review/201912/27/1c42cf5e11db1089355473985e69d916.gif">
-						</a>
-					</td>
-					<td class="left">
-						<a href="https://blog.naver.com/minadie/221749344912" target='_blank'>외기러기 아빠가 아이들에게 대접한 미안함 없는 푸짐한 겨울방학 식단</a>
-					</td>
-				</tr><tr>
-					<td class="img">
-						<a href="https://blog.naver.com/hotshout/221738320297" target='_blank'>
-							<img src="http://truelife.wisacdn.com/_data/review/201912/27/9da42739f307d4d47680c4010285181b.jpeg">
-						</a>
-					</td>
-					<td class="left">
-						<a href="https://blog.naver.com/hotshout/221738320297" target='_blank'>워킹맘! 겨울방학 아이들 건강식단 당당하게 트루라이프로 결정!!</a>
-					</td>
-				</tr></tbody>
+				</tbody>
         </table>
         <!-- //개발 영역 (작업 완료 후 상단 div 클래스명 추가 필수) -->
     </div>

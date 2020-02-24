@@ -46,6 +46,11 @@ public class ReviewDaoImpl implements ReviewDao {
 		List<ProductVo> list = sqlSession.selectList(NAMESPACE+".productName");
 		return list;
 	}
+
+	@Override
+	public List<ReviewVo> reviewList(PagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".reviewList", pagingDto);
+	}
 	
 	
 }

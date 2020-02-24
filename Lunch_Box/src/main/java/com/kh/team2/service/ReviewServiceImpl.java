@@ -43,4 +43,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.readReview(rev_num);
 	}
 
+	@Override
+	public List<ReviewVo> reviewList(PagingDto pagingDto) throws Exception {
+		return dao.reviewList(pagingDto);
+	}
+
 }

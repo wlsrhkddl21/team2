@@ -10,6 +10,9 @@ public interface ReviewService {
 
 	// ��� �� ����Ʈ
 	public List<ReviewVo> listAll(PagingDto pagingDto) throws Exception;
+
+	// 고객센터 리뷰목록
+	public List<ReviewVo> reviewList(PagingDto pagingDto) throws Exception;
 	
 	// ������
 	public int listCount(PagingDto pagingDto) throws Exception;
