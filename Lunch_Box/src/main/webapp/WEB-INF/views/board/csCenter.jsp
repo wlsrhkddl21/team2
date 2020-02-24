@@ -2,15 +2,41 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../include/header.jsp"%>
-<link rel="stylesheet" type="text/css" href="http://www.homeal.net/_data/wing_homeal_temp.css">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!-- <link rel="stylesheet" type="text/css" href="http://www.homeal.net/_data/wing_homeal_temp.css"> -->
+<link rel="stylesheet" href="/css/homeal.css">
 <style>
  .csCenter_info { 
  	padding: 35px; 
  	border: 5px solid #ededed;
  	margin-top: 20px;
+}
+a {
+  color: #000000;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
 } 
 </style>
+<script>
+$(document).ready(function(){
+	$(".not_title").click(function(e){
+		e.preventDefault();
+		var not_num = $(this).attr("data-bno");
+		$("input[name=not_num]").val(not_num);
+		$("#frmRead").attr("action", "/board/ntRead");
+		$("#frmRead").submit();
+	});
+});
+</script>
 <div class="container-fluid">
+	<form id="frmRead" action="/board/notice" method="get">
+		<input type="hidden" name="not_num"/>
+		<input type="hidden" name="page" 
+			value="${pagingDto.page }"/>
+		<input type="hidden" name="perPage"
+			value="${pagingDto.perPage }"/>
+	</form>
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
@@ -20,10 +46,6 @@
 				<h3>런치박스 고객센터</h3>
 				<strong>080-123-1234</strong>
 				<span>평일 09시 ~ 17시, 점심 12시 ~ 13시(토/일  공휴일 휴무)</span>
-				<div class="btn">
-					<div class="box_btn white"><a href="/content/content.php?cont=membership">회원혜택 안내</a></div>
-					<div class="box_btn white"><a href="/mypage/counsel_list.php">1:1상담 문의</a></div>
-				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-2">
@@ -37,7 +59,7 @@
     <div class="board_group box_left"> <!-- 작업 완료 후 'box_left' 클래스명 추가 -->
         <div class="title">
             <h4>공지사항</h4>
-            <a href="/board/?db=basic_1" class="more">더보기+</a>
+            <a href="/board/notice" class="more">더보기+</a>
         </div>
         
 <table class="tbl_board">
@@ -52,37 +74,31 @@
 			<th scope="col">날짜</th>
 		</tr>
 	</thead>
-	<tbody><tr>
-			<td><a href="http://www.homeal.net/board/?db=basic_1&no=1100&mari_mode=view@view">※ 호밀 쉐프가 말하는 호밀만의 제조 원칙 8가지!! ※</a></td>
-			<td class="date">2019-11-04</td>
-		</tr>
-		<tr>
-			<td><a href="http://www.homeal.net/board/?db=basic_1&no=1091&mari_mode=view@view">※ 호밀 식단 직배송 가능 지역표 ※ </a></td>
-			<td class="date">2019-09-23</td>
-		</tr>
-		<tr>
-			<td><a href="http://www.homeal.net/board/?db=basic_1&no=932&mari_mode=view@view">※ 나의 식단 일정 확인 및 변경 방법 안내 ※</a></td>
-			<td class="date">2018-03-23</td>
-		</tr>
-		<tr>
-			<td><a href="http://www.homeal.net/board/?db=basic_1&no=1132&mari_mode=view@view">2020년 3월 꾸러미스페셜 식단표</a></td>
-			<td class="date">2020-02-07</td>
-		</tr>
-		<tr>
-			<td><a href="http://www.homeal.net/board/?db=basic_1&no=1131&mari_mode=view@view">2020년 3월 한식 식단표</a></td>
-			<td class="date">2020-02-07</td>
-		</tr>
-		<tr>
-			<td><a href="http://www.homeal.net/board/?db=basic_1&no=1130&mari_mode=view@view">2020년 3월 꾸러미 식단표</a></td>
-			<td class="date">2020-02-04</td>
-		</tr>
+	<tbody>
+		<c:forEach items="${hotList }" var="boardVo">
+			<tr>
+				<td><a data-bno="${boardVo.not_num}" class="not_title"> ${boardVo.not_title } </a></td>
+				<td class=date><fmt:formatDate value="${boardVo.not_regdate }" 
+						pattern="yyyy-MM-dd"/></td>
+			</tr>
+		</c:forEach>
+		
+		<c:forEach items="${listPage }" var="boardVo">
+			<c:if test="${boardVo.not_hot == 0 }">
+			<tr>
+				<td><a data-bno="${boardVo.not_num}" class="not_title"> ${boardVo.not_title } </a></td>
+				<td class=date><fmt:formatDate value="${boardVo.not_regdate }" 
+						pattern="yyyy-MM-dd"/></td>
+			</tr>
+			</c:if>
+		</c:forEach>
 	</tbody>
 </table>
     </div>
     <div class="board_group box_right">
         <div class="title">
             <h4>고객후기</h4>
-            <a href="/shop/product_review_list.php" class="more">더보기+</a>
+            <a href="/review/reviewBoard" class="more">더보기+</a>
         </div>
         <!-- 개발 영역 (작업 완료 후 상단 div 클래스명 추가 필수) -->
         <table class="tbl_board prd div">
@@ -98,42 +114,42 @@
             </tr>
             </thead>
             <tbody><tr>
-											<td class="img">
-												<a href="https://blog.naver.com/andher/221758367684" target='_blank'>
-													<img src="http://truelife.wisacdn.com/_data/review/202001/04/be2eca4a6cf32774ca1389c69567168f.jpeg">
-												</a>
-											</td>
-											<td class="left">
-												<a href="https://blog.naver.com/andher/221758367684" target='_blank'>맞벌이 부부가 겨울방학 아이 식단으로 선택한 호밀 한식</a>
-											</td>
-										</tr><tr>
-											<td class="img">
-												<a href="https://blog.naver.com/PostView.nhn?blogId=grfog211&logNo=221734903222&redirect=Dlog&widgetTypeCall=true&directAccess=false" target='_blank'>
-													<img src="http://truelife.wisacdn.com/_data/review/201912/27/aae67c3aaee338e60719080eb28cc943.jpeg">
-												</a>
-											</td>
-											<td class="left">
-												<a href="https://blog.naver.com/PostView.nhn?blogId=grfog211&logNo=221734903222&redirect=Dlog&widgetTypeCall=true&directAccess=false" target='_blank'>편식대왕 우리 꼬맹이 다양한 식단으로 겨울방학~ 밥먹는 시간이 즐거워</a>
-											</td>
-										</tr><tr>
-											<td class="img">
-												<a href="https://blog.naver.com/minadie/221749344912" target='_blank'>
-													<img src="http://truelife.wisacdn.com/_data/review/201912/27/1c42cf5e11db1089355473985e69d916.gif">
-												</a>
-											</td>
-											<td class="left">
-												<a href="https://blog.naver.com/minadie/221749344912" target='_blank'>외기러기 아빠가 아이들에게 대접한 미안함 없는 푸짐한 겨울방학 식단</a>
-											</td>
-										</tr><tr>
-											<td class="img">
-												<a href="https://blog.naver.com/hotshout/221738320297" target='_blank'>
-													<img src="http://truelife.wisacdn.com/_data/review/201912/27/9da42739f307d4d47680c4010285181b.jpeg">
-												</a>
-											</td>
-											<td class="left">
-												<a href="https://blog.naver.com/hotshout/221738320297" target='_blank'>워킹맘! 겨울방학 아이들 건강식단 당당하게 트루라이프로 결정!!</a>
-											</td>
-										</tr></tbody>
+					<td class="img">
+						<a href="https://blog.naver.com/andher/221758367684" target='_blank'>
+							<img src="http://truelife.wisacdn.com/_data/review/202001/04/be2eca4a6cf32774ca1389c69567168f.jpeg">
+						</a>
+					</td>
+					<td class="left">
+						<a href="https://blog.naver.com/andher/221758367684" target='_blank'>맞벌이 부부가 겨울방학 아이 식단으로 선택한 호밀 한식</a>
+					</td>
+				</tr><tr>
+					<td class="img">
+						<a href="https://blog.naver.com/PostView.nhn?blogId=grfog211&logNo=221734903222&redirect=Dlog&widgetTypeCall=true&directAccess=false" target='_blank'>
+							<img src="http://truelife.wisacdn.com/_data/review/201912/27/aae67c3aaee338e60719080eb28cc943.jpeg">
+						</a>
+					</td>
+					<td class="left">
+						<a href="https://blog.naver.com/PostView.nhn?blogId=grfog211&logNo=221734903222&redirect=Dlog&widgetTypeCall=true&directAccess=false" target='_blank'>편식대왕 우리 꼬맹이 다양한 식단으로 겨울방학~ 밥먹는 시간이 즐거워</a>
+					</td>
+				</tr><tr>
+					<td class="img">
+						<a href="https://blog.naver.com/minadie/221749344912" target='_blank'>
+							<img src="http://truelife.wisacdn.com/_data/review/201912/27/1c42cf5e11db1089355473985e69d916.gif">
+						</a>
+					</td>
+					<td class="left">
+						<a href="https://blog.naver.com/minadie/221749344912" target='_blank'>외기러기 아빠가 아이들에게 대접한 미안함 없는 푸짐한 겨울방학 식단</a>
+					</td>
+				</tr><tr>
+					<td class="img">
+						<a href="https://blog.naver.com/hotshout/221738320297" target='_blank'>
+							<img src="http://truelife.wisacdn.com/_data/review/201912/27/9da42739f307d4d47680c4010285181b.jpeg">
+						</a>
+					</td>
+					<td class="left">
+						<a href="https://blog.naver.com/hotshout/221738320297" target='_blank'>워킹맘! 겨울방학 아이들 건강식단 당당하게 트루라이프로 결정!!</a>
+					</td>
+				</tr></tbody>
         </table>
         <!-- //개발 영역 (작업 완료 후 상단 div 클래스명 추가 필수) -->
     </div>

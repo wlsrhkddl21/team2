@@ -1,17 +1,21 @@
 package com.kh.team2.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team2.domain.BuyDetailVo;
+import com.kh.team2.domain.BuyJoinDto;
 import com.kh.team2.domain.BuyVo;
 import com.kh.team2.domain.CartDto;
 import com.kh.team2.domain.PointDto;
 import com.kh.team2.domain.PointVo;
 import com.kh.team2.persistence.BuyDao;
 import com.kh.team2.persistence.PointDao;
+import com.kh.team2.persistence.ProductDao;
 
 @Service
 public class BuyServiceImpl implements BuyService {
@@ -21,6 +25,8 @@ public class BuyServiceImpl implements BuyService {
 	
 	@Inject
 	PointDao pointDao;
+	
+	@Inject ProductDao pdtDao;
 	
 	@Transactional
 	@Override
@@ -45,6 +51,7 @@ public class BuyServiceImpl implements BuyService {
 			bdVo.setBuy_count(buy_count[i]);
 			bdVo.setBuy_num(buy_num);
 			buyDao.insertBuyDetail(bdVo);
+			pdtDao.updatePdtSales(pdt_num[i], buy_count[i]);
 		}
 		
 		//포인트 업데이트 (usePoint -값으로 받아오기)
@@ -70,10 +77,11 @@ public class BuyServiceImpl implements BuyService {
 		pointDao.insertPoint(savePointVo);
 	}
 
+
 	@Override
-	public void insertPoint(PointVo pointVo) throws Exception {
-		// TODO Auto-generated method stub
+	public List<BuyJoinDto> selectJoinByMemId(String mem_id) throws Exception {
 		
+		return buyDao.selectJoinByMemId(mem_id);
 	}
 	
 }

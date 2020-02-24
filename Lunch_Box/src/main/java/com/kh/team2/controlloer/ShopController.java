@@ -33,7 +33,7 @@ public class ShopController {
 
 	@Inject
 	MemberService memberService;
-
+	
 	@Inject
 	BuyService buyService;
 
@@ -55,7 +55,7 @@ public class ShopController {
 		return "shop/sub";
 	}
 
-	// 일반 상품
+	// 일반 상품테스트
 	@RequestMapping(value = "/singleT")
 	public String singleT(Model model,PagingDto pagingDto) throws Exception {
 		
@@ -66,6 +66,7 @@ public class ShopController {
 		
 		return "shop/single";
 	}
+	
 	// 일반 상품
 	@RequestMapping(value = "/single")
 	public String single(Model model,PagingDto pagingDto) throws Exception {
@@ -134,20 +135,15 @@ public class ShopController {
 		return "shop/buy";
 	}
 
-	@RequestMapping(value = "/complete")
+	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	//BuyVo buyVo,CartDto cartDto,PointDto pointDto), method = RequestMethod.POST)
-	public String complete() throws Exception {
+	public String complete(BuyVo buyVo,CartDto cartDto,PointDto pointDto) throws Exception {
 		// buy 마스터 테이블 추가
 		// 디테일 테이블 추가
 		// 결제 완료 후 멤버 포인트 수정
 		
-//		buyService.buy(buyVo, pointDto, cartDto);
+		buyService.buy(buyVo, pointDto, cartDto);
 
 		return "shop/complete";
-	}
-
-	@RequestMapping(value = "/buy/detail")
-	public String buyDetail() {
-		return "mypage/buy";
 	}
 }

@@ -13,6 +13,8 @@ public interface BoardDao {
 	public List<BoardVo> listAll(PagingDto pagingDto) throws Exception;
 	// 중요 공지사항 목록
 	public List<BoardVo> hotList(PagingDto pagingDto) throws Exception;
+	// 고객센터 페이지 공지사항 목록
+	public List<BoardVo> listPage(PagingDto pagingDto) throws Exception;
 	// 데이터 개수
 	public int listCount(PagingDto pagingDto) throws Exception;
 	// 데이터 추가

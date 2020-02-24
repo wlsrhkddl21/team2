@@ -59,4 +59,10 @@
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select>
 	
+	<update id="updatePdtSales">
+		update tbl_product set
+		pdt_sales = pdt_sales + #{pdt_sales}
+		where pdt_num = #{pdt_num}
+	</update>
+	
 </mapper>  
