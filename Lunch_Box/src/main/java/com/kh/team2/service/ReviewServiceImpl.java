@@ -38,4 +38,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.productName();
 	}
 
+	@Override
+	public ReviewVo readReview(int rev_num) throws Exception {
+		return dao.readReview(rev_num);
+	}
+
 }

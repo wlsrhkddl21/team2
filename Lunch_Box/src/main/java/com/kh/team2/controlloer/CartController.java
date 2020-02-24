@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -34,7 +33,7 @@ public class CartController {
 		String mem_id = (String)session.getAttribute("mem_id");
 		// 최근목록
 		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
-		// ----
+		// --
 		List<CartVo> list = cartService.cartList(mem_id);
 		boolean isEmpty = false;
 		if (list.isEmpty()) {
@@ -56,7 +55,7 @@ public class CartController {
 		CartVo vo = new CartVo();
 		int isCart = cartService.isCart(pdt_num,mem_id);
 		if (isCart > 0) {
-			cartService.countUp(count, pdt_num); 
+			cartService.countUp(count, pdt_num,mem_id); 
 		} else {
 			vo.setMem_id((String)session.getAttribute("mem_id"));
 			vo.setPdt_num(pdt_num);

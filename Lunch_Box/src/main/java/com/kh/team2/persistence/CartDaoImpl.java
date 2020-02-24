@@ -23,7 +23,7 @@ public class CartDaoImpl implements CartDao {
 	public List<CartVo> cartList(String mem_id) throws Exception {
 		return sqlSession.selectList(NAMESPACE+".cartList",mem_id);
 	}
-
+ 
 	@Override
 	public void cartInsert(CartVo vo) throws Exception {
 		sqlSession.insert(NAMESPACE+".addCart",vo);
@@ -56,10 +56,11 @@ public class CartDaoImpl implements CartDao {
 	}
 
 	@Override
-	public void countUp(int cart_count, int pdt_num) throws Exception {
+	public void countUp(int cart_count,int pdt_num,String mem_id) throws Exception {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("cart_count", cart_count);
 		paramMap.put("pdt_num", pdt_num);
+		paramMap.put("mem_id", mem_id);
 		sqlSession.update(NAMESPACE+".countUp",paramMap);
 	}
 
