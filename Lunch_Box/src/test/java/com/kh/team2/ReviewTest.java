@@ -22,8 +22,8 @@ public class ReviewTest {
 	
 	@Test
 	public void testRead() throws Exception {
-		int rev_num = 502;
-		dao.selectList(rev_num);
+		int rev_num = 54;
+		dao.readReview(rev_num);
 	}
 	
 	@Test

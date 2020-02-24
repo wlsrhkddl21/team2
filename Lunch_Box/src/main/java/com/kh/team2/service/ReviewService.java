@@ -19,4 +19,7 @@ public interface ReviewService {
 	
 	// 
 	public List<ProductVo> productName() throws Exception;
+	
+	// 리뷰상세보기
+	public ReviewVo readReview(int rev_num) throws Exception;
 }

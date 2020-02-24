@@ -45,15 +45,17 @@ $(document).ready(function(){
 							
 							<div class="form-group">
 								<label>리뷰 제목</label>
-								<input id="rev_title" class="form-control" type="text" name="rev_title">
+								<input id="rev_title" class="form-control" 
+									type="text" name="rev_title">
 							</div>
 							<div class="form-group">
 								<label>리뷰 내용</label>
-								<input id="rev_content" class="form-control" type="text" name="rev_content">
+								<textarea rows="5" id="content" class="form-control"
+									name="content"></textarea>
 							</div>
 							<div class="form-group">
 								<label>작성자</label>
-								<input id="rev_writer" class="form-control" type="text" name="rev_writer">
+								<input id="rev_writer" value="${mem_id}"class="form-control" type="text" name="rev_writer" readonly>
 							</div>
 							<div class="form-group">
 								<label>상품명</label>

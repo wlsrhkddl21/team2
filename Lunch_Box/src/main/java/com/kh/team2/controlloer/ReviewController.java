@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.team2.domain.BoardVo;
+import com.kh.team2.domain.MemberVo;
 import com.kh.team2.domain.PagingDto;
 import com.kh.team2.domain.ProductVo;
 import com.kh.team2.domain.ReviewVo;
@@ -71,7 +72,7 @@ public class ReviewController {
 	
 	// 글등록
 	@RequestMapping(value = "/reviewInsert", method = RequestMethod.POST)
-	public String insertReview(ReviewVo reviewVo, MultipartHttpServletRequest request) throws Exception { 
+	public String insertReview(ReviewVo reviewVo, MultipartHttpServletRequest request, MemberVo memberVo) throws Exception { 
 		System.out.println(reviewVo);
 //		reviewService.insertReview(reviewVo);
 		MultipartFile file = request.getFile("file");
@@ -87,8 +88,9 @@ public class ReviewController {
 	
 	// 글 상세보기
 	@RequestMapping(value ="/reviewContent",method = RequestMethod.GET)
-	public String reviewContent(Model model, PagingDto pagingDto) throws Exception {
-		
+	public String reviewContent(@RequestParam("rev_num") int rev_num,@ModelAttribute PagingDto pagingDto, Model model) throws Exception {
+		ReviewVo reviewVo = reviewService.readReview(rev_num);
+		model.addAttribute("reviewVo", reviewVo);
 		return "/review/reviewContent";
 	}
 	

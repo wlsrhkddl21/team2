@@ -20,8 +20,8 @@ public class ReviewDaoImpl implements ReviewDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public ReviewVo selectList(int rev_num) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".selectList", rev_num);
+	public ReviewVo readReview(int rev_num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".readReview", rev_num);
 	}
 
 	@Override
@@ -39,11 +39,6 @@ public class ReviewDaoImpl implements ReviewDao {
 	public void insertReview(ReviewVo reviewVo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insertReview", reviewVo);
 		
-	}
-
-	@Override
-	public ReviewVo readReview(int rev_num) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".readReview", rev_num);
 	}
 
 	@Override
