@@ -34,6 +34,13 @@
 	<select id="productName" resultType="ProductVo">
 		select * from tbl_product
 	</select>
+	
+	<select id="reviewList" resultType="ReviewVo">
+		select * from 
+		(select rownum rnum, a.* from 
+		(select * from tbl_review	order by rev_num desc) a)
+		where rnum &gt;= 1 and rnum &lt;= 4
+	</select>
 </mapper>  
 
 
