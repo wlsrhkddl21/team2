@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kh.team2.mappers.reviewMapper">
+<mapper namespace="com.kh.mappers.reviewMapper">
 	
 	<select id="readReview" resultType="ReviewVo">
 		select * from tbl_review

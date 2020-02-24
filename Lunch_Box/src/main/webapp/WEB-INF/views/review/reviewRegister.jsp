@@ -50,8 +50,8 @@ $(document).ready(function(){
 							</div>
 							<div class="form-group">
 								<label>리뷰 내용</label>
-								<textarea rows="5" id="content" class="form-control"
-									name="content"></textarea>
+								<textarea rows="5" id="rev_content" class="form-control"
+									name="rev_content"></textarea>
 							</div>
 							<div class="form-group">
 								<label>작성자</label>

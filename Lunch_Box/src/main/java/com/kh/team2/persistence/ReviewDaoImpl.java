@@ -14,7 +14,7 @@ import com.kh.team2.domain.ReviewVo;
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
 	
-	public static final String NAMESPACE = "com.kh.team2.mappers.reviewMapper";
+	public static final String NAMESPACE = "com.kh.mappers.reviewMapper";
 	
 	@Inject
 	private SqlSession sqlSession;
