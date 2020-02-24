@@ -51,7 +51,7 @@ public class MyLunchController {
 	@RequestMapping(value="delete", method = RequestMethod.GET)
 	public String deleteMLB(int lunch_num) throws Exception{
 		service.deleteMLB(lunch_num);
-		System.out.println(lunch_num);
+//		System.out.println(lunch_num);
 		return "success";
 	}
 }
