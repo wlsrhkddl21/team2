@@ -37,6 +37,12 @@
 		(select * from tbl_review	order by rev_num desc) a)
 		where rnum &gt;= 1 and rnum &lt;= 4
 	</select>
+	
+	<update id="viewCount">
+		update tbl_review set
+			rev_viewcount = rev_viewcount + 1
+		where rev_num = #{rev_num}
+	</update>
 </mapper>  
 
 

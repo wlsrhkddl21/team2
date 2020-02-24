@@ -10,6 +10,7 @@ public class ReviewVo {
 	private String rev_content;
 	private int rev_pdt_name;
 	private String rev_image;
+	private int rev_viewcount;
 	
 	public int getRev_num() {
 		return rev_num;
@@ -53,13 +54,20 @@ public class ReviewVo {
 	public void setRev_image(String rev_image) {
 		this.rev_image = rev_image;
 	}
-	
+	public int getRev_viewcount() {
+		return rev_viewcount;
+	}
+	public void setRev_viewcount(int rev_viewcount) {
+		this.rev_viewcount = rev_viewcount;
+	}
 	@Override
 	public String toString() {
 		return "ReviewVo [rev_num=" + rev_num + ", rev_title=" + rev_title + ", rev_writer=" + rev_writer
 				+ ", rev_regdate=" + rev_regdate + ", rev_content=" + rev_content + ", rev_pdt_name=" + rev_pdt_name
-				+ ", rev_image=" + rev_image + "]";
+				+ ", rev_image=" + rev_image + ", rev_viewcount=" + rev_viewcount + "]";
 	}
+	
+	
 	
 	
 	

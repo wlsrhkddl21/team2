@@ -43,8 +43,13 @@ $(document).ready(function(){
 	$("#btnRegister").click(function(){
 		location.href = "/review/reviewRegister";
 	});
-	$(".readTitle").click(function(){
-		location.href = "/review/reviewContent";
+	$(".readTitle").click(function(e){
+		e.preventDefault();
+		console.log("제목클릭됨");
+		var rev_num = $(this).attr("data-rno");
+		$("input[name=rev_num]").val(rev_num);
+		$("#frmRead").attr("action", "/review/reviewContent");
+		$("#frmRead").submit();
 	});
 	
 	function image() {
@@ -72,14 +77,14 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid">
 
-	<form id="frmPage" action="/review/reviewBoard" method="get">
-		<input type="hidden" name="rev_num"/>
+<!-- 	<form id="frmPage" action="/review/reviewBoard" method="get"> -->
+<!-- 		<input type="hidden" name="rev_num"/> -->
 <!-- 		<input type="hidden" name="rev_pdt_name"/> -->
-		<input type="hidden" name="page" 
-			value="${pagingDto.page }"/>
-		<input type="hidden" name="perPage"
-			value="${pagingDto.perPage }"/>
-	</form>
+<!-- 		<input type="hidden" name="page"  -->
+<%-- 			value="${pagingDto.page }"/> --%>
+<!-- 		<input type="hidden" name="perPage" -->
+<%-- 			value="${pagingDto.perPage }"/> --%>
+<!-- 	</form> -->
 	<form id="frmRead" action="/review/reviewContent" method="get">
 		<input type="hidden" name="rev_num"/> 
 		<input type="hidden" name="rev_pdt_name"/>
@@ -127,7 +132,7 @@ $(document).ready(function(){
 								</c:if>
 							</c:forEach>
 						</td>
-						<td><a href="/review/reviewContent/" data-rno="${reviewVo.rev_num}" class="readTitle" >${reviewVo.rev_title }</a></td>
+						<td><a data-rno="${reviewVo.rev_num}" class="readTitle" >${reviewVo.rev_title }</a></td>
 						<td>${reviewVo.rev_writer }</td>
 						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>
