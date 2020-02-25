@@ -107,8 +107,8 @@ function displayCnt(v){
 		var mem_id = "${sessionScope.mem_id}";
 		var chkN = chkSelectN();
 		
-		console.log(mem_id);
-		console.log(chkN);
+// 		console.log(mem_id);
+// 		console.log(chkN);
 		
 		$("#btnSub").click(function(){
 			var elCount = $("input[name=buy_count]");
@@ -169,25 +169,44 @@ function displayCnt(v){
 		
 		$("#bntBuy").click(function(){
 
-// 			if(mem_id == ""){
+			if(mem_id == ""){
 // 				console.log("아이디없음");
-// 				 alert("결제는 로그인 후에 이용할 수 있습니다.");
-// 			}else{
-// 				$("#buy_form").submit();
-// 			}
-			//텍스트 값 가져오기 가격 계산하기
+				 alert("결제는 로그인 후에 이용할 수 있습니다.");
+				 return;
+			}else if(chkN==false){
+// 				console.log("선택 X");
+				 alert("옵션을 모두 선택해주세요.");
+				 return;
+			}else{
+				
+				var rice = $("input[name=buy_name]").attr("data-rice");
+				var soup = $("input[name=buy_name]").attr("data-soup");
+				var side1 = $("input[name=buy_name]").attr("data-side1");
+				var side2 = $("input[name=buy_name]").attr("data-side2");
+				var side3 = $("input[name=buy_name]").attr("data-side3");
+				var price = parseInt($("#price").text());
+				$("input[name=buy_price]").val(price);
+				var name = rice+","+soup+","+side1+","+side2+","+side3;
+				console.log(name);
+// 				console.log(price);
+				$("input[name=buy_name]").val(name);
+				
+				$("#buy_form").submit();
+			}
 			
 		});
 		
 		//셀렉트 상자
 		$("#rice").change(function(){
-// 			var value = getSelectText("rice");
 			var value = $(this).find("option:selected").data("num");
+			var name = $(this).find("option:selected").data("name");
 			var price = $(this).val();
 			
 			$("input[name=rice]").attr("data-price",price);
 			$("input[name=rice]").val(value);
+			$("input[name=buy_name]").attr("data-rice",name);
 			
+			console.log(name);
 			//상태 변경
 			chkN = chkSelectN();
 			//가격 수정
@@ -197,51 +216,68 @@ function displayCnt(v){
 		
 		$("#soup").change(function(){
 			var value = $(this).find("option:selected").data("num");
+			var name = $(this).find("option:selected").data("name");
 			var price = $(this).val();
+			
+			console.log(name);
 			
 			$("input[name=soup]").attr("data-price",price);
 			$("input[name=soup]").val(value);
+			$("input[name=buy_name]").attr("data-soup",name);
 			
 			chkN = chkSelectN();
-			console.log(chkN);
+// 			console.log(chkN);
 			getPrice();
 			displayCnt(chkN);
 		});
 		
 		$("#side1").change(function(){
 			var value = $(this).find("option:selected").data("num");
+			var name = $(this).find("option:selected").data("name");
 			var price = $(this).val();
+			
+			console.log(name);
+			
 			$("input[name=side1]").attr("data-price",price);
 			$("input[name=side1]").val(value);
+			$("input[name=buy_name]").attr("data-side1",name);
 			
 			chkN = chkSelectN();
-			console.log(chkN);
+// 			console.log(chkN);
 			getPrice();
 			displayCnt(chkN);
 		});
 		
 		$("#side2").change(function(){
 			var value = $(this).find("option:selected").data("num");
+			var name = $(this).find("option:selected").data("name");
 			var price = $(this).val();
+			
+			console.log(name);
 			
 			$("input[name=side2]").attr("data-price",price);
 			$("input[name=side2]").val(value);
+			$("input[name=buy_name]").attr("data-side2",name);
 			
 			chkN = chkSelectN();
-			console.log(chkN);
+// 			console.log(chkN);
 			getPrice();
 			displayCnt(chkN);
 		});
 		
 		$("#side3").change(function(){
 			var value = $(this).find("option:selected").data("num");
+			var name = $(this).find("option:selected").data("name");
 			var price = $(this).val();
+			
+			console.log(name);
 			
 			$("input[name=side3]").attr("data-price",price);
 			$("input[name=side3]").val(value);
+			$("input[name=buy_name]").attr("data-side3",name);
 			
 			chkN = chkSelectN();
-			console.log(chkN);
+// 			console.log(chkN);
 			getPrice();
 			displayCnt(chkN);
 		});
@@ -260,10 +296,13 @@ function displayCnt(v){
 						style="height: 380px; width: 380px;" />
 				</div>
 				<div class="col-md-8">
-				<form action="/shop/buy" method="post" id="buy_form">
-					<input type="hidden" name="pdt_num" value="${productVo.pdt_num }"/> 
-					<input type="hidden" name="buy_count"  /> 
-					<input type="hidden" name="price"/> 
+				<form action="/shop/buyMy" method="post" id="buy_form">
+					<input type="hidden" name="buy_name"
+						data-rice="" data-soup=""
+						data-side1="" data-side2="" data-side3=""
+					  /> 
+					<input type="hidden" name="buy_count"/> 
+					<input type="hidden" name="buy_price"/> 
 					<input type="hidden" name="rice" data-price=""/> 
 					<input type="hidden" name="soup" data-price=""/> 
 					<input type="hidden" name="side1" data-price=""/> 
@@ -328,7 +367,7 @@ function displayCnt(v){
 								<option value="n">======선택======</option>
 								  <c:forEach items="${list }" var="vo">
 								  	<c:if test="${vo.lunch_type eq 'side'}">
-								  		  <option value="${vo.lunch_price}"
+								  		  <option value="${vo.lunch_price}"  data-name="${vo.lunch_name }"
 								  		  		 data-num="${vo.lunch_num }" >${vo.lunch_name }(${vo.lunch_price}원)</option>
 								  	</c:if>
 								  </c:forEach>
@@ -336,7 +375,7 @@ function displayCnt(v){
 						</div>
 						<hr class="count">
 						<div class="div_text count">수량: <input type="button" class="btn btn-light" value="-" id="btnSub"/>
-							<input name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" />
+							<input class="text-center" name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" />
 							<input type="button" class="btn btn-light" value="+" id="btnAdd"/>
 						</div>
 						<hr>

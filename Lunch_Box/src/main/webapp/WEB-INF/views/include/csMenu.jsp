@@ -21,5 +21,5 @@
 		고객센터</div>
 	<div class="list-group-item list-a text-center" OnClick="location.href='/board/notice'">공지사항</div>
 	<div class="list-group-item list-a text-center" OnClick="location.href='/board/qna'">문의게시판</div>
-	<div class="list-group-item list-a text-center">자주하는질문</div>
+	<div class="list-group-item list-a text-center" OnClick="location.href='/board/faq'">자주하는질문</div>
 </div>

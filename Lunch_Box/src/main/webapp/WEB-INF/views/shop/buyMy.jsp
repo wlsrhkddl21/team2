@@ -62,7 +62,7 @@
 			span_price.text(total_price);
 			$("#span_point").text(point);
 			$("#span_point").attr("data-use-point", point);
-// 			span_price.attr("data-price-point", total_price);
+			// 			span_price.attr("data-price-point", total_price);
 
 		});
 
@@ -73,7 +73,7 @@
 			var span_price = $("#result_price");
 			var total_price = span_price.attr("data-price");
 			span_price.text(total_price);
-// 			span_price.attr("data-price-point", 0);
+			// 			span_price.attr("data-price-point", 0);
 			$("#span_point").attr("data-use-point", 0);
 		});
 
@@ -82,7 +82,7 @@
 			new daum.Postcode({
 				oncomplete : function(data) {
 					$("#add_span").text(data.address);
-					$("#add_span").text(data-mem-add);
+					$("#add_span").text(data - mem - add);
 					$("#divSub").css("display", "block");
 				}
 			}).open();
@@ -92,38 +92,37 @@
 		$("#btnTel").click(function() {
 			$(".tel").css("display", "none");
 			$("#div_tel").css("display", "block");
-			$("#div_tel").attr("data-mem-tel","0");
+			$("#div_tel").attr("data-mem-tel", "0");
 		});
 
-		
 		//최종 결제
 		$("#btnBuy").click(function() {
-			var usePoint =$("#span_point").attr("data-use-point");
+			var usePoint = $("#span_point").attr("data-use-point");
 			var price = $("#result_price").attr("data-price");
 			var addSub = $("#addSub").val();
-			var buyAdd = $("#add_span").attr("data-mem-add")+addSub;
+			var buyAdd = $("#add_span").attr("data-mem-add") + addSub;
 			var buyTel = $("#div_tel").attr("data-mem-tel");
-			var savePoint = parseInt($("#savePoint").attr("data-save-point"))	;
-// 			console.log(buyTel);
+			var savePoint = parseInt($("#savePoint").attr("data-save-point"));
+			// 			console.log(buyTel);
 
-			if(buyTel == "0"){
+			if (buyTel == "0") {
 				buyTel = $("#update_tel").val();
 			}
-			
+
 			console.log(buyTel);
-			
-			if(usePoint!=0){
-				price = price-usePoint;
+
+			if (usePoint != 0) {
+				price = price - usePoint;
 			}
-			
+
 			$("input[name=buy_address]").val(buyAdd);
 			$("input[name=use_point]").val(usePoint);
 			$("input[name=buy_tel]").val(buyTel);
 			$("input[name=buy_price]").val(price);
 			$("input[name=save_point]").val(savePoint);
-			
+
 			$("#buyForm").submit();
-			
+
 		});
 	});
 </script>
@@ -145,9 +144,9 @@
 									<h3 class="mb-4 sec-title-w3 let-spa text-bl">주문/결제</h3>
 									<div class="process">
 										<ol>
-											<li class="process"><span class="num">1</span>장바구니</li>
-											<li class="process"><span class="num selected">2</span>주문서 작성/결제</li>
-											<li class="process"><span class="num">3</span>주문 완료</li>
+											<li><span class="num">1</span>장바구니</li>
+											<li><span class="num selected">2</span>주문서 작성/결제</li>
+											<li><span class="num">3</span>주문 완료</li>
 										</ol>
 									</div>
 								</div>
@@ -166,34 +165,33 @@
 												<th scope="col">주문금액</th>
 											</tr>
 											<c:set var="total_point" value="0" />
-											<c:set var="total_pdt_price" value="0" />
-											<!-- foreach -->
-											<c:forEach items="${list }" var="dto">
-												<tr>
-													<c:set var="price" value="${dto.pdt_price*dto.buy_count }"></c:set>
-													<c:set var="point"
-														value="${dto.pdt_price*0.05 *dto.buy_count }"></c:set>
-													<c:set var="total_pdt_price"
-														value="${total_pdt_price+price}" />
-													<c:set var="total_point" value="${total_point+point}" />
-													<td scope="col"><img src="/admin/displayFile?fileName=${dto.pdt_image}"
-														style="height: 100px; width: 100px;" /></td>
-													<td scope="col">${dto.pdt_name}</td>
-													<td scope="col"><fmt:formatNumber
-															value="${dto.pdt_price}" type="number" /> 원</td>
-													<td scope="col">2,500원</td>
-													<td scope="col"><span class="point"
-														data-point="${point }"> <fmt:formatNumber
-																value="${point }" type="number" /></span>P</td>
-													<td scope="col">${dto.buy_count }</td>
-													<td scope="col"><span class="price"
-														data-price="${price }"> <fmt:formatNumber
-																value="${price }" type="number" /></span>원</td>
-												</tr>
-											</c:forEach>
+											<c:set var="total_pdt_price" value="${vo.buy_price*vo.buy_count }" />
 											<tr>
-												<td colspan="7" id="savePoint" data-save-point="${total_point }">적립 예정 포인트 :<fmt:formatNumber
-														value="${total_point}" type="number" /> P
+<%-- 												<c:set var="price" value="${vo.buy_price*vo.buy_count }"></c:set> --%>
+												<c:set var="point"
+													value="${vo.buy_price*0.05 *vo.buy_count }"></c:set>
+<%-- 												<c:set var="total_pdt_price" --%>
+<%-- 													value="${total_pdt_price+price}" /> --%>
+<%-- 												<c:set var="total_point" value="${total_point+point}" /> --%>
+												<td scope="col"><img
+													src="../images/test1.jpg"
+													style="height: 100px; width: 100px;" /></td>
+												<td scope="col">${vo.buy_name}</td>
+												<td scope="col"><fmt:formatNumber
+														value="${vo.buy_price}" type="number" /> 원</td>
+												<td scope="col">2,500원</td>
+												<td scope="col"><span class="point"
+													data-point="${point }"> <fmt:formatNumber
+															value="${point }" type="number" /></span>P</td>
+												<td scope="col">${vo.buy_count }</td>
+												<td scope="col"><span class="price"
+													data-price="${total_pdt_price}"> <fmt:formatNumber
+															value="${total_pdt_price}" type="number" /></span>원</td>
+											</tr>
+											<tr>
+												<td colspan="7" id="savePoint"
+													data-save-point="${point }">적립 예정 포인트 :<fmt:formatNumber
+														value="${point}" type="number" /> P
 												</td>
 											</tr>
 										</thead>
@@ -232,8 +230,7 @@
 										<div class="col-md-6">
 											<h4 style="margin-top: 30px; margin-bottom: 15px;"
 												class="buy_text text-center">
-												총 결제 금액 : <span id="result_price"
-													data-price-point ="0"
+												총 결제 금액 : <span id="result_price" data-price-point="0"
 													data-price="${total_price }"> <fmt:formatNumber
 														value="${total_price }" type="number" /></span>
 											</h4>
@@ -282,14 +279,15 @@
 									</tr>
 									<tr id="mem_tel">
 										<td style="font-size: 18px; font-weight: 300;">휴대 전화 번호 :
-											<span class="tel">
-												${memberVo.mem_tel}</span>
-											<div style="display: none;" id="div_tel" data-mem-tel="${memberVo.mem_tel}">
+											<span class="tel"> ${memberVo.mem_tel}</span>
+											<div style="display: none;" id="div_tel"
+												data-mem-tel="${memberVo.mem_tel}">
 												<input type="text" id="update_tel"
 													style="height: 18px; width: 600px;"
 													placeholder="수정할 번호를 입력하세요.">
-											</div> <input class="tel btn btn-outline-dark" style="margin-top: 15px;" type="button" class="btn btn-outline-dark"
-											id="btnTel" value="번호 변경">
+											</div> <input class="tel btn btn-outline-dark"
+											style="margin-top: 15px;" type="button"
+											class="btn btn-outline-dark" id="btnTel" value="번호 변경">
 										</td>
 									</tr>
 
@@ -300,19 +298,22 @@
 										<div class="col-md-6">
 											<div class="btn_cart" align="center">
 												<div class="order">
-												<form id="buyForm" action="/shop/complete" method="post">
-													<c:forEach items="${list }" var="dto">
-														<input type="hidden" name="pdt_num" value="${dto.pdt_num}"/>
-														<input type="hidden" name="buy_count" value="${dto.buy_count}"/>
-													</c:forEach>
-														<input type="hidden" name="mem_id" value="${memberVo.mem_id }"/>
-														<input type="hidden" name="buy_address"/>
-														<input type="hidden" name="buy_tel"/>
-														<input type="hidden" name="buy_price"/>
-														<input type="hidden" name="use_point"/>
-														<input type="hidden" name="save_point"/>
-													<input type="button" id="btnBuy" class="btn" value="결제 하기" />
-												</form>
+													<form id="buyForm" action="/shop/completeMy" method="post">
+														
+														<input type="hidden" name="buy_name"value="${vo.buy_name }" /> 
+														<input type="hidden"name="buy_address" /> 
+														<input type="hidden" name="buy_tel" />
+														<input type="hidden" name="buy_price" /> 
+														<input type="hidden" name="buy_count" value="${vo.buy_count }" /> 
+														<input type="hidden" name="rice" value="${vo.rice }" /> 
+														<input type="hidden" name="soup" value="${vo.soup }" /> 
+														<input type="hidden" name="side1" value="${vo.side1 }"/> 
+														<input type="hidden" name="side2" value="${vo.side2 }" /> 
+														<input type="hidden" name="side3" value="${vo.side3 }" /> 
+														<input type="hidden" name="use_point" /> 
+														<input type="hidden" name="save_point" /> 
+														<input type="button" id="btnBuy" class="btn" value="결제 하기" />
+													</form>
 												</div>
 											</div>
 										</div>
