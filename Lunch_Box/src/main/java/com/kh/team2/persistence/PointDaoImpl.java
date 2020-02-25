@@ -1,6 +1,7 @@
 package com.kh.team2.persistence;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -29,6 +30,11 @@ public class PointDaoImpl implements PointDao {
 	@Override
 	public void insertPoint(PointVo vo) throws Exception {
 		sqlSession.insert(NAMESPACE+".insertPoint",vo);
+	}
+
+	@Override
+	public List<PointVo> pointList(String mem_id) throws Exception {
+		return sqlSession.selectList(NAMESPACE+".pointList",mem_id);
 	}
 
 }

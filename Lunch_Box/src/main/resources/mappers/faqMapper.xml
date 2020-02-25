@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.mappers.faqMapper">
+	
+	<select id="listAll" resultType="FaqVo">
+		select * 
+			from (select rownum rnum, a.* 
+        	  from (select * 
+        	  		from tbl_faq order by faq_num desc
+                   ) a
+             )
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+	</select>
+	
+	<select id="listCount" resultType="int">
+		select count(*) from tbl_faq
+	</select>
+	
+	<select id="getNextVal" resultType="int">
+		select seq_faq_num.nextval
+		from dual
+	</select>
+	
+	<select id="read" resultType="FaqVo">
+		select * from tbl_faq
+		where faq_num = #{faq_num}
+	</select>
+	
+	<insert id="create">
+		insert into tbl_faq (faq_num, faq_title, faq_content, faq_writer)
+		values (seq_faq_num.nextval, #{faq_title}, #{faq_content}, #{faq_writer})
+	</insert>
+	
+	<delete id="delete">
+		delete from tbl_faq
+		where faq_num = #{faq_num}	
+	</delete>
+	
+	<update id="update">
+		update tbl_faq set
+			faq_title = #{faq_title},
+			faq_content = #{faq_content}
+		where faq_num = #{faq_num}
+	</update>
+	
+</mapper>  
+
+

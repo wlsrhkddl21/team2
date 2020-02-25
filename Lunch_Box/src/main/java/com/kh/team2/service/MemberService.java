@@ -1,7 +1,10 @@
 package com.kh.team2.service;
 
+import java.util.List;
+
 import com.kh.team2.domain.LogingDto;
 import com.kh.team2.domain.MemberVo;
+import com.kh.team2.domain.PointVo;
 
 public interface MemberService {
 	// 회원추가
@@ -19,4 +22,5 @@ public interface MemberService {
 	// ���̵� �ߺ�üũ
 	public int idCheck(String mem_id) throws Exception;
 	
+	public List<PointVo> pointList (String mem_id) throws Exception;
 }

@@ -1,15 +1,15 @@
-package com.kh.team2.persistence;
+package com.kh.team2.service;
 
 import java.util.List;
 
 import com.kh.team2.domain.RevReplyVo;
 
-public interface RevReplyDao {
-
-	// 댓글 등록
+public interface RevReplyService {
+	
+	// 댓글쓰기
 	public void insertReply(RevReplyVo replyVo) throws Exception;
 	
-	// 댓글 목록
+	// 댓글목록
 	public List<RevReplyVo> list(int rep_bno) throws Exception;
 	
 	// 댓글 수정
