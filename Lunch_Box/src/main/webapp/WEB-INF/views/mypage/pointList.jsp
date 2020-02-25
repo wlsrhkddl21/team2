@@ -26,7 +26,6 @@
 						<div class="col-md-8">
 							<div class="mypage_info text-center">
 								<div>${memberVo}</div>
-								<div>보유 포인트: 500P</div>
 							</div>
 						</div>
 						<div class="col-md-2"></div>
