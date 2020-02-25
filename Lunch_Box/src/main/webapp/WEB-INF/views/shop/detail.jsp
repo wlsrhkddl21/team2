@@ -122,9 +122,13 @@
 			</div>
 			
 			<!-- 리뷰게시판 -->
-			<div class="col-md-12 text-center">
-				
+			<div class="col-md-12 text-center">		
 				<h1>리뷰게시판</h1>
+				<form>
+					<table>
+						
+					</table>
+				</form>
 			</div>
 			<!-- 리뷰게시판 끝 -->
 		</div>
