@@ -23,7 +23,7 @@
 	
 	<insert id="insertReply">
 		insert into tbl_revReply(rep_num, rep_bno, rep_content, rep_writer)
-		values (seq_rev_num.nextval,#{rep_bno} ,#{rep_content}, #{rep_writer})
+		values (seq_rep_num.nextval, #{rep_bno} , #{rep_content}, #{rep_writer})
 	</insert>
 	
 	

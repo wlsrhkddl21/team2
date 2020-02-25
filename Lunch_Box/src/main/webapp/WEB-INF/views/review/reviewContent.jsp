@@ -46,13 +46,13 @@ $(document).ready(function() {
 	
 	// 댓글 작성완료 버튼
 	$("#btn_reply").click(function(){
-		var rev_num = "${reviewVo.rev_num}";
-		var repContent = $("#repContent").val();
-		var repWriter = $("#repWriter").val();
+		var rep_bno = "${reviewVo.rev_num}";
+		var rep_content = $("#repContent").val();
+		var rep_writer = $("#repWriter").val();
 		var sendData = {
-				"rev_num" : rev_num,
-				"repContent" : repContent,
-				"repWriter" : repWriter
+				"rep_bno" : rep_bno,
+				"rep_content" : rep_content,
+				"rep_writer" : rep_writer
 		};
 		console.log(sendData);
 		var url = "/reviewReply/insertReply";
@@ -254,18 +254,7 @@ $(document).ready(function() {
 			
 			<hr>
 			
-			<div style="clear:both;">
-					<button type="submit" class="btn btn-success" id="btnSuccess"
-						style="display:none;">완료</button>
-					<button type="button" class="btn btn-warning" id="btnCancel"
-						style="display:none;">수정취소</button>
-					<button type="button" class="btn btn-warning" id="btnHot"
-						style="display:none;">중요공지등록</button>
-					<button type="button" class="btn btn-warning" id="btnHotSuccess"
-						style="display:none;">중요공지등록완료</button>
-					<button type="button" class="btn btn-warning" id="btnHotCancel"
-						style="display:none;">중요공지등록삭제</button>
-			</div>
+			
 			</form>
 				<div style="clear:both;">
 				<c:if test="${ mem_id == 'admin' || mem_id == reviewVo.rev_writer }">
@@ -300,36 +289,36 @@ $(document).ready(function() {
 	<!-- // 댓글 작성 -->
 	
 	<!-- 댓글 목록 -->
-<!-- 	<div class="row"> -->
-<!-- 		<div class="col-md-12"> -->
-<!-- 			<table class="table"> -->
-<!-- 				<thead> -->
-<!-- 					<tr> -->
-<!-- 						<th>번호</th> -->
-<!-- 						<th>댓글내용</th> -->
-<!-- 						<th>작성자</th> -->
-<!-- 						<th>날짜</th> -->
-<%-- 					<c:if test="${mem_id == boardVo.not_writer}"> --%>
-<!-- 						<th>수정</th> -->
-<!-- 						<th>삭제</th> -->
-<%-- 					</c:if> --%>
-<!-- 					</tr> -->
-<!-- 				</thead> -->
-<!-- 				<tbody id="replyList"> -->
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>댓글내용</th>
+						<th>작성자</th>
+						<th>날짜</th>
+					<c:if test="${mem_id == boardVo.not_writer}">
+						<th>수정</th>
+						<th>삭제</th>
+					</c:if>
+					</tr>
+				</thead>
+				<tbody id="replyList">
 					
-<!-- 				</tbody> -->
-<!-- 			</table> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1" ></div> -->
-<!-- 	</div> -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+		</div>
+		<div class="col-md-1" ></div>
+	</div>
 	
-<!-- 	<hr/> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-2"> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+	<hr/>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
 	<!-- // 댓글 목록 -->
 </div>
 
