@@ -2,7 +2,7 @@ package com.kh.team2.domain;
 
 //상품 정보 가져오려고 
 public class BuyDto {
-	
+
 	private int pdt_num;
 	private int buy_count;
 	private int pdt_price;
