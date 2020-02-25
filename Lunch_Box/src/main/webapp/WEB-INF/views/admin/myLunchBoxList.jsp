@@ -28,6 +28,7 @@ $(document).ready(function(){
 	});
 	
 	$("#insertMLB").click(function(){
+		var url=""
 		$("#modal-a").trigger("click");		
 	});
 	

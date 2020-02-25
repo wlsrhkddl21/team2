@@ -23,7 +23,8 @@
 	<select id="selectJoinByMemId" resultType="BuyJoinDto">
 		select * 
 		from tbl_buy b, tbl_buy_detail bd
-		where b.mem_id = #{mem_id}
+		where b.buy_num = bd.buy_num
+        and b.mem_id = #{mem_id}
 		order by b.buy_date desc
 	</select>
 	

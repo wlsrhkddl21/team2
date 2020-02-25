@@ -29,9 +29,9 @@ $(document).ready(function(){
 	
 	if (path == "/mp/buyList") {
 		
-		$(".list-a").eq(0).text("구매 목록 > >");
+		$(".list-a").eq(0).css("background-color", "#e9e9e9");
 	} else if (path == "/mp/pointList") {
-		$(".list-a").eq(1).text("포인트 내역 > >");
+		$(".list-a").eq(1).css("background-color", "#e9e9e9");
 	}
 	 
 // 	$(".list-a").prev().click(function(e){
