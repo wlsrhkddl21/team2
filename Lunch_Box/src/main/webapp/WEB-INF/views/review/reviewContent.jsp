@@ -168,10 +168,21 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
- 	replyList(); // 기능 실행
+	function image() {
+		console.log("실행됨");
+		$(".revImage").each( function() {
+					var fileName = $(this).attr("data-img");
+//						console.log("fileName:" + fileName);
+//						console.log(thumbnail);
+					$(this).attr(
+							"src",
+							"/review/displayFile?fileName="
+									+ fileName);
+		});
+	};
+	image();
+ 	replyList(); // 기능 실행 
 });
-	
 </script>
 
 		<a id="modal-a" href="#myModal" role="button" class="btn" data-toggle="modal"
@@ -238,18 +249,18 @@ $(document).ready(function() {
 			<div class="col-md-10 main_grid_contact" >
 			<br>
 			<form id="myform" role="form" method="get" 
-				action="/review/reviewContent">
+				action="/review/reviewContent" enctype="multipart/form-data">
 			<input type="hidden" name="rev_num" value="${reviewVo.rev_num}"/>
 			<input type="hidden" name="page" value="${pagingDto.page}"/>
 			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
-			<table class="table">
+			<table class="table" >
 		<colgroup>
 			<col style="width:10%;">
 			<col style="width:50%;">
 			<col style="width:10%;">
 			<col style="width:40%;">
 		</colgroup>
-		<tbody>
+		<tbody >
 			<tr>
 				<th scope="row">제목</th>
 				<td class="form-group">
@@ -269,11 +280,20 @@ $(document).ready(function() {
 				<td>${reviewVo.rev_regdate}</td>
 			</tr>
 			<tr>
-				<th scope="row" colspan="5" class="form-group" >
-				<textarea rows="10" id="rev_content" 
-						name="rev_content" style="border:none" readonly>${reviewVo.rev_content}</textarea>
+				<th scope="row" colspan="4" class="form-group" style="text-align:center; width:380px;">						
+					<c:if test="${not empty reviewVo.rev_image}">
+						<img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}" style="">
+					</c:if>			
 				</th>
 			</tr>
+			<tr>	
+				<th scope="row" colspan="5" class="form-group" >		
+					<textarea rows="3" id="rev_content" 
+						name="rev_content" style="border:none" readonly>${reviewVo.rev_content}</textarea>
+				</th>
+			</tr>	
+			
+			
 		</tbody>
 	</table>
 			

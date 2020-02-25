@@ -33,9 +33,11 @@ public class CartController {
 		String mem_id = (String)session.getAttribute("mem_id"); 
 		// 최근목록
 		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
+		// 장바구니 갯수
+		int cartCount = cartService.cartCount(mem_id);
+		// -- 
 		// --
 		List<CartVo> list = cartService.cartList(mem_id);
-		int cartCount = cartService.cartCount(mem_id);
 		boolean isEmpty = false;
 		if (list.isEmpty()) {
 			isEmpty = true;
