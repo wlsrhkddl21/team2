@@ -63,10 +63,9 @@ $(function() {
 		if (dataLong == "long") {
 			length = -120;
 		}
-		console.log(length);
 		var footHeight = $(".footer").outerHeight(true);
 		var mainHeight = $(".main-top").outerHeight(true);
-		var bodyHeight = $("body").outerHeight(true);
+		var bodyHeight = $("body").outerHeight(true)-800;
 		var recentList = $(".recentList").outerHeight(true);
 		var v = bodyHeight-footHeight-mainHeight;
 		var position = $(window).scrollTop();
