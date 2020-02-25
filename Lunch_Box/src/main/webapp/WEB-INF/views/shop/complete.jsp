@@ -22,7 +22,7 @@
 			console.log("클릭");
 		});
 		$("#btnBuyList").click(function(){
-			
+			location.href="/mp/buyList";
 		});
 		
 	});

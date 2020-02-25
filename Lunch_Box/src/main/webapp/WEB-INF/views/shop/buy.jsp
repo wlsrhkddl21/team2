@@ -176,7 +176,7 @@
 													<c:set var="total_pdt_price"
 														value="${total_pdt_price+price}" />
 													<c:set var="total_point" value="${total_point+point}" />
-													<td scope="col"><img src="../images/test1.jpg"
+													<td scope="col"><img src="/admin/displayFile?fileName=${dto.pdt_image}"
 														style="height: 100px; width: 100px;" /></td>
 													<td scope="col">${dto.pdt_name}</td>
 													<td scope="col"><fmt:formatNumber

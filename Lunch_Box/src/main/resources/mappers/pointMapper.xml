@@ -14,5 +14,12 @@
 		insert into tbl_point(point_num,mem_id,point,buy_num)
 		values(seq_point.nextval,#{mem_id},#{point},#{buy_num})
 	</insert>
+	
+	<select id="pointList" resultType="PointVo">
+		select *
+		from tbl_point
+		where mem_id=#{mem_id}
+		order by point_date desc
+	</select>
 
 </mapper>
