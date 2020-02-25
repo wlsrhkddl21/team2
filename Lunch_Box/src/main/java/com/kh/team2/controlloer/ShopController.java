@@ -25,6 +25,7 @@ import com.kh.team2.domain.PointDto;
 import com.kh.team2.domain.ProductVo;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
+import com.kh.team2.service.CartService;
 import com.kh.team2.service.MemberService;
 import com.kh.team2.service.MyLunchService;
 
@@ -40,6 +41,9 @@ public class ShopController {
 	
 	@Inject
 	BuyService buyService;
+	
+	@Inject
+	CartService carService;
 	
 	@Inject
 	MyLunchService myLunchService;
@@ -65,9 +69,20 @@ public class ShopController {
 	
 	// 일반 상품
 	@RequestMapping(value = "/single")
-	public String single(Model model,PagingDto pagingDto) throws Exception {
+	public String single(Model model,PagingDto pagingDto,HttpServletRequest request) throws Exception {
 
 		System.out.println("single Shop Controller");
+		// 최근목록
+		HttpSession session = request.getSession();
+		String mem_id = (String)session.getAttribute("mem_id");
+		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
+		int cartCount = 0;
+		if (mem_id != null) {
+			cartCount = carService.cartCount(mem_id);
+		}
+		model.addAttribute("cartCount", cartCount);
+		model.addAttribute("veiwList",veiwList);
+		// --
 
 		List<ProductVo> list = adminService.readAllPDT();
 		model.addAttribute("list", list);
@@ -89,7 +104,6 @@ public class ShopController {
 			list = new ArrayList<>();
 			session.setAttribute("veiw", list);
 		}
-		boolean numcheck = true;
 		for(int j=0 ;  j <list.size(); j++) {
 		if(productVo.getPdt_num() ==list.get(j).getPdt_num()){
 			list.remove(j);
@@ -107,9 +121,17 @@ public class ShopController {
 		if(list.size()==6) {
 			list.remove(5);
 		}
-		// ----
-//		System.out.println("list크기" + list.size());
-//		System.out.println(list);
+		// -----------------------------------------------------
+		// 최근목록
+		String mem_id = (String)session.getAttribute("mem_id");
+		int cartCount = 0;
+		if (mem_id != null) {
+			cartCount = carService.cartCount(mem_id);
+		}
+		model.addAttribute("cartCount", cartCount);
+		model.addAttribute("veiwList",list);
+		// --
+		
 		
 		return "shop/detail";
 	}
@@ -143,6 +165,7 @@ public class ShopController {
 			dto.setBuy_count(buy_count[i]);
 			dto.setPdt_name(pdtVo.getPdt_name());
 			dto.setPdt_price(pdtVo.getPdt_price());
+			dto.setPdt_image(pdtVo.getPdt_image());
 
 			list.add(dto);
 

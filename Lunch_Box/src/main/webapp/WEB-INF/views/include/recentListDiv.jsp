@@ -11,6 +11,7 @@
 		width: 200px;
 		border: 1px	solid #e6e5e5;
 		text-align: -webkit-center;
+		margin-bottom: 10px;
 	}
 	.title {
 		padding-bottom: 25px;
@@ -50,20 +51,69 @@
 		color: #7ebf27 !important;
 		font-size: inherit;
 	}
-	
+	.scroll {
+		color:#a4a4a4;
+		font-size: 11px;
+		height : 45px;
+	}
+	.scroll a{
+		float: left;
+		width: 50%;
+		height: 30px;
+		-webkit-box-sizing:border-box;
+		line-height: 1;
+		vertical-align: top;
+		cursor: pointer;
+		height: 45px;
+	}
+	.arr {
+		display: block;
+		width: 10px;
+		height: 7px;
+		margin: 9px auto 7px;
+	}
+	.scrollUp .arr{
+		background: url(http://www.homeal.net/_skin/homeal/img/common/arr_scroll_up.gif) no-repeat center top;
+	}
+	.scrollDown .arr{
+		background: url(http://www.homeal.net/_skin/homeal/img/common/arr_scroll_down.gif) no-repeat center top;
+	}
+	.scrollDown {
+		border-left: 1px solid #e6e5e5;
+	}
 </style>
 <script>
 $(function() {
-	console.log($("body").prop("scrollHeight"));
-
 	$(".cartList").click(function() {
 		location.href="/cart/list";
 	});
 	$(window).scroll(function() {
-			$(".recentList").animate({top:$(window).scrollTop()+120+"px"},{queue: false, duration: 350});
-	});  
-});
+		var length = 120;
+		var dataLong = $("#long").attr("data-long");
+		if (dataLong == "long") {
+			length = -120;
+		}
+		var footHeight = $(".footer").outerHeight(true);
+		var mainHeight = $(".main-top").outerHeight(true);
+		var bodyHeight = $("body").outerHeight(true)-600;
+		var recentList = $(".recentList").outerHeight(true);
+		var v = bodyHeight-footHeight-mainHeight;
+		var position = $(window).scrollTop();
+		if (position < mainHeight) {
+			position = mainHeight;
+		}
+		if (position > v ) {
+			position = v;
+		} 
+		
 
+		$(".recentList").stop();
+		$(".recentList").animate({"top":position-mainHeight+length});
+	});  
+	$(".btn_scroll_bottom").click(function(){
+		$('html, body').scrollTop( $(document).height() );
+	});
+});
 </script>
 <div class="recentList margin_self">
 				<div class="box">
@@ -78,4 +128,8 @@ $(function() {
 					<p class="cartList">장바구니 (<span class="countSpan">${cartCount}</span>)</p>
 					<p class="cartList">마이페이지</p>
 				</div>
-			</div>
+				<div class="box scroll">
+					<a class="scrollUp btn_scroll_top" onclick="window.scrollTo(0,0);"><span class="arr"></span>상단으로</a>
+					<a class="scrollDown btn_scroll_bottom"><span class="arr"></span>하단으로</a>
+				</div>
+</div>

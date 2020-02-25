@@ -49,4 +49,10 @@ public class ReviewTest {
 		repDao.insertReply(repVo);
 	}
 	
+	@Test
+	public void replyList() throws Exception {
+		int rep_bno = 61;
+		repDao.list(rep_bno);
+	}
+	
 }
