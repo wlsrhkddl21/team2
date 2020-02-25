@@ -22,10 +22,7 @@
 				</div>
 				<div class="col-md-9">
 					<div class="row">
-						<div class="col-md-2"></div>
-						<div class="col-md-8">
 							<div class="mypage_info text-center">
-								${buyList}
 								<table class="table text-center">
 									<thead>
 										<tr>
@@ -38,19 +35,17 @@
 										</tr>
 									</thead>
 									<tbody>
-<%-- 									${buyList }<hr> --%>
-<%-- 									${proList } --%>
 									<c:forEach items="${buyList }" var="buyJoinDto">
 										<tr>
 											<td>${buyJoinDto.buy_date }</td>
 											<td>${buyJoinDto.buy_address }</td>
 											<td>${buyJoinDto.buy_tel }</td>
-<%-- 										<c:forEach items ="${proList }" var="productVo"> --%>
-<%-- 											<c:if test="${buyList.pdt_num==productVo.pdt_num }"> --%>
-											<td>${buyJoinDto.pdt_num }</td>
-<%-- 											</c:if> --%>
+										<c:forEach items ="${proList }" var="productVo">
+											<c:if test="${buyJoinDto.pdt_num==productVo.pdt_num }">
+											<td>${productVo.pdt_name }</td>
+											</c:if>
 										
-<%-- 										</c:forEach> --%>
+										</c:forEach>
 											<td>${buyJoinDto.buy_count }</td>
 											<td>${buyJoinDto.buy_price }</td>
 										</tr>
@@ -59,8 +54,6 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
-						<div class="col-md-2"></div>
 					</div>
 				</div>
 				<div class="col-md-2" style="height: 600px;"></div>

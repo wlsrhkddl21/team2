@@ -104,7 +104,7 @@ $(document).ready(function() {
 			var isThis = $(this);
 			getHidden(isThis);
 		});
-// 		$("#cartForm").submit();
+		$("#cartForm").submit();
 	});
 	
 	// check buy
