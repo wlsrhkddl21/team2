@@ -27,6 +27,7 @@ import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
 import com.kh.team2.service.MemberService;
 import com.kh.team2.service.MyLunchService;
+import com.kh.team2.service.RevReplyService;
 
 @Controller
 @RequestMapping("/shop/*")
@@ -43,6 +44,9 @@ public class ShopController {
 	
 	@Inject
 	MyLunchService myLunchService;
+	
+	@Inject
+	RevReplyService replyService;
 
 	// 나만의 도시락
 	@RequestMapping(value = "/my")
@@ -79,17 +83,18 @@ public class ShopController {
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
 	public String detail(@PathVariable("pdt_num") int pdt_num, Model model,HttpServletRequest request) throws Exception {
 		System.out.println("detail Shop Controller"); 
+		//상품 디테일 정보 불러오기
 		ProductVo productVo = adminService.readPDT(pdt_num); 
-
 		model.addAttribute("productVo", productVo); 
+		//최근 목록
 		HttpSession session = request.getSession();
+		
 		// 최근본 상품 세션에 추가
 		List<ProductVo> list = (ArrayList)session.getAttribute("veiw");
 		if (list == null) {
 			list = new ArrayList<>();
 			session.setAttribute("veiw", list);
 		}
-		boolean numcheck = true;
 		for(int j=0 ;  j <list.size(); j++) {
 		if(productVo.getPdt_num() ==list.get(j).getPdt_num()){
 			list.remove(j);
@@ -110,6 +115,9 @@ public class ShopController {
 		// ----
 //		System.out.println("list크기" + list.size());
 //		System.out.println(list);
+		
+		//
+		
 		
 		return "shop/detail";
 	}
