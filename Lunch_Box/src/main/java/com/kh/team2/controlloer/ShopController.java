@@ -143,6 +143,7 @@ public class ShopController {
 			dto.setBuy_count(buy_count[i]);
 			dto.setPdt_name(pdtVo.getPdt_name());
 			dto.setPdt_price(pdtVo.getPdt_price());
+			dto.setPdt_image(pdtVo.getPdt_image());
 
 			list.add(dto);
 
