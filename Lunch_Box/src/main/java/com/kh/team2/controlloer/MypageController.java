@@ -1,5 +1,6 @@
 package com.kh.team2.controlloer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,7 +52,16 @@ public class MypageController {
 		MemberVo memberVo = memberService.readMember(mem_id);
 		List<ProductVo> proList = adminService.readAllPDT();
 		List<BuyJoinDto> list = buyService.selectJoinByMemId(mem_id);
+		List<BuyJoinDto> buyFirstlist = new ArrayList<BuyJoinDto>();
+		int buy_num =0;
+		for(BuyJoinDto buyJoinDto : list) {
+			if(buyJoinDto.getBuy_num()!=buy_num) {
+				buyFirstlist.add(buyJoinDto);
+				buy_num = buyJoinDto.getBuy_num();
+			}
+		}
 		
+		model.addAttribute("buyFirstlist",buyFirstlist);
 		model.addAttribute("proList",proList);
 		model.addAttribute("memberVo",memberVo);
 		model.addAttribute("buyList",list);
