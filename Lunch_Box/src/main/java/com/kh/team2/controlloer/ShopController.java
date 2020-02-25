@@ -24,6 +24,7 @@ import com.kh.team2.domain.PointDto;
 import com.kh.team2.domain.ProductVo;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
+import com.kh.team2.service.CartService;
 import com.kh.team2.service.MemberService;
 
 @Controller
@@ -38,6 +39,9 @@ public class ShopController {
 	
 	@Inject
 	BuyService buyService;
+	
+	@Inject
+	CartService carService;
 
 	// 나만의 도시락
 	@RequestMapping(value = "/my")
@@ -71,9 +75,17 @@ public class ShopController {
 	
 	// 일반 상품
 	@RequestMapping(value = "/single")
-	public String single(Model model,PagingDto pagingDto) throws Exception {
+	public String single(Model model,PagingDto pagingDto,HttpServletRequest request) throws Exception {
 
 		System.out.println("single Shop Controller");
+		// 최근목록
+		HttpSession session = request.getSession();
+		String mem_id = (String)session.getAttribute("mem_id");
+		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
+		int cartCount = carService.cartCount(mem_id);
+		model.addAttribute("cartCount", cartCount);
+		model.addAttribute("veiwList",veiwList);
+		// --
 
 		List<ProductVo> list = adminService.readAllPDT();
 		model.addAttribute("list", list);
@@ -113,9 +125,14 @@ public class ShopController {
 		if(list.size()==6) {
 			list.remove(5);
 		}
-		// ----
-//		System.out.println("list크기" + list.size());
-//		System.out.println(list);
+		// -----------------------------------------------------
+		// 최근목록
+		String mem_id = (String)session.getAttribute("mem_id");
+		int cartCount = carService.cartCount(mem_id);
+		model.addAttribute("cartCount", cartCount);
+		model.addAttribute("veiwList",list);
+		// --
+		
 		
 		return "shop/detail";
 	}

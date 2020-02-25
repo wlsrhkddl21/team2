@@ -54,16 +54,33 @@
 </style>
 <script>
 $(function() {
-	console.log($("body").prop("scrollHeight"));
-
 	$(".cartList").click(function() {
 		location.href="/cart/list";
 	});
 	$(window).scroll(function() {
-			$(".recentList").animate({top:$(window).scrollTop()+120+"px"},{queue: false, duration: 350});
+		var length = 120;
+		var dataLong = $("#long").attr("data-long");
+		if (dataLong == "long") {
+			length = -120;
+		}
+		console.log(length);
+		var footHeight = $(".footer").outerHeight(true);
+		var mainHeight = $(".main-top").outerHeight(true);
+		var bodyHeight = $("body").outerHeight(true);
+		var recentList = $(".recentList").outerHeight(true);
+		var v = bodyHeight-footHeight-mainHeight;
+		var position = $(window).scrollTop();
+		if (position < mainHeight) {
+			position = mainHeight;
+		}
+		if (position > v ) {
+			position = v;
+		} 
+		
+		$(".recentList").stop();
+		$(".recentList").animate({"top":position-mainHeight+length});
 	});  
 });
-
 </script>
 <div class="recentList margin_self">
 				<div class="box">
