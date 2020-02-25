@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team2.domain.BuyJoinDto;
 import com.kh.team2.domain.MemberVo;
+import com.kh.team2.domain.ProductVo;
 import com.kh.team2.persistence.MemberDao;
+import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
 import com.kh.team2.service.MemberService;
 
@@ -23,6 +25,9 @@ import com.kh.team2.service.MemberService;
 public class MypageController {
 	@Inject
 	MemberService memberService;
+	
+	@Inject
+	AdminService adminService;
 	
 	@Inject
 	BuyService buyService;
@@ -44,9 +49,10 @@ public class MypageController {
 		HttpSession session = request.getSession();
 		String mem_id = (String) session.getAttribute("mem_id");
 		MemberVo memberVo = memberService.readMember(mem_id);
-		
+		List<ProductVo> proList = adminService.readAllPDT();
 		List<BuyJoinDto> list = buyService.selectJoinByMemId(mem_id);
 		
+		model.addAttribute("proList",proList);
 		model.addAttribute("memberVo",memberVo);
 		model.addAttribute("buyList",list);
 		
