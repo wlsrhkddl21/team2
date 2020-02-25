@@ -55,4 +55,9 @@ public class ReviewTest {
 		repDao.list(rep_bno);
 	}
 	
+	@Test
+	public void readPdt() throws Exception {
+		int rev_pdt_name = 92;
+		dao.readPdtNum(rev_pdt_name);
+	}
 }

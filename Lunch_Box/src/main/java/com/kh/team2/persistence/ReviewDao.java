@@ -31,6 +31,7 @@ public interface ReviewDao {
 	// 리뷰 삭제
 	public void reviewDelete(int rev_num) throws Exception;
 
-	
+	// 상품번호 읽기
+	public List<ReviewVo> readPdtNum(int rev_pdt_name) throws Exception;
 	
 }

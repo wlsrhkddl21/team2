@@ -60,6 +60,26 @@
 			}
 		});
 		
+		// 리뷰 썸네일 이미지
+		function image() {
+		$(".revImage").each(
+				function() {
+					var fileName = $(this).attr("data-img");
+//						console.log("fileName:" + fileName);
+					var slice = fileName.lastIndexOf("/")
+					var path = fileName.substring(0, slice + 1);
+					var real = fileName.substring(slice + 1);
+					var thumbnail = path + "s_" + real;
+//						console.log(thumbnail);
+					$(this).attr(
+							"src",
+							"/review/displayFile?fileName="
+									+ thumbnail);
+				});
+	}
+	image();
+		// 리뷰 썸네일 이미지 끝
+		
 	});
 </script>
 <div class="container-fluid" id="long" data-long="short">
@@ -121,41 +141,50 @@
 				</table>
 			</div>
 			
+			
 			<!-- 리뷰게시판 -->
 			<div class="col-md-12 ">		
 				
-				<form>
+				<form action = "/review/reviewBoard" method="post">
+		<div style="height: 20px"></div>
+		<table class="table text-center table-striped">
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th>글번호</th>  -->
+<!-- 						<th>이미지</th>  -->
+<!-- 						<th>상품명</th>  -->
+<!-- 						<th>글제목</th> -->
+<!-- 						<th>작성자</th> -->
+<!-- 						<th>작성일</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+				<thead>
 					
-					<div class="form-group">
-						<label for="repWriter">REVIEW</label>
-							<input type="text" id="repWriter" value="${mem_id}"
-								class="form-control" readonly/>
-					</div>
-					<div class="form-group">
-						<label for="repContent">댓글내용</label>
-							<input type="text" id="repContent"
-								class="form-control"/>
-					</div>
+				<c:forEach items="${reviewList }" var="reviewVo">
 					
-					<div class="form-group">
-						<label>상품명</label>
-							<select name="rev_pdt_name" id="rev_pdt_name"class="form-control">
-								<c:forEach items="${list}" var="list">
-									<option value="${list.pdt_num}">${list.pdt_name}</option>
-								</c:forEach>
-							</select>
-					</div>
-								
-					<div class="form-group">
-						<label>사진첨부</label>
-							<input id="rev_image" class="form-control" type="file" name="file">
-					</div>	
+						<tr>
+						<td>${reviewVo.rev_num }</td>
+						<c:if test="${not empty reviewVo.rev_image}">
+							<td><img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}"></td>
+						</c:if>
+						<td>
+							<c:forEach items="${productList}" var="ProductVo">
+								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}">
+									${ProductVo.pdt_name}
+								</c:if>
+							</c:forEach>
+						</td>
+						<td><a data-rno="${reviewVo.rev_num}" class="readTitle" >${reviewVo.rev_title }</a></td>
+						<td>${reviewVo.rev_writer }</td>
+						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
+   								pattern="yyyy-MM-dd HH:mm:ss"/></td>   
+					</tr>
 					
-					<div class="form-group">
-						<button type="button" class="btn-xs btn-success"
-							id="btn_reply">작성완료</button>
-					</div>
-				</form>
+ 					
+				</c:forEach>
+				</thead>
+			</table>
+			</form>
 			</div>
 			<!-- 리뷰게시판 끝 -->
 		</div>

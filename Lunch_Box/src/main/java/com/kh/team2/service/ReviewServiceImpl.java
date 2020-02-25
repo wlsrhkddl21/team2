@@ -55,4 +55,9 @@ public class ReviewServiceImpl implements ReviewService {
 		
 	}
 
+	@Override
+	public List<ReviewVo> readPdtNum(int rev_pdt_name) throws Exception {
+		return dao.readPdtNum(rev_pdt_name);
+	}
+
 }
