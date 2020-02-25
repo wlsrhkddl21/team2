@@ -29,7 +29,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public void insertReview(ReviewVo reviewVo) throws Exception {
-		dao.insertReview(reviewVo);
+		dao.insertReview(reviewVo); 
 		
 	}
 

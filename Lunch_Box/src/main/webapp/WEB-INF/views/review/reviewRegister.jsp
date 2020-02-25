@@ -21,7 +21,7 @@ $(document).ready(function(){
 // 		location.href = "/review/reviewBoard";
 		$("#registForm").submit(); 
 		console.log("클릭됨");
-// 	});
+	});
 // 	$("#btnFile").click(function(){
 // 		("#pdt_image").trigger("click");
 // 	});

@@ -88,10 +88,13 @@ public class ReviewController {
 	
 	// 글 상세보기
 	@RequestMapping(value ="/reviewContent",method = RequestMethod.GET)
-	public String reviewContent(@RequestParam("rev_num") int rev_num,@ModelAttribute PagingDto pagingDto,Model model) throws Exception {
-		ReviewVo reviewVo = reviewService.readReview(rev_num);
-		System.out.println(reviewVo);
-		model.addAttribute("reviewVo", reviewVo);
+	public String reviewContent(@ModelAttribute PagingDto pagingDto,
+								Model model,@RequestParam("rev_num")int rev_num) throws Exception {
+		List<ProductVo> list = reviewService.productName();
+		ReviewVo vo = reviewService.readReview(rev_num);
+		model.addAttribute("list", list);
+		model.addAttribute("reviewVo", vo);
+		System.out.println(vo);
 		return "/review/reviewContent";
 	}
 	

@@ -1,9 +1,12 @@
 package com.kh.team2.controlloer;
 
+import java.util.List;
+
 //import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,16 +29,22 @@ public class ReviewReplyController {
 		return "success";
 	}
 	
-//	@RequestMapping(value="/all/{ntbno}", method = RequestMethod.GET)
-//	public List<ntReplyVo> list(@PathVariable("ntbno") int ntbno) throws Exception {
-//		return ntReplyService.list(ntbno);
-//	}
-//	
-//	@RequestMapping(value="/update", method = RequestMethod.PUT)
-//	public String update(@RequestBody ntReplyVo ntreplyVo) throws Exception {
-//		ntReplyService.update(ntreplyVo);
-//		return "success";
-//	}
+	@RequestMapping(value="/list/{rep_bno}", method = RequestMethod.GET)
+	public List<RevReplyVo> list(@PathVariable("rep_bno") int rep_bno) throws Exception {
+		return replyService.list(rep_bno);
+	}
+	
+	@RequestMapping(value="/update", method = RequestMethod.PUT)
+	public String update(@RequestBody RevReplyVo replyVo) throws Exception {
+		replyService.update(replyVo);
+		return "success";
+	}
+	
+	@RequestMapping(value="/delete/{rep_num}", method = RequestMethod.DELETE)
+	public String delete(@PathVariable("rep_num") int rep_num) throws Exception {
+		replyService.delete(rep_num);
+		return "success";
+	}
 	
 	
 }

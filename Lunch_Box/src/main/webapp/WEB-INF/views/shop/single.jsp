@@ -12,7 +12,7 @@
 <h3 class="title-w3ls text-center text-bl mb-5">일반 도시락</h3>
 <div style="height: 20px"></div>
 <!-- 상품 등록 -->
-<div class="container-fluid">
+<div class="container-fluid" id="long" data-long="long">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">

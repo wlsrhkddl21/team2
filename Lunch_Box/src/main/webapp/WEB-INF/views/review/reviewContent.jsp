@@ -4,7 +4,7 @@
 
 <script>
 $(document).ready(function() {
-// 	// 	수정 버튼
+	// 	수정 버튼
 // 	$("#btnModify").click(function() {
 // 		$("#not_title").prop("readonly", false);
 // 		$("#not_content").prop("readonly", false);
@@ -31,28 +31,29 @@ $(document).ready(function() {
 			$("#frmList").attr("action", "/review/reviewDelete").submit();	
 		}
 	});
-// 	// 수정취소 버튼
-// 	$("#btnCancel").click(function(){
-// 		$("#not_title").prop("readonly", true);
-// 		$("#not_content").prop("readonly", true);
-// 		$("#not_title").css("border","none");
-// 		$("#not_content").css("border","none");
-// 		$("button[type=submit]").hide(100);
-// 		$("#btnHotCancel").hide(100);
-// 		$(this).hide(100);
-// 		$("#btnModify").show(100);
-// 		$("#btnHot").hide(100);
-// 	});
+	
+	// 수정취소 버튼
+	$("#btnCancel").click(function(){
+		$("#not_title").prop("readonly", true);
+		$("#not_content").prop("readonly", true);
+		$("#not_title").css("border","none");
+		$("#not_content").css("border","none");
+		$("button[type=submit]").hide(100);
+		$("#btnHotCancel").hide(100);
+		$(this).hide(100);
+		$("#btnModify").show(100);
+		$("#btnHot").hide(100);
+	});
 	
 	// 댓글 작성완료 버튼
 	$("#btn_reply").click(function(){
-		var rev_num = "${reviewVo.rev_num}";
-		var repContent = $("#repContent").val();
-		var repWriter = $("#repWriter").val();
+		var rep_bno = "${reviewVo.rev_num}";
+		var rep_content = $("#repContent").val();
+		var rep_writer = $("#repWriter").val();
 		var sendData = {
-				"rev_num" : rev_num,
-				"repContent" : repContent,
-				"repWriter" : repWriter
+				"rep_bno" : rep_bno,
+				"rep_content" : rep_content,
+				"rep_writer" : rep_writer
 		};
 		console.log(sendData);
 		var url = "/reviewReply/insertReply";
@@ -68,85 +69,120 @@ $(document).ready(function() {
 			"data" : JSON.stringify(sendData),
 			"success" : function(rData) {
 				console.log(rData);
-// 				replyList();
+				replyList();
 			}
 		});
 	});
 	
 	
-// 	// 댓글 목록 불러오기
-// 	function replyList() {
-// 		$("#replyList").empty();
-// 		var url = "/replies/all/${boardVo.not_num}";
-// 		$.getJSON(url, function(rData) {
-// 			console.log(rData);
-// 			var strHtml = "";
-// 			$(rData).each(function(){
-// 				strHtml += "<tr>";
-// 				strHtml += "<td>" + this.ntrno +"</td>";
-// 				strHtml += "<td>" + this.ntrcontent + "</td>";
-// 				strHtml += "<td>" + this.ntrwriter + "</td>";
-// 				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
-// 				if("${mem_id}" == this.ntrwriter) {
-// 					strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
-// 					strHtml += " data-rno='" + this.ntrno + "'";
-// 					strHtml += " data-reply_text='" + this.ntrcontent + "'";
-// 					strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
-// 					strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
-// 					strHtml += " data-rno='" + this.ntrno + "'";
-// 					strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
-// 				}
-// 				strHtml += "</tr>";
-// 			});
-// 			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
-// 		});
-// 	}
-// 	// 댓글 수정 버튼
-// 	$("#replyList").on("click", ".btnReplyUpdate", function() {
-// 		console.log("댓글 수정 버튼");
-// 		var ntrno = $(this).attr("data-rno");
-// 		var ntrcontent = $(this).attr("data-reply_text");
-// 		var ntrwriter = $(this).attr("data-replyer");
-// 		$("#modal_rno").val(ntrno);
-// 		$("#modal_reply_text").val(ntrcontent);
-// 		$("#modal_replyer").val(ntrwriter);
-// 		$("#modal-a").trigger("click");
-// 		$("#myModal").modal("show"); 
-// 	});
-// 	// 댓글 모달창 완료 버튼
-// 	$("#btnModalReply").click(function(){
-// 		console.log("댓글완료");
-// 		var ntrno = $("#modal_rno").val();
-// 		var ntrcontent = $("#modal_reply_text").val();
-// 		var ntrwriter = $("#modal_replyer").val();
-		
-//  		var sendData = {
-// 				"ntrno" : ntrno,
-//  				"ntrcontent" : ntrcontent,
-//  				"ntrwriter" : ntrwriter
-//  		}
-//  		var url = "/replies/update";
-		
-// 		$.ajax({
-// 			"type" : "put",
-// 			"url" : url,
-// 			"headers" : {
-// 				"Content-Type" : "application/json",
-// 				"X-HTTP-Method-Override" : "put"
-// 			},
-// 			"dataType" : "text",
-// 			"data" : JSON.stringify(sendData),
-// 			"success" : function(rData) {
-// 				console.log(rData);
-// 				replyList();
-// 				$("#btnModalClose").trigger("click");
-// 			}
-// 		});
-// 	});
+	// 댓글 목록 불러오기
+	function replyList() {
+		$("#replyList").empty();
+		var url = "/reviewReply/list/${reviewVo.rev_num}";
+		$.getJSON(url, function(rData) {
+			console.log(rData);
+			var strHtml = "";
+			$(rData).each(function(){
+				strHtml += "<tr>";
+				strHtml += "<td>" + this.rep_num +"</td>";
+				strHtml += "<td>" + this.rep_content + "</td>";
+				strHtml += "<td>" + this.rep_writer + "</td>";
+				strHtml += "<td>" + dateString(this.rep_date) + "</td>";
+				if("${mem_id}" == this.rep_writer) {
+					strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
+					strHtml += " data-rno='" + this.rep_num + "'";
+					strHtml += " data-reply_text='" + this.rep_content + "'";
+					strHtml += " data-replyer='" + this.rep_writer + "'>수정</button></td>";
+					strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
+					strHtml += " data-rno='" + this.rep_num + "'";
+					strHtml += " data-bno='" + this.rep_bno + "'>삭제</button></td>";	
+				}
+				strHtml += "</tr>";
+			});
+			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
+		});
+	}
 	
-//  	replyList(); // 기능 실행
+	// 댓글 삭제 버튼
+	$("#replyList").on("click", ".btnReplyDelete", function() {
+		console.log("댓글 삭제 버튼");
+		var rep_num = $(this).attr("data-rno");
+		var url = "/reviewReply/delete/" + rep_num ;
+		
+		$.ajax({
+			"type" : "delete",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "delete"
+			},
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+				if (confirm("댓글을 삭제하시겠습니까?")) {
+					$("#btnModalClose").trigger("click");
+				}		
+			}
+		}); // $.ajax()
+	});
+	
+	//댓글 수정 버튼
+	$("#replyList").on("click", ".btnReplyUpdate", function() {
+		console.log("댓글 수정 버튼");
+		var rep_num = $(this).attr("data-rno");
+		var rep_content = $(this).attr("data-reply_text");
+		var rep_writer = $(this).attr("data-replyer");
+		$("#modal_rno").val(rep_num);
+		$("#modal_reply_text").val(rep_content);
+		$("#modal_replyer").val(rep_writer);
+		$("#modal-a").trigger("click");
+		$("#myModal").modal("show"); 
+	});
+	// 댓글 모달창 완료 버튼
+	$("#btnModalReply").click(function(){
+		console.log("댓글완료");
+		var rep_num = $("#modal_rno").val();
+		var rep_content = $("#modal_reply_text").val();
+		var rep_writer = $("#modal_replyer").val();
+		
+ 		var sendData = {
+				"rep_num" : rep_num,
+ 				"rep_content" : rep_content,
+ 				"rep_writer" : rep_writer
+ 		}
+ 		var url = "/reviewReply/update";
+		
+		$.ajax({
+			"type" : "put",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+				$("#btnModalClose").trigger("click");
+			}
+		});
+	});
+	function image() {
+		console.log("실행됨");
+		$(".revImage").each( function() {
+					var fileName = $(this).attr("data-img");
+//						console.log("fileName:" + fileName);
+//						console.log(thumbnail);
+					$(this).attr(
+							"src",
+							"/review/displayFile?fileName="
+									+ fileName);
+		});
+	};
+	image();
+ 	replyList(); // 기능 실행 
 });
-	
 </script>
 
 		<a id="modal-a" href="#myModal" role="button" class="btn" data-toggle="modal"
@@ -213,18 +249,18 @@ $(document).ready(function() {
 			<div class="col-md-10 main_grid_contact" >
 			<br>
 			<form id="myform" role="form" method="get" 
-				action="/review/reviewContent">
+				action="/review/reviewContent" enctype="multipart/form-data">
 			<input type="hidden" name="rev_num" value="${reviewVo.rev_num}"/>
 			<input type="hidden" name="page" value="${pagingDto.page}"/>
 			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
-			<table class="table">
+			<table class="table" >
 		<colgroup>
 			<col style="width:10%;">
 			<col style="width:50%;">
 			<col style="width:10%;">
 			<col style="width:40%;">
 		</colgroup>
-		<tbody>
+		<tbody >
 			<tr>
 				<th scope="row">제목</th>
 				<td class="form-group">
@@ -244,28 +280,26 @@ $(document).ready(function() {
 				<td>${reviewVo.rev_regdate}</td>
 			</tr>
 			<tr>
-				<th scope="row" colspan="5" class="form-group" >
-				<textarea rows="10" id="rev_content" 
-						name="rev_content" style="border:none" readonly>${reviewVo.rev_content}</textarea>
+				<th scope="row" colspan="4" class="form-group" style="text-align:center; width:380px;">						
+					<c:if test="${not empty reviewVo.rev_image}">
+						<img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}" style="">
+					</c:if>			
 				</th>
 			</tr>
+			<tr>	
+				<th scope="row" colspan="5" class="form-group" >		
+					<textarea rows="3" id="rev_content" 
+						name="rev_content" style="border:none" readonly>${reviewVo.rev_content}</textarea>
+				</th>
+			</tr>	
+			
+			
 		</tbody>
 	</table>
 			
 			<hr>
 			
-			<div style="clear:both;">
-					<button type="submit" class="btn btn-success" id="btnSuccess"
-						style="display:none;">완료</button>
-					<button type="button" class="btn btn-warning" id="btnCancel"
-						style="display:none;">수정취소</button>
-					<button type="button" class="btn btn-warning" id="btnHot"
-						style="display:none;">중요공지등록</button>
-					<button type="button" class="btn btn-warning" id="btnHotSuccess"
-						style="display:none;">중요공지등록완료</button>
-					<button type="button" class="btn btn-warning" id="btnHotCancel"
-						style="display:none;">중요공지등록삭제</button>
-			</div>
+			
 			</form>
 				<div style="clear:both;">
 				<c:if test="${ mem_id == 'admin' || mem_id == reviewVo.rev_writer }">
@@ -300,36 +334,36 @@ $(document).ready(function() {
 	<!-- // 댓글 작성 -->
 	
 	<!-- 댓글 목록 -->
-<!-- 	<div class="row"> -->
-<!-- 		<div class="col-md-12"> -->
-<!-- 			<table class="table"> -->
-<!-- 				<thead> -->
-<!-- 					<tr> -->
-<!-- 						<th>번호</th> -->
-<!-- 						<th>댓글내용</th> -->
-<!-- 						<th>작성자</th> -->
-<!-- 						<th>날짜</th> -->
-<%-- 					<c:if test="${mem_id == boardVo.not_writer}"> --%>
-<!-- 						<th>수정</th> -->
-<!-- 						<th>삭제</th> -->
-<%-- 					</c:if> --%>
-<!-- 					</tr> -->
-<!-- 				</thead> -->
-<!-- 				<tbody id="replyList"> -->
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>댓글내용</th>
+						<th>작성자</th>
+						<th>날짜</th>
+					<c:if test="${mem_id == reviewVo.rev_writer}">
+						<th>수정</th>
+						<th>삭제</th>
+					</c:if>
+					</tr>
+				</thead>
+				<tbody id="replyList">
 					
-<!-- 				</tbody> -->
-<!-- 			</table> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1" ></div> -->
-<!-- 	</div> -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+		</div>
+		<div class="col-md-1" ></div>
+	</div>
 	
-<!-- 	<hr/> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-2"> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+	<hr/>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
 	<!-- // 댓글 목록 -->
 </div>
 

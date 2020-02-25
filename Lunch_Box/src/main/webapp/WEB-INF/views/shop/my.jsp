@@ -11,9 +11,6 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8" style="margin-bottom: 450px;">
-			<!-- 최근목록 보기 -->
-			<%@ include file="../include/recentListDiv.jsp"%>
-			<!-- /최근목록 보기 -->
 			<div class="row no-gutters">
 				<div class="col-md-4">
 					<a href="/shop/detailMy"> <img

@@ -231,7 +231,7 @@ $(document).ready(function() {
 </script>
 	<!-- contact -->
 	<section class="contact py-5" id="contact">
-		<div class="container">
+		<div class="container" id="long" data-long="short">
 					<!-- 최근 목록 -->
 	<%@ include file="../include/recentListDiv.jsp" %>
 					<!-- /최근 목록 -->

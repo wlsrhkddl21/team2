@@ -62,7 +62,7 @@
 		
 	});
 </script>
-<div class="container-fluid">
+<div class="container-fluid" id="long" data-long="short">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
@@ -122,9 +122,40 @@
 			</div>
 			
 			<!-- 리뷰게시판 -->
-			<div class="col-md-12 text-center">
+			<div class="col-md-12 ">		
 				
-				<h1>리뷰게시판</h1>
+				<form>
+					
+					<div class="form-group">
+						<label for="repWriter">REVIEW</label>
+							<input type="text" id="repWriter" value="${mem_id}"
+								class="form-control" readonly/>
+					</div>
+					<div class="form-group">
+						<label for="repContent">댓글내용</label>
+							<input type="text" id="repContent"
+								class="form-control"/>
+					</div>
+					
+					<div class="form-group">
+						<label>상품명</label>
+							<select name="rev_pdt_name" id="rev_pdt_name"class="form-control">
+								<c:forEach items="${list}" var="list">
+									<option value="${list.pdt_num}">${list.pdt_name}</option>
+								</c:forEach>
+							</select>
+					</div>
+								
+					<div class="form-group">
+						<label>사진첨부</label>
+							<input id="rev_image" class="form-control" type="file" name="file">
+					</div>	
+					
+					<div class="form-group">
+						<button type="button" class="btn-xs btn-success"
+							id="btn_reply">작성완료</button>
+					</div>
+				</form>
 			</div>
 			<!-- 리뷰게시판 끝 -->
 		</div>
