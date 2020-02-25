@@ -24,6 +24,12 @@
 		select * 
 		from tbl_buy b, tbl_buy_detail bd
 		where b.mem_id = #{mem_id}
+		order by b.buy_date desc
+	</select>
+	
+	<select id="selectDetailCount" resultType="int">
+		select count(*) from tbl_detail
+		where buy_num=#{buy_num}
 	</select>
 
 </mapper>

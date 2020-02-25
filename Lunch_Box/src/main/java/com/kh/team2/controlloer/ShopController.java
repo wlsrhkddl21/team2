@@ -19,12 +19,14 @@ import com.kh.team2.domain.BuyDto;
 import com.kh.team2.domain.BuyVo;
 import com.kh.team2.domain.CartDto;
 import com.kh.team2.domain.MemberVo;
+import com.kh.team2.domain.MyLunchVo;
 import com.kh.team2.domain.PagingDto;
 import com.kh.team2.domain.PointDto;
 import com.kh.team2.domain.ProductVo;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
 import com.kh.team2.service.MemberService;
+import com.kh.team2.service.MyLunchService;
 
 @Controller
 @RequestMapping("/shop/*")
@@ -38,6 +40,9 @@ public class ShopController {
 	
 	@Inject
 	BuyService buyService;
+	
+	@Inject
+	MyLunchService myLunchService;
 
 	// 나만의 도시락
 	@RequestMapping(value = "/my")
@@ -57,17 +62,6 @@ public class ShopController {
 		return "shop/sub";
 	}
 
-	// 일반 상품테스트
-	@RequestMapping(value = "/singleT")
-	public String singleT(Model model,PagingDto pagingDto) throws Exception {
-		
-		System.out.println("single Shop Controller");
-		
-		List<ProductVo> list = adminService.readAllPDT();
-		model.addAttribute("list", list);
-		
-		return "shop/single";
-	}
 	
 	// 일반 상품
 	@RequestMapping(value = "/single")
@@ -120,6 +114,17 @@ public class ShopController {
 		return "shop/detail";
 	}
 
+
+	//나만의 도시락
+	@RequestMapping(value = "/detailMy", method = RequestMethod.GET)
+	public String detailMy(Model model) throws Exception {
+		
+		List<MyLunchVo> list = myLunchService.readAllMLB("all");
+		model.addAttribute("list",list);
+		
+		return "shop/detailMy";
+	}
+	
 	// 구매 페이지 (바로구매)
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	public String buy(HttpServletRequest request, Model model,CartDto cartDto) throws Exception {

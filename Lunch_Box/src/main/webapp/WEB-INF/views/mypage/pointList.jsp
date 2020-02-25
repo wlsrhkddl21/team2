@@ -26,6 +26,7 @@
 						<div class="col-md-8">
 							<div class="mypage_info text-center">
 								<div>${memberVo}</div>
+								${list }
 							</div>
 						</div>
 						<div class="col-md-2"></div>
