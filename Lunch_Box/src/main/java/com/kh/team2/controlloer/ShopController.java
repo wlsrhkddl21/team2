@@ -76,7 +76,10 @@ public class ShopController {
 		HttpSession session = request.getSession();
 		String mem_id = (String)session.getAttribute("mem_id");
 		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
-		int cartCount = carService.cartCount(mem_id);
+		int cartCount = 0;
+		if (mem_id != null) {
+			cartCount = carService.cartCount(mem_id);
+		}
 		model.addAttribute("cartCount", cartCount);
 		model.addAttribute("veiwList",veiwList);
 		// --
@@ -101,7 +104,6 @@ public class ShopController {
 			list = new ArrayList<>();
 			session.setAttribute("veiw", list);
 		}
-		boolean numcheck = true;
 		for(int j=0 ;  j <list.size(); j++) {
 		if(productVo.getPdt_num() ==list.get(j).getPdt_num()){
 			list.remove(j);
@@ -122,7 +124,10 @@ public class ShopController {
 		// -----------------------------------------------------
 		// 최근목록
 		String mem_id = (String)session.getAttribute("mem_id");
-		int cartCount = carService.cartCount(mem_id);
+		int cartCount = 0;
+		if (mem_id != null) {
+			cartCount = carService.cartCount(mem_id);
+		}
 		model.addAttribute("cartCount", cartCount);
 		model.addAttribute("veiwList",list);
 		// --
