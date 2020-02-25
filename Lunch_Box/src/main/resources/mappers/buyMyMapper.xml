@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.mappers.buyMyMapper">
+
+
+	<select id="getSeqBuyMyNextVal" resultType="int">
+		select seq_my_buy.nextval
+		from dual
+	</select>
+	
+	<insert id="insertBuyMy">
+		insert into tbl_buy_my(buy_num,rice,soup,side1,side2,side3,
+								buy_price,buy_count,buy_name,mem_id,buy_address,buy_tel)
+		values (#{buy_num},#{rice},#{soup},#{side1},#{side2},#{side3},#{buy_price},#{buy_count},#{buy_name},#{mem_id},
+				#{buy_address},#{buy_tel})
+	</insert>
+	
+	<select id="selectBuyMy" resultType="BuyMyVo">
+		select * from tbl_buy_my
+	</select>
+	
+</mapper>

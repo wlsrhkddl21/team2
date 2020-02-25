@@ -5,10 +5,19 @@ public class BuyJoinDto {
 	private int pdt_num;
 	private int buy_count;
 	private String mem_id;
+	private String pdt_name;
 	private String buy_date;
 	private String buy_address;
 	private String buy_tel;
 	private int buy_price;
+
+	public String getPdt_name() {
+		return pdt_name;
+	}
+
+	public void setPdt_name(String pdt_name) {
+		this.pdt_name = pdt_name;
+	}
 
 	public int getBuy_num() {
 		return buy_num;
@@ -77,8 +86,8 @@ public class BuyJoinDto {
 	@Override
 	public String toString() {
 		return "BuyJoinDto [buy_num=" + buy_num + ", pdt_num=" + pdt_num + ", buy_count=" + buy_count + ", mem_id="
-				+ mem_id + ", buy_date=" + buy_date + ", buy_address=" + buy_address + ", buy_tel=" + buy_tel
-				+ ", buy_price=" + buy_price + "]";
+				+ mem_id + ", pdt_name=" + pdt_name + ", buy_date=" + buy_date + ", buy_address=" + buy_address
+				+ ", buy_tel=" + buy_tel + ", buy_price=" + buy_price + "]";
 	}
 
 }
