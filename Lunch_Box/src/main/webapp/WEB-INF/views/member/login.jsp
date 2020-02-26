@@ -31,7 +31,7 @@
 							</div>
 							
 							<div class="input-group1 text-right">
-								<button id="btnLogin" class="btn" type="submit">로그인 하기</button>
+								<button id="btnLogin" class="btn" type="submit">로그인</button>
 							</div>
 						</form>
 					</div>
