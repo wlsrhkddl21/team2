@@ -28,6 +28,7 @@ public class MyPageController {
 	@Inject
 	MemberService memberService;
 	
+	
 	@Inject
 	AdminService adminService;
 	

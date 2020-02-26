@@ -79,10 +79,11 @@
 
 		//주소 수정 버튼
 		$("#btnAdd").click(function() {
+			
 			new daum.Postcode({
 				oncomplete : function(data) {
 					$("#add_span").text(data.address);
-					$("#add_span").text(data-mem-add);
+					$("#add_span").attr("data-mem-add",data.address);
 					$("#divSub").css("display", "block");
 				}
 			}).open();
