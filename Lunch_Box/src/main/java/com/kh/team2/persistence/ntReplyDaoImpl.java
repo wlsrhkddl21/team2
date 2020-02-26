@@ -37,4 +37,9 @@ public class ntReplyDaoImpl implements ntReplyDao {
 		sqlSession.delete(NAMESPACE + ".delete", ntrno);
 	}
 
+	@Override
+	public void deleteNum(int not_num) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteNum", not_num);
+	}
+
 }

@@ -14,5 +14,7 @@ public interface ntReplyDao {
 	public void update(ntReplyVo ntreplyVo) throws Exception;
 	// 댓글 삭제
 	public void delete(int ntrno) throws Exception;
+	// 본글삭제시 댓글삭제
+	public void deleteNum(int not_num) throws Exception;
 	
 }

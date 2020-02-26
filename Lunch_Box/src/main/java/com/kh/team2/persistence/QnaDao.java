@@ -22,10 +22,10 @@ public interface QnaDao {
 	public void answer(QnaVo vo) throws Exception;
 	// 답변추가시 success 변경
 	public void updateSuccess(QnaVo vo) throws Exception;
-//	// 데이터 삭제
-//	public void delete(int not_num)  throws Exception; 
-//	// 데이터 수정
-//	public void update(BoardVo vo) throws Exception;
+	// 데이터 삭제
+	public void delete(int qna_ref)  throws Exception; 
+	// 데이터 수정
+	public void update(QnaVo vo) throws Exception;
 //	// 중요공지사항 추가
 //	public void hotUpdate(BoardVo vo) throws Exception;
 //	// 중요공지사항 삭제

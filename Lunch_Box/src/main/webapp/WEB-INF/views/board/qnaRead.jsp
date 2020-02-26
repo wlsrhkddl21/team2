@@ -6,19 +6,13 @@
 $(document).ready(function() {
 	// 	수정 버튼
 	$("#btnModify").click(function() {
-		$("#not_title").prop("readonly", false);
-		$("#not_content").prop("readonly", false);
-		$("#not_title").css("border","1px solid");
-		$("#not_content").css("border","1px solid");
+		$("#qna_title").prop("readonly", false);
+		$("#qna_content").prop("readonly", false);
+		$("#qna_title").css("border","1px solid");
+		$("#qna_content").css("border","1px solid");
 		$(this).hide(100);
 		$("button[type=submit]").show(100);
 		$("#btnCancel").show(100);
-		$("#btnHot").show(100);
-		if("${boardVo.not_hot}" == 1) {
-			console.log("중요공지임");
-			$("#btnHot").hide(100);
-			$("#btnHotCancel").show(100);
-		}
 	});
 	// 목록 버튼
 	$("#btnListAll").click(function(){
@@ -34,39 +28,33 @@ $(document).ready(function() {
 	// 삭제 버튼
 	$("#btnDelete").click(function(){
 		if(confirm("삭제하시겠습니까?")) {
-			$("#frmList").attr("action", "/board/ntDelete").submit();	
+			$("#frmList").attr("action", "/board/qnaDelete").submit();	
 		}
 	});
 	// 수정취소 버튼
 	$("#btnCancel").click(function(){
-		$("#not_title").prop("readonly", true);
-		$("#not_content").prop("readonly", true);
-		$("#not_title").css("border","none");
-		$("#not_content").css("border","none");
+		$("#qna_title").prop("readonly", true);
+		$("#qna_content").prop("readonly", true);
+		$("#qna_title").css("border","none");
+		$("#qna_content").css("border","none");
 		$("button[type=submit]").hide(100);
-		$("#btnHotCancel").hide(100);
 		$(this).hide(100);
 		$("#btnModify").show(100);
 		$("#btnHot").hide(100);
 	});
-	// 중요공지등록 버튼
-	$("#btnHot").click(function() {
-		if(confirm("중요공지로 등록하시겠습니까?")) {
-			$("#myform").attr("action", "/board/hotUpdate").submit();
-		}
-	});
+	
 	// 댓글 작성완료 버튼
-	$("#btn_ntReply").click(function(){
-		var ntbno = "${boardVo.not_num}";
-		var ntrcontent = $("#ntRcontent").val();
-		var ntrwriter = $("#ntRwriter").val();
+	$("#btn_qnaReply").click(function(){
+		var qrbno = "${qnaVo.qna_num}";
+		var qrcontent = $("#qrContent").val();
+		var qrwriter = $("#qrWriter").val();
 		var sendData = {
-				"ntbno" : ntbno,
-				"ntrcontent" : ntrcontent,
-				"ntrwriter" : ntrwriter
+				"qrbno" : qrbno,
+				"qrcontent" : qrcontent,
+				"qrwriter" : qrwriter
 		};
 		console.log(sendData);
-		var url = "/replies/register";
+		var url = "/replies/qnaRegister";
 		
 		$.ajax({
 			"type" : "post",
@@ -85,30 +73,57 @@ $(document).ready(function() {
 	});
 	// 댓글 모달창 완료 버튼
 	$("#btnModalReply").click(function(){
-		console.log("댓글완료");		
+		console.log("댓글완료");
+		var qrnum = $("#modal_rno").val();
+		var qrcontent = $("#modal_reply_text").val();
+		var qrwriter = $("#modal_replyer").val();
+		
+		var sendData = {
+				"qrnum" : qrnum,
+				"qrcontent" : qrcontent,
+				"qrwriter" : qrwriter
+		}
+		var url = "/replies/qnaUpdate";
+		
+		$.ajax({
+			"type" : "put",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+				$("#btnModalClose").trigger("click");
+			}
+		});		
 	});
 	
 	// 댓글 목록 불러오기
 	function replyList() {
 		$("#replyList").empty();
-		var url = "/replies/all/${boardVo.not_num}";
+		var url = "/replies/qnaAll/${qnaVo.qna_num}";
 		$.getJSON(url, function(rData) {
 			console.log(rData);
 			var strHtml = "";
 			$(rData).each(function(){
 				strHtml += "<tr>";
-				strHtml += "<td>" + this.ntrno +"</td>";
-				strHtml += "<td>" + this.ntrcontent + "</td>";
-				strHtml += "<td>" + this.ntrwriter + "</td>";
-				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
-				if("${mem_id}" == this.ntrwriter) {
-					strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
-					strHtml += " data-rno='" + this.ntrno + "'";
-					strHtml += " data-reply_text='" + this.ntrcontent + "'";
-					strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
-					strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
-					strHtml += " data-rno='" + this.ntrno + "'";
-					strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
+				strHtml += "<td>" + this.qrcontent + "</td>";
+				strHtml += "<td>" + this.qrwriter + "</td>";
+				strHtml += "<td>" + dateString(this.qrdate) + "</td>";
+				if("${mem_id}" == this.qrwriter || "${mem_id}" == "admin") {
+					strHtml += "<td><button type='button' class='btn btn-outline-dark btnReplyUpdate'";
+					strHtml += " data-rno='" + this.qrnum + "'";
+					strHtml += " data-reply_text='" + this.qrcontent + "'";
+					strHtml += " data-replyer='" + this.qrwriter + "'>수정</button></td>";
+					strHtml += "<td><button type='button' class='btn btn-outline-danger btnReplyDelete'";
+					strHtml += " data-rno='" + this.qrnum + "'";
+					strHtml += " data-bno='" + this.qrbno + "'>삭제</button></td>";	
+				} else {
+					strHtml += "<td></td><td></td>";
 				}
 				strHtml += "</tr>";
 			});
@@ -118,15 +133,37 @@ $(document).ready(function() {
 	// 댓글 수정 버튼
 	$("#replyList").on("click", ".btnReplyUpdate", function() {
 		console.log("댓글 수정 버튼");
-		var ntrno = $(this).attr("data-rno");
-		var ntrcontent = $(this).attr("data-reply_text");
-		var ntrwriter = $(this).attr("data-replyer");
-		$("#modal_rno").val(ntrno);
-		$("#modal_reply_text").val(ntrcontent);
-		$("#modal_replyer").val(ntrwriter);
+		var qrnum = $(this).attr("data-rno");
+		var qrcontent = $(this).attr("data-reply_text");
+		var qrwriter = $(this).attr("data-replyer");
+		$("#modal_rno").val(qrnum);
+		$("#modal_reply_text").val(qrcontent);
+		$("#modal_replyer").val(qrwriter);
 		$("#modal-a").trigger("click");
 		$("#myModal").modal("show"); 
 	});
+	// 댓글 삭제 버튼
+	$("#replyList").on("click", ".btnReplyDelete", function() {
+			console.log("댓글 삭제 버튼");
+			var qrnum = $(this).attr("data-rno");
+			var url = "/replies/qnaDelete/" + qrnum;
+			
+			$.ajax({
+				"type" : "delete",
+				"url" : url,
+				"headers" : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "delete"
+				},
+				"success" : function(rData) {
+					console.log(rData);
+					replyList();
+					if (confirm("댓글을 삭제하시겠습니까?")) {
+						$("#btnModalClose").trigger("click");
+					}		
+				}
+			}); // $.ajax()
+		});
 	
 	replyList(); // 기능 실행
 });
@@ -202,7 +239,7 @@ $(document).ready(function() {
 			<div class="col-md-10 main_grid_contact" >
 			<br>
 			<form id="myform" role="form" method="post" 
-				action="/board/ntUpdate">
+				action="/board/qnaUpdate">
 			<input type="hidden" name="qna_num" value="${qnaVo.qna_num}"/>
 			<input type="hidden" name="page" value="${pagingDto.page}"/>
 			<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
@@ -217,8 +254,8 @@ $(document).ready(function() {
 			<tr>
 				<th scope="row">제목</th>
 				<td class="form-group">
-				<input type="text" id="not_title" 
-						name="not_title" value="${qnaVo.qna_title}" style="border:none" 
+				<input type="text" id="qna_title" 
+						name="qna_title" value="${qnaVo.qna_title}" style="border:none" 
 						readonly/></td>
 				<th scope="row">답변여부</th>
 				<td>
@@ -235,16 +272,16 @@ $(document).ready(function() {
 			<tr>
 				<th scope="row">작성자</th>
 				<td class="form-group">
-				<input type="text" id="not_writer" 
-						name="not_writer" value="${qnaVo.qna_writer}" style="border:none"
+				<input type="text" id="qna_writer" 
+						name="qna_writer" value="${qnaVo.qna_writer}" style="border:none"
 						readonly/></td>
 				<th scope="row">작성일</th>
 				<td>${qnaVo.qna_regdate}</td>
 			</tr>
 			<tr>
 				<th scope="row" colspan="5" class="form-group" >
-				<textarea rows="10" id="not_content" 
-						name="not_content" style="border:none" readonly>${qnaVo.qna_content}</textarea>
+				<textarea rows="10" id="qna_content" 
+						name="qna_content" style="border:none" readonly>${qnaVo.qna_content}</textarea>
 				</th>
 			</tr>
 		</tbody>
@@ -262,32 +299,40 @@ $(document).ready(function() {
 				<div style="clear:both;">
 					<button type="button" class="btn btn-outline-dark"
 						id="btnListAll">목록</button>
-				<c:if test="${mem_id == 'admin'}">
-					<button type="button" class="btn btn-outline-dark"
-						id="btnAnswer">답변하기</button>				
-					<button type="button" class="btn btn-outline-dark"
-						id="btnModify">수정</button>
-					<button type="button" class="btn btn-outline-danger"
-						id="btnDelete">삭제</button>				
-				</c:if>
+						<c:choose>
+							<c:when test="${mem_id == 'admin' }">
+								<button type="button" class="btn btn-outline-dark"
+										id="btnAnswer">답변하기</button>
+								<button type="button" class="btn btn-outline-dark"
+										id="btnModify">수정</button>
+								<button type="button" class="btn btn-outline-danger"
+										id="btnDelete">삭제</button>		
+							</c:when>
+							<c:when test="${mem_id == qnaVo.qna_writer }">
+								<button type="button" class="btn btn-outline-dark"
+										id="btnModify">수정</button>
+							<button type="button" class="btn btn-outline-danger"
+										id="btnDelete">삭제</button>
+							</c:when>
+						</c:choose>
 				</div>
 			<!-- 댓글 작성 -->
 	<c:if test="${mem_id != null && mem_id != ''}">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="ntRcontent">댓글내용</label>
-				<input type="text" id="ntRcontent"
+				<label for="qrContent">댓글내용</label>
+				<input type="text" id="qrContent"
 					class="form-control"/>
 			</div>
 			<div class="form-group" style="display:none;">
-				<label for="ntRwriter">작성자</label>
-				<input type="text" id="ntRwriter" value="${mem_id }"
+				<label for="qrWriter">작성자</label>
+				<input type="text" id="qrWriter" value="${mem_id }"
 					class="form-control" readonly/>
 			</div>
 			<div class="form-group">
 				<button type="button" class="btn btn-outline-dark"
-					id="btn_ntReply">작성완료</button>
+					id="btn_qnaReply">작성완료</button>
 			</div>
 		</div>
 	</div>
@@ -298,19 +343,17 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
-				<thead>
+				<thead style="text-align:center;">
 					<tr>
-						<th>번호</th>
+<!-- 						<th>번호</th> -->
 						<th>댓글내용</th>
 						<th>작성자</th>
 						<th>날짜</th>
-					<c:if test="${mem_id == boardVo.not_writer}">
 						<th>수정</th>
 						<th>삭제</th>
-					</c:if>
 					</tr>
 				</thead>
-				<tbody id="replyList">
+				<tbody id="replyList" style="text-align:center;">
 					
 				</tbody>
 			</table>

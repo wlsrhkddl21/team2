@@ -30,6 +30,10 @@
 		where ntrno = #{ntrno}
 	</update>
 	
+	<delete id="deleteNum">
+		delete from tbl_ntReply
+		where ntbno = #{not_num}
+	</delete>
 	
 </mapper>
 

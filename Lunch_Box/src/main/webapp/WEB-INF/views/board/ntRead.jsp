@@ -93,11 +93,11 @@ $(document).ready(function() {
 			var strHtml = "";
 			$(rData).each(function(){
 				strHtml += "<tr>";
-				strHtml += "<td>" + this.ntrno +"</td>";
+// 				strHtml += "<td>" + this.ntrno +"</td>";
 				strHtml += "<td>" + this.ntrcontent + "</td>";
 				strHtml += "<td>" + this.ntrwriter + "</td>";
 				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
-				if("${mem_id}" == this.ntrwriter) {
+				if("${mem_id}" == this.ntrwriter || "${mem_id}" == "admin") {
 					strHtml += "<td><button type='button' class='btn btn-outline-dark btnReplyUpdate'";
 					strHtml += " data-rno='" + this.ntrno + "'";
 					strHtml += " data-reply_text='" + this.ntrcontent + "'";
@@ -105,10 +105,13 @@ $(document).ready(function() {
 					strHtml += "<td><button type='button' class='btn btn-outline-danger btnReplyDelete'";
 					strHtml += " data-rno='" + this.ntrno + "'";
 					strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
+				} else {
+					strHtml += "<td></td><td></td>";	
 				}
 				strHtml += "</tr>";
 			});
 			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
+			$("#ntRcontent").val("");
 		});
 	}
 	// 댓글 수정 버튼
@@ -125,26 +128,27 @@ $(document).ready(function() {
 	});
 
 	// 댓글 삭제 버튼
-// 	$("#replyList").on("click", ".btnReplyDelete", function() {
-// 		console.log("댓글 삭제 버튼");
-// 		var ntrno = $(this).attr("data-rno");
-// 		var ntbno = $(this).attr("data-bno");
-// 		var url = "/replies/delete/" + ntrno + "/" + ntbno;
+$("#replyList").on("click", ".btnReplyDelete", function() {
+		console.log("댓글 삭제 버튼");
+		var ntrno = $(this).attr("data-rno");
+		var url = "/replies/delete/" + ntrno ;
 		
-// 		$.ajax({
-// 			"type" : "delete",
-// 			"url" : url,
-// 			"headers" : {
-// 				"Content-Type" : "application/json",
-// 				"X-HTTP-Method-Override" : "delete"
-// 			},
-// 			"success" : function(rData) {
-// 				console.log(rData);
-// 				replyList();
-// 				$("#btnModalClose").trigger("click");
-// 			}
-// 		}); // $.ajax()
-// 	});
+		$.ajax({
+			"type" : "delete",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "delete"
+			},
+			"success" : function(rData) {
+				console.log(rData);
+				replyList();
+				if (confirm("댓글을 삭제하시겠습니까?")) {
+					$("#btnModalClose").trigger("click");
+				}		
+			}
+		}); // $.ajax()
+	});
 	
 	// 댓글 모달창 완료 버튼
 	$("#btnModalReply").click(function(){
@@ -339,19 +343,17 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
-				<thead>
+				<thead style="text-align:center;">
 					<tr>
-						<th>번호</th>
+<!-- 						<th>번호</th> -->
 						<th>댓글내용</th>
 						<th>작성자</th>
 						<th>날짜</th>
-					<c:if test="${mem_id == boardVo.not_writer}">
 						<th>수정</th>
 						<th>삭제</th>
-					</c:if>
 					</tr>
 				</thead>
-				<tbody id="replyList">
+				<tbody id="replyList" style="text-align:center;">
 					
 				</tbody>
 			</table>

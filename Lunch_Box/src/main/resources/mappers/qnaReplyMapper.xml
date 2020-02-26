@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.mappers.qnaReplyMapper">
+	
+	<insert id="create">
+		insert into tbl_qnaReply
+			(qrnum, qrbno, qrcontent, qrwriter)
+		values 
+			(seq_qnaReply_num.nextval, #{qrbno}, #{qrcontent}, #{qrwriter}) 
+	</insert>
+	
+	<select id="list" resultType="QnaReplyVo">
+		select * from tbl_qnaReply
+		where qrbno = #{qrbno}
+		order by qrnum desc
+	</select>
+	
+	<delete id="delete">
+		delete from tbl_qnaReply
+		where qrnum = #{qrnum}
+	</delete>
+	
+	<update id="update">
+		update tbl_qnaReply set
+			qrcontent = #{qrcontent},
+			qrudate = sysdate
+		where qrnum = #{qrnum}
+	</update>
+	
+	<delete id="deleteNum">
+		delete from tbl_qnaReply
+		where qrbno = #{qna_ref}
+	</delete>
+	
+</mapper>
+

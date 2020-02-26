@@ -55,4 +55,14 @@ public class QnaDaoImpl implements QnaDao {
 		sqlSession.update(NAMESPACE + ".success", vo);
 	}
 
+	@Override
+	public void delete(int qna_ref) throws Exception {
+		sqlSession.delete(NAMESPACE + ".delete", qna_ref);
+	}
+
+	@Override
+	public void update(QnaVo vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update", vo);
+	}
+
 }

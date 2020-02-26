@@ -10,12 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.team2.domain.PagingDto;
 import com.kh.team2.domain.QnaVo;
 import com.kh.team2.persistence.QnaDao;
+import com.kh.team2.persistence.QnaReplyDao;
 
 @Service
 public class QnaServiceImpl implements QnaService {
 
 	@Inject
 	private QnaDao qnaDao;
+	@Inject
+	private QnaReplyDao qnaReplyDao;
 	
 	@Override
 	public List<QnaVo> listAll(PagingDto pagingDto) throws Exception {
@@ -42,6 +45,17 @@ public class QnaServiceImpl implements QnaService {
 	public void answer(QnaVo vo) throws Exception {
 		qnaDao.answer(vo);
 		qnaDao.updateSuccess(vo);
+	}
+
+	@Override
+	public void update(QnaVo vo) throws Exception {
+		qnaDao.update(vo);
+	}
+
+	@Override
+	public void delete(int qna_ref) throws Exception {
+		qnaReplyDao.deleteNum(qna_ref);
+		qnaDao.delete(qna_ref);
 	}
 
 

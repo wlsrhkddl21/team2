@@ -85,6 +85,8 @@ $(document).ready(function() {
 				<input type="text" id="faq_title" 
 						name="faq_title" value="${faqVo.faq_title}" style="border:none" 
 						readonly/></td>
+				<th></th>
+				<td></td>
 			</tr>
 			<tr>
 				<th scope="row">작성자</th>

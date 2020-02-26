@@ -17,4 +17,8 @@ public interface QnaService {
 	public void create(QnaVo vo) throws Exception;
 	// 답변등록
 	public void answer(QnaVo vo) throws Exception;
+	// 글 수정
+	public void update(QnaVo vo) throws Exception;
+	// 글 삭제
+	public void delete(int qna_ref) throws Exception;
 }

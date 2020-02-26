@@ -70,21 +70,21 @@ public class QnaController {
 		model.addAttribute("qnaVo", qnaVo);
 		return "board/qnaRead";
 	}
-//	
-//	// 글수정
-//	@RequestMapping(value="/qnaUpdate", method = RequestMethod.POST)
-//	public String update(BoardVo boardVo, 
-//			@ModelAttribute PagingDto pagingDto) throws Exception {
-//		boardService.update(boardVo);
-//		return "redirect:/board/ntRead?not_num=" + boardVo.getNot_num() + "&page=" 
-//				+ pagingDto.getPage() + "&perPage=" + pagingDto.getPerPage();
-//	}
-//	
-//	// 글삭제
-//	@RequestMapping(value="/qnaDelete", method = RequestMethod.GET)
-//	public String delete(@RequestParam("not_num") int not_num) throws Exception {
-//		boardService.delete(not_num);
-//		return "redirect:/board/notice";
-//	}
+	
+	// 글수정
+	@RequestMapping(value="/qnaUpdate", method = RequestMethod.POST)
+	public String update(QnaVo qnaVo, 
+			@ModelAttribute PagingDto pagingDto) throws Exception {
+		qnaService.update(qnaVo);
+		return "redirect:/board/qnaRead?qna_num=" + qnaVo.getQna_num() + "&page=" 
+				+ pagingDto.getPage() + "&perPage=" + pagingDto.getPerPage();
+	}
+	
+	// 글삭제
+	@RequestMapping(value="/qnaDelete", method = RequestMethod.GET)
+	public String delete(@RequestParam("qna_ref") int qna_ref) throws Exception {
+		qnaService.delete(qna_ref);
+		return "redirect:/board/qna";
+	}
 	
 }

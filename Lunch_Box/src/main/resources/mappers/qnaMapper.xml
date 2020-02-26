@@ -9,7 +9,7 @@
 		select * 
 			from (select rownum rnum, a.* 
         	  from (select * 
-        	  		from tbl_qna order by qna_ref desc, qna_restep desc
+        	  		from tbl_qna order by qna_ref desc, qna_restep asc
                    ) a
              )
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
@@ -45,6 +45,18 @@
 		where qna_num = #{qna_ref}
 	</update>
 	
+	<update id="update">
+		update tbl_qna set
+			qna_title = #{qna_title},
+			qna_content = #{qna_content},
+			qna_writer = #{qna_writer}
+		where qna_num = #{qna_num}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_qna
+		where qna_ref = #{qna_ref}
+	</delete>
 </mapper>  
 
 

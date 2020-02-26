@@ -5,6 +5,7 @@ import java.util.List;
 
 
 
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -13,12 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.team2.domain.BoardVo;
 import com.kh.team2.domain.PagingDto;
 import com.kh.team2.persistence.BoardDao;
+import com.kh.team2.persistence.ntReplyDao;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 	
 	@Inject
 	private BoardDao boardDao;
+	@Inject
+	private ntReplyDao ntreplyDao;
 
 	@Override
 	public List<BoardVo> listAll(PagingDto pagingDto) throws Exception {
@@ -42,9 +46,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(int not_num) throws Exception {
+		ntreplyDao.deleteNum(not_num);
 		boardDao.delete(not_num);
-		
 	}
 
 	@Override
