@@ -119,17 +119,17 @@
 					<form id="joinForm" action="/lb/joinPost" method="post">
 							<div class="form-group">
 							<input id="mem_name" class="form-control" type="text"
-								name="mem_name" placeholder="이름"  required/>
+								name="mem_name" placeholder="이름"  required=""/>
 						</div>
 							<div class="form-group">
 							<p><input id="mem_id" class="form-control" type="text" placeholder="이메일(아이디)" 
-								name="mem_id" style="width: 86%; display: initial;"/>
+								name="mem_id" style="width: 86%; display: initial;" required=""/>
 								<span class="box_btn"><button id="btnCheck" class="btn btn-outline-dark">중복체크</button></span></p>
 						</div>
 						
 							<div class="form-group">
 							<input id="mem_pass" class="form-control" type="password"
-								name="mem_pass" placeholder="비밀번호"  required/>
+								name="mem_pass" placeholder="비밀번호"  required=""/>
 						</div>
 							<div class="form-group">
 							<input id="mem_pass2" class="form-control" type="password"
@@ -139,15 +139,15 @@
 
 						<div class="form-group">
 							<input id="mem_address" class="form-control" type="text"
-								name="mem_address" placeholder="주소"  required/>
+								name="mem_address" placeholder="주소"  required=""/>
 						</div>
 						<div class="form-group">
 							<input id="detailAddress" class="form-control" type="text"
-								name="detailAddress" placeholder="상세주소"  required/>
+								name="detailAddress" placeholder="상세주소"  required=""/>
 						</div>
 						<div class="form-group">
 							<input id="mem_tel" class="form-control" type="text"
-								name="mem_tel" placeholder="전화번호"  required/>
+								name="mem_tel" placeholder="전화번호"  required=""/>
 						</div>
 						<div class="input-group1 text-right">
 							<button  type="submit" id="btnSubmit">가입하기</button>
