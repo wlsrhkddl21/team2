@@ -174,7 +174,7 @@
 <%-- 													value="${total_pdt_price+price}" /> --%>
 <%-- 												<c:set var="total_point" value="${total_point+point}" /> --%>
 												<td scope="col"><img
-													src="../images/test1.jpg"
+													src="../images/my.PNG"
 													style="height: 100px; width: 100px;" /></td>
 												<td scope="col">${vo.buy_name}</td>
 												<td scope="col"><fmt:formatNumber

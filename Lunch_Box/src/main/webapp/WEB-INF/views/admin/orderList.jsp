@@ -9,7 +9,8 @@ th {
 </style>
 <script>
 	$(document).ready(function() {
-		$(".proView").click(function() {
+		$(".proView").click(function(e) {
+			e.preventDefault();
 			var buy_num = $(this).attr("data-buy_num");
 			$(".detailView").each(function(){
 				var detail_num = $(this).attr("data-buy_detail");
@@ -45,7 +46,7 @@ th {
 									<tr>
 										<th>구매일</th>
 										<th>배송지</th>
-										<th>전화번호</th>
+										<th>아이디</th>
 										<th>상품</th>
 										<th>금액</th>
 									</tr>
@@ -57,7 +58,7 @@ th {
 										<tr>
 											<td>${buyJoinDto.buy_date }</td>
 											<td>${buyJoinDto.buy_address }</td>
-											<td>${buyJoinDto.buy_tel }</td>
+											<td>${buyJoinDto.mem_id }</td>
 											<c:forEach items="${proList }" var="productVo">
 												<c:if test="${buyJoinDto.pdt_num==productVo.pdt_num }">
 													<td><a href="#" class="proView"

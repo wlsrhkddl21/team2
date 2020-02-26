@@ -28,4 +28,13 @@
 		where mem_id = #{mem_id}
 	</select>
 	
+	<update id="memUpdate">
+		update tbl_member set
+		mem_pass=#{mem_pass},
+		mem_address=#{mem_address},
+		mem_tel=#{mem_tel}
+		where mem_id = #{mem_id}
+		
+	</update>
+	
 </mapper>  

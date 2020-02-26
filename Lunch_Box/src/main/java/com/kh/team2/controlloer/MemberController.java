@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team2.domain.LogingDto;
 import com.kh.team2.domain.MemberVo;
@@ -35,16 +36,12 @@ public class MemberController {
 	
 	@RequestMapping(value = "/joinGet", method = RequestMethod.GET)
 	public String join(MemberVo memberVo) throws Exception{
-		System.out.println("joinGet");
 		
 		return "member/join";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/joinCheck", method = RequestMethod.POST)
 	public String check(HttpServletRequest request, MemberVo memberVo, Model model) throws Exception{
-		System.out.println(request.getParameter("mem_pass"));
-		System.out.println(request.getParameter("mem_pass2"));
-		System.out.println(request.getParameter("isCheck"));
 		String mem_pass = request.getParameter("mem_pass");
 		String mem_pass2 = request.getParameter("mem_pass2");
 		String isCheck = request.getParameter("isCheck");
@@ -60,23 +57,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/joinPost", method = RequestMethod.POST)
-	public String insertMember(MemberVo memberVo) throws Exception {
+	public String insertMember(MemberVo memberVo, HttpServletRequest request) throws Exception {
+		String detailAddress = request.getParameter("detailAddress");
+		String mem_address = memberVo.getMem_address();
+		System.out.println(mem_address);
+		System.out.println(detailAddress);
+		String sumAddress = mem_address+" "+detailAddress;
+		memberVo.setMem_address(sumAddress);
 		service.insertMember(memberVo);
 		return "member/login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, LogingDto logingDto, Model model) {
-//		System.out.println("loginGet");
 		
 		return "member/login";
 	}
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public String loginPost(HttpServletRequest request, LogingDto logingDto, Model model, MemberVo memberVo) throws Exception {
-//		System.out.println("loginGet");
-		System.out.println("logingDto:" + logingDto);
 		memberVo = service.login(logingDto);
-//		MemberVo memberVo2 = service.readWithPw(logingDto.getMem_id(), logingDto.getMem_pass());
 		HttpSession session = request.getSession();
 		String go = "";
 		if (memberVo != null) {
@@ -105,9 +104,8 @@ public class MemberController {
 	public Map<String, Object> idCheck(HttpServletRequest request, Model model) throws Exception {
 		String mem_id = request.getParameter("mem_id");
 		String isCheck = request.getParameter("isCheck");
-		String msg = "중복체크 해줭";
+		String msg = "이메일을 입력해주세요";
 		int chk = service.idCheck(mem_id);
-		System.out.println(chk);
 		if (!mem_id.equals("")) {
 			if (chk == 0) {
 				isCheck = "true";
@@ -121,7 +119,12 @@ public class MemberController {
 		map.put("isCheck", isCheck);
 		return map;
 	}
-
+	
+	@RequestMapping(value="/memUpdate",method=RequestMethod.POST)
+	public String memUpdate(MemberVo memberVo) throws Exception{
+		System.out.println(memberVo);
+		return null;
+	}
 					
 	
 }

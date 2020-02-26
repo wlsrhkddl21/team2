@@ -4,9 +4,7 @@
 <%@ include file="../include/header.jsp"%>
 
 <style>
-#idCheck {
-	height: 44px;
-}
+
 .btn_box {
 	display: inline-block;
 	overflow: hidden;
@@ -18,15 +16,25 @@
 	font-weight: 400;
 	cursor:pointer;
 }
-.black {
-	border: 1px solid #333;
-	color: #fff;
-	background: #333;
-}
-.middle {
-	height: 30px;
-	line-height: 30px;
-}
+/* .black { */
+/* 	border: 1px solid #333; */
+/* 	color: #fff; */
+/* 	background: #333; */
+/* } */
+/* .middle { */
+/* 	height: 30px; */
+/* 	line-height: 30px; */
+/* } */
+ #btnCheck { 
+ 	    position: absolute;
+ 	    height: 44px; 
+/*     right: 0; */
+/*     top: 0; */
+/*     height: 34px; */
+/*     padding: 0 13px; */
+/*     font-weight: bold; */
+/*     line-height: 35px; */
+ } 
 </style>
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -58,7 +66,6 @@
 						alert(rData.msg);
 						if (rData.isCheck == "true") {
 							isCheck = true;
-							console.log(isCheck);
 						}
 					}
 			});
@@ -82,7 +89,6 @@
 					"isCheck" : isCheck
 				},
 				success : function(data) {
-					console.log(data);
 					if (data == "success") {
 						alert("회원가입성공");
 						$("#joinForm").submit();
@@ -113,48 +119,46 @@
 					<form id="joinForm" action="/lb/joinPost" method="post">
 							<div class="form-group">
 							<input id="mem_name" class="form-control" type="text"
-								name="mem_name" placeholder="Name"  required/>
+								name="mem_name" placeholder="이름"  required=""/>
 						</div>
 							<div class="form-group">
-							<p><input id="mem_id" class="form-control" type="text" placeholder="Email" 
-								name="mem_id" style="width: 86%; display: initial;"/>
-								<span class="box_btn"><a id="btnCheck" class="middle black" href="#">중복체크</a></span></p>
+							<p><input id="mem_id" class="form-control" type="text" placeholder="이메일(아이디)" 
+								name="mem_id" style="width: 86%; display: initial;" required=""/>
+								<span class="box_btn"><button id="btnCheck" class="btn btn-outline-dark">중복체크</button></span></p>
 						</div>
 						
 							<div class="form-group">
 							<input id="mem_pass" class="form-control" type="password"
-								name="mem_pass" placeholder="Password"  required/>
+								name="mem_pass" placeholder="비밀번호"  required=""/>
 						</div>
 							<div class="form-group">
 							<input id="mem_pass2" class="form-control" type="password"
-								name="mem_pass2" placeholder="Password Check"  required/>
+								name="mem_pass2" placeholder="비밀번호 확인"  required/>
 						</div>
 						
 
 						<div class="form-group">
 							<input id="mem_address" class="form-control" type="text"
-								name="mem_address" placeholder="Address"  required/>
+								name="mem_address" placeholder="주소"  required=""/>
 						</div>
 						<div class="form-group">
-							<input id="mem_address" class="form-control" type="text"
-								name="mem_address" placeholder="Detailed Address"  required/>
+							<input id="detailAddress" class="form-control" type="text"
+								name="detailAddress" placeholder="상세주소"  required=""/>
 						</div>
 						<div class="form-group">
 							<input id="mem_tel" class="form-control" type="text"
-								name="mem_tel" placeholder="Phone Number"  required/>
+								name="mem_tel" placeholder="전화번호"  required=""/>
 						</div>
 						<div class="input-group1 text-right">
-							<button  type="submit" id="btnSubmit">Submit</button>
+							<button  type="submit" id="btnSubmit">가입하기</button>
 						</div>
 					</form>
 				</div>
 			</div>
 			<div class="col-lg-2 map"></div>
-			<!-- //contact form -->
 		</div>
 	</div>
 </section>
-<!-- //contact -->
 
 
 
