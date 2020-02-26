@@ -32,10 +32,10 @@ $(document).ready(function(){
 		$("input[name=not_num]").remove();
 		$("#frmPage").submit();
 	});
-	$(".not_title").click(function(e){
+	$(".faq_title").click(function(e){
 		e.preventDefault();
-		var not_num = $(this).attr("data-bno");
-		$("input[name=not_num]").val(not_num);
+		var faq_num = $(this).attr("data-bno");
+		$("input[name=faq_num]").val(faq_num);
 		$("#frmRead").attr("action", "/board/faqRead");
 		$("#frmRead").submit();
 	});

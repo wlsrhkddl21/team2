@@ -12,6 +12,9 @@
 <script>
 $(document).ready(function() {
 	
+	var mem_id = "${sessionScope.mem_id}";
+	console.log(mem_id);
+	
 	
 	$("#allCheck").click(function() {
 		if ($("#allCheck").prop("checked")) {
@@ -99,27 +102,40 @@ $(document).ready(function() {
 	
 	// all buy
 	$(".allBuy").click(function(e) {
-// 		e.preventDefault();
-		$(".chk").each(function() {
-			var isThis = $(this);
-			getHidden(isThis);
-		});
-		$("#cartForm").submit();
+		if(mem_id == ""){
+			return;
+		}else{
+//	 		e.preventDefault();
+			$(".chk").each(function() {
+				var isThis = $(this);
+				getHidden(isThis);
+			});
+			$("#cartForm").submit();
+		}
+
 	});
 	
 	// check buy
 	$(".checkBuy").click(function() {
-		$(".chk:checked").each(function() {
-			var isThis = $(this);
-			getHidden(isThis);
-		});
-		$("#cartForm").submit();
+		if(mem_id == ""){
+			return;
+		}else{
+			$(".chk:checked").each(function() {
+				var isThis = $(this);
+				getHidden(isThis);
+			});
+			$("#cartForm").submit();
+		}
 	});
 	// select buy
 	$(".oneBuy").click(function() {
-		var isThis = $(this);
-		getHidden(isThis);
-		$("#cartForm").submit();
+		if(mem_id == ""){
+			return;
+		}else{
+			var isThis = $(this);
+			getHidden(isThis);
+			$("#cartForm").submit();
+		}
 	});
 	
 	// pdt_view_list

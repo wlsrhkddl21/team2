@@ -21,7 +21,6 @@
 		<!-- /최근목록 보기 -->
 			<div class="row no-gutters">
 				<c:forEach items="${list }" var="productVo">
-					<c:if test="${productVo.pdt_date == 1}">
 						<div class="col-md-4">
 							<a href="/shop/detail/${productVo.pdt_num }"> <img src="/admin/displayFile?fileName=${productVo.pdt_image}" alt="상품이미지"
 								class="img-fluid" style="height: 380px; width: 380px;" />
@@ -37,7 +36,6 @@
 							</div>
 								<div style="height: 20px;"></div>
 						</div>
-					</c:if>
 				</c:forEach>
 			</div>
 		</div>
@@ -45,35 +43,6 @@
 		</div>
 		<!-- 페이지 -->
 		<div style="height: 50px"></div>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
-					<div class="row">
-						<div class="col-md-2"></div>
-						<div class="col-md-8">
-							<nav>
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#">1</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">2</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">3</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">4</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">5</a>
-									</li>
-								</ul>
-							</nav>
-							<div style="height: 50px"></div>
-						</div>
-						<div class="col-md-2"></div>
-					</div>
-				</div>
-				<div class="col-md-4"></div>
-			</div>
-		</div>
 	</div>
 </div>
 

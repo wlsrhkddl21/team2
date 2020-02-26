@@ -11,8 +11,8 @@
 	</update>
 	
 	<insert id="insertPoint">
-		insert into tbl_point(point_num,mem_id,point,buy_num)
-		values(seq_point.nextval,#{mem_id},#{point},#{buy_num})
+		insert into tbl_point(point_num,mem_id,point,buy_num,point_type)
+		values(seq_point.nextval,#{mem_id},#{point},#{buy_num},#{point_type})
 	</insert>
 	
 	<select id="pointList" resultType="PointVo">

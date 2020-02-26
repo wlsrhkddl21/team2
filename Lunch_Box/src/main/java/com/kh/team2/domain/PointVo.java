@@ -6,6 +6,15 @@ public class PointVo {
 	private int buy_num;
 	private int point;
 	private String point_date;
+	private String point_type;
+
+	public String getPoint_type() {
+		return point_type;
+	}
+
+	public void setPoint_type(String point_type) {
+		this.point_type = point_type;
+	}
 
 	public String getPoint_date() {
 		return point_date;
@@ -50,7 +59,8 @@ public class PointVo {
 	@Override
 	public String toString() {
 		return "PointVo [point_num=" + point_num + ", mem_id=" + mem_id + ", buy_num=" + buy_num + ", point=" + point
-				+ ", point_date=" + point_date + "]";
+				+ ", point_date=" + point_date + ", point_type=" + point_type + "]";
 	}
+
 
 }
