@@ -28,27 +28,11 @@ $(document).ready(function(){
 		$("input[name=page]").val(page);
 		$("#frmPage").submit();
 	});
-// 	$("#btnRegister").click(function() {
-// 		console.log("클릭됨");
-// 		$("#frmPage").attr("action", "/review/ntRegister");
-// // 		$("input[name=not_num]").remove();
-// 		$("#frmPage").submit();
-// 		location.href = "/review/reviewRegister";
-// 	});
-// 	$(".readTitle").click(function(e){
-// 		e.preventDefault();
-// 		console.log("타이틀 클릭됨");
-// 		var rev_num = $(this).attr("data-rno");
-// 		$("input[name=rev_num]").val(rev_num);
-// 		$("#frmRead").attr("action", "/review/reviewContent");
-// 		$("#frmRead").submit();
-// 	});
 	$("#btnRegister").click(function(){
 		location.href = "/review/reviewRegister";
 	});
 	$(".readTitle").click(function(e){
 		e.preventDefault();
-		console.log("제목클릭됨");
 		var rev_num = $(this).attr("data-rno");
 		$("input[name=rev_num]").val(rev_num);
 		$("#frmRead").attr("action", "/review/reviewContent");
@@ -59,12 +43,10 @@ $(document).ready(function(){
 		$(".revImage").each(
 				function() {
 					var fileName = $(this).attr("data-img");
-//						console.log("fileName:" + fileName);
 					var slice = fileName.lastIndexOf("/")
 					var path = fileName.substring(0, slice + 1);
 					var real = fileName.substring(slice + 1);
 					var thumbnail = path + "s_" + real;
-//						console.log(thumbnail);
 					$(this).attr(
 							"src",
 							"/review/displayFile?fileName="
@@ -72,10 +54,7 @@ $(document).ready(function(){
 				});
 	}
 	image();
-// 	$("#pdtContent").click(function(){
-// 		console.log("클릭됨");
-// 		location.href = "/shop/detail";
-// 	});
+
 });
 </script>
 <div class="container-fluid">
@@ -104,9 +83,9 @@ $(document).ready(function(){
 		<br>
 		<div style="height: 20px"></div>
 		<h3 class="title-w3ls text-center text-bl mb-5">리뷰 게시판</h3>
-<%-- 		<c:if test="${mem_id}"> --%>
+		<c:if test="${mem_id != null}">
 		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
-<%-- 		</c:if> --%>
+		</c:if>
 		<form action = "/review/reviewBoard" method="post">
 		<div style="height: 20px"></div>
 		<table class="table text-center">
@@ -180,8 +159,6 @@ $(document).ready(function(){
 		</div>
 	</div>
 	</div>
-	<!-- pagination -->
 	<!-- 페이지 -->
 		
-	<!-- // pagination -->
 <%@ include file="../include/footer.jsp" %>

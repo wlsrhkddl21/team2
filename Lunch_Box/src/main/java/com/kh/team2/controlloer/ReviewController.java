@@ -46,11 +46,9 @@ public class ReviewController {
 	// 리뷰게시판
 	@RequestMapping(value ="/reviewBoard",method = RequestMethod.GET)
 	public String list(Model model, PagingDto pagingDto) throws Exception {
-		System.out.println(pagingDto);
 		List<ReviewVo> list = reviewService.listAll(pagingDto);
 		List<ProductVo> productList = adminService.readAllPDT();
 		int totalCount = reviewService.listCount(pagingDto);
-//		ReviewVo reviewVo = new ReviewVo();
 		
 		pagingDto.setTotalCount(totalCount);
 		model.addAttribute("list", list);
@@ -63,9 +61,7 @@ public class ReviewController {
 	@RequestMapping(value ="/reviewRegister",method = RequestMethod.GET)
 	public String reviewRegister(Model model) throws Exception {
 		
-		System.out.println("글쓰기들어옴");
 		List<ProductVo> list = reviewService.productName();
-		System.out.println(list);
 		model.addAttribute("list", list);
 		return "/review/reviewRegister";
 	}
@@ -73,15 +69,12 @@ public class ReviewController {
 	// 글등록
 	@RequestMapping(value = "/reviewInsert", method = RequestMethod.POST)
 	public String insertReview(ReviewVo reviewVo, MultipartHttpServletRequest request) throws Exception { 
-		System.out.println(reviewVo);
-//		reviewService.insertReview(reviewVo);
 		MultipartFile file = request.getFile("file");
 		String originalFileName = file.getOriginalFilename();
 		System.out.println("file:" + originalFileName);
 		String revPath = ReviewFileUploadUtil.uploadFile(uploadPath+"/review", originalFileName, file.getBytes(), true);
 		String revMainPath = revPath.replace("\\", "/");
 		reviewVo.setRev_image(revMainPath);
-//		System.out.println("글쓰고 리뷰게시판옴");
 		reviewService.insertReview(reviewVo);
 		return "redirect:/review/reviewBoard";
 	}
@@ -94,7 +87,6 @@ public class ReviewController {
 		ReviewVo vo = reviewService.readReview(rev_num);
 		model.addAttribute("list", list);
 		model.addAttribute("reviewVo", vo);
-		System.out.println(vo);
 		return "/review/reviewContent";
 	}
 	

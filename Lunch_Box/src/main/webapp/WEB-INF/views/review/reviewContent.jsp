@@ -173,13 +173,10 @@ $(document).ready(function() {
 	function image() {
 		console.log("실행됨");
 		$(".revImage").each( function() {
-					var fileName = $(this).attr("data-img");
-//						console.log("fileName:" + fileName);
-//						console.log(thumbnail);
-					$(this).attr(
-							"src",
-							"/review/displayFile?fileName="
-									+ fileName);
+			var fileName = $(this).attr("data-img");
+//			console.log("fileName:" + fileName);
+//			console.log(thumbnail);
+			$(this).attr("src", "/review/displayFile?fileName="+ fileName);
 		});
 	};
 	image();

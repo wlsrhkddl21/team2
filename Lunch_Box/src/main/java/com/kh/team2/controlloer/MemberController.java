@@ -36,16 +36,12 @@ public class MemberController {
 	
 	@RequestMapping(value = "/joinGet", method = RequestMethod.GET)
 	public String join(MemberVo memberVo) throws Exception{
-		System.out.println("joinGet");
 		
 		return "member/join";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/joinCheck", method = RequestMethod.POST)
 	public String check(HttpServletRequest request, MemberVo memberVo, Model model) throws Exception{
-		System.out.println(request.getParameter("mem_pass"));
-		System.out.println(request.getParameter("mem_pass2"));
-		System.out.println(request.getParameter("isCheck"));
 		String mem_pass = request.getParameter("mem_pass");
 		String mem_pass2 = request.getParameter("mem_pass2");
 		String isCheck = request.getParameter("isCheck");
@@ -61,23 +57,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/joinPost", method = RequestMethod.POST)
-	public String insertMember(MemberVo memberVo) throws Exception {
+	public String insertMember(MemberVo memberVo, HttpServletRequest request) throws Exception {
+		String detailAddress = request.getParameter("detailAddress");
+		String mem_address = memberVo.getMem_address();
+		System.out.println(mem_address);
+		System.out.println(detailAddress);
+		String sumAddress = mem_address+" "+detailAddress;
+		memberVo.setMem_address(sumAddress);
 		service.insertMember(memberVo);
 		return "member/login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, LogingDto logingDto, Model model) {
-//		System.out.println("loginGet");
 		
 		return "member/login";
 	}
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public String loginPost(HttpServletRequest request, LogingDto logingDto, Model model, MemberVo memberVo) throws Exception {
-//		System.out.println("loginGet");
-		System.out.println("logingDto:" + logingDto);
 		memberVo = service.login(logingDto);
-//		MemberVo memberVo2 = service.readWithPw(logingDto.getMem_id(), logingDto.getMem_pass());
 		HttpSession session = request.getSession();
 		String go = "";
 		if (memberVo != null) {
@@ -108,7 +106,6 @@ public class MemberController {
 		String isCheck = request.getParameter("isCheck");
 		String msg = "이메일을 입력해주세요";
 		int chk = service.idCheck(mem_id);
-		System.out.println(chk);
 		if (!mem_id.equals("")) {
 			if (chk == 0) {
 				isCheck = "true";
