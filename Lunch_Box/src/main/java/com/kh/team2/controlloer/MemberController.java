@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team2.domain.LogingDto;
 import com.kh.team2.domain.MemberVo;
@@ -105,7 +106,7 @@ public class MemberController {
 	public Map<String, Object> idCheck(HttpServletRequest request, Model model) throws Exception {
 		String mem_id = request.getParameter("mem_id");
 		String isCheck = request.getParameter("isCheck");
-		String msg = "중복체크 해줭";
+		String msg = "이메일을 입력해주세요";
 		int chk = service.idCheck(mem_id);
 		System.out.println(chk);
 		if (!mem_id.equals("")) {

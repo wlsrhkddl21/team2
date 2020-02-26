@@ -18,15 +18,24 @@
 	font-weight: 400;
 	cursor:pointer;
 }
-.black {
-	border: 1px solid #333;
-	color: #fff;
-	background: #333;
-}
-.middle {
-	height: 30px;
-	line-height: 30px;
-}
+/* .black { */
+/* 	border: 1px solid #333; */
+/* 	color: #fff; */
+/* 	background: #333; */
+/* } */
+/* .middle { */
+/* 	height: 30px; */
+/* 	line-height: 30px; */
+/* } */
+ #btnCheck { 
+ 	    position: absolute; 
+/*     right: 0; */
+/*     top: 0; */
+/*     height: 34px; */
+/*     padding: 0 13px; */
+/*     font-weight: bold; */
+/*     line-height: 35px; */
+ } 
 </style>
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -118,7 +127,7 @@
 							<div class="form-group">
 							<p><input id="mem_id" class="form-control" type="text" placeholder="Email" 
 								name="mem_id" style="width: 86%; display: initial;"/>
-								<span class="box_btn"><a id="btnCheck" class="middle black" href="#">중복체크</a></span></p>
+								<span class="box_btn"><button id="btnCheck" class="btn btn-outline-dark">중복체크</button></span></p>
 						</div>
 						
 							<div class="form-group">

@@ -69,8 +69,10 @@ $(document).ready(function() {
 			"data" : JSON.stringify(sendData),
 			"success" : function(rData) {
 				console.log(rData);
-				replyList();
+				replyList();	
+				$("#repContent").val("");
 			}
+			
 		});
 	});
 	
@@ -89,11 +91,11 @@ $(document).ready(function() {
 				strHtml += "<td>" + this.rep_writer + "</td>";
 				strHtml += "<td>" + dateString(this.rep_date) + "</td>";
 				if("${mem_id}" == this.rep_writer) {
-					strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
+					strHtml += "<td><button type='button' class='btn-xs btn btn-outline-dark btnReplyUpdate'";
 					strHtml += " data-rno='" + this.rep_num + "'";
 					strHtml += " data-reply_text='" + this.rep_content + "'";
 					strHtml += " data-replyer='" + this.rep_writer + "'>수정</button></td>";
-					strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
+					strHtml += "<td><button type='button' class='btn-xs btn btn-outline-danger btnReplyDelete'";
 					strHtml += " data-rno='" + this.rep_num + "'";
 					strHtml += " data-bno='" + this.rep_bno + "'>삭제</button></td>";	
 				}
@@ -304,10 +306,10 @@ $(document).ready(function() {
 				<div style="clear:both;">
 				<c:if test="${ mem_id == 'admin' || mem_id == reviewVo.rev_writer }">
 					
-					<button type="button" class="btn btn-danger"
+					<button type="button" class="btn btn-outline-danger"
 						id="btnDelete">삭제</button>				
 				</c:if>
-					<button type="button" class="btn btn-primary"
+					<button type="button" class="btn btn-outline-dark"
 						id="btnListAll">목록</button>
 				</div>
 			<!-- 댓글 작성 -->
@@ -325,7 +327,7 @@ $(document).ready(function() {
 					class="form-control"/>
 			</div>
 			<div class="form-group">
-				<button type="button" class="btn-xs btn-success"
+				<button type="button" class="btn btn-outline-dark"
 					id="btn_reply">작성완료</button>
 			</div>
 		</div>

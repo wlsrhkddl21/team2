@@ -80,14 +80,14 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid">
 
-<!-- 	<form id="frmPage" action="/review/reviewBoard" method="get"> -->
-<!-- 		<input type="hidden" name="rev_num"/> -->
-<!-- 		<input type="hidden" name="rev_pdt_name"/> -->
-<!-- 		<input type="hidden" name="page"  -->
-<%-- 			value="${pagingDto.page }"/> --%>
-<!-- 		<input type="hidden" name="perPage" -->
-<%-- 			value="${pagingDto.perPage }"/> --%>
-<!-- 	</form> -->
+	<form id="frmPage" action="/review/reviewBoard" method="get">
+		<input type="hidden" name="rev_num"/>
+		<input type="hidden" name="rev_pdt_name"/>
+		<input type="hidden" name="page" 
+			value="${pagingDto.page }"/>
+		<input type="hidden" name="perPage"
+			value="${pagingDto.perPage }"/>
+	</form>
 	<form id="frmRead" action="/review/reviewContent" method="get">
 		<input type="hidden" name="rev_num"/> 
 		<input type="hidden" name="rev_pdt_name"/>
