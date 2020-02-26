@@ -28,8 +28,8 @@ public class BuyMyImpl implements BuyMyDao {
 	}
 
 	@Override
-	public List<BuyMyVo> selectBuyMy() {
-		return sqlSession.selectList(NAMESPACE+".selectBuyMy");
+	public List<BuyMyVo> selectBuyMyByMemId(String mem_id) {
+		return sqlSession.selectList(NAMESPACE+".selectBuyMyByMemId",mem_id);
 	}
 
 }

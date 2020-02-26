@@ -15,4 +15,5 @@ public interface BuyService {
 	public void buyMy(BuyMyVo buyVo,PointDto pointDto) throws Exception ;
 	public List<BuyJoinDto> selectJoinByMemId(String mem_id) throws Exception;
 	public List<BuyJoinDto> selectReadAll()	throws Exception; 
+	public List<BuyMyVo> selectBuyMyByMemId(String mem_id) throws Exception;
 } 

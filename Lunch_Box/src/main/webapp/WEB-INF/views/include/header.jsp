@@ -117,7 +117,7 @@ $(document).ready(function(){
 			</c:when>
 			
 			<c:otherwise>
-				<a>${mem_name} 님 환영합니다</a><br>
+				<div style="text-align: right;">${mem_name} 님 환영합니다</div>
 				<a href="/lb/logout" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2" id="btnLogout">로그아웃</a>
 				<a href="/mp/" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">MyPage</a>
 				<a href="/cart/list"><img src="/images/cart.png" width="45px"/></a>

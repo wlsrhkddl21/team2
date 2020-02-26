@@ -28,4 +28,6 @@ public interface ReviewService {
 	
 	// 리뷰삭제
 	public void reviewDelete(int rev_num) throws Exception;
+	
+	public List<ReviewVo> readPdtNum(int rev_pdt_name) throws Exception;
 }

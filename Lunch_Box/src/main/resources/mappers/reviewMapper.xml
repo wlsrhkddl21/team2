@@ -48,6 +48,11 @@
 		delete from tbl_review
 		where rev_num = #{rev_num}
 	</delete>
+	
+	<select id="readPdtNum" resultType="ReviewVo">
+		select * from tbl_review
+		where rev_pdt_name = #{rev_pdt_name}
+	</select>
 </mapper>  
 
 

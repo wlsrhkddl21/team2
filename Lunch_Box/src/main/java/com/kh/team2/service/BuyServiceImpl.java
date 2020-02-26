@@ -139,4 +139,11 @@ public class BuyServiceImpl implements BuyService {
 		pointDao.insertPoint(savePointVo);
 	}
 
+	@Override
+	public List<BuyMyVo> selectBuyMyByMemId(String mem_id) throws Exception {
+		
+		return myDao.selectBuyMyByMemId(mem_id);
+	}
+
+
 }

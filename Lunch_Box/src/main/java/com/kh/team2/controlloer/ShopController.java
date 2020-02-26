@@ -22,6 +22,7 @@ import com.kh.team2.domain.MyLunchVo;
 import com.kh.team2.domain.PagingDto;
 import com.kh.team2.domain.PointDto;
 import com.kh.team2.domain.ProductVo;
+import com.kh.team2.domain.ReviewVo;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
 import com.kh.team2.service.CartService;
@@ -99,7 +100,7 @@ public class ShopController {
 
 	// 상품 상세보기
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
-	public String detail(@PathVariable("pdt_num") int pdt_num, Model model,HttpServletRequest request) throws Exception {
+	public String detail(@PathVariable("pdt_num") int pdt_num, Model model,HttpServletRequest request, PagingDto pagingDto) throws Exception {
 		System.out.println("detail Shop Controller"); 
 		//상품 디테일 정보 불러오기
 		ProductVo productVo = adminService.readPDT(pdt_num); 
@@ -142,8 +143,9 @@ public class ShopController {
 		// 최근목록 끝
 		
 		// 리뷰작성
-		
-		
+		List<ReviewVo> reviewList = reviewService.readPdtNum(pdt_num);
+		System.out.println(reviewList);
+		model.addAttribute("reviewList", reviewList);
 		// 리뷰작성 끝
 		
 		
