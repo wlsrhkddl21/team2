@@ -9,6 +9,9 @@
 	.margin_self{
 		margin-left: 1253px;
 	}
+	.readTitle{
+		cursor : pointer;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -59,6 +62,17 @@
 				$("#buy_form").submit();
 			}
 		});
+		// 리뷰 제목누르면 리뷰상세보기 이동
+		$(".readTitle").click(function(e){
+			e.preventDefault();
+			console.log("글제목클릭됨");
+			var rev_num = $(this).attr("data-rno");
+			console.log(rev_num);
+			$("input[name=rev_num]").val(rev_num);
+			$("#reviewForm").attr("action", "/review/reviewContent");
+			$("#reviewForm").submit();
+		});
+		// 리뷰상세보기 이동 끝
 		
 		// 리뷰 썸네일 이미지
 		function image() {
@@ -83,6 +97,11 @@
 	});
 </script>
 <div class="container-fluid" id="long" data-long="short">
+<!-- 리뷰게시판 -->
+<form id="reviewForm" action="/review/reviewContent" method="get">
+	<input type="hidden" name="rev_num"/>
+</form>
+<!-- 리뷰게시판 끝 -->
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
@@ -145,19 +164,20 @@
 			<!-- 리뷰게시판 -->
 			<div class="col-md-12 ">		
 				
-				<form action = "/review/reviewBoard" method="post">
+				<form action = "/review/reviewContent" method="get">
 		<div style="height: 20px"></div>
 		<table class="table text-center table-striped">
-<!-- 				<thead> -->
-<!-- 					<tr> -->
-<!-- 						<th>글번호</th>  -->
-<!-- 						<th>이미지</th>  -->
+				<thead>
+					<tr>
+						REVIEW
+						<th>글번호</th> 
+						<th>후기 이미지</th> 
 <!-- 						<th>상품명</th>  -->
-<!-- 						<th>글제목</th> -->
-<!-- 						<th>작성자</th> -->
-<!-- 						<th>작성일</th> -->
-<!-- 					</tr> -->
-<!-- 				</thead> -->
+						<th>글제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
 				<thead>
 					
 				<c:forEach items="${reviewList }" var="reviewVo">
@@ -167,14 +187,14 @@
 						<c:if test="${not empty reviewVo.rev_image}">
 							<td><img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}"></td>
 						</c:if>
-						<td>
-							<c:forEach items="${productList}" var="ProductVo">
-								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}">
-									${ProductVo.pdt_name}
-								</c:if>
-							</c:forEach>
-						</td>
-						<td><a data-rno="${reviewVo.rev_num}" class="readTitle" >${reviewVo.rev_title }</a></td>
+<!-- 						<td> -->
+<%-- 							<c:forEach items="${productList}" var="ProductVo"> --%>
+<%-- 								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}"> --%>
+<%-- 									${ProductVo.pdt_name} --%>
+<%-- 								</c:if> --%>
+<%-- 							</c:forEach> --%>
+<!-- 						</td> -->
+						<td><a data-rno="${reviewVo.rev_num}" class="readTitle" href="#">${reviewVo.rev_title }</a></td>
 						<td>${reviewVo.rev_writer }</td>
 						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
    								pattern="yyyy-MM-dd HH:mm:ss"/></td>   
