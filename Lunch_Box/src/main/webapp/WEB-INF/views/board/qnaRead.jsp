@@ -157,11 +157,11 @@ $(document).ready(function() {
 								id="modal_replyer" readonly/>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary"
+							<button type="button" class="btn btn-outline-dark"
 								id="btnModalReply">
 								수정완료
 							</button> 
-							<button type="button" class="btn btn-secondary" data-dismiss="modal"
+							<button type="button" class="btn btn-outline-danger" data-dismiss="modal"
 								id="btnModalClose">
 								닫기
 							</button>
@@ -253,29 +253,23 @@ $(document).ready(function() {
 			<hr>
 			
 			<div style="clear:both;">
-					<button type="submit" class="btn btn-success" id="btnSuccess"
+					<button type="submit" class="btn btn-outline-dark" id="btnSuccess"
 						style="display:none;">완료</button>
-					<button type="button" class="btn btn-warning" id="btnCancel"
+					<button type="button" class="btn btn-outline-danger" id="btnCancel"
 						style="display:none;">수정취소</button>
-					<button type="button" class="btn btn-warning" id="btnHot"
-						style="display:none;">중요공지등록</button>
-					<button type="button" class="btn btn-warning" id="btnHotSuccess"
-						style="display:none;">중요공지등록완료</button>
-					<button type="button" class="btn btn-warning" id="btnHotCancel"
-						style="display:none;">중요공지등록삭제</button>
 			</div>
 			</form>
 				<div style="clear:both;">
-				<c:if test="${mem_id == 'admin'}">
-					<button type="button" class="btn btn-warning"
-						id="btnModify">수정</button>
-					<button type="button" class="btn btn-danger"
-						id="btnDelete">삭제</button>				
-					<button type="button" class="btn btn-danger"
-						id="btnAnswer">답변하기</button>				
-				</c:if>
-					<button type="button" class="btn btn-primary"
+					<button type="button" class="btn btn-outline-dark"
 						id="btnListAll">목록</button>
+				<c:if test="${mem_id == 'admin'}">
+					<button type="button" class="btn btn-outline-dark"
+						id="btnAnswer">답변하기</button>				
+					<button type="button" class="btn btn-outline-dark"
+						id="btnModify">수정</button>
+					<button type="button" class="btn btn-outline-danger"
+						id="btnDelete">삭제</button>				
+				</c:if>
 				</div>
 			<!-- 댓글 작성 -->
 	<c:if test="${mem_id != null && mem_id != ''}">
@@ -286,13 +280,13 @@ $(document).ready(function() {
 				<input type="text" id="ntRcontent"
 					class="form-control"/>
 			</div>
-			<div class="form-group">
+			<div class="form-group" style="display:none;">
 				<label for="ntRwriter">작성자</label>
 				<input type="text" id="ntRwriter" value="${mem_id }"
 					class="form-control" readonly/>
 			</div>
 			<div class="form-group">
-				<button type="button" class="btn-xs btn-success"
+				<button type="button" class="btn btn-outline-dark"
 					id="btn_ntReply">작성완료</button>
 			</div>
 		</div>
