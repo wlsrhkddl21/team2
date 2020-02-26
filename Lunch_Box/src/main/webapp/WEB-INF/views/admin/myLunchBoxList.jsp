@@ -17,14 +17,23 @@ th{
 $(document).ready(function(){
 	
 	
-	$(".form-control").each(function(){
+	$(".updateTxt").each(function(){
 		$(this).attr("readonly","readonly");
 		$(this).css("border", "none");
 		$(this).css("text-align","center");
 	});
 	
-	$(".checkbox").change(function(){
-		var el = $(this).parent().children().find(".form-control").attr("readonly" ,false);
+	$(".checkboxs").change(function(){
+		var that = $(this).is(":checked");
+		var checkBox = $(this).parent().parent().children().find(".updateTxt");
+		console.log(that);
+		if(that==true){
+		checkBox.attr("readonly" ,false);
+		checkBox.css("border", "1px solid");
+		}else{
+			checkBox.attr("readonly" ,true);
+			checkBox.css("border", "none");
+		}
 	});
 	
 	$("#insertMLB").click(function(){
@@ -62,7 +71,9 @@ $(document).ready(function(){
 						"lunch_num"  : lunch_num,
 				};
 				$.get("/myLunch/delete",sData,function(rData){
-					console.log("삭제됨");
+					if(rData=="success"){
+						alert("삭제되었습니다.");
+					}
 				});
 			});
 		}
@@ -98,7 +109,7 @@ $(document).ready(function(){
 				"dataType" : "text",
 				"data" : JSON.stringify(sData),
 				"success" : function(rData) {
-					console.log("업데이트됨");
+					alert("수정되었습니다.");
 				}
 			});		
 		});
@@ -106,11 +117,16 @@ $(document).ready(function(){
 	});
 	//수정취소클릭
 	$("#updateCancel").click(function(){
-		$(".update").hide();
-		$(".updateHide").show();	
+			
 		$(".checkbox :checked").each(function(){
+			var el = $(this).parent().parent().children().find(".form-control");
+			el.attr("readonly" ,true);
+			el.css("border", "none");
+			console.log($(this));
 			$(this).prop("checked",false);
 		});
+// 		$(".update").hide();
+// 		$(".updateHide").show();
 // 		console.log($(".checkbox :checked"));
 	});
 	
@@ -225,7 +241,7 @@ $(document).ready(function(){
 				<tbody>
 					<c:forEach items="${list }" var="myLunchVo">
 						<tr>
-							<td style="display:none;" class="update checkbox"><input type="checkbox"></td>
+							<td style="display:none;" class="update checkbox"><input type="checkbox" class="checkboxs"></td>
 							<td><span class="lunch_num">${myLunchVo.lunch_num }</span></td>
 							<td>
 								<span class="updateHide">${myLunchVo.lunch_type }</span>
@@ -237,9 +253,9 @@ $(document).ready(function(){
 									</select>
 								</span>
 							</td>
-							<td><input type="text" value="${myLunchVo.lunch_name }" class="form-control lunch_name"
+							<td><input type="text" value="${myLunchVo.lunch_name }" class="form-control lunch_name updateTxt"
 								name="lunch_name" /></td>
-							<td><input type="text" value="${myLunchVo.lunch_price }" class="form-control lunch_price"
+							<td><input type="text" value="${myLunchVo.lunch_price }" class="form-control lunch_price updateTxt"
 								name="lunch_price" /></td>
 						</tr>
 					</c:forEach>
