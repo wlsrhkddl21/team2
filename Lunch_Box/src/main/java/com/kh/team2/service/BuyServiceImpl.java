@@ -83,5 +83,12 @@ public class BuyServiceImpl implements BuyService {
 		
 		return buyDao.selectJoinByMemId(mem_id);
 	}
+
+
+	@Override
+	public List<BuyJoinDto> selectReadAll() throws Exception {
+		
+		return buyDao.selectReadAll();
+	}
 	
 }
