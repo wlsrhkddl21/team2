@@ -135,4 +135,10 @@ public class AdminController {
 		model.addAttribute("list",list);
 		return "/admin/orderList";
 	}
+	@RequestMapping(value="mlbList")
+	public String mlbList(Model model)throws Exception{
+		List<BuyJoinDto> list = buyService.selectReadAll();
+		model.addAttribute("list",list);
+		return "/admin/mlbList";
+	}
 }

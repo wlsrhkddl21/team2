@@ -27,6 +27,7 @@ $(document).ready(function(){
 							<span>
 							<select class="form-control" id="pdt_category" name="pdt_category">
 								<option value="한식">한식</option>
+								<option value="양식">양식</option>
 								<option value="중식">중식</option>
 								<option value="일식">일식</option>
 							</select>	
@@ -48,17 +49,17 @@ $(document).ready(function(){
 						type="text" class="form-control" id="pdt_price" name="pdt_price"/>
 				</div>
 				<div class="form-group">
-					<button type="button" class="btn btn-primary" id="btnFile">메인 사진 등록</button>
+					<button type="button" class="btn btn-outline-dark" id="btnFile">메인 사진 등록</button>
 					<input
 						type="file" class="form-control-file" id="pdt_image" name="file" style="display:none;"/>
 				</div>
 				<div class="form-group">
-					<button type="button" class="btn btn-primary" id="btnSubfile">서브 사진 등록</button>
+					<button type="button" class="btn btn-outline-dark" id="btnSubfile">서브 사진 등록</button>
 					<input
-						type="file" class="form-control-file" id="pdt_Subimage" name="subFile" style="display:none;"/>
+						type="file" class="form-control-file btn-outline-dark" id="pdt_Subimage" name="subFile" style="display:none;"/>
 				</div>
-				<button type="submit" class="btn btn-primary">등록</button>
-				<button type="button" id="btnList" class="btn btn-danger">목록</button>
+				<button type="submit" class="btn btn-outline-dark">등록</button>
+				<button type="button" id="btnList" class="btn btn-outline-dark">목록</button>
 			</form>
 			
 		</div>
