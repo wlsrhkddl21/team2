@@ -3,6 +3,7 @@
 <style>
 .list-a {
 	cursor: pointer;
+	color: #000;
 }
 
 .list-a:hover {
@@ -30,8 +31,10 @@ $(document).ready(function(){
 	if (path == "/mp/buyList") {
 		
 		$(".list-a").eq(0).css("background-color", "#e9e9e9");
-	} else if (path == "/mp/pointList") {
+	} else if (path == "mp/myBuyLisy") {
 		$(".list-a").eq(1).css("background-color", "#e9e9e9");
+	}else if(path== "/mp/pointList"){
+		$(".list-a").eq(2).css("background-color", "#e9e9e9");
 	}
 	 
 // 	$(".list-a").prev().click(function(e){
@@ -47,6 +50,7 @@ $(document).ready(function(){
 	<div class="list-group-item text-center"
 		style="background: #f99; font-size: 20px; color: white; font-weight: 600; height: 80px; padding-top: 25px;">
 		My page</div>
-	<span><a href="/mp/buyList" class="list-group-item list-a text-center">구매 목록</a></span>
-	<span><a href="/mp/pointList" class="list-group-item list-a text-center" >포인트 내역</a></span>
+	<a href="/mp/buyList" class="list-group-item list-a text-center">구매 목록</a>
+	<a href="/mp/buyMyList" class="list-group-item list-a text-center" >나만의 도시락 구매목록</a>
+	<a href="/mp/pointList" class="list-group-item list-a text-center" >포인트 내역</a>
 </div>
