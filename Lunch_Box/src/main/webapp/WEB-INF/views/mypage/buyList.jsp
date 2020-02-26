@@ -13,8 +13,9 @@ th{
 }
 </style>
 <script>
-	$(document).ready(function() {
-		$(".proView").click(function() {
+	$(document).ready(function(e) {
+		$(".proView").click(function(e) {
+			e.preventDefault();
 			var buy_num = $(this).attr("data-buy_num");
 			$(".detailView").each(function(){
 				var detail_num = $(this).attr("data-buy_detail");
@@ -79,7 +80,7 @@ th{
 														<c:if test="${buyView.pdt_num==productVo.pdt_num }">
 
 															<td><a href="/shop/detail/${buyView.pdt_num }"
-																class="proView">(${productVo.pdt_name })</a>
+																class="proView" style="font-size:13px">(${productVo.pdt_name })</a>
 															</td>
 															<td>${productVo.pdt_price }</td>
 														</c:if>

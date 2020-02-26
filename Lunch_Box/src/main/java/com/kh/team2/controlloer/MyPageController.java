@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,5 +101,25 @@ public class MyPageController {
 		
 		return "mypage/buyMyList";
 	}
+	@RequestMapping(value="/myInfo",method = RequestMethod.GET)
+	public String myInfo(HttpServletRequest request,Model model) throws Exception{
+		
+		HttpSession session = request.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
+		MemberVo memVo = memberService.readMember(mem_id);
+		model.addAttribute("memVo",memVo);
+		
+		return "mypage/myInfo";
+	}
 
+	@RequestMapping(value="/memUpdate",method=RequestMethod.POST)
+	public String memUpdate(HttpServletRequest request,MemberVo memberVo) throws Exception{
+		String mem_detailAddress = request.getParameter("mem_detailAddress");
+		String sumAddress = memberVo.getMem_address()+" "+mem_detailAddress;
+		memberVo.setMem_address(sumAddress);
+		System.out.println(memberVo);
+		return null;
+	}
+					
+	
 }

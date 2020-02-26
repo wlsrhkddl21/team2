@@ -119,7 +119,12 @@ public class MemberController {
 		map.put("isCheck", isCheck);
 		return map;
 	}
-
+	
+	@RequestMapping(value="/memUpdate",method=RequestMethod.POST)
+	public String memUpdate(MemberVo memberVo) throws Exception{
+		System.out.println(memberVo);
+		return null;
+	}
 					
 	
 }
