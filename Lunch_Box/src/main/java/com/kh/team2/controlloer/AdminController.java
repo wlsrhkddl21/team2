@@ -3,6 +3,7 @@ package com.kh.team2.controlloer;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -132,7 +133,19 @@ public class AdminController {
 	@RequestMapping(value="orderList")
 	public String orderList(Model model)throws Exception{
 		List<BuyJoinDto> list = buyService.selectReadAll();
-		model.addAttribute("list",list);
+		List<ProductVo> proList = service.readAllPDT();
+		List<BuyJoinDto> buyFirstlist = new ArrayList<BuyJoinDto>();
+		int buy_num =0;
+		for(BuyJoinDto buyJoinDto : list) {
+			if(buyJoinDto.getBuy_num()!=buy_num) {
+				buyFirstlist.add(buyJoinDto);
+				buy_num = buyJoinDto.getBuy_num();
+			}
+		}
+		
+		model.addAttribute("buyFirstlist",buyFirstlist);
+		model.addAttribute("proList",proList);
+		model.addAttribute("buyList",list);
 		return "/admin/orderList";
 	}
 	@RequestMapping(value="mlbList")
