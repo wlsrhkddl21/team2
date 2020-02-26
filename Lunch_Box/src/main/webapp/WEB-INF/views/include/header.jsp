@@ -78,18 +78,8 @@ $(document).ready(function(){
 					<label for="drop" class="toggle">Menu</label>
 					<input type="checkbox" id="drop" />
 					<ul class="menu mx-lg-auto">
-						<li>
-							<!-- First Tier Drop Down -->
-							<label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"
-									aria-hidden="true"></span>							</label>
-							<a href="#">도시락 판매 <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-							<input type="checkbox" id="drop-2" />
-							<ul>
-								<li><a href="/shop/single" class="drop-text">일반 도시락</a></li>
-								<li><a href="/shop/my" class="drop-text">나만의 도시락</a></li>
-							</ul>
-						</li>
-						<li><a href="/shop/sub">정기배송</a></li>
+						<li><a href="/shop/single">일반 도시락</a></li>
+						<li><a href="/shop/my">나만의 도시락</a></li>
 						<li><a href="/review/reviewBoard">리뷰 게시판</a></li>
 						<li>
 							<!-- First Tier Drop Down -->
