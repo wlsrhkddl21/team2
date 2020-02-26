@@ -16,6 +16,9 @@
 .readTitle {
 	cursor: pointer;
 }
+th {
+	background-color:#f7f7f7;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -106,9 +109,9 @@ $(document).ready(function(){
 <%-- 		</c:if> --%>
 		<form action = "/review/reviewBoard" method="post">
 		<div style="height: 20px"></div>
-		<table class="table text-center table-striped">
+		<table class="table text-center">
 				<thead>
-					<tr>
+					<tr >
 						<th>글번호</th> 
 						<th>이미지</th> 
 						<th>상품명</th> 
@@ -120,7 +123,7 @@ $(document).ready(function(){
 				<tbody>
 					
 				<c:forEach items="${list }" var="reviewVo">
-					<tr>
+					<tr style="font-weight:bold;">
 						<td>${reviewVo.rev_num }</td>
 						<c:if test="${not empty reviewVo.rev_image}">
 							<td><img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}"></td>
@@ -132,7 +135,7 @@ $(document).ready(function(){
 								</c:if>
 							</c:forEach>
 						</td>
-						<td><a data-rno="${reviewVo.rev_num}" class="readTitle" >${reviewVo.rev_title }</a></td>
+						<td><a data-rno="${reviewVo.rev_num}" class="readTitle" href="#">${reviewVo.rev_title }</a></td>
 						<td>${reviewVo.rev_writer }</td>
 						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
 								pattern="yyyy-MM-dd HH:mm:ss"/></td>

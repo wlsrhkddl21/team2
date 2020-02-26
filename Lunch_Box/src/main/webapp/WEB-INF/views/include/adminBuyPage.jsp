@@ -52,6 +52,6 @@ $(document).ready(function(){
 	<div class="list-group-item text-center"
 		style="background: #f99; font-size: 20px; color: white; font-weight: 600; height: 80px; padding-top: 25px;">
 		주문내역</div>
-	<span><a href="/mp/buyList" class="list-group-item list-a text-center">일반도시락</a></span>
-	<span><a href="/mp/pointList" class="list-group-item list-a text-center" >나만의 도시락</a></span>
+	<span><a href="/admin/orderList" class="list-group-item list-a text-center">일반도시락</a></span>
+	<span><a href="/admin/mlbList" class="list-group-item list-a text-center" >나만의 도시락</a></span>
 </div>

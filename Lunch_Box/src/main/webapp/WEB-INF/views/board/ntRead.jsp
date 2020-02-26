@@ -98,11 +98,11 @@ $(document).ready(function() {
 				strHtml += "<td>" + this.ntrwriter + "</td>";
 				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
 				if("${mem_id}" == this.ntrwriter) {
-					strHtml += "<td><button type='button' class='btn-xs btn-warning btnReplyUpdate'";
+					strHtml += "<td><button type='button' class='btn btn-outline-dark btnReplyUpdate'";
 					strHtml += " data-rno='" + this.ntrno + "'";
 					strHtml += " data-reply_text='" + this.ntrcontent + "'";
 					strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
-					strHtml += "<td><button type='button' class='btn-xs btn-danger btnReplyDelete'";
+					strHtml += "<td><button type='button' class='btn btn-outline-danger btnReplyDelete'";
 					strHtml += " data-rno='" + this.ntrno + "'";
 					strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
 				}
@@ -123,6 +123,29 @@ $(document).ready(function() {
 		$("#modal-a").trigger("click");
 		$("#myModal").modal("show"); 
 	});
+
+	// 댓글 삭제 버튼
+// 	$("#replyList").on("click", ".btnReplyDelete", function() {
+// 		console.log("댓글 삭제 버튼");
+// 		var ntrno = $(this).attr("data-rno");
+// 		var ntbno = $(this).attr("data-bno");
+// 		var url = "/replies/delete/" + ntrno + "/" + ntbno;
+		
+// 		$.ajax({
+// 			"type" : "delete",
+// 			"url" : url,
+// 			"headers" : {
+// 				"Content-Type" : "application/json",
+// 				"X-HTTP-Method-Override" : "delete"
+// 			},
+// 			"success" : function(rData) {
+// 				console.log(rData);
+// 				replyList();
+// 				$("#btnModalClose").trigger("click");
+// 			}
+// 		}); // $.ajax()
+// 	});
+	
 	// 댓글 모달창 완료 버튼
 	$("#btnModalReply").click(function(){
 		console.log("댓글완료");
@@ -265,29 +288,30 @@ $(document).ready(function() {
 			<hr>
 			
 			<div style="clear:both;">
-					<button type="submit" class="btn btn-success" id="btnSuccess"
+					<button type="submit" class="btn btn-outline-dark" id="btnSuccess"
 						style="display:none;">완료</button>
-					<button type="button" class="btn btn-warning" id="btnCancel"
+					<button type="button" class="btn btn-outline-danger" id="btnCancel"
 						style="display:none;">수정취소</button>
-					<button type="button" class="btn btn-warning" id="btnHot"
+					<button type="button" class="btn btn-outline-dark" id="btnHot"
 						style="display:none;">중요공지등록</button>
-					<button type="button" class="btn btn-warning" id="btnHotSuccess"
+					<button type="button" class="btn btn-outline-dark" id="btnHotSuccess"
 						style="display:none;">중요공지등록완료</button>
-					<button type="button" class="btn btn-warning" id="btnHotCancel"
+					<button type="button" class="btn btn-outline-danger" id="btnHotCancel"
 						style="display:none;">중요공지등록삭제</button>
 			</div>
 			</form>
 				<div style="clear:both;">
+					<button type="button" class="btn btn-outline-dark"
+						id="btnListAll">목록</button>
 				<c:if test="${mem_id == 'admin'}">
-					<button type="button" class="btn btn-warning"
+					<button type="button" class="btn btn-outline-dark"
 						id="btnModify">수정</button>
-					<button type="button" class="btn btn-danger"
+					<button type="button" class="btn btn-outline-danger"
 						id="btnDelete">삭제</button>				
 				</c:if>
-					<button type="button" class="btn btn-primary"
-						id="btnListAll">목록</button>
 				</div>
 			<!-- 댓글 작성 -->
+			<div style="height: 20px"></div>
 	<c:if test="${mem_id != null && mem_id != ''}">
 	<div class="row">
 		<div class="col-md-12">
@@ -296,18 +320,19 @@ $(document).ready(function() {
 				<input type="text" id="ntRcontent"
 					class="form-control"/>
 			</div>
-			<div class="form-group">
+			<div class="form-group" style="display:none;">
 				<label for="ntRwriter">작성자</label>
 				<input type="text" id="ntRwriter" value="${mem_id }"
 					class="form-control" readonly/>
 			</div>
 			<div class="form-group">
-				<button type="button" class="btn-xs btn-success"
+				<button type="button" class="btn btn-outline-dark"
 					id="btn_ntReply">작성완료</button>
 			</div>
 		</div>
 	</div>
 	</c:if>
+	
 	<!-- // 댓글 작성 -->
 	
 	<!-- 댓글 목록 -->

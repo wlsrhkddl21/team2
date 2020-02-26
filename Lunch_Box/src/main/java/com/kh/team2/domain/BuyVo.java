@@ -7,7 +7,7 @@ public class BuyVo {
 	private String buy_address;
 	private String buy_tel;
 	private int buy_price;
-	
+	private String buy_review;
 	public int getBuy_num() {
 		return buy_num;
 	}
@@ -44,10 +44,17 @@ public class BuyVo {
 	public void setBuy_price(int buy_price) {
 		this.buy_price = buy_price;
 	}
+	public String getBuy_review() {
+		return buy_review;
+	}
+	public void setBuy_review(String buy_review) {
+		this.buy_review = buy_review;
+	}
 	@Override
 	public String toString() {
 		return "BuyVo [buy_num=" + buy_num + ", mem_id=" + mem_id + ", buy_date=" + buy_date + ", buy_address="
-				+ buy_address + ", buy_tel=" + buy_tel + ", buy_price=" + buy_price + "]";
+				+ buy_address + ", buy_tel=" + buy_tel + ", buy_price=" + buy_price + ", buy_review=" + buy_review
+				+ "]";
 	}
 	
 	

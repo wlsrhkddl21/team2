@@ -25,7 +25,7 @@
 		from tbl_buy b, tbl_buy_detail bd
 		where b.buy_num = bd.buy_num
         and b.mem_id = #{mem_id}
-		order by b.buy_date desc
+		order by b.buy_num desc
 	</select>
 	
 	<select id="selectDetailCount" resultType="int">
@@ -37,7 +37,7 @@
 		select * 
 		from tbl_buy b, tbl_buy_detail bd
 		where b.buy_num = bd.buy_num
-		order by b.buy_date desc
+		order by b.buy_num desc
 	</select>
 
 </mapper>
