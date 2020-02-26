@@ -292,7 +292,7 @@ function displayCnt(v){
 			<div class="row">
 				<div class="col-md-4">
 				<div style="height: 30px;"></div>
-					<img src="../images/test1.jpg" alt="상품이미지" class="img-fluid"
+					<img src="../images/my.PNG" alt="상품이미지" class="img-fluid"
 						style="height: 380px; width: 380px;" />
 				</div>
 				<div class="col-md-8">
@@ -392,7 +392,6 @@ function displayCnt(v){
 					<tr>
 						<td style="font-size: 30px;"><a 
 						style="color:  gray;" href="#detail_img">상세보기 이미지</a></td>
-						<td style="font-size: 30px;"><a href="#review" style="color:  gray;">리뷰 게시판</a></td>
 					</tr>
 				</table>
 			</div>
@@ -400,19 +399,6 @@ function displayCnt(v){
 				<img src="../images/test1.jpg"
 					alt="상세보기 이미지" class="img-fluid" />
 			</div>
-			<div class="col-md-12 text-center">
-				<table class="table" id="review"> 
-					<tr>
-						<td style="font-size: 30px;"><a 
-						style="color: gray;" href="#detail_img">상세보기 이미지</a></td>
-						<td style="font-size: 30px;"><a href="#review" style="color: gray;">리뷰 게시판</a></td>
-					</tr>
-				</table>
-			</div>
-			<div class="col-md-12 text-center">
-				<h1>리뷰게시판</h1>
-			</div>
-		</div>
 		<div class="col-md-2"></div>
 	</div>
 </div>
