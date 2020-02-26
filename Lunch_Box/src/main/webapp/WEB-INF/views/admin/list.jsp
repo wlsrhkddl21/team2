@@ -63,8 +63,6 @@ th{
 		<a href="/admin/orderList" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문목록</a>
 				</div>
 				<div class="col-md-6 text-right">
-						<a href="/admin/orderList"
-						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문내역</a>
 						<a href="/admin/insertPDT"
 						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">상품등록</a>
 				</div>

@@ -18,8 +18,10 @@
 				#{buy_address},#{buy_tel})
 	</insert>
 	
-	<select id="selectBuyMy" resultType="BuyMyVo">
+	<select id="selectBuyMyByMemId" resultType="BuyMyVo">
 		select * from tbl_buy_my
+		where mem_id = #{mem_id}
+		order by buy_num desc
 	</select>
 	
 </mapper>

@@ -3,7 +3,6 @@
 <style>
 .list-a {
 	cursor: pointer;
-	color: #000;
 }
 
 .list-a:hover {
@@ -15,6 +14,11 @@
 .style2 {
 	backgroundColor : #eee
 };
+.buyList_info {
+	padding: 35px;
+	border: 5px solid #ededed;
+	margin-top: 20px;
+}
 
 </style>
 <!-- <div style="font-size: 20px;margin: 8px;"class="text-center"> -->
@@ -28,13 +32,11 @@ $(document).ready(function(){
 	console.log(window.location.pathname);
 	var path = window.location.pathname;
 	
-	if (path == "/mp/buyList") {
+	if (path == "/admin/orderList") {
 		
 		$(".list-a").eq(0).css("background-color", "#e9e9e9");
-	} else if (path == "mp/myBuyLisy") {
+	} else if (path == "/admin/mlbList") {
 		$(".list-a").eq(1).css("background-color", "#e9e9e9");
-	}else if(path== "/mp/pointList"){
-		$(".list-a").eq(2).css("background-color", "#e9e9e9");
 	}
 	 
 // 	$(".list-a").prev().click(function(e){
@@ -49,8 +51,7 @@ $(document).ready(function(){
 <div class="list-group">
 	<div class="list-group-item text-center"
 		style="background: #f99; font-size: 20px; color: white; font-weight: 600; height: 80px; padding-top: 25px;">
-		My page</div>
-	<a href="/mp/buyList" class="list-group-item list-a text-center">구매 목록</a>
-	<a href="/mp/buyMyList" class="list-group-item list-a text-center" >나만의 도시락 구매목록</a>
-	<a href="/mp/pointList" class="list-group-item list-a text-center" >포인트 내역</a>
+		주문내역</div>
+	<span><a href="/mp/buyList" class="list-group-item list-a text-center">일반도시락</a></span>
+	<span><a href="/mp/pointList" class="list-group-item list-a text-center" >나만의 도시락</a></span>
 </div>

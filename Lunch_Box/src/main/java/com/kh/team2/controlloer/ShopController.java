@@ -63,17 +63,6 @@ public class ShopController {
 		return "shop/my"; 
 	}
 
-	// 정기 배송
-	@RequestMapping(value = "/sub") 
-	public String subscription(Model model,PagingDto pagingDto) throws Exception {
-		System.out.println("subscription Shop Controller");
-
-		List<ProductVo> list = adminService.readAllPDT();
-		model.addAttribute("list", list);
-
-		return "shop/sub";
-	}
-
 	
 	// 일반 상품
 	@RequestMapping(value = "/single")

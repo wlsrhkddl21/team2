@@ -78,14 +78,24 @@
 								name="pdt_num" style="border: none;" readonly />
 						</div>
 						<div class="form-group">
+						
 							<label for="pdt_category" style="font-weight: bold">종류</label> <input
 								type="text" value="${productVo.pdt_category}"
-								class="form-control updateHide" /> <select
-								class="form-control updateShow" id="pdt_category"
-								name="pdt_category" style="display: none;">
-								<option value="한식">한식</option>
-								<option value="중식">중식</option>
-								<option value="일식">일식</option>
+								class="form-control updateHide" /> 
+								<select class="form-control updateShow" id="pdt_category"
+								name="pdt_category" style="display:none;">
+								<option value="한식"
+								<c:if test="${productVo.pdt_category=='한식' }"> selected</c:if>
+								>한식</option>
+								<option value="양식"
+								<c:if test="${productVo.pdt_category=='양식' }"> selected</c:if>
+								>양식</option>
+								<option value="중식"
+								<c:if test="${productVo.pdt_category=='중식' }"> selected</c:if>
+								>중식</option>
+								<option value="일식"
+								<c:if test="${productVo.pdt_category=='일식' }"> selected</c:if>
+								>일식</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -110,10 +120,10 @@
 								style="display: none;" />
 							<c:if test="${not empty productVo.pdt_image }">
 								<img src="/admin/displayFile?fileName=${productVo.pdt_image}"
-									id="pdt_image" width="800px" class="updateHide" />
+									id="pdt_image" width="700px" class="updateHide" />
 							</c:if>
 							
-							<button type="button" class="btn btn-primary updateShow"
+							<button type="button" class="btn btn-outline-dark updateShow"
 								id="btnFile" style="display: none;">메인 사진 변경</button>
 						</div>
 						<div class="form-group">
@@ -122,20 +132,20 @@
 								name="subFile" style="display: none;" />
 <%-- 							<c:if test="${not empty productVo.pdt_subimage }"> --%>
 								<img src="/admin/displayFile?fileName=${productVo.pdt_subimage}"
-									id="pdt_Subfile"  width="800px"  class="updateHide" />
+									id="pdt_Subfile"  width="700px"  class="updateHide" />
 <%-- 							</c:if> --%>
 							
-							<button type="button" class="btn btn-primary updateShow"
+							<button type="button" class="btn btn-outline-dark updateShow"
 								id="btnSubfile" style="display: none;">서브 사진 변경</button>
 						</div>
-						<button type="button" class="btn btn-primary" id="btnList">목록</button>
-						<button type="button" class="btn btn-primary updateHide"
+						<button type="button" class="btn btn-outline-dark" id="btnList">목록</button>
+						<button type="button" class="btn btn-outline-dark updateHide"
 							id="btnUpdate">수정</button>
-						<button type="button" class="btn btn-primary updateHide"
+						<button type="button" class="btn btn-outline-danger updateHide"
 							id="btnDelete">삭제</button>
-						<button type="submit" class="btn btn-primary updateShow"
+						<button type="submit" class="btn btn-outline-dark updateShow"
 							id="btnSubmit" style="display: none;">완료</button>
-						<button type="button" class="btn btn-primary updateShow"
+						<button type="button" class="btn btn-outline-danger updateShow"
 							id="btnCancel" style="display: none;">취소</button>
 					</form>
 				</div>

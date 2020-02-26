@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.kh.team2.domain.BuyJoinDto;
 import com.kh.team2.domain.ProductVo;
 import com.kh.team2.service.AdminService;
+import com.kh.team2.service.BuyService;
 import com.kh.team2.util.AdminFileUploadUtil;
 
 @Controller
@@ -28,6 +30,9 @@ public class AdminController {
 	
 	@Inject
 	AdminService service;
+	
+	@Inject
+	BuyService buyService;
 	
 	@Resource
 	private String uploadPath;
@@ -125,7 +130,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="orderList")
-	public String orderList()throws Exception{
+	public String orderList(Model model)throws Exception{
+		List<BuyJoinDto> list = buyService.selectReadAll();
+		model.addAttribute("list",list);
 		return "/admin/orderList";
+	}
+	@RequestMapping(value="mlbList")
+	public String mlbList(Model model)throws Exception{
+		List<BuyJoinDto> list = buyService.selectReadAll();
+		model.addAttribute("list",list);
+		return "/admin/mlbList";
 	}
 }

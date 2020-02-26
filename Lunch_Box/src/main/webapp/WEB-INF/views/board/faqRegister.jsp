@@ -60,13 +60,13 @@ ${pagingDto }
 				<input type="hidden" name="perPage" value="${pagingDto.perPage }"/>
 				<input type="hidden" name="faq_writer" value="${mem_id }"/>
 				<div class="form-group">
-					<label for="faq_title">Title</label>
+					<label for="faq_title">제목</label>
 					<input type="text" class="form-control" id="faq_title" 
 						name="faq_title"/>
 				</div>
 				<div class="form-group">
-					<label for="faq_conetent">Content</label>
-					<textarea class="form-control" rows="5" id="faq_content" 
+					<label for="faq_conetent">내용</label>
+					<textarea class="form-control" rows="10" id="faq_content" 
 						name="faq_content"></textarea>
 				</div>
 <!-- 				<div class="form-group"> -->
@@ -75,11 +75,11 @@ ${pagingDto }
 <!-- 						name="not_writer" /> -->
 <!-- 				</div> -->
 				<div class="form-group" id="buttonDiv">
-				<button type="button" class="btn btn-primary" id="btnSubmit">
-					Submit
+				<button type="button" class="btn btn-outline-dark" id="btnSubmit">
+					완료
 				</button>
-				<button type="button" class="btn btn-primary" id="btnList">
-					List All
+				<button type="button" class="btn btn-outline-dark" id="btnList">
+					목록
 				</button>
 				</div>
 			</form>

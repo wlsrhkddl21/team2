@@ -114,14 +114,14 @@ $(document).ready(function() {
 			</div>
 			</form>
 				<div style="clear:both;">
+					<button type="button" class="btn btn-outline-dark"
+						id="btnListAll">목록</button>
 				<c:if test="${mem_id == 'admin'}">
-					<button type="button" class="btn btn-warning"
+					<button type="button" class="btn btn-outline-dark"
 						id="btnModify">수정</button>
-					<button type="button" class="btn btn-danger"
+					<button type="button" class="btn btn-outline-danger"
 						id="btnDelete">삭제</button>				
 				</c:if>
-					<button type="button" class="btn btn-primary"
-						id="btnListAll">목록</button>
 				</div>
 				<div style="height: 30px"></div>
 		</div>
