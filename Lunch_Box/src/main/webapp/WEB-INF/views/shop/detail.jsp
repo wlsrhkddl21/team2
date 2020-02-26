@@ -155,7 +155,7 @@
 					<tr>
 						<td style="font-size: 30px;"><a 
 						style="color: gray;" href="#detail_img">상세보기 이미지</a></td>
-						<td style="font-size: 30px;"><a href="/review/reviewBoard" style="color: gray;">리뷰 게시판</a></td>
+						<td style="font-size: 30px;"><a href="#review" style="color: gray;">리뷰 게시판</a></td>
 					</tr>
 				</table>
 			</div>

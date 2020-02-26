@@ -14,7 +14,7 @@
 			<div class="row no-gutters">
 				<div class="col-md-4">
 					<a href="/shop/detailMy"> <img
-						src="../images/test1.jpg"
+						src="../images/my.PNG"
 						alt="상품이미지" class="img-fluid" style="height: 380px; width: 380px;" />
 					</a>
 					<div>
