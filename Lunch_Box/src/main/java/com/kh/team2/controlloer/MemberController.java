@@ -105,7 +105,7 @@ public class MemberController {
 	public Map<String, Object> idCheck(HttpServletRequest request, Model model) throws Exception {
 		String mem_id = request.getParameter("mem_id");
 		String isCheck = request.getParameter("isCheck");
-		String msg = "중복체크 해줭";
+		String msg = "중복체크를 하세요";
 		int chk = service.idCheck(mem_id);
 		System.out.println(chk);
 		if (!mem_id.equals("")) {
@@ -121,7 +121,12 @@ public class MemberController {
 		map.put("isCheck", isCheck);
 		return map;
 	}
-
+	
+	@RequestMapping(value="/memUpdate",method=RequestMethod.POST)
+	public String memUpdate(MemberVo memberVo) throws Exception{
+		System.out.println(memberVo);
+		return null;
+	}
 					
 	
 }
