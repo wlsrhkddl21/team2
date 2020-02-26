@@ -63,6 +63,11 @@ public class ReviewDaoImpl implements ReviewDao {
 		sqlSession.delete(NAMESPACE + ".reviewDelete", rev_num);
 		
 	}
+
+	@Override
+	public List<ReviewVo> readPdtNum(int rev_pdt_name) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".readPdtNum", rev_pdt_name);
+	}
 	
 	
 }

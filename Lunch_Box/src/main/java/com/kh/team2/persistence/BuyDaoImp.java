@@ -1,8 +1,7 @@
 package com.kh.team2.persistence;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.kh.team2.domain.BuyDetailVo;
 import com.kh.team2.domain.BuyJoinDto;
 import com.kh.team2.domain.BuyVo;
-import com.kh.team2.domain.PointVo;
 
 @Repository
 public class BuyDaoImp implements BuyDao {
@@ -41,6 +39,12 @@ public class BuyDaoImp implements BuyDao {
 	public List<BuyJoinDto> selectJoinByMemId(String mem_id) throws Exception {
 		
 		return sqlSession.selectList(NAMESPACE+".selectJoinByMemId",mem_id);
+	}
+
+	@Override
+	public List<BuyJoinDto> selectReadAll() throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE+".selectReadAll");
 	}
 
 }

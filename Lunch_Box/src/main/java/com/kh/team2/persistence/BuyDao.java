@@ -11,4 +11,5 @@ public interface BuyDao {
 	public void insertBuyDetail(BuyDetailVo vo) throws Exception;
 	public int getSeqBuyNextVal() throws Exception;
 	public List<BuyJoinDto> selectJoinByMemId(String mem_id) throws Exception;
+	public List<BuyJoinDto> selectReadAll() throws Exception;
 }

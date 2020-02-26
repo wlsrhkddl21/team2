@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team2.domain.BuyJoinDto;
+import com.kh.team2.domain.BuyMyVo;
 import com.kh.team2.domain.MemberVo;
+import com.kh.team2.domain.PointVo;
 import com.kh.team2.domain.ProductVo;
-import com.kh.team2.persistence.MemberDao;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
 import com.kh.team2.service.MemberService;
@@ -23,7 +24,7 @@ import com.kh.team2.service.MemberService;
 @RequestMapping(value="/mp/*")
 
 @Controller
-public class MypageController {
+public class MyPageController {
 	@Inject
 	MemberService memberService;
 	
@@ -76,9 +77,27 @@ public class MypageController {
 		String mem_id = (String) session.getAttribute("mem_id");
 		MemberVo memberVo = memberService.readMember(mem_id);
 		
+		List<PointVo> list = memberService.pointList(mem_id);
+		
 		model.addAttribute("memberVo",memberVo);
+		model.addAttribute("list",list);
+		
 		
 		
 		return "mypage/pointList";
 	}
+
+	@RequestMapping(value="/buyMyList",method = RequestMethod.GET)
+	public String buyMyList(HttpServletRequest request,Model model) throws Exception{
+		
+		HttpSession session = request.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
+		
+		List<BuyMyVo> list = buyService.selectBuyMyByMemId(mem_id);
+		System.out.println(list);
+		model.addAttribute("list",list);
+		
+		return "mypage/buyMyList";
+	}
+
 }

@@ -91,6 +91,13 @@ public class BuyServiceImpl implements BuyService {
 		return buyDao.selectJoinByMemId(mem_id);
 	}
 
+
+	@Override
+	public List<BuyJoinDto> selectReadAll() throws Exception {
+		
+		return buyDao.selectReadAll();
+	}
+	
 	@Override
 	@Transactional
 	public void buyMy(BuyMyVo buyVo, PointDto pointDto) throws Exception {
@@ -131,5 +138,12 @@ public class BuyServiceImpl implements BuyService {
 
 		pointDao.insertPoint(savePointVo);
 	}
+
+	@Override
+	public List<BuyMyVo> selectBuyMyByMemId(String mem_id) throws Exception {
+		
+		return myDao.selectBuyMyByMemId(mem_id);
+	}
+
 
 }

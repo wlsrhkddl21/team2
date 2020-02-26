@@ -32,5 +32,12 @@
 		select count(*) from tbl_detail
 		where buy_num=#{buy_num}
 	</select>
+	
+	<select id="selectReadAll" resultType="BuyJoinDto">
+		select * 
+		from tbl_buy b, tbl_buy_detail bd
+		where b.buy_num = bd.buy_num
+		order by b.buy_date desc
+	</select>
 
 </mapper>

@@ -8,6 +8,9 @@
 	border: 5px solid #ededed;
 	margin-top: 20px;
 }
+th{
+	background: #f8f9fa;
+}
 </style>
 <script>
 	$(document).ready(function() {
@@ -36,6 +39,7 @@
 				<div class="col-md-9">
 					<div class="row">
 						<div class="mypage_info text-center">
+						<h4 style="margin-bottom: 15px; ">구매 목록</h4>
 							<table class="table text-center">
 								<thead>
 									<tr>
