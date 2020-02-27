@@ -390,7 +390,7 @@ function displayCnt(v){
 			<div class="col-md-12 text-center" style="margin-top: 20px;">
 				<table class="table" id="detail_img"> 
 					<tr>
-						<td style="font-size: 30px;"><a 
+						<td style="font-size: 30px;background: #eee"><a 
 						style="color:  gray;" href="#detail_img">상세보기 이미지</a></td>
 					</tr>
 				</table>
