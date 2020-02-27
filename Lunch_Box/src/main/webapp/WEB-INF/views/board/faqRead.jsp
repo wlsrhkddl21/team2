@@ -109,9 +109,9 @@ $(document).ready(function() {
 			<hr>
 			
 			<div style="clear:both;">
-					<button type="submit" class="btn btn-success" id="btnSuccess"
+					<button type="submit" class="btn btn-outline-dark" id="btnSuccess"
 						style="display:none;">완료</button>
-					<button type="button" class="btn btn-warning" id="btnCancel"
+					<button type="button" class="btn btn-outline-danger" id="btnCancel"
 						style="display:none;">수정취소</button>
 			</div>
 			</form>

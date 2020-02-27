@@ -124,7 +124,7 @@
 						<div class="div_text">배송비 : 2,500원 (5만원 이상 무료)</div>
 						<div class="div_text">적립금 : 구매 금액의 5%</div>
 						<div class="div_text">수량: <input type="button" class="btn btn-light" value="-" id="btnSub"/>
-									<input name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" />
+									<input name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" readonly="readonly" />
 									<input type="button" class="btn btn-light" value="+" id="btnAdd"/>
 						</div>
 						<hr>
@@ -140,9 +140,9 @@
 			<div class="col-md-12 text-center" style="margin-top: 20px;">
 				<table class="table" id="detail_img"> 
 					<tr>
-						<td style="font-size: 30px;"><a 
+						<td style="font-size: 30px; background: #eee"><a 
 						style="color:  gray;" href="#detail_img">상세보기 이미지</a></td>
-						<td style="font-size: 30px;"><a href="#review" style="color:  gray;">리뷰 게시판</a></td>
+						<td style="font-size: 30px;"><a href="#review" style="color: #eee;" >리뷰 게시판</a></td>
 					</tr>
 				</table>
 			</div>
@@ -154,8 +154,8 @@
 				<table class="table" id="review"> 
 					<tr>
 						<td style="font-size: 30px;"><a 
-						style="color: gray;" href="#detail_img">상세보기 이미지</a></td>
-						<td style="font-size: 30px;"><a href="#review" style="color: gray;">리뷰 게시판</a></td>
+						style="color: #eee;" href="#detail_img">상세보기 이미지</a></td>
+						<td style="font-size: 30px;background: #eee" ><a href="#review" style="color: gray;">리뷰 게시판</a></td>
 					</tr>
 				</table>
 			</div>
@@ -169,7 +169,6 @@
 		<table class="table text-center table-striped">
 				<thead>
 					<tr>
-						REVIEW
 						<th>글번호</th> 
 						<th>후기 이미지</th> 
 <!-- 						<th>상품명</th>  -->

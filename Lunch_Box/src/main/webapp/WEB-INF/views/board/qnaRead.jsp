@@ -144,7 +144,8 @@ $(document).ready(function() {
 	});
 	// 댓글 삭제 버튼
 	$("#replyList").on("click", ".btnReplyDelete", function() {
-			console.log("댓글 삭제 버튼");
+			
+		if (confirm("댓글을 삭제하시겠습니까?")) {
 			var qrnum = $(this).attr("data-rno");
 			var url = "/replies/qnaDelete/" + qrnum;
 			
@@ -157,12 +158,10 @@ $(document).ready(function() {
 				},
 				"success" : function(rData) {
 					console.log(rData);
-					replyList();
-					if (confirm("댓글을 삭제하시겠습니까?")) {
-						$("#btnModalClose").trigger("click");
-					}		
-				}
-			}); // $.ajax()
+					replyList();	
+		}		
+	});
+			} // $.ajax()
 		});
 	
 	replyList(); // 기능 실행

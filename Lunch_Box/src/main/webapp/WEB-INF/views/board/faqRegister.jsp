@@ -90,5 +90,6 @@ ${pagingDto }
 		</div>
 	</div>
 </div>
+<div style="height: 50px"></div>
 
 <%@ include file="../include/footer.jsp" %>

@@ -102,7 +102,6 @@ $(function(){
 });
 </script>
 <div class="container-fluid">
-${pagingDto }
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -121,12 +120,12 @@ ${pagingDto }
 				<input type="hidden" name="perPage" value="${pagingDto.perPage }"/>
 				<input type="hidden" name="not_writer" value="${mem_name }"/>
 				<div class="form-group">
-					<label for="not_title">Title</label>
+					<label for="not_title">제목</label>
 					<input type="text" class="form-control" id="not_title" 
 						name="not_title"/>
 				</div>
 				<div class="form-group">
-					<label for="not_conetent">Content</label>
+					<label for="not_conetent">내용</label>
 					<textarea class="form-control" rows="5" id="not_content" 
 						name="not_content"></textarea>
 				</div>
@@ -136,11 +135,11 @@ ${pagingDto }
 <!-- 						name="not_writer" /> -->
 <!-- 				</div> -->
 				<div class="form-group" id="buttonDiv">
-				<button type="button" class="btn btn-primary" id="btnSubmit">
-					Submit
+				<button type="button" class="btn btn-outline-dark" id="btnSubmit">
+					완료
 				</button>
-				<button type="button" class="btn btn-primary" id="btnList">
-					List All
+				<button type="button" class="btn btn-outline-dark" id="btnList">
+					목록
 				</button>
 				</div>
 			</form>
@@ -151,5 +150,6 @@ ${pagingDto }
 		</div>
 	</div>
 </div>
+<div style="height: 50px"></div>
 
 <%@ include file="../include/footer.jsp" %>

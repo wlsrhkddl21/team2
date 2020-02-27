@@ -375,7 +375,7 @@ function displayCnt(v){
 						</div>
 						<hr class="count">
 						<div class="div_text count">수량: <input type="button" class="btn btn-light" value="-" id="btnSub"/>
-							<input class="text-center" name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" />
+							<input class="text-center" name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" readonly="readonly" />
 							<input type="button" class="btn btn-light" value="+" id="btnAdd"/>
 						</div>
 						<hr>
@@ -390,13 +390,13 @@ function displayCnt(v){
 			<div class="col-md-12 text-center" style="margin-top: 20px;">
 				<table class="table" id="detail_img"> 
 					<tr>
-						<td style="font-size: 30px;"><a 
+						<td style="font-size: 30px;background: #eee"><a 
 						style="color:  gray;" href="#detail_img">상세보기 이미지</a></td>
 					</tr>
 				</table>
 			</div>
 			<div class="col-md-12 text-center">
-				<img src="../images/test1.jpg"
+				<img src="../images/myDetail.jpg"
 					alt="상세보기 이미지" class="img-fluid" />
 			</div>
 		<div class="col-md-2"></div>

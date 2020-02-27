@@ -113,7 +113,6 @@ public class MyPageController {
 		return "mypage/myInfo";
 	}
 	
-	@ResponseBody
 	@RequestMapping(value="/memUpdate",method=RequestMethod.POST)
 	public String memUpdate(HttpServletRequest request,MemberVo memberVo) throws Exception{
 		HttpSession session = request.getSession();
@@ -123,6 +122,7 @@ public class MyPageController {
 		memberVo.setMem_address(sumAddress);
 		memberVo.setMem_id(mem_id);
 		memberService.memUpdate(memberVo);
+		session.setAttribute("msg", "수정완료");
 		return "redirect:/mp/myInfo";
 				
 	}
