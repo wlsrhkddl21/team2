@@ -23,4 +23,6 @@ public interface MemberService {
 	public int idCheck(String mem_id) throws Exception;
 	
 	public List<PointVo> pointList (String mem_id) throws Exception;
+	
+	public void memUpdate(MemberVo memVo) throws Exception;
 }

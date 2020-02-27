@@ -63,7 +63,7 @@ $(document).ready(function(){
 
 	<!-- header 2 -->
 	<!-- navigation -->
-	<div class="main-top">
+	<div class="main-top" style="margin-bottom:20px;">
 		<div class="container d-lg-flex justify-content-between align-items-center">
 			<!-- logo -->
 			<h1 class="logo-style-res float-left">

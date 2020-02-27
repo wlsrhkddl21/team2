@@ -109,7 +109,7 @@ public class MemberController {
 		if (!mem_id.equals("")) {
 			if (chk == 0) {
 				isCheck = "true";
-				msg = "사용가능한아이디";
+				msg = "사용 가능한 아이디";
 			} else {
 				msg = "사용중인 아이디";
 			}

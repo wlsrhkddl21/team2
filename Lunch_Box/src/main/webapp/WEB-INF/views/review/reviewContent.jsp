@@ -49,7 +49,7 @@ $(document).ready(function() {
 	$("#btn_reply").click(function(){
 		var rep_bno = "${reviewVo.rev_num}";
 		var rep_content = $("#repContent").val();
-		var rep_writer = $("#repWriter").val();
+		var rep_writer = "${mem_id}";
 		var sendData = {
 				"rep_bno" : rep_bno,
 				"rep_content" : rep_content,
@@ -89,13 +89,13 @@ $(document).ready(function() {
 				strHtml += "<td>" + this.rep_num +"</td>";
 				strHtml += "<td>" + this.rep_content + "</td>";
 				strHtml += "<td>" + this.rep_writer + "</td>";
-				strHtml += "<td>" + dateString(this.rep_date) + "</td>";
+				strHtml += "<td>" + dateString(this.rep_date) + "";
 				if("${mem_id}" == this.rep_writer) {
-					strHtml += "<td><button type='button' class='btn-xs btn btn-outline-dark btnReplyUpdate'";
+					strHtml += "&nbsp;&nbsp;&nbsp;<button type='button' class='btn-xs btn btn-outline-dark btnReplyUpdate'";
 					strHtml += " data-rno='" + this.rep_num + "'";
 					strHtml += " data-reply_text='" + this.rep_content + "'";
-					strHtml += " data-replyer='" + this.rep_writer + "'>수정</button></td>";
-					strHtml += "<td><button type='button' class='btn-xs btn btn-outline-danger btnReplyDelete'";
+					strHtml += " data-replyer='" + this.rep_writer + "'>수정</button>";
+					strHtml += " <button type='button' class='btn-xs btn btn-outline-danger btnReplyDelete'";
 					strHtml += " data-rno='" + this.rep_num + "'";
 					strHtml += " data-bno='" + this.rep_bno + "'>삭제</button></td>";	
 				}
@@ -301,23 +301,19 @@ $(document).ready(function() {
 			
 			</form>
 				<div style="clear:both;">
+					<button type="button" class="btn btn-outline-dark"
+						id="btnListAll">목록</button>
 				<c:if test="${ mem_id == 'admin' || mem_id == reviewVo.rev_writer }">
 					
 					<button type="button" class="btn btn-outline-danger"
-						id="btnDelete">삭제</button>				
+						id="btnDelete">삭제</button>		
 				</c:if>
-					<button type="button" class="btn btn-outline-dark"
-						id="btnListAll">목록</button>
 				</div>
+				<div><br></div>
 			<!-- 댓글 작성 -->
 	<c:if test="${mem_id != null && mem_id != ''}">
-	<div class="row">
+	<div class="row" style="margin-top:10px;">
 		<div class="col-md-12">
-			<div class="form-group">
-				<label for="repWriter">작성자</label>
-				<input type="text" id="repWriter" value="${mem_id}"
-					class="form-control" readonly/>
-			</div>
 			<div class="form-group">
 				<label for="repContent">댓글내용</label>
 				<input type="text" id="repContent"
@@ -342,10 +338,10 @@ $(document).ready(function() {
 						<th>댓글내용</th>
 						<th>작성자</th>
 						<th>날짜</th>
-					<c:if test="${mem_id == reviewVo.rev_writer}">
-						<th>수정</th>
-						<th>삭제</th>
-					</c:if>
+<%-- 					<c:if test="${mem_id == reviewVo.rev_writer}"> --%>
+<!-- 						<th>수정</th> -->
+<!-- 						<th>삭제</th> -->
+<%-- 					</c:if> --%>
 					</tr>
 				</thead>
 				<tbody id="replyList">

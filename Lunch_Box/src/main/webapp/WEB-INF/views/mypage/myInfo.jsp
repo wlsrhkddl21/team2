@@ -37,6 +37,16 @@ $(document).ready(function(){
 		$("#mem_address").attr("disabled",true);
 		$("#btnUpdate").show();
 	});
+	
+	$("#btnSubmit").click(function(){
+		var mem_pass = $("#mem_pass").val();
+		var mem_pass2 =  $("#mem_pass2").val();
+		if(mem_pass!=mem_pass2){
+			alert("비밀번호가 일치하지 않습니다.");
+		}else if(mem_pass==mem_pass2){
+			$("#memUpdate").submit();
+		}
+	});
 });
 </script>
 <div class="container-fluid">
@@ -105,7 +115,7 @@ $(document).ready(function(){
 						</div>
 						<div class="input-group1 text-right">
 							<button type="button" id="btnUpdate">수정</button>
-							<button type="submit" class="disnone" id="btnSubmit">완료</button>
+							<button type="button" class="disnone" id="btnSubmit">완료</button>
 							<button type="button" class="disnone" id="btnCancel">취소</button>
 						</div>
 					</form>

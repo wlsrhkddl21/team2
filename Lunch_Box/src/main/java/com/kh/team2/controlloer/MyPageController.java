@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team2.domain.BuyJoinDto;
 import com.kh.team2.domain.BuyMyVo;
@@ -111,14 +112,19 @@ public class MyPageController {
 		
 		return "mypage/myInfo";
 	}
-
+	
+	@ResponseBody
 	@RequestMapping(value="/memUpdate",method=RequestMethod.POST)
 	public String memUpdate(HttpServletRequest request,MemberVo memberVo) throws Exception{
+		HttpSession session = request.getSession();
+		String mem_id = (String)session.getAttribute("mem_id");
 		String mem_detailAddress = request.getParameter("mem_detailAddress");
 		String sumAddress = memberVo.getMem_address()+" "+mem_detailAddress;
 		memberVo.setMem_address(sumAddress);
-		System.out.println(memberVo);
-		return null;
+		memberVo.setMem_id(mem_id);
+		memberService.memUpdate(memberVo);
+		return "redirect:/mp/myInfo";
+				
 	}
 					
 	
