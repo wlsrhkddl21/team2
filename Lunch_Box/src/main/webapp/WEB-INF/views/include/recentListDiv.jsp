@@ -88,14 +88,14 @@ $(function() {
 		location.href="/cart/list";
 	});
 	$(window).scroll(function() {
-		var length = 120;
+		var length = 730;
 		var dataLong = $("#long").attr("data-long");
 		if (dataLong == "long") {
-			length = -120;
+			length = 830;
 		}
 		var footHeight = $(".footer").outerHeight(true);
 		var mainHeight = $(".main-top").outerHeight(true);
-		var bodyHeight = $("body").outerHeight(true)-600;
+		var bodyHeight = $("body").outerHeight(true)-length;
 		var recentList = $(".recentList").outerHeight(true);
 		var v = bodyHeight-footHeight-mainHeight;
 		var position = $(window).scrollTop();
@@ -108,7 +108,7 @@ $(function() {
 		
 
 		$(".recentList").stop();
-		$(".recentList").animate({"top":position-mainHeight+length});
+		$(".recentList").animate({"top":position-mainHeight});
 	});  
 	$(".btn_scroll_bottom").click(function(){
 		$('html, body').scrollTop( $(document).height() );
@@ -126,7 +126,6 @@ $(function() {
 					</ul>
 					</div>
 					<p class="cartList">장바구니 (<span class="countSpan">${cartCount}</span>)</p>
-					<p class="cartList">마이페이지</p>
 				</div>
 				<div class="box scroll">
 					<a class="scrollUp btn_scroll_top" onclick="window.scrollTo(0,0);"><span class="arr"></span>상단으로</a>
