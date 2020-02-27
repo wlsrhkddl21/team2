@@ -79,15 +79,15 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		String go = "";
 		if (memberVo != null) {
-			model.addAttribute("msg", "success");
-			model.addAttribute("memberVo", memberVo);
+			session.setAttribute("msg", "success");
+			session.setAttribute("memberVo", memberVo);
 			session.setAttribute("mem_name", memberVo.getMem_name());
 			session.setAttribute("mem_id", memberVo.getMem_id());
 			session.setAttribute("mem_pass", memberVo.getMem_pass());
-			go = "index";
+			go = "redirect:/";
 		} else {	
-			model.addAttribute("msg","fail");
-			model.addAttribute("memberVo", memberVo);
+			session.setAttribute("msg","fail");
+			session.setAttribute("memberVo", memberVo);
 			go = "member/login";
 		}
 		return go;
@@ -96,7 +96,7 @@ public class MemberController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
-		return "index";
+		return "redirect:/";
 	}
 	
 	@ResponseBody

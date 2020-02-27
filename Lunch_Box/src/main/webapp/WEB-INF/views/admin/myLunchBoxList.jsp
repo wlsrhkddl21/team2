@@ -26,13 +26,19 @@ $(document).ready(function(){
 	$(".checkboxs").change(function(){
 		var that = $(this).is(":checked");
 		var checkBox = $(this).parent().parent().children().find(".updateTxt");
+		var type = $(this).parent().parent().children().find(".updateType");
+		var typehide = $(this).parent().parent().children().find(".updateTypeHide");
 		console.log(that);
 		if(that==true){
 		checkBox.attr("readonly" ,false);
 		checkBox.css("border", "1px solid");
+		type.show();
+		typehide.hide();
 		}else{
 			checkBox.attr("readonly" ,true);
 			checkBox.css("border", "none");
+			type.hide();
+			typehide.show();
 		}
 	});
 	
@@ -244,8 +250,8 @@ $(document).ready(function(){
 							<td style="display:none;" class="update checkbox"><input type="checkbox" class="checkboxs"></td>
 							<td><span class="lunch_num">${myLunchVo.lunch_num }</span></td>
 							<td>
-								<span class="updateHide">${myLunchVo.lunch_type }</span>
-								<span class="update" style="display:none;">
+								<span class="updateTypeHide">${myLunchVo.lunch_type }</span>
+								<span class="updateType" style="display:none;">
 									<select name="lunch_type" class="lunch_type">
 										<option value="rice">밥류</option>
 										<option value="side">반찬류</option>

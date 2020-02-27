@@ -29,6 +29,8 @@ $(document).ready(function(){
 		$(".updateTxt").attr("readonly",false);
 		$("#mem_address").attr("disabled",false);
 		$(this).hide();
+		$("#mem_pass").val("");
+		$("#mem_pass2").val("");
 	});
 	
 	$("#btnCancel").click(function(){
@@ -41,14 +43,16 @@ $(document).ready(function(){
 	$("#btnSubmit").click(function(){
 		var mem_pass = $("#mem_pass").val();
 		var mem_pass2 =  $("#mem_pass2").val();
-		if(mem_pass!=mem_pass2){
-			alert("비밀번호가 일치하지 않습니다.");
-		}else if(mem_pass==mem_pass2){
+		if(mem_pass!=mem_pass2||mem_pass==""||mem_pass2==""){
+			alert("비밀번호를 확인하세요.");
+		}else if(mem_pass==mem_pass2&&mem_pass!=""){
 			$("#memUpdate").submit();
+			alert("수정완료");
 		}
 	});
 });
 </script>
+<c:remove var="msg" scope="session" />
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>

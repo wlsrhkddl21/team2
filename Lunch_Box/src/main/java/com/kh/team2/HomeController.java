@@ -55,7 +55,6 @@ public class HomeController {
 		List<FaqVo> faqList = faqService.listAll(dto);
 		List<ProductVo> pdtList = adminService.readAllPDT();
 		List<ReviewVo> reviewList = reviewService.reviewList(dto);
-		System.out.println(reviewList);
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
