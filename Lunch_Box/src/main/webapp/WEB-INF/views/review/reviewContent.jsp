@@ -110,22 +110,21 @@ $(document).ready(function() {
 		console.log("댓글 삭제 버튼");
 		var rep_num = $(this).attr("data-rno");
 		var url = "/reviewReply/delete/" + rep_num ;
+		if (confirm("댓글을 삭제하시겠습니까?")) {
+			$.ajax({
+				"type" : "delete",
+				"url" : url,
+				"headers" : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "delete"
+				},
+				"success" : function(rData) {
+					replyList();
+						
+				}
+			}); // $.ajax()
+		}	
 		
-		$.ajax({
-			"type" : "delete",
-			"url" : url,
-			"headers" : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "delete"
-			},
-			"success" : function(rData) {
-				console.log(rData);
-				replyList();
-				if (confirm("댓글을 삭제하시겠습니까?")) {
-					$("#btnModalClose").trigger("click");
-				}		
-			}
-		}); // $.ajax()
 	});
 	
 	//댓글 수정 버튼
@@ -203,9 +202,6 @@ $(document).ready(function() {
 							<label for="modal_reply_text">댓글내용</label>
 							<input type="text" class="form-control"
 								id="modal_reply_text"/>
-							<label for="modal_replyer">작성자</label>
-							<input type="text" class="form-control"
-								id="modal_replyer" readonly/>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary"
