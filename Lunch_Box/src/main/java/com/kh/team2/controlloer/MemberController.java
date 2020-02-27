@@ -84,7 +84,7 @@ public class MemberController {
 			session.setAttribute("mem_name", memberVo.getMem_name());
 			session.setAttribute("mem_id", memberVo.getMem_id());
 			session.setAttribute("mem_pass", memberVo.getMem_pass());
-			go = "index";
+			go = "redirect:/";
 		} else {	
 			model.addAttribute("msg","fail");
 			model.addAttribute("memberVo", memberVo);
@@ -96,7 +96,7 @@ public class MemberController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
-		return "index";
+		return "redirect:/";
 	}
 	
 	@ResponseBody
@@ -104,14 +104,14 @@ public class MemberController {
 	public Map<String, Object> idCheck(HttpServletRequest request, Model model) throws Exception {
 		String mem_id = request.getParameter("mem_id");
 		String isCheck = request.getParameter("isCheck");
-		String msg = "이메일을 입력해주세요";
+		String msg = "�씠硫붿씪�쓣 �엯�젰�빐二쇱꽭�슂";
 		int chk = service.idCheck(mem_id);
 		if (!mem_id.equals("")) {
 			if (chk == 0) {
 				isCheck = "true";
-				msg = "사용 가능한 아이디";
+				msg = "�궗�슜 媛��뒫�븳 �븘�씠�뵒";
 			} else {
-				msg = "사용중인 아이디";
+				msg = "�궗�슜以묒씤 �븘�씠�뵒";
 			}
 		}
 		Map<String, Object> map = new HashMap<String, Object>();

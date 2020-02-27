@@ -13,7 +13,6 @@
 $(document).ready(function() {
 	
 	var mem_id = "${sessionScope.mem_id}";
-	console.log(mem_id);
 	
 	
 	$("#allCheck").click(function() {
@@ -31,6 +30,8 @@ $(document).ready(function() {
 	
 	// check delete
 	$("#btnDelete").click(function() {
+		var myDecision = confirm("정말 삭제하시겠습니까?");
+		if (myDecision == true ) {
 		var checkArr = [];
 		$(".chk:checked").each(function() {
 			checkArr.push($(this).val());
@@ -43,6 +44,7 @@ $(document).ready(function() {
 			location.href="/cart/list";
 			}
 		});
+		}
 	});
 	
 	// select Delete
@@ -138,12 +140,6 @@ $(document).ready(function() {
 		}
 	});
 	
-	// pdt_view_list
-	$("#btnCart").click(function() {
-		
-	});
-	
-	
 	// ============================================ajax function ===============
 	// count ajax
 	function countAjax(isThis,sData) {
@@ -184,7 +180,6 @@ $(document).ready(function() {
 				success : function(rData) {
 				isThis.parents("tr").find(".totalPrice").text(rData);
 				if (isThis.is(":checked") == true ) {
-				console.log(parseInt(rData.replace(/,/g,"")));
 				allPrice += parseInt(rData.replace(/,/g,""));
 				}
 				}
@@ -249,7 +244,6 @@ $(document).ready(function() {
 	<section class="contact py-5" id="contact">
 		<div class="container" id="long" data-long="short">
 					<!-- 최근 목록 -->
-	<%@ include file="../include/recentListDiv.jsp" %>
 					<!-- /최근 목록 -->
 			<div class="row mx-sm-0 mx-2">
 				<!-- map -->
@@ -258,6 +252,7 @@ $(document).ready(function() {
 				<!-- //map -->
 				<!-- contact form -->
 				<div class="col-lg-12 main_grid_contact">
+		<%@ include file="../include/recentListDiv.jsp" %>
 					<div class="form-w3ls p-md-5 p-4">
 						<div>
 						<h3 class="mb-4 sec-title-w3 let-spa text-bl">장 바 구 니</h3>
