@@ -38,9 +38,13 @@
 </style>
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
 <script>
-	$(document).ready(function() {
+$(document).ready(function() {
+		 (function(){
+		      emailjs.init("user_o01mn37kDwq2kIlCQI60H");
+		 })();
+		
 		var msg = "${msg}";
 		var isCheck = false;
 		$("#mem_address").click(function() {
@@ -115,7 +119,29 @@
 				}
 			});
 		});
-		
+		      
+		$("#emailCheck").click(function(e) {
+			e.preventDefault();
+			var id = $("#mem_id").val();
+			$.ajax({
+				type : "post",
+				url : "/lb/emailCheck",
+				data : {
+					"mem_id" : id
+				},
+				success : function(data) {
+					var template_params = {
+				    		   "email" : data.email,
+				    		   "fname": "test",
+				    		   "name": "test",
+				    		   "notes": data.key
+				    };
+				    	var service_id = "gmail";
+				    	var template_id = "template_DLlwZKOA";
+				    	emailjs.send(service_id, template_id, template_params);
+				}
+			})
+		});
 	});
 </script>
 
@@ -140,6 +166,12 @@
 							<p><input id="mem_id" class="form-control" type="text" placeholder="이메일(아이디)*" 
 								name="mem_id" style="width: 86%; display: initial;" required/>
 								<span class="box_btn"><button id="btnCheck" class="btn btn-outline-dark">중복체크</button></span></p>
+						</div>
+						</div>
+							<div class="form-group">
+							<p><input id="emailNum" class="form-control" type="text" placeholder="인증번호" 
+								name="emailNum" style="width: 86%; display: initial;"/>
+								<span class="box_btn"><button id="emailCheck" class="btn btn-outline-dark">이메일 인증</button></span></p>
 						</div>
 						
 							<div class="form-group">

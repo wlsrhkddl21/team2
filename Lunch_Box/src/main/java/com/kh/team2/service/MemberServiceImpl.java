@@ -59,4 +59,9 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public void setKey(MemberVo memberVo) throws Exception {
+		memberDao.setKey(memberVo);
+	}
+
 }
