@@ -35,15 +35,6 @@ public class CartAjaxController {
 		return strTotal;
 	}
 	
-	@RequestMapping(value ="/buy",method= RequestMethod.POST)
-	@ResponseBody
-	public void checkBuy(@RequestBody CartVo[] arrCart) {
-		System.out.println(arrCart.length);
-		for (CartVo vo : arrCart) {
-			System.out.println(vo);
-		}
-	}
-	
 	@RequestMapping(value = "/updateCount", method = RequestMethod.POST)
 	@ResponseBody
 	public int updateCount(@RequestBody CartVo vo) throws Exception {
@@ -57,7 +48,6 @@ public class CartAjaxController {
 	@RequestMapping(value = "/format" , method = RequestMethod.POST)
 	@ResponseBody
 	public String formatPrice(@RequestParam("price")int price) throws Exception {
-		System.out.println(price);
 		String result = df.format(price);
 		return result;
 	}

@@ -96,7 +96,7 @@
 		
 	});
 </script>
-<div class="container-fluid" id="long" data-long="short">
+<div class="container-fluid" id="long" data-long="long">
 <!-- 리뷰게시판 -->
 <form id="reviewForm" action="/review/reviewContent" method="get">
 	<input type="hidden" name="rev_num"/>
