@@ -4,19 +4,21 @@ import com.kh.team2.domain.MemberVo;
 
 public interface MemberDao {
 	
-	// È¸¿ø °¡ÀÔ
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void insertMember(MemberVo memberVo) throws Exception;
 	
-	// ¾ÆÀÌµð·Î È¸¿ø Á¶È¸
+	// ï¿½ï¿½ï¿½Ìµï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½È¸
 	public MemberVo readMember(String mem_id) throws Exception;
 	
-	// ¾ÆÀÌµð¶û ºñ¹Ð¹øÈ£·Î È¸¿ø Á¶È¸
+	// ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½È¸
 	public MemberVo readWithPw(String mem_id, String mem_pass) throws Exception;
 
 	public MemberVo GetKey(String mem_id, String key);
 	
-	// ¾ÆÀÌµð Áßº¹Ã¼Å©
+	// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
 	public int idCheck(String mem_id) throws Exception;
+	
+	public void memUpdate(MemberVo memVo) throws Exception;
 
 //	public void GetKey(String mem_id, String key);
 }

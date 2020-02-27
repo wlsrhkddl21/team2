@@ -301,23 +301,19 @@ $(document).ready(function() {
 			
 			</form>
 				<div style="clear:both;">
+					<button type="button" class="btn btn-outline-dark"
+						id="btnListAll">목록</button>
 				<c:if test="${ mem_id == 'admin' || mem_id == reviewVo.rev_writer }">
 					
 					<button type="button" class="btn btn-outline-danger"
-						id="btnDelete">삭제</button>				
+						id="btnDelete">삭제</button>		
 				</c:if>
-					<button type="button" class="btn btn-outline-dark"
-						id="btnListAll">목록</button>
 				</div>
+				<div><br></div>
 			<!-- 댓글 작성 -->
 	<c:if test="${mem_id != null && mem_id != ''}">
-	<div class="row">
+	<div class="row" style="margin-top:10px;">
 		<div class="col-md-12">
-			<div class="form-group">
-				<label for="repWriter">작성자</label>
-				<input type="text" id="repWriter" value="${mem_id}"
-					class="form-control" readonly/>
-			</div>
 			<div class="form-group">
 				<label for="repContent">댓글내용</label>
 				<input type="text" id="repContent"

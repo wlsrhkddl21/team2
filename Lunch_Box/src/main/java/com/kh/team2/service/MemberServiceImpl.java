@@ -53,4 +53,10 @@ public class MemberServiceImpl implements MemberService {
 		return pointDao.pointList(mem_id);
 	}
 
+	@Override
+	public void memUpdate(MemberVo memVo) throws Exception {
+		memberDao.memUpdate(memVo);
+		
+	}
+
 }

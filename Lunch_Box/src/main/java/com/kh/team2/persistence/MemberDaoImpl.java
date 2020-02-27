@@ -48,4 +48,10 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE + ".idCheck", mem_id);
 	}
 
+	@Override
+	public void memUpdate(MemberVo memVo) throws Exception {
+		sqlSession.update(NAMESPACE+".memUpdate",memVo);
+		
+	}
+
 }
