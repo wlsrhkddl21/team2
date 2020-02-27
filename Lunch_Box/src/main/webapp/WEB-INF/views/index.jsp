@@ -26,6 +26,14 @@
 	.support ul a:hover{
 		color: #fd5c63;
 	}
+	.popup p {
+		color: inherit;
+		padding: 10px;
+		border-top: 1px solid #cacaca;
+	}
+	.silver {
+		background: #f2f2f2;
+	}
 	
 </style>
 <script>
@@ -42,7 +50,12 @@ $(function() {
 		$("#mainForm").attr("action","/board/faqRead");
 		$("#mainForm").submit();
 	});
-
+	$(".readReview").click(function() {
+		var num = $(this).attr("data-bno");
+		$("#num").attr("name","rev_num").val(num);
+		$("#mainForm").attr("action","/review/reviewContent");
+		$("#mainForm").submit();
+	});
 });
 </script>
 <!-- 	banner slider -->
@@ -80,7 +93,7 @@ $(function() {
 	</div>
 <!-- 	//banner slider -->
 <!-- best menu -->
-	<div class="gallery py-5" id="gallery">
+	<div class="gallery py-5 silver" id="gallery">
 		<div class="container py-xl-5 py-lg-3">
 			<h3 class="title-w3ls text-bl mb-5">BEST MENU</h3>
 			<div class="row no-gutters">
@@ -113,9 +126,9 @@ $(function() {
 	</div>
 <!-- Review -->
 	<!-- 	gallery -->
-	<div class="gallery py-5" id="gallery">
+	<div class="gallery py-5 silver" id="gallery">
 		<div class="container py-xl-5 py-lg-3">
-			<h3 class="title-w3ls text-center text-bl mb-5">RECENT REVIEW</h3>
+			<h3 class="title-w3ls text-bl mb-5">RECENT REVIEW</h3>
 			<div class="row no-gutters">
 				<c:forEach items="${reviewList}" var="list" begin="0" end="2" varStatus="num">
 				<div class="col-md-4 gallery-grid1">
@@ -136,12 +149,14 @@ $(function() {
 			</div>
 		</div>
 		<c:forEach items="${reviewList}" var="list" varStatus="num">
-		<div id="gal${num.count}" class="pop-overlay animate">
+		<div id="gal${num.count}" class="pop-overlay">
 			<div class="popup">
+				<a href="#go" class="readReview" data-bno="${list.rev_num}">
 				<img src="/review/displayFile?fileName=${list.rev_image}" alt="Popup Image" class="img-fluid" />
+				</a>
 				<p class="mt-4">${list.rev_content}
 				</p>
-				<a class="close" href="#gallery">&times;</a>
+				<a class="close" href="#not">&times;</a>
 			</div>
 		</div>
 		</c:forEach>
