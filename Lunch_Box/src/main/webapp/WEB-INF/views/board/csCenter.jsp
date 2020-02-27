@@ -191,7 +191,7 @@ $(document).ready(function(){
 		<c:forEach items="${list }" var="faqVo">
 			<tr class="faq_subject">
 				<td class="type"><img src="http://www.homeal.net/_skin/homeal/img/bg/faq_q.png" alt="Question"></td>
-				<td class="left">BEST</td>
+				<td class="left" style="text-align:center;">BEST</td>
 				<td class="left subject"><a data-bno="${faqVo.faq_num}" class="faq_title"> ${faqVo.faq_title } </a></td>
 			</tr>
 			<tr class="faq_content" id="faq97" style="display:none;">
