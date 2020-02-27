@@ -2,6 +2,7 @@ package com.kh.team2.controlloer;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.SynchronousQueue;
 
@@ -25,8 +26,10 @@ import com.kh.team2.domain.MemberVo;
 import com.kh.team2.domain.PagingDto;
 import com.kh.team2.domain.ProductVo;
 import com.kh.team2.domain.ReviewVo;
+import com.kh.team2.persistence.ReviewDao;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BoardService;
+import com.kh.team2.service.BuyService;
 import com.kh.team2.service.ReviewService;
 import com.kh.team2.util.ReviewFileUploadUtil;
 
@@ -35,7 +38,13 @@ import com.kh.team2.util.ReviewFileUploadUtil;
 public class ReviewController {
 	
 	@Inject
+	BuyService buyService;
+	
+	@Inject
 	ReviewService reviewService;
+	
+	@Inject
+	ReviewDao reviewDao;
 	
 	@Inject
 	AdminService adminService;
@@ -59,9 +68,9 @@ public class ReviewController {
 	
 	// 글쓰러가기
 	@RequestMapping(value ="/reviewRegister",method = RequestMethod.GET)
-	public String reviewRegister(Model model) throws Exception {
-		
+	public String reviewRegister(Model model,@RequestParam String buy_num) throws Exception {
 		List<ProductVo> list = reviewService.productName();
+		model.addAttribute("buy_num",buy_num);
 		model.addAttribute("list", list);
 		return "/review/reviewRegister";
 	}
@@ -69,12 +78,20 @@ public class ReviewController {
 	// 글등록
 	@RequestMapping(value = "/reviewInsert", method = RequestMethod.POST)
 	public String insertReview(ReviewVo reviewVo, MultipartHttpServletRequest request) throws Exception { 
+		int buy_num = Integer.parseInt(request.getParameter("buy_num"));
+		int rev_num = reviewDao.getRev_num();
+		System.out.println("buy:"+buy_num);
+		System.out.println("rev_num:"+rev_num);
+		List<Integer> BRNum = new ArrayList<Integer>();
+		BRNum.add(buy_num);
+		BRNum.add(rev_num);
+		reviewVo.setRev_num(rev_num);
 		MultipartFile file = request.getFile("file");
 		String originalFileName = file.getOriginalFilename();
-		System.out.println("file:" + originalFileName);
 		String revPath = ReviewFileUploadUtil.uploadFile(uploadPath+"/review", originalFileName, file.getBytes(), true);
 		String revMainPath = revPath.replace("\\", "/");
 		reviewVo.setRev_image(revMainPath);
+		buyService.buy_reviewUpdate(BRNum);
 		reviewService.insertReview(reviewVo);
 		return "redirect:/review/reviewBoard";
 	}

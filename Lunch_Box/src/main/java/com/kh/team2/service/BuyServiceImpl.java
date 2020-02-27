@@ -145,5 +145,11 @@ public class BuyServiceImpl implements BuyService {
 		return myDao.selectBuyMyByMemId(mem_id);
 	}
 
+	@Override
+	public void buy_reviewUpdate(List<Integer> BRNum) throws Exception {
+		buyDao.buy_reviewUpdate(BRNum);
+		
+	}
+
 
 }

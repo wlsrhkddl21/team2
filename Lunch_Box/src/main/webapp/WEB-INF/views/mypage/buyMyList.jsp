@@ -8,6 +8,9 @@
 	border: 5px solid #ededed;
 	margin-top: 20px;
 }
+th{
+	background: #f8f9fa;
+}
 </style>
 <script>
 	
@@ -25,7 +28,7 @@
 				</div>
 				<div class="col-md-9">
 					<div class="row">
-						<div class="mypage_info text-center">
+						<div class="mypage_info text-center" style="width: 700px;">
 						<h4 style="margin-bottom: 15px; ">나만의 도시락 구매 목록</h4>
 							<table class="table text-center">
 								<tr>

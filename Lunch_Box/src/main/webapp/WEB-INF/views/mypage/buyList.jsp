@@ -13,22 +13,33 @@ th{
 }
 </style>
 <script>
-	$(document).ready(function(e) {
-		$(".proView").click(function(e) {
-			e.preventDefault();
-			var buy_num = $(this).attr("data-buy_num");
-			$(".detailView").each(function(){
-				var detail_num = $(this).attr("data-buy_detail");
-				if(buy_num==detail_num){
-					$(this).toggle();
-				}
-			});
+$(document).ready(function(e) {
+	$(".proView").click(function(e) {
+		e.preventDefault();
+		var buy_num = $(this).attr("data-buy_num");
+		$(".detailView").each(function(){
+			var detail_num = $(this).attr("data-buy_detail");
+			if(buy_num==detail_num){
+				$(this).toggle();
+			}
 		});
 	});
+	$("#btnRegister").click(function(){
+		var buy_num = $(this).attr("data-buy_numreview");
+		location.href = "/review/reviewRegister?buy_num="+buy_num;
+	});
+// 	$("#btnDelete").click(function(){
+// 		var rev_num = $(this).attr("data-buy_numreview");
+// 		if(confirm("삭제하시겠습니까?"){
+// 		location.href ="/review/reviewDelete?rev_num="+rev_num;
+// 		}
+// 	});
+	
+});
 </script>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-2"></div>
+		<div class="col-md-2" style="height: 600px;"></div>
 		<div class="col-md-8">
 			<div style="height: 20px;"></div>
 			<h3 class="title-w3ls text-center text-bl mb-5">My page</h3>
@@ -39,7 +50,7 @@ th{
 				</div>
 				<div class="col-md-9">
 					<div class="row">
-						<div class="mypage_info text-center">
+						<div class="mypage_info text-center" >
 						<h4 style="margin-bottom: 15px; ">구매 목록</h4>
 							<table class="table text-center">
 								<thead>
@@ -49,6 +60,7 @@ th{
 										<th>전화번호</th>
 										<th>상품</th>
 										<th>금액</th>
+										<th></th>
 									</tr>
 								</thead>
 								<%-- 									${buyFirstlist } --%>
@@ -68,6 +80,16 @@ th{
 
 											</c:forEach>
 											<td>${buyJoinDto.buy_price }</td>
+											<td>
+											<c:if test="${buyJoinDto.buy_review==0 }">
+												<button type="button" id="btnRegister" class="btn btn-outline-dark"
+												data-buy_numreview="${buyJoinDto.buy_num }">리뷰쓰기</button>
+											</c:if>
+<%-- 											<c:if test="${buyJoinDto.buy_review!=0 }"> --%>
+<!-- 													<button type="button" id="btnDelete" class="btn btn-outline-dark" -->
+<%-- 												data-buy_numreview="${buyJoinDto.buy_review }">리뷰삭제</button> --%>
+<%-- 											</c:if> --%>
+											</td>
 										</tr>
 										<c:forEach items="${buyList }" var="buyView">
 											<c:if test="${buyView.buy_num==buyJoinDto.buy_num }">
@@ -84,8 +106,10 @@ th{
 															</td>
 															<td>${productVo.pdt_price }</td>
 														</c:if>
+													<td>
+													</td>
 													</c:forEach>
-
+													
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -96,9 +120,9 @@ th{
 						</div>
 					</div>
 				</div>
-				<div class="col-md-2" style="height: 600px;"></div>
 			</div>
 		</div>
+		<div class="col-md-2"></div>
 	</div>
 </div>
 <%@ include file="../include/footer.jsp"%>

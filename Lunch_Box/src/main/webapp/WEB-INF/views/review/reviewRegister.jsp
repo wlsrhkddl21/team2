@@ -42,7 +42,7 @@ $(document).ready(function(){
 				<div class="col-lg-8 main_grid_contact">
 					<div class="form-w3ls p-md-5 p-4">
 						<form id="registForm" action="/review/reviewInsert" method="post" enctype="multipart/form-data">
-							
+							<input type="hidden" name="buy_num" value="${buy_num }"> 
 							<div class="form-group">
 								<label>리뷰 제목</label>
 								<input id="rev_title" class="form-control" 

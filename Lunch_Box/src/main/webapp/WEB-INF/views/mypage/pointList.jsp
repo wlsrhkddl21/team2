@@ -4,10 +4,9 @@
 <%@ include file="../include/header.jsp"%>
 <style>
 .mypage_info {
-	padding: 50px;
+	padding: 35px;
 	border: 5px solid #ededed;
 	margin-top: 20px;
-	margin-left: 60px;
 }
 th{
 	background: #f8f9fa;
@@ -26,7 +25,7 @@ th{
 				</div>
 				<div class="col-md-9">
 					<div class="row">
-							<div class="mypage_info text-center">
+							<div class="mypage_info text-center" style="width: 700px;">
 								<h4 class="text-center" style="margin-bottom: 15px;">포인트 내역</h4>
 								<table class="table">
 									<tr>

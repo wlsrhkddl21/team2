@@ -20,8 +20,8 @@
 		font-weight: bold;
 	}
 	.footer-top a {
-		color : #fff;
-		cursor: pointer;
+		color : #999;
+		font-size: 16px;
 	}
 	.footer-top a:hover {
 		color: #0056b3;
@@ -33,21 +33,17 @@
 				<li><a href="/board/notice">공지사항</a></li>
 				<li><a href="/board/qna">고객센터</a></li>
 				<li><a href="/board/qna">문의게시판</a></li>
-				<li><a href="https://www.iei.or.kr/main/main.kh">KH정보교육원</a><li>
+				<li><a href="http://www.ulsankh.com/">KH정보교육원</a><li>
 			</ul>
 		</div>
 		<div>
 			<p>Copyright &copy; 2019.Company name All rights reserved.More Templates</p>
-			<p>Copyright &copy; Google Naver Homeal PocketDosirak<p>
+			<p>Copyright &copy; Google Naver KH LunchBox<p>
 			
 		</div>
 		<div>
 			<p>ProJect Team</p>
-			<p>Hyun</p>
-			<p>Lee</p>
-			<p>Jang</p>
-			<p>Min</p>
-			<p>Jeon</p>
+			<p> Hyun Lee Jang Min Jeon</p>
 		</div>
 		<a href="#" class="move-top text-center" onclick="window.scrollTo(0,0);">
 			<span class="fa fa-level-up" aria-hidden="true"></span>
