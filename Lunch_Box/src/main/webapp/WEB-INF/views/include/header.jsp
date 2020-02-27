@@ -84,7 +84,7 @@ $(document).ready(function(){
 						<li><a href="/review/reviewBoard">리뷰 게시판</a></li>
 						<li>
 							<!-- First Tier Drop Down -->
-							<label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"
+							<label for="drop-2" class="toggle toogle-2">고객센터 <span class="fa fa-angle-down"
 									aria-hidden="true"></span>							</label>
 							<a href="/cs/">고객센터 <span class="fa fa-angle-down" aria-hidden="true"></span></a>
 							<input type="checkbox" id="drop-2" />
