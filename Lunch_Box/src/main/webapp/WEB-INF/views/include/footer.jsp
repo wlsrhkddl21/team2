@@ -20,8 +20,8 @@
 		font-weight: bold;
 	}
 	.footer-top a {
-		color : #fff;
-		cursor: pointer;
+		color : #999;
+		font-size: 14px;
 	}
 	.footer-top a:hover {
 		color: #0056b3;
@@ -33,7 +33,7 @@
 				<li><a href="/board/notice">공지사항</a></li>
 				<li><a href="/board/qna">고객센터</a></li>
 				<li><a href="/board/qna">문의게시판</a></li>
-				<li><a href="https://www.iei.or.kr/main/main.kh">KH정보교육원</a><li>
+				<li><a href="http://www.ulsankh.com/">KH정보교육원</a><li>
 			</ul>
 		</div>
 		<div>
