@@ -124,7 +124,7 @@
 						<div class="div_text">배송비 : 2,500원 (5만원 이상 무료)</div>
 						<div class="div_text">적립금 : 구매 금액의 5%</div>
 						<div class="div_text">수량: <input type="button" class="btn btn-light" value="-" id="btnSub"/>
-									<input name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" />
+									<input name="buy_count" type="text" value="1" style="width: 50px;" id="pdt_count" readonly="readonly" />
 									<input type="button" class="btn btn-light" value="+" id="btnAdd"/>
 						</div>
 						<hr>

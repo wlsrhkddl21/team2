@@ -22,9 +22,11 @@ $(document).ready(function(){
 	$("#btnLogout").click(function(){
 		alert("로그아웃 되었습니다");
 	});
+	
 });
 </script>
 <head>
+<c:remove var="msg" scope="session" />
 	<title>Lunch Box</title> 
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,7 +59,6 @@ $(document).ready(function(){
 	<!-- //Web-Fonts -->
 </head>
 <body>
-
 	<!-- header -->
 	<!-- //top-bar -->
 

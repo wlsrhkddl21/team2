@@ -25,7 +25,6 @@
 <!-- </div> -->
 <script>
 $(document).ready(function(){
-	console.log(window.location.pathname);
 	var path = window.location.pathname;
 	
 	if (path == "/mp/myInfo") {
