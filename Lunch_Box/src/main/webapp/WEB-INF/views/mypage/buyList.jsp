@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../include/header.jsp"%>
-<<<<<<< HEAD
 <style>
 .mypage_info {
 	padding: 50px;
@@ -10,9 +9,8 @@
 	margin-top: 20px;
 /* 	margin-left: 60px; */
 }
-=======
+</style>
 <%@ include file="../include/mypageStyle.jsp"%>
->>>>>>> branch 'master' of https://github.com/wlsrhkddl21/team2.git
 
 <script>
 	$(document).ready(function(e) {
