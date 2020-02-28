@@ -175,7 +175,6 @@
 						<tr>
 							<th>글번호</th> 
 							<th>후기 이미지</th> 
-	<!-- 						<th>상품명</th>  -->
 							<th>글제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
@@ -190,13 +189,7 @@
 							<c:if test="${not empty reviewVo.rev_image}">
 								<td><img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}"></td>
 							</c:if>
-	<!-- 						<td> -->
-	<%-- 							<c:forEach items="${productList}" var="ProductVo"> --%>
-	<%-- 								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}"> --%>
-	<%-- 									${ProductVo.pdt_name} --%>
-	<%-- 								</c:if> --%>
-	<%-- 							</c:forEach> --%>
-	<!-- 						</td> -->
+	
 							<td><a data-rno="${reviewVo.rev_num}" class="readTitle" href="#">${reviewVo.rev_title }</a></td>
 							<td>${reviewVo.rev_writer }</td>
 							<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
