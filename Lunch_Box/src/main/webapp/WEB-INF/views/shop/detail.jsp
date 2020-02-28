@@ -48,7 +48,7 @@
 			if (mem_id != "") {
 				location.href="/cart/insert/"+"${productVo.pdt_num}"+"/"+count;
 			} else {
-				alert("로그인이 필요합니다.");
+				alert("장바구니는 로그인후에 이용할 수 있습니다.");
 				location.href="/lb/login";
 			}
 		});
@@ -56,8 +56,9 @@
 		$("#bntBuy").click(function(){
 
 			if(mem_id == ""){
-				console.log("아이디없음");
+// 				console.log("아이디없음");
 				 alert("결제는 로그인 후에 이용할 수 있습니다.");
+				 location.href="/lb/login";
 			}else{
 				$("#buy_form").submit();
 			}
@@ -164,45 +165,50 @@
 			<!-- 리뷰게시판 -->
 			<div class="col-md-12 ">		
 				
-				<form action = "/review/reviewContent" method="get">
+		<form action = "/review/reviewContent" method="get">
 		<div style="height: 20px"></div>
-		<table class="table text-center table-striped">
-				<thead>
-					<tr>
-						<th>글번호</th> 
-						<th>후기 이미지</th> 
-<!-- 						<th>상품명</th>  -->
-						<th>글제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-					</tr>
-				</thead>
-				<thead>
-					
-				<c:forEach items="${reviewList }" var="reviewVo">
-					
+		<c:choose>
+		<c:when test="${empty reviewList }"></c:when>
+		<c:otherwise>
+			<table class="table text-center table-striped">
+					<thead>
 						<tr>
-						<td>${reviewVo.rev_num }</td>
-						<c:if test="${not empty reviewVo.rev_image}">
-							<td><img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}"></td>
-						</c:if>
-<!-- 						<td> -->
-<%-- 							<c:forEach items="${productList}" var="ProductVo"> --%>
-<%-- 								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}"> --%>
-<%-- 									${ProductVo.pdt_name} --%>
-<%-- 								</c:if> --%>
-<%-- 							</c:forEach> --%>
-<!-- 						</td> -->
-						<td><a data-rno="${reviewVo.rev_num}" class="readTitle" href="#">${reviewVo.rev_title }</a></td>
-						<td>${reviewVo.rev_writer }</td>
-						<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
-   								pattern="yyyy-MM-dd HH:mm:ss"/></td>   
-					</tr>
-					
- 					
-				</c:forEach>
-				</thead>
-			</table>
+							<th>글번호</th> 
+							<th>후기 이미지</th> 
+	<!-- 						<th>상품명</th>  -->
+							<th>글제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<thead>
+						
+					<c:forEach items="${reviewList }" var="reviewVo">
+						
+							<tr>
+							<td>${reviewVo.rev_num }</td>
+							<c:if test="${not empty reviewVo.rev_image}">
+								<td><img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}"></td>
+							</c:if>
+	<!-- 						<td> -->
+	<%-- 							<c:forEach items="${productList}" var="ProductVo"> --%>
+	<%-- 								<c:if test="${reviewVo.rev_pdt_name == ProductVo.pdt_num}"> --%>
+	<%-- 									${ProductVo.pdt_name} --%>
+	<%-- 								</c:if> --%>
+	<%-- 							</c:forEach> --%>
+	<!-- 						</td> -->
+							<td><a data-rno="${reviewVo.rev_num}" class="readTitle" href="#">${reviewVo.rev_title }</a></td>
+							<td>${reviewVo.rev_writer }</td>
+							<td><fmt:formatDate value="${reviewVo.rev_regdate }" 
+	   								pattern="yyyy-MM-dd HH:mm:ss"/></td>   
+						</tr>
+						
+	 					
+					</c:forEach>
+					</thead>
+				</table>
+			</c:otherwise>
+			</c:choose>
 			</form>
 			</div>
 			<!-- 리뷰게시판 끝 -->
