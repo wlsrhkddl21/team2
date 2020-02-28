@@ -7,13 +7,11 @@
 	padding: 50px;
 	border: 5px solid #ededed;
 	margin-top: 20px;
-	margin-left: 60px;
-}
-
-th {
-	background: #f8f9fa;
+/* 	margin-left: 60px; */
 }
 </style>
+<%@ include file="../include/mypageStyle.jsp"%>
+
 <script>
 	$(document).ready(function(e) {
 		$(".proView").click(function(e) {
@@ -25,7 +23,7 @@ th {
 					$(this).toggle();
 				}
 			});
-		});
+		}); 
 
 		$("#btnRegister").click(function() {
 			var buy_num = $(this).attr("data-buy_numreview");
@@ -43,7 +41,7 @@ th {
 </script>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-2" style="height: 600px;"></div>
+		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div style="height: 20px;"></div>
 			<h3 class="title-w3ls text-center text-bl mb-5">My page</h3>
@@ -67,7 +65,7 @@ th {
 												<th>구매일</th>
 												<th>배송지</th>
 												<th>전화번호</th>
-												<th>상품</th>
+												<th width="200px;">상품</th>
 												<th>금액</th>
 												<th></th>
 											</tr>
@@ -118,11 +116,11 @@ th {
 												</c:if>
 											</c:forEach>
 										</c:forEach>
-
 									</table>
 								</c:otherwise>
 							</c:choose>
 						</div>
+						<div style="height: 400px;"></div>
 					</div>
 				</div>
 			</div>

@@ -2,17 +2,8 @@
 	pageEncoding="UTF-8"%>														
 															
 <%@ include file="../include/header.jsp"%>															
-<style>															
-.mypage_info {															
-	padding: 50px;														
-	border: 5px solid #ededed;														
-	margin-top: 20px;														
-	margin-left: 60px;														
-}		
-th {																		
-	background: #f8f9fa;																	
-}															
-</style>															
+<%@ include file="../include/mypageStyle.jsp"%>
+															
 <script>															
 															
 </script>															
@@ -29,7 +20,7 @@ th {
 				</div>											
 				<div class="col-md-9">											
 					<div class="row">										
-						<div class="mypage_info text-center">									
+						<div class="mypage_info text-center" style="width: 931.84px;">									
 							<h4 style="margin-bottom: 15px;">나만의 도시락 구매 목록</h4>								
 							<c:choose>								
 								<c:when test="${empty list}">							
@@ -61,7 +52,7 @@ th {
 						</div>									
 					</div>										
 				</div>											
-				<div class="col-md-2" style="height: 600px;"></div>											
+				<div class="col-md-2" style="height: 400px;"></div>											
 			</div>												
 		</div>													
 	</div>														

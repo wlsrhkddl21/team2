@@ -32,7 +32,7 @@ th {
 					<a href="/myLunch/readAll"
 						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">나만의도시락</a>
 					<a href="/admin/orderList"
-						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문목록</a>
+						class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문내역</a>
 				</div>
 				<div class="col-md-6"></div>
 			</div>
@@ -80,9 +80,9 @@ th {
 														<c:if test="${buyView.pdt_num==productVo.pdt_num }">
 
 															<td><a href="/shop/detail/${buyView.pdt_num }"
-																class="proView" style="font-size:13px">(${productVo.pdt_name })</a>
+																class="proView" style="font-size:13px">${productVo.pdt_name }(${buyView.buy_count }개)</a>
 															</td>
-															<td>${productVo.pdt_price }</td>
+															<td>${productVo.pdt_price*buyView.buy_count }</td>
 														</c:if>
 													</c:forEach>
 

@@ -157,5 +157,13 @@ public class BuyServiceImpl implements BuyService {
 		
 	}
 
+	@Override
+	public List<BuyMyVo> selectBuyMy() throws Exception {
+		
+		return myDao.selectBuyMy();
+	}
+	
+	
+
 
 }

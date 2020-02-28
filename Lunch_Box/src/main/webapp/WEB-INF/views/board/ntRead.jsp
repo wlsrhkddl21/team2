@@ -89,27 +89,32 @@ $(document).ready(function() {
 		$("#replyList").empty();
 		var url = "/replies/all/${boardVo.not_num}";
 		$.getJSON(url, function(rData) {
-			console.log(rData);
+			console.log("rdata:" + rData);
 			var strHtml = "";
-			$(rData).each(function(){
+			if(rData == "" || rData == null) {
 				strHtml += "<tr>";
-// 				strHtml += "<td>" + this.ntrno +"</td>";
-				strHtml += "<td>" + this.ntrcontent + "</td>";
-				strHtml += "<td>" + this.ntrwriter + "</td>";
-				strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
-				if("${mem_id}" == this.ntrwriter || "${mem_id}" == "admin") {
-					strHtml += "<td><button type='button' class='btn btn-outline-dark btnReplyUpdate'";
-					strHtml += " data-rno='" + this.ntrno + "'";
-					strHtml += " data-reply_text='" + this.ntrcontent + "'";
-					strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
-					strHtml += "<td><button type='button' class='btn btn-outline-danger btnReplyDelete'";
-					strHtml += " data-rno='" + this.ntrno + "'";
-					strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
-				} else {
-					strHtml += "<td></td><td></td>";	
-				}
-				strHtml += "</tr>";
-			});
+				strHtml += "<td colspan='5'> 댓글이 없습니다. </td>";
+			} else if (rData != ""){
+				$(rData).each(function(){
+					strHtml += "<tr>";
+//	 				strHtml += "<td>" + this.ntrno +"</td>";
+					strHtml += "<td>" + this.ntrcontent + "</td>";
+					strHtml += "<td>" + this.ntrwriter + "</td>";
+					strHtml += "<td>" + dateString(this.ntrdate) + "</td>";
+					if("${mem_id}" == this.ntrwriter || "${mem_id}" == "admin") {
+						strHtml += "<td><button type='button' class='btn btn-outline-dark btnReplyUpdate'";
+						strHtml += " data-rno='" + this.ntrno + "'";
+						strHtml += " data-reply_text='" + this.ntrcontent + "'";
+						strHtml += " data-replyer='" + this.ntrwriter + "'>수정</button></td>";
+						strHtml += "<td><button type='button' class='btn btn-outline-danger btnReplyDelete'";
+						strHtml += " data-rno='" + this.ntrno + "'";
+						strHtml += " data-bno='" + this.ntbno + "'>삭제</button></td>";	
+					} else {
+						strHtml += "<td></td><td></td>";	
+					}
+					strHtml += "</tr>";
+				});
+			}
 			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
 			$("#ntRcontent").val("");
 		});
