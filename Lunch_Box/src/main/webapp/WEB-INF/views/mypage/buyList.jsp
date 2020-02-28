@@ -15,7 +15,7 @@
 					$(this).toggle();
 				}
 			});
-		});
+		}); 
 
 		$("#btnRegister").click(function() {
 			var buy_num = $(this).attr("data-buy_numreview");
