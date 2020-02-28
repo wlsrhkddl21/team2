@@ -172,6 +172,7 @@ function displayCnt(v){
 			if(mem_id == ""){
 // 				console.log("아이디없음");
 				 alert("결제는 로그인 후에 이용할 수 있습니다.");
+				 location.href="/lb/login";
 				 return;
 			}else if(chkN==false){
 // 				console.log("선택 X");
