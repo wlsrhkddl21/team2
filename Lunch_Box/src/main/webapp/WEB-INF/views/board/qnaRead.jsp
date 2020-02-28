@@ -109,6 +109,10 @@ $(document).ready(function() {
 		$.getJSON(url, function(rData) {
 			console.log(rData);
 			var strHtml = "";
+			if(rData == "" || rData == null) {
+				strHtml += "<tr>";
+				strHtml += "<td colspan='5'> 댓글이 없습니다. </td>";
+			} else if (rData != ""){
 			$(rData).each(function(){
 				strHtml += "<tr>";
 				strHtml += "<td>" + this.qrcontent + "</td>";
@@ -127,6 +131,7 @@ $(document).ready(function() {
 				}
 				strHtml += "</tr>";
 			});
+			}
 			$("#replyList").append(strHtml); // <tbody>의 자식 엘리먼트로 html을 추가
 		});
 	}
