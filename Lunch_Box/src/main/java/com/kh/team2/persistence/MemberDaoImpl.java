@@ -38,9 +38,8 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public MemberVo GetKey(String mem_id, String key) {
-		// TODO Auto-generated method stub
-		return null;
+	public void setKey(MemberVo memberVo) {
+		sqlSession.insert(NAMESPACE+".setKey",memberVo);
 	}
 
 	@Override

@@ -37,4 +37,15 @@
 		
 	</update>
 	
+	<insert id="setKey">
+	insert into tbl_join
+	values ( #{mem_id} , #{key} )
+	</insert>
+	
+	<select id="emailCheck" resultType="int">
+		select count(*)
+		from email
+		where email = #{mem_id}
+	</select>
+	
 </mapper>  

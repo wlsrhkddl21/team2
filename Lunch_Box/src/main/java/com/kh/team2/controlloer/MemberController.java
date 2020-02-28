@@ -5,6 +5,7 @@ package com.kh.team2.controlloer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -125,6 +126,21 @@ public class MemberController {
 		System.out.println(memberVo);
 		return null;
 	}
-					
+		
+	@RequestMapping(value="/emailCheck",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> emailCheck(String mem_id) throws Exception {
+		int ran = (int)(Math.random()*1000000)+100000;
+		String key = String.valueOf(ran);
+		MemberVo vo = new MemberVo();
+		vo.setMem_id(mem_id);
+		vo.setKey(key);
+		service.setKey(vo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("key", key);
+		map.put("email", mem_id);
+		return map;
+	}
 	
 }
