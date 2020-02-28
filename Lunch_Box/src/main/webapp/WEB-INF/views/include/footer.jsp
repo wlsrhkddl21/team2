@@ -22,6 +22,7 @@
 	.footer-top a {
 		color : #999;
 		font-size: 16px;
+		font-size: 14px;
 	}
 	.footer-top a:hover {
 		color: #0056b3;
