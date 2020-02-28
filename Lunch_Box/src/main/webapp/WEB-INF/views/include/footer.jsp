@@ -21,6 +21,7 @@
 	}
 	.footer-top a {
 		color : #999;
+		font-size: 16px;
 		font-size: 14px;
 	}
 	.footer-top a:hover {
@@ -38,16 +39,12 @@
 		</div>
 		<div>
 			<p>Copyright &copy; 2019.Company name All rights reserved.More Templates</p>
-			<p>Copyright &copy; Google Naver Homeal PocketDosirak<p>
+			<p>Copyright &copy; Google Naver KH LunchBox<p>
 			
 		</div>
 		<div>
 			<p>ProJect Team</p>
-			<p>Hyun</p>
-			<p>Lee</p>
-			<p>Jang</p>
-			<p>Min</p>
-			<p>Jeon</p>
+			<p> Hyun Lee Jang Min Jeon</p>
 		</div>
 		<a href="#" class="move-top text-center" onclick="window.scrollTo(0,0);">
 			<span class="fa fa-level-up" aria-hidden="true"></span>

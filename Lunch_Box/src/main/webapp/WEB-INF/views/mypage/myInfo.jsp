@@ -65,7 +65,7 @@ $(document).ready(function(){
 					<%@ include file="../include/myMenu.jsp"%>
 				</div>
 				<div class="col-md-9">
-						<div class="mypage_info">
+						<div class="mypage_info" style="width: 700px;">
 						<h4 style="margin-bottom: 15px; text-align:center;">내 정보 변경</h4>
 						<section class="contact py-5" id="contact">
 	<div class="container">

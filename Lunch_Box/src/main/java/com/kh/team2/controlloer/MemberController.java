@@ -110,14 +110,14 @@ public class MemberController {
 	public Map<String, Object> idCheck(HttpServletRequest request, Model model) throws Exception {
 		String mem_id = request.getParameter("mem_id");
 		String isCheck = request.getParameter("isCheck");
-		String msg = "�씠硫붿씪�쓣 �엯�젰�빐二쇱꽭�슂";
+		String msg = "이메일을 입력해주세요";
 		int chk = service.idCheck(mem_id);
 		if (!mem_id.equals("")) {
 			if (chk == 0) {
 				isCheck = "true";
-				msg = "�궗�슜 媛��뒫�븳 �븘�씠�뵒";
+				msg = "사용 가능한 아이디입니다.";
 			} else {
-				msg = "�궗�슜以묒씤 �븘�씠�뵒";
+				msg = "이미 사용중인 아이디입니다.";
 			}
 		}
 		Map<String, Object> map = new HashMap<String, Object>();

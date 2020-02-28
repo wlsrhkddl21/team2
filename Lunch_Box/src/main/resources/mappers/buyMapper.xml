@@ -39,5 +39,17 @@
 		where b.buy_num = bd.buy_num
 		order by b.buy_num desc
 	</select>
+	
+	<update id="buy_reviewUpdate">
+		update tbl_buy set
+		buy_review = #{rev_num}
+		where buy_num = #{buy_num}
+	</update>
+	
+	<update id="buy_reviewDelete">
+		update tbl_buy set
+		buy_review = -1
+		where buy_review = #{buy_review}
+	</update>
 
 </mapper>

@@ -68,6 +68,12 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<ReviewVo> readPdtNum(int rev_pdt_name) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".readPdtNum", rev_pdt_name);
 	}
+
+	@Override
+	public int getRev_num() throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+".getRev_num");
+	}
 	
 	
 }

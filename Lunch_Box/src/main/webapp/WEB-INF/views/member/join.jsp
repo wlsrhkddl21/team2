@@ -28,12 +28,13 @@
  #btnCheck { 
  	    position: absolute;
  	    height: 44px; 
-/*     right: 0; */
-/*     top: 0; */
-/*     height: 34px; */
-/*     padding: 0 13px; */
-/*     font-weight: bold; */
-/*     line-height: 35px; */
+ } 
+#emailCheck {
+	position: absolute;
+ 	    height: 44px; 
+}
+ .emailNum { 
+ 	display : none; 
  } 
 </style>
 <script
@@ -70,6 +71,9 @@ $(document).ready(function() {
 						alert(rData.msg);
 						if (rData.isCheck == "true") {
 							isCheck = true;
+							$(".emailNum").show();
+						} else {
+							$(".emailNum").hide();
 						}
 					}
 			});
@@ -162,14 +166,14 @@ $(document).ready(function() {
 						</div>
 							<div class="form-group">
 							<p><input id="mem_id" class="form-control" type="text" placeholder="이메일(아이디)*" 
-								name="mem_id" style="width: 86%; display: initial;" required/>
+								name="mem_id" style="width: 85%; display: initial;" required/>
 								<span class="box_btn"><button id="btnCheck" class="btn btn-outline-dark">중복체크</button></span></p>
 						</div>
-						</div>
-							<div class="form-group">
-							<p><input id="emailNum" class="form-control" type="text" placeholder="인증번호" 
-								name="emailNum" style="width: 86%; display: initial;"/>
-								<span class="box_btn"><button id="emailCheck" class="btn btn-outline-dark">이메일 인증</button></span></p>
+						
+							<div class="form-group emailNum">
+							<p><input id="emailNum" class="form-control" type="text" placeholder="인증번호*" 
+								name="emailNum" style="width: 79%; display: initial;"/>
+								<span class="box_btn"><button id="emailCheck" class="btn btn-outline-dark">인증번호 받기</button></span></p>
 						</div>
 						
 							<div class="form-group">
@@ -194,6 +198,7 @@ $(document).ready(function() {
 							<input id="mem_tel" class="form-control" type="text"
 								name="mem_tel" placeholder="전화번호*"  required/>
 						</div>
+						</div>
 						<div class="input-group1 text-right">
 							<button  type="submit" id="btnSubmit">가입하기</button>
 						</div>
@@ -202,7 +207,7 @@ $(document).ready(function() {
 			</div>
 			<div class="col-lg-2 map"></div>
 		</div>
-	</div>
+	
 </section>
 
 
