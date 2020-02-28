@@ -7,7 +7,7 @@
 	padding: 50px;
 	border: 5px solid #ededed;
 	margin-top: 20px;
-	margin-left: 60px;
+/* 	margin-left: 60px; */
 }
 
 th {

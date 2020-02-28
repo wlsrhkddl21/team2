@@ -89,6 +89,7 @@ $(document).ready(function(){
 	$("#updateMLB").click(function(){
 		$(".update").show();
 		$(".updateHide").hide();
+		$(".checkboxs").show();
 	});
 	
 	$("#updateSubmit").click(function(){
@@ -131,8 +132,9 @@ $(document).ready(function(){
 			console.log($(this));
 			$(this).prop("checked",false);
 		});
-// 		$(".update").hide();
-// 		$(".updateHide").show();
+		$(".update").hide();
+		$(".updateHide").show();
+		$(".checkboxs").hide();
 // 		console.log($(".checkbox :checked"));
 	});
 	
@@ -195,7 +197,7 @@ $(document).ready(function(){
 				<div class="col-md-6 text-left">
 					<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">전체상품</a>
 					<a href="/myLunch/readAll" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">나만의도시락</a>
-					<a href="/admin/orderList" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문목록</a>
+					<a href="/admin/orderList" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문내역</a>
 				</div>
 				<div class="col-md-6 text-right">
 					<a id="updateSubmit" href="#"
@@ -250,12 +252,22 @@ $(document).ready(function(){
 							<td style="display:none;" class="update checkbox"><input type="checkbox" class="checkboxs"></td>
 							<td><span class="lunch_num">${myLunchVo.lunch_num }</span></td>
 							<td>
-								<span class="updateTypeHide">${myLunchVo.lunch_type }</span>
-								<span class="updateType" style="display:none;">
+								<span class="updateHide">${myLunchVo.lunch_type }</span>
+								<span class="update" style="display:none;">
 									<select name="lunch_type" class="lunch_type">
-										<option value="rice">밥류</option>
-										<option value="side">반찬류</option>
-										<option value="soup">국류</option>
+										<option value="rice"
+										<c:if test="${myLunchVo.lunch_type=='rice' }">
+										selected
+										</c:if>
+										>밥류</option>
+										<option value="side"
+										<c:if test="${myLunchVo.lunch_type=='side' }">
+										selected
+										</c:if>>반찬류</option>
+										<option value="soup"
+										<c:if test="${myLunchVo.lunch_type=='soup' }">
+										selected
+										</c:if>>국류</option>
 									</select>
 								</span>
 							</td>

@@ -24,4 +24,9 @@
 		order by buy_num desc
 	</select>
 	
+	<select id="selectBuyMy" resultType="BuyMyVo">
+		select*from tbl_buy_my
+		order by buy_num desc
+	</select>
+	
 </mapper>
