@@ -37,7 +37,7 @@
 		// 		}
 		// 	});
 
-	});
+	}); 
 </script>
 <div class="container-fluid">
 	<div class="row">
@@ -106,9 +106,9 @@
 												<c:forEach items="${proList }" var="productVo">
 													<c:if test="${buyView.pdt_num==productVo.pdt_num }">
 														<td><a href="/shop/detail/${buyView.pdt_num }" class="proView"style="font-size: 13px"
-															data-buy_num="${buyJoinDto.buy_num }">(${productVo.pdt_name })</a>
+															data-buy_num="${buyJoinDto.buy_num }">${productVo.pdt_name }(${buyView.buy_count }개)</a>
 														</td>
-														<td>${productVo.pdt_price }</td>
+														<td>${productVo.pdt_price*buyView.buy_count }</td>
 														</c:if>
 												</c:forEach>
 														<td></td>

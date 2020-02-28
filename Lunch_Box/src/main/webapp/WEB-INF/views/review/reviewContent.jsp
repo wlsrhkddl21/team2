@@ -281,7 +281,7 @@ $(document).ready(function() {
 			<tr>
 				<th scope="row" colspan="4" class="form-group" style="text-align:center; width:380px;">						
 					<c:if test="${not empty reviewVo.rev_image}">
-						<img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}" style="">
+						<img class="revImage" alt="도시락" data-img="${reviewVo.rev_image}" style="width:700px;">
 					</c:if>			
 				</th>
 			</tr>
