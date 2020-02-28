@@ -151,5 +151,11 @@ public class BuyServiceImpl implements BuyService {
 		
 	}
 
+	@Override
+	public void buy_reviewDelete(int buy_reivew) throws Exception {
+		buyDao.buy_reviewDelete(buy_reivew);
+		
+	}
+
 
 }

@@ -35,4 +35,6 @@ public interface ReviewDao {
 	public List<ReviewVo> readPdtNum(int rev_pdt_name) throws Exception;
 	
 	public int getRev_num () throws Exception;
+	
+	
 }

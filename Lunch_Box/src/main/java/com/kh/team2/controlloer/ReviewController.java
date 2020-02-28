@@ -120,6 +120,7 @@ public class ReviewController {
 	// 리뷰삭제
 	@RequestMapping(value = "/reviewDelete", method = RequestMethod.GET)
 	public String reviewDelete(@RequestParam("rev_num") int rev_num) throws Exception {
+		buyService.buy_reviewDelete(rev_num);
 		reviewService.reviewDelete(rev_num);
 		return "redirect:/review/reviewBoard";
 	}
