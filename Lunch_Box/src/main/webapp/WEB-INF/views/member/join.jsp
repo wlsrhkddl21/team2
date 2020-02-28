@@ -131,10 +131,8 @@ $(document).ready(function() {
 				},
 				success : function(data) {
 					var template_params = {
-				    		   "email" : data.email,
-				    		   "fname": "test",
-				    		   "name": "test",
-				    		   "notes": data.key
+				    		   "email" : data.certify_id,
+				    		   "notes": data.certify_key
 				    };
 				    	var service_id = "gmail";
 				    	var template_id = "template_DLlwZKOA";

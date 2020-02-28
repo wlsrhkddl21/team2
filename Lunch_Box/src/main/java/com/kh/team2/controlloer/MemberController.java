@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team2.domain.CertifyVo;
 import com.kh.team2.domain.LogingDto;
 import com.kh.team2.domain.MemberVo;
+import com.kh.team2.service.CertifyService;
 import com.kh.team2.service.MemberService;
 
 /**
@@ -34,6 +36,9 @@ public class MemberController {
 	
 	@Inject
 	private MemberService service;
+	
+	@Inject
+	private CertifyService certifyService;
 	
 	@RequestMapping(value = "/joinGet", method = RequestMethod.GET)
 	public String join(MemberVo memberVo) throws Exception{
@@ -132,14 +137,18 @@ public class MemberController {
 	public Map<String, Object> emailCheck(String mem_id) throws Exception {
 		int ran = (int)(Math.random()*1000000)+100000;
 		String key = String.valueOf(ran);
-		MemberVo vo = new MemberVo();
-		vo.setMem_id(mem_id);
-		vo.setKey(key);
-		service.setKey(vo);
-		
+		CertifyVo vo = new CertifyVo();
+		vo.setCertify_id(mem_id);
+		vo.setCertify_key(key);
+		int isCheck = certifyService.certifyCheck(mem_id);
+		if (isCheck > 0) {
+			certifyService.certifyKeyUpdate(vo);
+		} else {
+			certifyService.certifySetKey(vo);
+		}
 		Map<String, Object> map = new HashMap<>();
-		map.put("key", key);
-		map.put("email", mem_id);
+		map.put("certify_key", key);
+		map.put("certify_id", mem_id);
 		return map;
 	}
 	

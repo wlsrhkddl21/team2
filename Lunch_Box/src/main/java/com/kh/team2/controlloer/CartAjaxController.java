@@ -51,4 +51,5 @@ public class CartAjaxController {
 		String result = df.format(price);
 		return result;
 	}
+	
 } 
