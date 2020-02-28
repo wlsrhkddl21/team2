@@ -58,4 +58,10 @@ public class BuyDaoImp implements BuyDao {
 		
 	}
 
+	@Override
+	public void buy_reviewDelete(int buy_review) throws Exception {
+		sqlSession.update(NAMESPACE+".buy_reviewDelete",buy_review);
+		
+	}
+
 }
