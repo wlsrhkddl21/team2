@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../include/header.jsp"%>
+<<<<<<< HEAD
 <style>
 .mypage_info {
 	padding: 50px;
@@ -9,11 +10,10 @@
 	margin-top: 20px;
 /* 	margin-left: 60px; */
 }
+=======
+<%@ include file="../include/mypageStyle.jsp"%>
+>>>>>>> branch 'master' of https://github.com/wlsrhkddl21/team2.git
 
-th {
-	background: #f8f9fa;
-}
-</style>
 <script>
 	$(document).ready(function(e) {
 		$(".proView").click(function(e) {
@@ -43,7 +43,7 @@ th {
 </script>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-2" style="height: 600px;"></div>
+		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div style="height: 20px;"></div>
 			<h3 class="title-w3ls text-center text-bl mb-5">My page</h3>
@@ -67,7 +67,7 @@ th {
 												<th>구매일</th>
 												<th>배송지</th>
 												<th>전화번호</th>
-												<th>상품</th>
+												<th width="200px;">상품</th>
 												<th>금액</th>
 												<th></th>
 											</tr>
@@ -118,11 +118,11 @@ th {
 												</c:if>
 											</c:forEach>
 										</c:forEach>
-
 									</table>
 								</c:otherwise>
 							</c:choose>
 						</div>
+						<div style="height: 400px;"></div>
 					</div>
 				</div>
 			</div>
