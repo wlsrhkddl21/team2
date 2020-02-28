@@ -71,9 +71,9 @@ $(document).ready(function() {
 						alert(rData.msg);
 						if (rData.isCheck == "true") {
 							isCheck = true;
-							$(".emailNum").show();
+							$(".emailNum").show(500);
 						} else {
-							$(".emailNum").hide();
+							$(".emailNum").hide(500);
 						}
 					}
 			});
