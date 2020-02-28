@@ -203,12 +203,10 @@ $(document).ready(function() {
 							<label for="modal_reply_text">댓글내용</label>
 							<input type="text" class="form-control"
 								id="modal_reply_text"/>
-							<label for="modal_replyer">작성자</label>
-							<input type="text" class="form-control"
-								id="modal_replyer" readonly/>
+							
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary"
+							<button type="button" class="btn btn-outline-dark"
 								id="btnModalReply">
 								수정완료
 							</button> 
