@@ -8,7 +8,7 @@
 <mapper namespace="com.kh.team2.mappers.certifyMapper">
 
 	<insert id="setKey">
-		insert into tbl_certify
+		insert into tbl_certify(certify_id,certify_key)
 		values ( #{certify_id} , #{certify_key} )
 	</insert>
 	
@@ -24,9 +24,27 @@
 		where certify_id = #{certify_id}
 	</update>
 	
-	<delete id="joinSuccess">
-		delete from tbl_certify
+	<select id="certify" resultType="int">
+		select count(*)
+		from tbl_certify
+		where certify_key = #{certify_key} and certify_id = #{certify_id}
+	</select>
+	
+	<update id="certifySuccess">
+		update tbl_certify set
+		certify_yn = 'Y'
 		where certify_id = #{certify_id}
+	</update>
+	
+	<select id="certifyCheck" resultType="String">
+		select certify_yn
+		from tbl_certify
+		where certify_id = #{certify_id}
+	</select>
+	
+	<delete id="deleteCertify">
+		delete from tbl_certify
+		where certify_id = #{certify_id} and certify_yn = 'Y'
 	</delete>
 	
 </mapper>

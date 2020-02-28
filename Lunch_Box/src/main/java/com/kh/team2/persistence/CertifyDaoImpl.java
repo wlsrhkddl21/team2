@@ -30,4 +30,24 @@ public class CertifyDaoImpl implements CertifyDao {
 		sqlSession.update(NAMESPACE+".keyUpdate",certifyVo);
 	}
 
+	@Override
+	public int certify(CertifyVo certifyVo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".certify",certifyVo);
+	}
+
+	@Override
+	public void certifySuccess(String certify_id) throws Exception {
+		sqlSession.update(NAMESPACE+".certifySuccess",certify_id);
+	}
+
+	@Override
+	public String ynCheck(String certify_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".certifyCheck",certify_id);
+	}
+
+	@Override
+	public void deleteCertify(String certify_id) throws Exception {
+		sqlSession.delete(NAMESPACE+".deleteCertify",certify_id);
+	}
+
 }

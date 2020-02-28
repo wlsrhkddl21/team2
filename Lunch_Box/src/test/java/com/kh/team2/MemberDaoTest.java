@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team2.domain.MemberVo;
+import com.kh.team2.persistence.CertifyDao;
 import com.kh.team2.persistence.MemberDao;
 
 
@@ -18,6 +19,9 @@ public class MemberDaoTest {
 	
 	@Inject
 	private MemberDao dao;
+	
+	@Inject
+	private CertifyDao dao2;
 	
 	@Test
 	public void testInsertMember() throws Exception {
@@ -41,5 +45,11 @@ public class MemberDaoTest {
 		String mem_id = "jang@email.com";
 		String mem_pass = "1234";
 		dao.readWithPw(mem_id, mem_pass);
+	}
+	
+	@Test
+	public void testCheck() throws Exception {
+		String result = dao2.ynCheck("klnhara@naver.com");
+		System.out.println(result);
 	}
 }

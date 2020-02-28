@@ -28,4 +28,24 @@ public class CertifyServiceImpl implements CertifyService {
 		certifyDao.certifyKeyUpdate(certifyVo);
 	}
 
+	@Override
+	public int certify(CertifyVo certifyVo) throws Exception {
+		return certifyDao.certify(certifyVo);
+	}
+
+	@Override
+	public void certifySuccess(String certify_id) throws Exception {
+		certifyDao.certifySuccess(certify_id);
+	}
+
+	@Override
+	public String ynCheck(String certify_id) throws Exception {
+		return certifyDao.ynCheck(certify_id);
+	}
+
+	@Override
+	public void deleteCertify(String certify_id) throws Exception {
+		certifyDao.deleteCertify(certify_id);
+	}
+
 }
