@@ -35,8 +35,8 @@ public class CartDaoImpl implements CartDao {
 	}
 
 	@Override
-	public void allDelete() throws Exception {
-		sqlSession.delete(NAMESPACE+".deleteAll");
+	public void allDelete(String mem_id) throws Exception {
+		sqlSession.delete(NAMESPACE+".deleteAll",mem_id);
 	}
 
 	@Override

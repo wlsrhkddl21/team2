@@ -32,8 +32,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public void allDelete() throws Exception {
-		cartDao.allDelete();
+	public void allDelete(String mem_id) throws Exception {
+		cartDao.allDelete(mem_id);
 	}
 
 	@Override
