@@ -8,6 +8,7 @@
 	<select id="readReview" resultType="ReviewVo">
 		select * from tbl_review
 		where rev_num = #{rev_num}
+		order by rev_num desc
 	</select>
 	
 	<select id="listAll" resultType="ReviewVo">
@@ -52,6 +53,7 @@
 	<select id="readPdtNum" resultType="ReviewVo">
 		select * from tbl_review
 		where rev_pdt_name = #{rev_pdt_name}
+		order by rev_num desc
 	</select>
 	
 	<select id="getRev_num" resultType="int">
