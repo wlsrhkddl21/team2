@@ -83,9 +83,6 @@ $(document).ready(function(){
 		<br>
 		<div style="height: 20px"></div>
 		<h3 class="title-w3ls text-center text-bl mb-5">리뷰 게시판</h3>
-		<c:if test="${mem_id != null}">
-		<button type="button" id="btnRegister" class="btn text-wh" style="background: #fd5c63;">글쓰기</button>
-		</c:if>
 		<form action = "/review/reviewBoard" method="post">
 		<div style="height: 20px"></div>
 		<table class="table text-center">

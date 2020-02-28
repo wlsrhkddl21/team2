@@ -2,18 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../include/header.jsp"%>
-<style>
-.mypage_info {
-	padding: 35px;
-	border: 5px solid #ededed;
-	margin-top: 20px;
-}
-.disnone{
-	display: none;
-}
-</style>
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<%@ include file="../include/mypageStyle.jsp"%>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 $(document).ready(function(){
 	$(".updateTxt").attr("readonly",true);
@@ -65,7 +55,7 @@ $(document).ready(function(){
 					<%@ include file="../include/myMenu.jsp"%>
 				</div>
 				<div class="col-md-9">
-						<div class="mypage_info">
+						<div class="mypage_info" style="width: 931.84px;margin-left: 5px;">
 						<h4 style="margin-bottom: 15px; text-align:center;">내 정보 변경</h4>
 						<section class="contact py-5" id="contact">
 	<div class="container">
@@ -132,7 +122,7 @@ $(document).ready(function(){
 </section>
 						</div>
 				</div>
-				<div class="col-md-2" style="height: 600px;"></div>
+				<div class="col-md-2" style="height: 400px;"></div>
 			</div>
 		</div>
 	</div>

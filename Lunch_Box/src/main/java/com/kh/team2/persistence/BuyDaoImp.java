@@ -1,7 +1,9 @@
 package com.kh.team2.persistence;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -45,6 +47,21 @@ public class BuyDaoImp implements BuyDao {
 	public List<BuyJoinDto> selectReadAll() throws Exception {
 		
 		return sqlSession.selectList(NAMESPACE+".selectReadAll");
+	}
+
+	@Override
+	public void buy_reviewUpdate(List<Integer> BRNum) throws Exception {
+		Map<String,Integer> map = new HashMap<String, Integer>();
+		map.put("buy_num", BRNum.get(0));
+		map.put("rev_num", BRNum.get(1));
+		sqlSession.update(NAMESPACE+".buy_reviewUpdate",map);
+		
+	}
+
+	@Override
+	public void buy_reviewDelete(int buy_review) throws Exception {
+		sqlSession.update(NAMESPACE+".buy_reviewDelete",buy_review);
+		
 	}
 
 }
