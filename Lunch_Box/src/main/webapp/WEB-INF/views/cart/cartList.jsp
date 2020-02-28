@@ -11,7 +11,6 @@
 </style>
 <script>
 $(document).ready(function() {
-	
 	var mem_id = "${sessionScope.mem_id}";
 	
 	

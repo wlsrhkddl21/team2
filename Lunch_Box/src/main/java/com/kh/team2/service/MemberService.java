@@ -26,5 +26,4 @@ public interface MemberService {
 	
 	public void memUpdate(MemberVo memVo) throws Exception;
 	
-	public void setKey(MemberVo memberVo) throws Exception;
 }

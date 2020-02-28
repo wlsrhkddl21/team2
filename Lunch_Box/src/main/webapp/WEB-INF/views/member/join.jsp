@@ -95,6 +95,7 @@ $(document).ready(function() {
 			var mem_address = $("#mem_address").val();
 			var detailAddress = $("#detailAddress").val();
 			var mem_tel	 = $("#mem_tel").val();
+			var certify_key = $("#certify_key").val();
 			if(mem_id==""||mem_pass==""||mem_pass2==""||mem_name==""||mem_address==""||mem_tel==""){
 // 				console.log("");
 				alert("필수 입력사항을 모두 입력해주세요.");
@@ -108,6 +109,7 @@ $(document).ready(function() {
 					"mem_id" : mem_id,
 					"mem_pass" : mem_pass,
 					"mem_pass2" : mem_pass2,
+					"certify_key" : certify_key,
 					"isCheck" : isCheck
 				},
 				success : function(data) {
@@ -116,9 +118,10 @@ $(document).ready(function() {
 						$("#joinForm").submit();
 					} else if (data == "fail") {
 						alert("비밀번호가 일치하지 않습니다");
-					}
-					if (data == "msgCheck") {
+					} else if (data == "msgCheck") {
 						alert("이메일 중복체크를 해주세요");
+					} else if (data == "N") {
+						alert("인증이 잘못되었습니다");
 					}
 				}
 			});
@@ -135,10 +138,8 @@ $(document).ready(function() {
 				},
 				success : function(data) {
 					var template_params = {
-				    		   "email" : data.email,
-				    		   "fname": "test",
-				    		   "name": "test",
-				    		   "notes": data.key
+				    		   "email" : data.certify_id,
+				    		   "notes": data.certify_key
 				    };
 				    	var service_id = "gmail";
 				    	var template_id = "template_DLlwZKOA";
@@ -173,7 +174,7 @@ $(document).ready(function() {
 						</div>
 						
 							<div class="form-group emailNum">
-							<p><input id="emailNum" class="form-control" type="text" placeholder="인증번호*" 
+							<p><input id="certify_key" class="form-control" type="text" placeholder="인증번호*" 
 								name="emailNum" style="width: 79%; display: initial;"/>
 								<span class="box_btn"><button id="emailCheck" class="btn btn-outline-dark">인증번호 받기</button></span></p>
 						</div>

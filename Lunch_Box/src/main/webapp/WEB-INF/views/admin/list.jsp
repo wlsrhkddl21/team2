@@ -60,7 +60,7 @@ th{
 				<div class="col-md-6 text-left"> 
 					<a href="/admin/list" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">전체상품</a>
 		<a href="/myLunch/readAll" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">나만의도시락</a>
-		<a href="/admin/orderList" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문목록</a>
+		<a href="/admin/orderList" class="login-button-2 text-uppercase text-wh mt-lg-0 mt-2">주문내역</a>
 				</div>
 				<div class="col-md-6 text-right">
 						<a href="/admin/insertPDT"

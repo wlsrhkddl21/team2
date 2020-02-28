@@ -5,7 +5,6 @@ package com.kh.team2.controlloer;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -13,14 +12,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team2.domain.CertifyVo;
 import com.kh.team2.domain.LogingDto;
 import com.kh.team2.domain.MemberVo;
+import com.kh.team2.service.CertifyService;
 import com.kh.team2.service.MemberService;
 
 /**
@@ -35,6 +34,9 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 	
+	@Inject
+	private CertifyService certifyService;
+	
 	@RequestMapping(value = "/joinGet", method = RequestMethod.GET)
 	public String join(MemberVo memberVo) throws Exception{
 		
@@ -46,13 +48,25 @@ public class MemberController {
 		String mem_pass = request.getParameter("mem_pass");
 		String mem_pass2 = request.getParameter("mem_pass2");
 		String isCheck = request.getParameter("isCheck");
+		String mem_id = request.getParameter("mem_id");
+		String certify_key = request.getParameter("certify_key");
+		CertifyVo certifyVo = new CertifyVo();
+		certifyVo.setCertify_id(mem_id);
+		certifyVo.setCertify_key(certify_key);
+		int certifyCheck = certifyService.certify(certifyVo);
+		if ( certifyCheck > 0 ) {
+			certifyService.certifySuccess(mem_id);
+		}
+		String YN = certifyService.ynCheck(mem_id);
 		String msg = "msgCheck";
 		if (isCheck.equals("true")) {
-			if(mem_pass.equals(mem_pass2) && !mem_pass.equals("")) {
+			if(mem_pass.equals(mem_pass2) && !mem_pass.equals("") && YN.equals("Y")) {
 				msg = "success";
+			} else if (YN.equals("N")){
+				msg = "N";
 			} else {
 				msg = "fail";
-			}
+ 			}
 		}
 		return msg;
 	}
@@ -61,11 +75,10 @@ public class MemberController {
 	public String insertMember(MemberVo memberVo, HttpServletRequest request) throws Exception {
 		String detailAddress = request.getParameter("detailAddress");
 		String mem_address = memberVo.getMem_address();
-		System.out.println(mem_address);
-		System.out.println(detailAddress);
 		String sumAddress = mem_address+" "+detailAddress;
 		memberVo.setMem_address(sumAddress);
 		service.insertMember(memberVo);
+		certifyService.deleteCertify(memberVo.getMem_id());
 		return "member/login";
 	}
 	
@@ -132,14 +145,18 @@ public class MemberController {
 	public Map<String, Object> emailCheck(String mem_id) throws Exception {
 		int ran = (int)(Math.random()*1000000)+100000;
 		String key = String.valueOf(ran);
-		MemberVo vo = new MemberVo();
-		vo.setMem_id(mem_id);
-		vo.setKey(key);
-		service.setKey(vo);
-		
+		CertifyVo vo = new CertifyVo();
+		vo.setCertify_id(mem_id);
+		vo.setCertify_key(key);
+		int isCheck = certifyService.certifyCheck(mem_id);
+		if (isCheck > 0) {
+			certifyService.certifyKeyUpdate(vo);
+		} else {
+			certifyService.certifySetKey(vo);
+		}
 		Map<String, Object> map = new HashMap<>();
-		map.put("key", key);
-		map.put("email", mem_id);
+		map.put("certify_key", key);
+		map.put("certify_id", mem_id);
 		return map;
 	}
 	

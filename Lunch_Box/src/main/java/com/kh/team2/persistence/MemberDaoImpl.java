@@ -37,10 +37,6 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE + ".readWithPw", paramMap);
 	}
 
-	@Override
-	public void setKey(MemberVo memberVo) {
-		sqlSession.insert(NAMESPACE+".setKey",memberVo);
-	}
 
 	@Override
 	public int idCheck(String mem_id) throws Exception {

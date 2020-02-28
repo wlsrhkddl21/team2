@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.team2.domain.BuyJoinDto;
+import com.kh.team2.domain.BuyMyVo;
 import com.kh.team2.domain.ProductVo;
 import com.kh.team2.service.AdminService;
 import com.kh.team2.service.BuyService;
@@ -150,7 +151,7 @@ public class AdminController {
 	}
 	@RequestMapping(value="mlbList")
 	public String mlbList(Model model)throws Exception{
-		List<BuyJoinDto> list = buyService.selectReadAll();
+		List<BuyMyVo> list = buyService.selectBuyMy();
 		model.addAttribute("list",list);
 		return "/admin/mlbList";
 	}
