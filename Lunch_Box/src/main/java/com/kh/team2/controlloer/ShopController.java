@@ -34,7 +34,7 @@ import com.kh.team2.service.ReviewService;
 @Controller
 @RequestMapping("/shop/*")
 public class ShopController {
-	// 상품 정보 불러오기 (readPDT)
+	// �긽�뭹 �젙蹂� 遺덈윭�삤湲� (readPDT)
 	@Inject
 	private AdminService adminService;
 
@@ -56,7 +56,7 @@ public class ShopController {
 	@Inject
 	ReviewService reviewService;
 
-	// 나만의 도시락
+	// �굹留뚯쓽 �룄�떆�씫
 	@RequestMapping(value = "/my")
 	public String my() {
 
@@ -64,12 +64,12 @@ public class ShopController {
 	}
 
 	
-	// 일반 상품
+	// �씪諛� �긽�뭹
 	@RequestMapping(value = "/single")
 	public String single(Model model,PagingDto pagingDto,HttpServletRequest request) throws Exception {
 
 		System.out.println("single Shop Controller");
-		// 최근목록
+		// 理쒓렐紐⑸줉
 		HttpSession session = request.getSession();
 		String mem_id = (String)session.getAttribute("mem_id");
 		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
@@ -87,17 +87,17 @@ public class ShopController {
 		return "shop/single";
 	}
 
-	// 상품 상세보기
+	// �긽�뭹 �긽�꽭蹂닿린
 	@RequestMapping(value = "/detail/{pdt_num}", method = RequestMethod.GET)
 	public String detail(@PathVariable("pdt_num") int pdt_num, Model model,HttpServletRequest request, PagingDto pagingDto) throws Exception {
 		System.out.println("detail Shop Controller"); 
-		//상품 디테일 정보 불러오기
+		//�긽�뭹 �뵒�뀒�씪 �젙蹂� 遺덈윭�삤湲�
 		ProductVo productVo = adminService.readPDT(pdt_num); 
 		model.addAttribute("productVo", productVo); 
-		//최근 목록
+		//理쒓렐 紐⑸줉
 		HttpSession session = request.getSession();
 		
-		// 최근본 상품 세션에 추가
+		// 理쒓렐蹂� �긽�뭹 �꽭�뀡�뿉 異붽�
 		List<ProductVo> list = (ArrayList)session.getAttribute("veiw");
 		if (list == null) {
 			list = new ArrayList<>();
@@ -121,7 +121,7 @@ public class ShopController {
 			list.remove(5);
 		}
 		// -----------------------------------------------------
-		// 최근목록
+		// 理쒓렐紐⑸줉
 		String mem_id = (String)session.getAttribute("mem_id");
 		int cartCount = 0;
 		if (mem_id != null) {
@@ -129,20 +129,20 @@ public class ShopController {
 		}
 		model.addAttribute("cartCount", cartCount);
 		model.addAttribute("veiwList",list);
-		// 최근목록 끝
+		// 理쒓렐紐⑸줉 �걹
 		
-		// 리뷰작성
+		// 由щ럭�옉�꽦
 		List<ReviewVo> reviewList = reviewService.readPdtNum(pdt_num);
 		System.out.println(reviewList);
 		model.addAttribute("reviewList", reviewList);
-		// 리뷰작성 끝
+		// 由щ럭�옉�꽦 �걹
 		
 		
 		return "shop/detail";
 	}
 
 
-	//나만의 도시락
+	//�굹留뚯쓽 �룄�떆�씫
 	@RequestMapping(value = "/detailMy", method = RequestMethod.GET)
 	public String detailMy(Model model) throws Exception {
 		
@@ -152,7 +152,7 @@ public class ShopController {
 		return "shop/detailMy";
 	}
 	
-	// 구매 페이지 (바로구매)
+	// 援щℓ �럹�씠吏� (諛붾줈援щℓ)
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	public String buy(HttpServletRequest request, Model model,CartDto cartDto) throws Exception {
 		// for(int i=0; i<pdt_num.length;i++) {
@@ -162,10 +162,10 @@ public class ShopController {
 		int buy_count[] = cartDto.getBuy_count();
 
 		for (int i = 0; i < pdt_num.length; i++) {
-//			System.out.println("상품번호:" + pdt_num[i] + "갯수:" + buy_count[i]);
+//			System.out.println("�긽�뭹踰덊샇:" + pdt_num[i] + "媛��닔:" + buy_count[i]);
 			ProductVo pdtVo = adminService.readPDT(pdt_num[i]);
 
-			BuyDto dto = new BuyDto(); // 주문 내역 보여주는 dto
+			BuyDto dto = new BuyDto(); // 二쇰Ц �궡�뿭 蹂댁뿬二쇰뒗 dto
 			dto.setPdt_num(pdt_num[i]);
 			dto.setBuy_count(buy_count[i]);
 			dto.setPdt_name(pdtVo.getPdt_name());
@@ -175,7 +175,7 @@ public class ShopController {
 			list.add(dto);
 
 		}
-		// 구매자 정보
+		// 援щℓ�옄 �젙蹂�
 		HttpSession session = request.getSession();
 		String mem_id = (String) session.getAttribute("mem_id");
 		MemberVo memberVo = memberService.readMember(mem_id);
@@ -190,12 +190,14 @@ public class ShopController {
 
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	//BuyVo buyVo,CartDto cartDto,PointDto pointDto), method = RequestMethod.POST)
-	public String complete(BuyVo buyVo,CartDto cartDto,PointDto pointDto) throws Exception {
-		// buy 마스터 테이블 추가
-		// 디테일 테이블 추가
-		// 결제 완료 후 멤버 포인트 수정
-		
+	public String complete(BuyVo buyVo,CartDto cartDto,PointDto pointDto,HttpServletRequest request) throws Exception {
+		// buy 留덉뒪�꽣 �뀒�씠釉� 異붽�
+		// �뵒�뀒�씪 �뀒�씠釉� 異붽�
+		// 寃곗젣 �셿猷� �썑 硫ㅻ쾭 �룷�씤�듃 �닔�젙
+		HttpSession session = request.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
 		buyService.buy(buyVo, pointDto, cartDto);
+		carService.allDelete(mem_id);
 
 		return "shop/complete";
 	}

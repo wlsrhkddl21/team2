@@ -13,7 +13,7 @@ public interface CartService {
 	// 장바구니 선택 삭제
 	public void cartDelete(int num) throws Exception;
 	// 장바구니 전체 삭제
-	public void allDelete() throws Exception;
+	public void allDelete(String mem_id) throws Exception;
 	// 장바구니 수량 수정
 	public void updateCount(int count,int cart_num) throws Exception;
 	// 장바구니 체크
