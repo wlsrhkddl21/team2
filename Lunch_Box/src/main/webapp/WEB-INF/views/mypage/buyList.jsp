@@ -42,7 +42,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8" style="margin-bottom: 600px;">
+		<div class="col-md-8" style="margin-bottom: 300px;">
 			<div style="height: 20px;"></div>
 			<h3 class="title-w3ls text-center text-bl mb-5">My page</h3>
 			<div class="row">

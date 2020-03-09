@@ -66,14 +66,16 @@ public class AdminController {
 		String originalSubFilename = sFile.getOriginalFilename();
 		System.out.println("file:"+originalFilename);
 		System.out.println("subFile:"+originalSubFilename);
-//		productVo.setPdt_image(originalFilename);
-		String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes(),true);
-		String dirSubPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalSubFilename, sFile.getBytes(),false);
-		String mainPath = dirPath.replace("\\", "/");
-		String subPath = dirSubPath.replace("\\", "/");
-//		System.out.println("path:" + path);
-		productVo.setPdt_image(mainPath);
-		productVo.setPdt_subimage(subPath);
+//		if(originalFilename!="") {
+			String dirPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalFilename, mFile.getBytes(),true);
+			String mainPath = dirPath.replace("\\", "/");
+			productVo.setPdt_image(mainPath);
+//		}
+//		if(originalSubFilename!="") {
+			String dirSubPath = AdminFileUploadUtil.uploadFile(uploadPath+"/product", originalSubFilename, sFile.getBytes(),false);
+			String subPath = dirSubPath.replace("\\", "/");
+			productVo.setPdt_subimage(subPath);
+//		}
 		service.insertPDT(productVo);
 		return "redirect:/admin/list";
 	}

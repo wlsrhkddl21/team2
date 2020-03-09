@@ -23,7 +23,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-2" style="height: 400px;"></div>
+				<div class="col-md-2" style="height: 300px;"></div>
 			</div>
 		</div>
 	</div>

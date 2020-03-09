@@ -4,7 +4,6 @@ public class ProductVo {
 	private int pdt_num;
 	private String pdt_category;
 	private String pdt_name;
-	private int pdt_date;
 	private int pdt_price;
 	private String pdt_image;
 	private int pdt_sales;
@@ -40,12 +39,6 @@ public class ProductVo {
 	public void setPdt_name(String pdt_name) {
 		this.pdt_name = pdt_name;
 	}
-	public int getPdt_date() {
-		return pdt_date;
-	}
-	public void setPdt_date(int pdt_date) {
-		this.pdt_date = pdt_date;
-	}
 	public int getPdt_price() {
 		return pdt_price;
 	}
@@ -68,7 +61,7 @@ public class ProductVo {
 	@Override
 	public String toString() {
 		return "ProductVo [pdt_num=" + pdt_num + ", pdt_category=" + pdt_category + ", pdt_name=" + pdt_name
-				+ ", pdt_date=" + pdt_date + ", pdt_price=" + pdt_price + ", pdt_image=" + pdt_image + ", pdt_sales="
+				+ ", pdt_price=" + pdt_price + ", pdt_image=" + pdt_image + ", pdt_sales="
 				+ pdt_sales + ", pdt_subimage=" + pdt_subimage + "]";
 	}
 	

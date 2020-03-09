@@ -12,15 +12,28 @@ $(document).ready(function(){
 		$("#pdt_image").trigger("click");
 	});
 	$("#btnSubfile").click(function() {
+		
 		$("#pdt_Subimage").trigger("click");
+	});
+	
+	$("#btnSubmit").click(function(){
+		var pdt_name = $("#pdt_name").val();
+		var pdt_price = $("#pdt_price").val();
+		if(pdt_name!=""&&pdt_price!=""){
+		$("#insertForm").submit();
+		}else if(pdt_name==""){
+			alert("상품명을 입력하세요");
+		}else if(pdt_price==""){
+			alert("가격을 입력하세요");
+		}
 	});
 });
 </script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-3"></div>
-		<div class="col-md-6 main_grid_contact" style="margin-bottom: 600px;">    
-			<form role="form" method="post" action="/admin/insertPDT" enctype="multipart/form-data"
+		<div class="col-md-6 main_grid_contact" style="margin-bottom: 300px;">    
+			<form role="form" method="post" id="insertForm" action="/admin/insertPDT" enctype="multipart/form-data"
 			style="margin: 30px;">
 				<div class="form-group">
 					<label for="pdt_category">종류</label>
@@ -37,7 +50,7 @@ $(document).ready(function(){
 				<div class="form-group">
 					<label for="pdt_name"> 상품명 </label> 
 					<input
-						type="text" class="form-control" id="pdt_name" name="pdt_name"/>
+						type="text" class="form-control" id="pdt_name" name="pdt_name" placeholder="상품명*" />
 				</div>
 				<div class="form-group">
 					<label for="pdt_price"> 가격 </label> 
@@ -54,7 +67,7 @@ $(document).ready(function(){
 					<input
 						type="file" class="form-control-file btn-outline-dark" id="pdt_Subimage" name="subFile" style="display:none;"/>
 				</div>
-				<button type="submit" class="btn btn-outline-dark">등록</button>
+				<button type="button" id="btnSubmit" class="btn btn-outline-dark">등록</button>
 				<button type="button" id="btnList" class="btn btn-outline-dark">목록</button>
 			</form>
 		</div>
