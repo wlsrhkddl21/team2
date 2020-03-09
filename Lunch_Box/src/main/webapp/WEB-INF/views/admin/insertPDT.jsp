@@ -19,8 +19,9 @@ $(document).ready(function(){
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-3"></div>
-		<div class="col-md-6 main_grid_contact">
-			<form role="form" method="post" action="/admin/insertPDT" enctype="multipart/form-data">
+		<div class="col-md-6 main_grid_contact" style="margin-bottom: 600px;">    
+			<form role="form" method="post" action="/admin/insertPDT" enctype="multipart/form-data"
+			style="margin: 30px;">
 				<div class="form-group">
 					<label for="pdt_category">종류</label>
 						
@@ -37,11 +38,6 @@ $(document).ready(function(){
 					<label for="pdt_name"> 상품명 </label> 
 					<input
 						type="text" class="form-control" id="pdt_name" name="pdt_name"/>
-				</div>
-				<div class="form-group">
-					<label for="pdt_date"> 일수 </label> 
-					<input
-						type="text" class="form-control" id="pdt_date" name="pdt_date"/>
 				</div>
 				<div class="form-group">
 					<label for="pdt_price"> 가격 </label> 
@@ -61,8 +57,8 @@ $(document).ready(function(){
 				<button type="submit" class="btn btn-outline-dark">등록</button>
 				<button type="button" id="btnList" class="btn btn-outline-dark">목록</button>
 			</form>
-			
 		</div>
+		<div style="height:400px;"></div>
 		<div class="col-md-3"></div>
 	</div>
 </div>

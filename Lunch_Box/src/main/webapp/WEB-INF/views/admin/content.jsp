@@ -104,11 +104,6 @@
 								id="pdt_name" name="pdt_name" />
 						</div>
 						<div class="form-group">
-							<label for="pdt_date" style="font-weight: bold">총일수</label> <input
-								type="text" value="${productVo.pdt_date}" class="form-control"
-								id="pdt_date" name="pdt_date" />
-						</div>
-						<div class="form-group">
 							<label for="pdt_price" style="font-weight: bold">가격</label> <input
 								type="text" class="form-control" id="pdt_price" name="pdt_price"
 								value="${productVo.pdt_price } ">

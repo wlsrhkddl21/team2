@@ -80,7 +80,7 @@ th {
 														<c:if test="${buyView.pdt_num==productVo.pdt_num }">
 
 															<td><a href="/shop/detail/${buyView.pdt_num }"
-																class="proView" style="font-size:13px">${productVo.pdt_name }(${buyView.buy_count }개)</a>
+																style="font-size:13px">${productVo.pdt_name }(${buyView.buy_count }개)</a>
 															</td>
 															<td>${productVo.pdt_price*buyView.buy_count }</td>
 														</c:if>

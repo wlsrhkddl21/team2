@@ -7,8 +7,8 @@
 <mapper namespace="com.kh.mappers.productMapper">
 	<insert id="insertPDT">
 		insert into
-		tbl_product(pdt_num,pdt_category,pdt_name,pdt_date,pdt_price,pdt_image,pdt_subimage)
-		values(seq_product.nextval,#{pdt_category},#{pdt_name},#{pdt_date},#{pdt_price},#{pdt_image},#{pdt_subimage})
+		tbl_product(pdt_num,pdt_category,pdt_name,pdt_price,pdt_image,pdt_subimage)
+		values(seq_product.nextval,#{pdt_category},#{pdt_name},#{pdt_price},#{pdt_image},#{pdt_subimage})
 	</insert>
 
 	<select id="readAllPDT" resultType="ProductVo">
@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="readTOP3" resultType="ProductVo">
-		select PDT_NUM,PDT_CATEGORY,PDT_NAME,PDT_DATE,PDT_PRICE,PDT_IMAGE,PDT_SALES,PDT_SUBIMAGE 
+		select PDT_NUM,PDT_CATEGORY,PDT_NAME,PDT_PRICE,PDT_IMAGE,PDT_SALES,PDT_SUBIMAGE 
 		from (select rownum r,p.* 
 			 from (select * from tbl_product
 			 order by pdt_sales desc)p)
@@ -33,7 +33,6 @@
 		update tbl_product set
 		pdt_category=#{pdt_category},
 		pdt_name=#{pdt_name},
-		pdt_date=#{pdt_date},
 		pdt_price=#{pdt_price},
 		pdt_image=#{pdt_image},
 		pdt_subimage=#{pdt_subimage}
