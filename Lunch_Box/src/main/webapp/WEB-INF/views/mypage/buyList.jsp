@@ -42,7 +42,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-8" style="margin-bottom: 600px;">
 			<div style="height: 20px;"></div>
 			<h3 class="title-w3ls text-center text-bl mb-5">My page</h3>
 			<div class="row">
@@ -105,7 +105,7 @@
 														<td></td>
 												<c:forEach items="${proList }" var="productVo">
 													<c:if test="${buyView.pdt_num==productVo.pdt_num }">
-														<td><a href="/shop/detail/${buyView.pdt_num }" class="proView"style="font-size: 13px"
+														<td><a href="/shop/detail/${buyView.pdt_num }" style="font-size: 13px"
 															data-buy_num="${buyJoinDto.buy_num }">${productVo.pdt_name }(${buyView.buy_count }개)</a>
 														</td>
 														<td>${productVo.pdt_price*buyView.buy_count }</td>
