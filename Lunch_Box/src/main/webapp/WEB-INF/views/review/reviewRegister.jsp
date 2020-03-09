@@ -82,7 +82,7 @@ $(document).ready(function(){
 <!-- 							</div> -->
 							
 							<div class="input-group1 text-right">
-								<button id="btnSubmit" class="btn" type="submit">Submit</button>
+								<button id="btnSubmit" class="btn btn-outline-dark" type="submit">작성 완료</button>
 							</div>
 						</form>
 					</div>

@@ -48,24 +48,15 @@ public class MemberController {
 		String mem_pass = request.getParameter("mem_pass");
 		String mem_pass2 = request.getParameter("mem_pass2");
 		String isCheck = request.getParameter("isCheck");
-		String mem_id = request.getParameter("mem_id");
-		String certify_key = request.getParameter("certify_key");
-		CertifyVo certifyVo = new CertifyVo();
-		certifyVo.setCertify_id(mem_id);
-		certifyVo.setCertify_key(certify_key);
-		int certifyCheck = certifyService.certify(certifyVo);
-		if ( certifyCheck > 0 ) {
-			certifyService.certifySuccess(mem_id);
-		}
-		String YN = certifyService.ynCheck(mem_id);
+		String certify = request.getParameter("certify");
 		String msg = "msgCheck";
 		if (isCheck.equals("true")) {
-			if(mem_pass.equals(mem_pass2) && !mem_pass.equals("") && YN.equals("Y")) {
+			if(mem_pass.equals(mem_pass2) && !mem_pass.equals("") && certify.equals("Y")) {
 				msg = "success";
-			} else if (YN.equals("N")){
+			}  else if (certify.equals("N")){
 				msg = "N";
-			} else {
-				msg = "fail";
+ 			} else {
+ 				msg = "fail";
  			}
 		}
 		return msg;
@@ -140,7 +131,7 @@ public class MemberController {
 		return null;
 	}
 		
-	@RequestMapping(value="/emailCheck",method = RequestMethod.POST)
+	@RequestMapping(value="/sendMail",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> emailCheck(String mem_id) throws Exception {
 		int ran = (int)(Math.random()*1000000)+100000;
@@ -160,4 +151,15 @@ public class MemberController {
 		return map;
 	}
 	
+	@RequestMapping(value="/certify",method = RequestMethod.POST)
+	@ResponseBody
+	public String certify(CertifyVo certifyVo) throws Exception {
+		System.out.println(certifyVo);
+		int certifyCheck = certifyService.certify(certifyVo);
+		if ( certifyCheck > 0 ) {
+			certifyService.certifySuccess(certifyVo.getCertify_id());
+		}
+		String YN = certifyService.ynCheck(certifyVo.getCertify_id());
+		return YN;
+	}
 }

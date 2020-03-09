@@ -31,9 +31,9 @@ public class CartController {
 	public String view(Model model,HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String mem_id = (String)session.getAttribute("mem_id"); 
-		// 최근목록
+		// 理쒓렐紐⑸줉
 		List<ProductVo> veiwList = (ArrayList)session.getAttribute("veiw");
-		// 장바구니 갯수
+		// �옣諛붽뎄�땲 媛��닔
 		int cartCount = cartService.cartCount(mem_id);
 		// -- 
 		// --
@@ -83,8 +83,10 @@ public class CartController {
 		return "success";
 	}
 	@RequestMapping(value = "/deleteAll",method = RequestMethod.GET)
-	public String deleteAll() throws Exception {
-		cartService.allDelete();
+	public String deleteAll(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		String mem_id = (String)session.getAttribute("mem_id");
+		cartService.allDelete(mem_id);
 		return "redirect:/cart/list";
 	}
 	

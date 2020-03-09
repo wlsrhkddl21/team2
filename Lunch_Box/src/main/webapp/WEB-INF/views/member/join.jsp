@@ -71,9 +71,9 @@ $(document).ready(function() {
 						alert(rData.msg);
 						if (rData.isCheck == "true") {
 							isCheck = true;
-							$(".emailNum").show();
+							$(".emailNum").show(500);
 						} else {
-							$(".emailNum").hide();
+							$(".emailNum").hide(500);
 						}
 					}
 			});
@@ -82,6 +82,56 @@ $(document).ready(function() {
 			isCheck = false;
 		});
 		// 아이디 체크 끝 
+		
+		
+		$(".emailCheck").one("click",function(e){
+			e.preventDefault();
+			var id = $("#mem_id").val();
+			$.ajax({
+				type : "post",
+				url : "/lb/sendMail",
+				data : {
+					"mem_id" : id
+				},
+				success : function(data) {
+					var template_params = {
+				    		   "email" : data.certify_id,
+				    		   "notes": data.certify_key
+				    };
+				    	var service_id = "gmail";
+				    	var template_id = "template_DLlwZKOA";
+				    	emailjs.send(service_id, template_id, template_params);
+						alert("인증번호를 보냈습니다.");
+						$(".emailCheck").val("인증확인").css("padding-left", "30px").css("padding-right", "30px").addClass("certify").removeClass("emailCheck");
+				}
+			});
+		});
+		
+		$(document).on("click", ".certify", function(){
+			var id = $("#mem_id").val();
+			var certify_key = $("#certify_key").val();
+			$.ajax({
+				type : "post",
+				url : "/lb/certify",
+				data : {
+					"certify_id" : id,
+					"certify_key" : certify_key
+				},
+				success : function(data) {
+					if (data == "Y") {
+						alert("인증되었습니다");
+						$(".emailNum").hide();
+						$("#mem_id").attr("readonly","readonly");
+						$("#mem_id").attr("data-certify","Y");
+						$("#btnCheck").prop("disabled", true);
+						$("#btnCheck").attr("disabled","disabled");
+					} else {
+						alert("인증번호가 틀렸습니다.");
+					}
+				}
+			});
+		});
+		
 		
 		// 회원 가입
 		
@@ -95,7 +145,8 @@ $(document).ready(function() {
 			var mem_address = $("#mem_address").val();
 			var detailAddress = $("#detailAddress").val();
 			var mem_tel	 = $("#mem_tel").val();
-			var certify_key = $("#certify_key").val();
+			var certify = $("#mem_id").attr("data-certify");
+		
 			if(mem_id==""||mem_pass==""||mem_pass2==""||mem_name==""||mem_address==""||mem_tel==""){
 // 				console.log("");
 				alert("필수 입력사항을 모두 입력해주세요.");
@@ -109,7 +160,7 @@ $(document).ready(function() {
 					"mem_id" : mem_id,
 					"mem_pass" : mem_pass,
 					"mem_pass2" : mem_pass2,
-					"certify_key" : certify_key,
+					"certify" : certify,
 					"isCheck" : isCheck
 				},
 				success : function(data) {
@@ -121,32 +172,12 @@ $(document).ready(function() {
 					} else if (data == "msgCheck") {
 						alert("이메일 중복체크를 해주세요");
 					} else if (data == "N") {
-						alert("인증이 잘못되었습니다");
+						alert("이메일 인증해주세요");
 					}
 				}
 			});
 		});
 		      
-		$("#emailCheck").click(function(e) {
-			e.preventDefault();
-			var id = $("#mem_id").val();
-			$.ajax({
-				type : "post",
-				url : "/lb/emailCheck",
-				data : {
-					"mem_id" : id
-				},
-				success : function(data) {
-					var template_params = {
-				    		   "email" : data.certify_id,
-				    		   "notes": data.certify_key
-				    };
-				    	var service_id = "gmail";
-				    	var template_id = "template_DLlwZKOA";
-				    	emailjs.send(service_id, template_id, template_params);
-				}
-			})
-		});
 	});
 </script>
 
@@ -169,14 +200,14 @@ $(document).ready(function() {
 						</div>
 							<div class="form-group">
 							<p><input id="mem_id" class="form-control" type="text" placeholder="이메일(아이디)*" 
-								name="mem_id" style="width: 85%; display: initial;" required/>
+								name="mem_id" style="width: 85%; display: initial;" data-certify="N" required/>
 								<span class="box_btn"><button id="btnCheck" class="btn btn-outline-dark">중복체크</button></span></p>
 						</div>
 						
 							<div class="form-group emailNum">
 							<p><input id="certify_key" class="form-control" type="text" placeholder="인증번호*" 
-								name="emailNum" style="width: 79%; display: initial;"/>
-								<span class="box_btn"><button id="emailCheck" class="btn btn-outline-dark">인증번호 받기</button></span></p>
+								name="emailNum"  style= "display: initial;"/>
+								<span class="box_btn"><input type="button" class="btn btn-outline-dark emailCheck" value="인증번호 받기"/></span></p>
 						</div>
 						
 							<div class="form-group">
