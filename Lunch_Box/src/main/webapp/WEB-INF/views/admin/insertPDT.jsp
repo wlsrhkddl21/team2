@@ -55,7 +55,7 @@ $(document).ready(function(){
 				<div class="form-group">
 					<label for="pdt_price"> 가격 </label> 
 					<input
-						type="text" class="form-control" id="pdt_price" name="pdt_price" placeholder="가격*"/>
+						type="number" class="form-control" id="pdt_price" name="pdt_price" placeholder="가격*"/>
 						
 				</div>
 				<div class="form-group">

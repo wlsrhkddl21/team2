@@ -29,6 +29,7 @@
 
 		$("#btnUpdate").click(function() {
 			$(".form-control").css("border", "1px solid");
+			$(".form-control").attr("readonly",false);
 			$(".updateShow").each(function() {
 				$(this).show();
 			});
@@ -50,6 +51,7 @@
 		$("#btnCancel").click(function() {
 			$(".form-control").each(function() {
 				$(".form-control").attr("disabled", true);
+				$(".form-control").css("border", "none");
 			});
 			$(".updateShow").each(function() {
 				$(this).hide();
@@ -81,7 +83,7 @@
 						
 							<label for="pdt_category" style="font-weight: bold">종류</label> <input
 								type="text" value="${productVo.pdt_category}"
-								class="form-control updateHide" /> 
+								class="form-control updateHide" style="border: none;" readonly/> 
 								<select class="form-control updateShow" id="pdt_category"
 								name="pdt_category" style="display:none;">
 								<option value="한식"
@@ -101,12 +103,12 @@
 						<div class="form-group">
 							<label for="pdt_name" style="font-weight: bold">상품명</label> <input
 								type="text" value="${productVo.pdt_name}" class="form-control"
-								id="pdt_name" name="pdt_name" />
+								id="pdt_name" name="pdt_name" style="border: none;" readonly/>
 						</div>
 						<div class="form-group">
 							<label for="pdt_price" style="font-weight: bold">가격</label> <input
-								type="text" class="form-control" id="pdt_price" name="pdt_price"
-								value="${productVo.pdt_price } ">
+								type="number" class="form-control" id="pdt_price" name="pdt_price"
+								value="${productVo.pdt_price }"style="border: none;" readonly>
 
 						</div>
 						<div class="form-group">
