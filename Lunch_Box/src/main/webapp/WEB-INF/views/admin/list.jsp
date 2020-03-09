@@ -82,10 +82,15 @@ th{
 						<c:forEach items="${list}" var="productVo">
 							<tr>
 								<td>${productVo.pdt_num}</td>
-								<c:if test="${not empty productVo.pdt_image}">
-									<td><img alt="상품이미지" class="pdtImg"
-										data-img="${productVo.pdt_image}"></td>
-								</c:if>
+								<td><c:choose>
+										<c:when test="${productVo.pdt_subimage=='default' }">
+											<img src="../images/my.PNG" width="60px">
+										</c:when>
+										<c:otherwise>
+											<img alt="이미지가 없습니다." class="pdtImg"
+												data-img="${productVo.pdt_image}">
+										</c:otherwise>
+									</c:choose></td>
 								<td>${productVo.pdt_category}</td>
 								<td><a class="pdt_name" href="#"
 									data-num="${productVo.pdt_num}">${productVo.pdt_name}</a></td>

@@ -113,10 +113,15 @@
 							<label for="pdt_image" style="font-weight: bold">상품이미지</label><br> <input
 								type="file" class="form-control-file" id="pdt_file" name="file"
 								style="display: none;" />
-							<c:if test="${not empty productVo.pdt_image }">
-								<img src="/admin/displayFile?fileName=${productVo.pdt_image}"
-									id="pdt_image" width="700px" class="updateHide" />
-							</c:if>
+								<c:choose>
+									<c:when test="${productVo.pdt_subimage=='default' }">
+										<img src="../images/my.PNG" width="700px" >
+									</c:when>
+									<c:otherwise>
+									<img src="/admin/displayFile?fileName=${productVo.pdt_image}"
+										id="pdt_image" width="700px" class="updateHide" />
+								</c:otherwise>
+								</c:choose>
 							
 							<button type="button" class="btn btn-outline-dark updateShow"
 								id="btnFile" style="display: none;">메인 사진 변경</button>
@@ -125,10 +130,15 @@
 							<label for="pdt_Subimage" style="font-weight: bold;">상품서브이미지</label><br>
 							<input type="file" class="form-control-file" id="pdt_Subfile"
 								name="subFile" style="display: none;" />
-<%-- 							<c:if test="${not empty productVo.pdt_subimage }"> --%>
-								<img src="/admin/displayFile?fileName=${productVo.pdt_subimage}"
-									id="pdt_Subfile"  width="700px"  class="updateHide" />
-<%-- 							</c:if> --%>
+								<c:choose>
+									<c:when test="${productVo.pdt_subimage=='default' }">
+										<img src="../images/my.PNG" width="700px" >
+									</c:when>
+									<c:otherwise>
+									<img src="/admin/displayFile?fileName=${productVo.pdt_subimage}"
+									id="pdt_Subfile"  width="700px" class="updateHide" />
+									</c:otherwise>
+								</c:choose>
 							
 							<button type="button" class="btn btn-outline-dark updateShow"
 								id="btnSubfile" style="display: none;">서브 사진 변경</button>

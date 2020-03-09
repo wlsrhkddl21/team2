@@ -44,18 +44,6 @@
 		where pdt_num = #{pdt_num}
 	</delete>
 
-	<select id="selectSingleCount">
-		select count(*)
-		from tbl_product
-		where pdt_date=1;
-	</select>
-
-	<select id="selectSubCount">
-		select count(*)
-		from tbl_product
-		where pdt_date>1;
-	</select>
-	
 	<select id="listAllTest" resultType="ProductVo">
 		select * 
 			from (select rownum rnum, a.* 

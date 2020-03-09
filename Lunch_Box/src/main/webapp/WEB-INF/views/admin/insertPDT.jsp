@@ -55,7 +55,8 @@ $(document).ready(function(){
 				<div class="form-group">
 					<label for="pdt_price"> 가격 </label> 
 					<input
-						type="text" class="form-control" id="pdt_price" name="pdt_price"/>
+						type="text" class="form-control" id="pdt_price" name="pdt_price" placeholder="가격*"/>
+						
 				</div>
 				<div class="form-group">
 					<button type="button" class="btn btn-outline-dark" id="btnFile">메인 사진 등록</button>
