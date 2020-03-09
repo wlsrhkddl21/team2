@@ -56,7 +56,7 @@
 							<h4 style="margin-bottom: 15px;">구매 목록</h4>
 							<c:choose>
 								<c:when test="${empty buyFirstlist}">
-									<div>구매내역이 없습니다.</div>
+									<div style="width: 880px;">구매내역이 없습니다.</div>
 								</c:when>
 								<c:otherwise>
 									<table class="table text-center">

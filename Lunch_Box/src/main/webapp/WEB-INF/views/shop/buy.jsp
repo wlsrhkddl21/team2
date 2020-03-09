@@ -75,6 +75,7 @@
 			span_price.text(total_price);
 // 			span_price.attr("data-price-point", 0);
 			$("#span_point").attr("data-use-point", 0);
+			$("input[name=use_point]").val(0);
 		});
 
 		//주소 수정 버튼
